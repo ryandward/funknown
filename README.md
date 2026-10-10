@@ -4,10 +4,10 @@
 
 Files get ingested, staged in an object store, verified, published, and eventually deleted. In *Funknown*, every decision about where a file is in that lifecycle, and what happens to it next, is a pure function over values. The core does no I/O. A thin imperative shell carries out whatever the core decides and reports back what happened.
 
-### Where is the "Fun" in Funknown?
-Distributed systems are usually an exercise in paranoia—waiting for a dropped webhook or a race condition to leak a staging area at 3 AM. *Funknown* flips that dynamic. 
+### Q: Where's the fun in Funknown?
+A: Well, it's actually *function*—but we think it's fun because distributed systems are usually an exercise in paranoia: waiting for a dropped webhook or a race condition to leak a staging area at 3 AM.
 
-The fun here is the absolute arrogance of writing a mathematically airtight contract and then actively playing the villain against it. We deliberately introduce microscopic, bug-shaped mutations into our own code (negative controls) just to watch LiquidHaskell's termination checker scream `UNSAFE` before the project even compiles. The joy of *Funknown* is trading the anxiety of "Did I miss an edge case?" for the absolute certainty of "The compiler proved I didn't."
+Then we get to play the villain. We write a mathematically airtight contract and deliberately introduce microscopic, bug-shaped mutations into our own code (negative controls) just to watch LiquidHaskell's termination checker scream `UNSAFE` before the project even compiles. The joy of *Funknown* is trading the anxiety of "Did I miss an edge case?" for the absolute certainty of "The compiler proved I didn't."
 
 ## The Problem
 File infrastructure typically fails in a handful of invisible ways:
