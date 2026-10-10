@@ -1,0 +1,115 @@
+© Copyright 2008 to 2024 NVM Express, Inc. ALL RIGHTS RESERVED.
+
+
+5.3.1.3     64b Guard Protection Information
+
+The 64b Guard Protection Information is shown in Figure 151 and is contained in the metadata associated
+with each logical block. 64b Guard Protection Information shall only be available to namespaces that have
+a logical block size (refer to the LBADS field in Figure 116) greater than or equal to 4 KiB.
+The Guard field contains a 64b CRC computed over the logical block data. The polynomial used to calculate
+the CRC is defined in section 5.3.1.3.1. The Application Tag and Storage and Reference Space have the
+
+5.3.1.3.1   64b CRC Definition
+Figure 152 defines the 64b CRC polynomial used to generate the Guard field for the 64b Guard Protection
+Information.
+
+
+                                        Figure 152: 64b CRC Polynomials
+ Function    Definition
+             A polynomial representing the transmitted logical block data, which is covered by the 64b CRC. For the
+             purposes of the 64b CRC, the coefficient of the highest order term shall be byte zero bit seven of the
+    F(x)
+             logical block data and the coefficient of the lowest order term shall be bit zero of the last byte of the
+             logical block data.
+   F’(x)     A polynomial representing the received logical block data.
+             The generator polynomial:
+               G(x) = x64 + x63 + x61 + x59 + x58 + x56 + x55 + x52 + x49 + x48 + x47 + x46 + x44 + x41 + x37 + x36 +
+   G(x)
+                      x34 + x32 + x31 + x28 + x26 + x23 + x22 + x19 + x16 + x13 + x12 + x10 + x9 + x6 + x4 + x3 + x0
+             (i.e., in finite field notation G(x) = 1_ AD93D235_94C93659h)
+             The remainder polynomial calculated during CRC generation by the transmitter, representing the
+   R(x)
+
+5.3.1.3.4   RocksoftTM Model CRC Algorithm parameters for 64b CRC
+The 64-bit CRC required by this specification uses the generator polynomial AD93D235_94C93659h. The
+64-bit CRC is calculated using the Rocksoft Model CRC Algorithm parameters defined in Figure 153.
+
+
+
+                                                        132
+NVM Express® NVM Command Set Specification, Revision 1.1
+
+
+
+                            Figure 153: 64-bit CRC Rocksoft Model Parameters
+                            Parameter                          Value
+                              Name                     “NVM Express 64b CRC”
+                              Width                             64
+                               Poly                     AD93D235_94C93659h
+                               Init                    FFFFFFFF_FFFFFFFFh
+                              RefIn                            True
+                             RefOut                            True
+                             XorOut                    FFFFFFFF_FFFFFFFFh
+                              Check                     11199E50_6128D175h
+
+When sending a logical block and metadata, the 64b Guard field shall be calculated using the following
+procedure or a procedure that produces an equivalent result:
+    1. Initialize the CRC register to FFFFFFFF_FFFFFFFFh. This is equivalent to inverting the lowest 64
+       bits of the user data;
+    2. Append 64 bits of 0’s to the end of each logical block and metadata not including the 64b Protection
+       Information. This results in the Guard field shown in Figure 151 to be cleared to 0h;
+    3. Map the bits from step 2 to the coefficients of the message polynomial M(x). Assume the length of
+       M(x) is Y bytes. Bit 0 of byte 0 in the logical block is the most significant bit of M(x), followed by bit
+       1 of byte 0, on through to bit 7 of byte Y - 1. Note that the bits within each byte are reflected (i.e.,
+       bit n of each byte is mapped to bit (7 - n) resulting in bit 7 to bit 0, bit 6 to bit 1, and so on);
+
+                                 Figure 154: Logical Block and Metadata Example
+                                               Message Body (Length = Y bytes)
+                        Byte 0                          Byte 1              …                     Byte Y - 1
+  M(x) =    0   1   2   3    4     5   6   7   0   1   2   3   4   5    6   7   …    0    1   2    3    4      5   6   7
+
+    4. Divide the polynomial M(x) by the generator polynomial AD93D235_94C93659h to produce the 64-
+       bit remainder polynomial R(x);
+    5. Reflect each byte of R(x) (i.e., bit n of each byte is mapped to bit (7 - n) resulting in bit 7 to bit 0, bit
+       6 to bit 1, and so on) to produce the polynomial R′(x);
+    6. Invert R′(x) to produce the polynomial R′′(x); and
+    7. Store R′′(x) in the 64b Guard field in the 64b Protection Information.
+Upon receipt of a logical block and metadata, the Guard field may be validated as follows:
+    1. Save the received Guard field;
+    2. Initialize the CRC register to FFFFFFFF_FFFFFFFFh. This is equivalent to inverting the lowest 64
+       bits of the logical block;
+    3. Clear the Guard field to 0h;
+    4. Map the bits in the logical block and metadata excluding the protection information to the
+       coefficients of the message polynomial M(x) as described in step 3 in the Guard field calculation
+       procedure for sending a logical block and metadata;
+    5. Divide the polynomial M(x) by the generator polynomial AD93D235_94C93659h to produce the 64-
+       bit remainder polynomial R(x);
+    6. Reflect each byte of R(x) (i.e., bit n of each byte is mapped to bit (7 - n) resulting in bit 7 to bit 0, bit
+       6 to bit 1, and so on) to produce the polynomial R′(x);
+    7. Invert R′(x) to produce the polynomial R′′(x); and
+    8. Compare R′′(x) from step 7 to the Guard field value saved in step 1. If both values are equal, the
+       64b CRC check passes.
+
+
+
+
+                                                       133
+                                                  NVM Express® NVM Command Set Specification, Revision 1.1
+
+
+5.3.1.3.5    64b CRC Test Cases
+Several 64b CRC test cases are shown in Figure 155.
+
+
+               Figure 155: 64b CRC Test Cases for 4 KiB Logical Block with no Metadata
+ Logical Block Contents                                                            64b Guard Field Value
+ 4 KiB bytes each byte cleared to 00h                                              6482D367_EB22B64Eh
+ 4 KiB bytes each byte set to FFh                                                 C0DDBA73_02ECA3ACh
+ 4 KiB bytes of an incrementing byte pattern from 00h to FFh,
+ repeating (e.g., byte 0 is set to 00h, byte 1 is set to 01h, … , byte
+                                                                                   3E729F5F_6750449Ch
+ 254 is set to FEh, byte 255 is set to FFh, byte 256 is set to 00h,
+ …)
+ 4 KiB bytes of a decrementing pattern from FFh to 00h, repeating
+ (e.g., byte 0 is set to FFh, byte 1 is set to FEh, … , byte 254 is set            9A2DF64B8_E9E517Eh
+ to 01h, byte 255 is set to 00h, byte 256 is set to FFh, …)

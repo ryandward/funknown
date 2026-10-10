@@ -1,0 +1,3143 @@
+[
+  {
+    "id": "RFC4918-2-1",
+    "doc": "RFC 4918",
+    "section": "2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The key words \"MUST\", \"MUST NOT\", \"REQUIRED\", \"SHALL\", \"SHALL NOT\", \"SHOULD\", \"SHOULD NOT\", \"RECOMMENDED\", \"MAY\", and \"OPTIONAL\" in this document are to be interpreted as described in [RFC2119].",
+    "topic": "conventions",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-3-1",
+    "doc": "RFC 4918",
+    "section": "3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "State Token - A URI that represents a state of a resource. Lock tokens are the only state tokens defined in this specification.",
+    "topic": "state-token",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-3-2",
+    "doc": "RFC 4918",
+    "section": "3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Principal - A distinct human or computational actor that initiates access to network resources.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-3-3",
+    "doc": "RFC 4918",
+    "section": "3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Collection - Informally, a resource that also acts as a container of references to child resources. Formally, a resource that contains a set of mappings between path segments and resources and meets the requirements defined in Section 5.",
+    "topic": "namespace",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-3-4",
+    "doc": "RFC 4918",
+    "section": "3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Live Property - A property whose semantics and syntax are enforced by the server. For example, the live property DAV:getcontentlength has its value, the length of the entity returned by a GET request, automatically calculated by the server.",
+    "topic": "metadata",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-3-5",
+    "doc": "RFC 4918",
+    "section": "3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Dead Property - A property whose semantics and syntax are not enforced by the server. The server only records the value of a dead property; the client is responsible for maintaining the consistency of the syntax and semantics of a dead property.",
+    "topic": "metadata",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-5.1-1",
+    "doc": "RFC 4918",
+    "section": "5.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "An HTTP URL namespace is said to be consistent if it meets the following conditions: for every URL in the HTTP hierarchy there exists a collection that contains that URL as an internal member URL.",
+    "topic": "namespace-consistency",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-5.1-2",
+    "doc": "RFC 4918",
+    "section": "5.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "However, certain WebDAV methods are prohibited from producing results that cause namespace inconsistencies.",
+    "topic": "namespace-consistency",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-5.2-1",
+    "doc": "RFC 4918",
+    "section": "5.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A collection MUST contain at most one mapping for a given path segment, i.e., it is illegal to have the same path segment mapped to more than one resource.",
+    "topic": "namespace-consistency",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-5.2-2",
+    "doc": "RFC 4918",
+    "section": "5.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "For all WebDAV-compliant resources A and B, identified by URLs \"U\" and \"V\", respectively, such that \"V\" is equal to \"U/SEGMENT\", A MUST be a collection that contains a mapping from \"SEGMENT\" to B.",
+    "topic": "namespace-consistency",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-5.2-3",
+    "doc": "RFC 4918",
+    "section": "5.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "In cases where a server treats a set of segments as equivalent, the server MUST expose only one preferred segment per mapping, consistently chosen, in PROPFIND responses.",
+    "topic": "namespace-consistency",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6-1",
+    "doc": "RFC 4918",
+    "section": "6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The ability to lock a resource provides a mechanism for serializing access to that resource. Using a lock, an authoring client can provide a reasonable guarantee that another principal will not modify a resource while it is being edited. In this way, a client can prevent the \"lost update\" problem.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-6.1-1",
+    "doc": "RFC 4918",
+    "section": "6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A lock either directly or indirectly locks a resource.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-6.1-2",
+    "doc": "RFC 4918",
+    "section": "6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A resource becomes directly locked when a LOCK request to a URL of that resource creates a new lock. The \"lock-root\" of the new lock is that URL. If at the time of the request, the URL is not mapped to a resource, a new empty resource is created and directly locked.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-6.1-3",
+    "doc": "RFC 4918",
+    "section": "6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "An exclusive lock (Section 6.2) conflicts with any other kind of lock on the same resource, whether either lock is direct or indirect. A server MUST NOT create conflicting locks on a resource.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.1-4",
+    "doc": "RFC 4918",
+    "section": "6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a member resource is added to the collection, the new member resource MUST NOT already have a conflicting lock, because the new resource MUST become indirectly locked by L.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.1-5",
+    "doc": "RFC 4918",
+    "section": "6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a member resource stops being a member of the collection, then the resource MUST no longer be indirectly locked by L.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.1-6",
+    "doc": "RFC 4918",
+    "section": "6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Each lock is identified by a single globally unique lock token (Section 6.5).",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-6.1-7",
+    "doc": "RFC 4918",
+    "section": "6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "An UNLOCK request deletes the lock with the specified lock token. After a lock is deleted, no resource is locked by that lock.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-6.1-8",
+    "doc": "RFC 4918",
+    "section": "6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A lock token is \"submitted\" in a request when it appears in an \"If\" header",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-6.1-9",
+    "doc": "RFC 4918",
+    "section": "6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a request causes the lock-root of any lock to become an unmapped URL, then the lock MUST also be deleted by that request.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.2-1",
+    "doc": "RFC 4918",
+    "section": "6.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A successful request for a new shared lock MUST result in the generation of a unique lock associated with the requesting principal.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.3-1",
+    "doc": "RFC 4918",
+    "section": "6.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A WebDAV-compliant resource is not required to support locking in any form. If the resource does support locking, it may choose to support any combination of exclusive and shared locks for any access types.",
+    "topic": "locking",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-6.4-1",
+    "doc": "RFC 4918",
+    "section": "6.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "When a locked resource is modified, a server MUST check that the authenticated principal matches the lock creator (in addition to checking for valid lock token submission).",
+    "topic": "permissions",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.4-2",
+    "doc": "RFC 4918",
+    "section": "6.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The server MAY allow privileged users other than the lock creator to destroy a lock (for example, the resource owner or an administrator).",
+    "topic": "permissions",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-6.4-3",
+    "doc": "RFC 4918",
+    "section": "6.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Note that having a lock does not confer full privilege to modify the locked resource. Write access and other privileges MUST be enforced through normal privilege or authentication mechanisms, not based on the possible obscurity of lock token values.",
+    "topic": "permissions",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.5-1",
+    "doc": "RFC 4918",
+    "section": "6.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Each lock has exactly one unique lock token generated by the server. Clients MUST NOT attempt to interpret lock tokens in any way.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.5-2",
+    "doc": "RFC 4918",
+    "section": "6.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Lock token URIs MUST be unique across all resources for all time.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.5-3",
+    "doc": "RFC 4918",
+    "section": "6.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "When a LOCK operation creates a new lock, the new lock token is returned in the Lock-Token response header defined in Section 10.5, and also in the body of the response.",
+    "topic": "locking",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-6.5-4",
+    "doc": "RFC 4918",
+    "section": "6.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Except for the case of using UNLOCK under user guidance, a client SHOULD NOT use a lock token created by another client instance.",
+    "topic": "locking",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-6.6-1",
+    "doc": "RFC 4918",
+    "section": "6.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A lock MAY have a limited lifetime. The lifetime is suggested by the client when creating or refreshing the lock, but the server ultimately chooses the timeout value. Timeout is measured in seconds remaining until lock expiration.",
+    "topic": "expiry",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-6.6-2",
+    "doc": "RFC 4918",
+    "section": "6.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The timeout counter MUST be restarted if a refresh lock request is successful (see Section 9.10.2). The timeout counter SHOULD NOT be restarted at any other time.",
+    "topic": "expiry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.6-3",
+    "doc": "RFC 4918",
+    "section": "6.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If the timeout expires, then the lock SHOULD be removed. In this case the server SHOULD act as if an UNLOCK method was executed by the",
+    "topic": "expiry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-6.6-4",
+    "doc": "RFC 4918",
+    "section": "6.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "server on the resource using the lock token of the timed-out lock, performed with its override authority.",
+    "topic": "expiry",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-6.6-5",
+    "doc": "RFC 4918",
+    "section": "6.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A client MUST NOT assume that just because the timeout has expired, the lock has immediately been removed.",
+    "topic": "expiry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.6-6",
+    "doc": "RFC 4918",
+    "section": "6.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Likewise, a client MUST NOT assume that just because the timeout has not expired, the lock still exists. Clients MUST assume that locks can arbitrarily disappear at any time, regardless of the value given in the Timeout header. The Timeout header only indicates the behavior of the server if extraordinary circumstances do not occur.",
+    "topic": "expiry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.7-1",
+    "doc": "RFC 4918",
+    "section": "6.7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Any DAV-compliant resource that supports the LOCK method MUST support the DAV:supportedlock property.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-6.8-1",
+    "doc": "RFC 4918",
+    "section": "6.8",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Any DAV-compliant resource that supports the LOCK method MUST support the DAV:lockdiscovery property.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7-1",
+    "doc": "RFC 4918",
+    "section": "7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "An exclusive write lock protects a resource: it prevents changes by any principal other than the lock creator and in any case where the lock token is not submitted (e.g., by a client process other than the one holding the lock).",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-7-2",
+    "doc": "RFC 4918",
+    "section": "7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Clients MUST submit a lock-token they are authorized to use in any request that modifies a write-locked resource.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7-3",
+    "doc": "RFC 4918",
+    "section": "7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "For collections, any modification of an internal member URI. An internal member URI of a collection is considered to be modified if it is added, removed, or identifies a different resource.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-7-4",
+    "doc": "RFC 4918",
+    "section": "7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A modification of the mapping of the root of the write lock, either to another resource or to no resource (e.g., DELETE).",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-7-5",
+    "doc": "RFC 4918",
+    "section": "7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Of the methods defined in HTTP and WebDAV, PUT, POST, PROPPATCH, LOCK, UNLOCK, MOVE, COPY (for the destination resource), DELETE, and MKCOL are affected by write locks. All other HTTP/WebDAV methods defined so far -- GET in particular -- function independently of a write lock.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-7.2-1",
+    "doc": "RFC 4918",
+    "section": "7.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Although the write locks provide some help in preventing lost updates, they cannot guarantee that updates will never be lost.",
+    "topic": "concurrency",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-7.2-2",
+    "doc": "RFC 4918",
+    "section": "7.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Finally, being stateless, it cannot enforce a sequence of operations like LOCK / GET / PUT / UNLOCK.",
+    "topic": "concurrency",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-7.2-3",
+    "doc": "RFC 4918",
+    "section": "7.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "HTTP 1.1 clients can be good citizens, avoiding overwriting other clients' changes, by using entity tags in If-Match headers with any requests that would modify resources.",
+    "topic": "concurrency",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-7.3-1",
+    "doc": "RFC 4918",
+    "section": "7.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "WebDAV provides the ability to send a LOCK request to an unmapped URL in order to reserve the name for use. This is a simple way to avoid the lost-update problem on the creation of a new resource (another way is to use If-None-Match header specified in Section 14.26 of [RFC2616]).",
+    "topic": "upload-reservation",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-7.3-2",
+    "doc": "RFC 4918",
+    "section": "7.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A successful lock request to an unmapped URL MUST result in the creation of a locked (non-collection) resource with empty content. Subsequently, a successful PUT request (with the correct lock token) provides the content for the resource.",
+    "topic": "upload-reservation",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.3-3",
+    "doc": "RFC 4918",
+    "section": "7.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A resource created with a LOCK is empty but otherwise behaves in every way as a normal resource.",
+    "topic": "upload-reservation",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-7.3-4",
+    "doc": "RFC 4918",
+    "section": "7.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "SHOULD NOT disappear when its lock goes away (clients must therefore be responsible for cleaning up their own mess, as with any other operation or any non-empty resource).",
+    "topic": "upload-reservation",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-7.3-5",
+    "doc": "RFC 4918",
+    "section": "7.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "MUST NOT be converted into a collection. The server MUST fail a MKCOL request (as it would with a MKCOL request to any existing non-collection resource).",
+    "topic": "upload-reservation",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.3-6",
+    "doc": "RFC 4918",
+    "section": "7.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The response MUST indicate that a resource was created, by use of the \"201 Created\" response code (a LOCK request to an existing resource instead will result in 200 OK).",
+    "topic": "status-code",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.3-7",
+    "doc": "RFC 4918",
+    "section": "7.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The client is expected to update the locked empty resource shortly after locking it, using PUT and possibly PROPPATCH.",
+    "topic": "upload-reservation",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-7.4-1",
+    "doc": "RFC 4918",
+    "section": "7.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Expressed otherwise, a write lock of either kind protects any request that would create a new resource in a write locked collection, any request that would remove an internal member URL of a write locked collection, and any request that would change the segment name of any internal member.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-7.4-2",
+    "doc": "RFC 4918",
+    "section": "7.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "PUT or MKCOL request that would create a new internal member.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-7.4-3",
+    "doc": "RFC 4918",
+    "section": "7.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The collection's lock token is required in addition to the lock token on the internal member itself, if it is locked separately.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-7.4-4",
+    "doc": "RFC 4918",
+    "section": "7.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a depth-infinity write LOCK request is issued to a collection containing member URLs identifying resources that are currently locked in a manner that conflicts with the new lock (see Section 6.1, point 3), the request MUST fail with a 423 (Locked) status code, and the response SHOULD contain the 'no-conflicting-lock' precondition.",
+    "topic": "status-code",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.4-5",
+    "doc": "RFC 4918",
+    "section": "7.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a lock request causes the URL of a resource to be added as an internal member URL of a depth-infinity locked collection, then the new resource MUST be automatically protected by the lock.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.5-1",
+    "doc": "RFC 4918",
+    "section": "7.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "In order to prevent these collisions, a lock token MUST be submitted by an authorized principal for all locked resources that a method may change or the method MUST fail. A lock token is submitted when it appears in an If header.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.5.1-1",
+    "doc": "RFC 4918",
+    "section": "7.5.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "In this example, even though both the source and destination are locked, only one lock token must be submitted (the one for the lock on the destination). This is because the source resource is not modified by a COPY, and hence unaffected by the write lock.",
+    "topic": "locking",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-7.5.2-1",
+    "doc": "RFC 4918",
+    "section": "7.5.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Thus, the client would need to submit the lock token with the request to make it succeed.",
+    "topic": "recourse",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-7.6-1",
+    "doc": "RFC 4918",
+    "section": "7.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A COPY method invocation MUST NOT duplicate any write locks active on the source.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.6-2",
+    "doc": "RFC 4918",
+    "section": "7.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A successful MOVE request on a write locked resource MUST NOT move the write lock with the resource. However, if there is an existing lock at the destination, the server MUST add the moved resource to the destination lock scope.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.7-1",
+    "doc": "RFC 4918",
+    "section": "7.7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A client MUST NOT submit the same write lock request twice.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.7-2",
+    "doc": "RFC 4918",
+    "section": "7.7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A server receiving a LOCK request with no body MUST NOT create a new lock -- this form of the LOCK request is only to be used to \"refresh\" an existing lock (meaning, at minimum, that any timers associated with the lock MUST be reset).",
+    "topic": "expiry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-7.7-3",
+    "doc": "RFC 4918",
+    "section": "7.7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Servers, as always, may ignore Timeout headers submitted by the client, and a server MAY refresh a lock with a timeout period that is different than the previous timeout period used for the lock, provided it advertises the new value in the LOCK refresh response.",
+    "topic": "expiry",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-7.7-4",
+    "doc": "RFC 4918",
+    "section": "7.7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If an error is received in response to a refresh LOCK request, the client MUST NOT assume that the lock was refreshed.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-8.1-1",
+    "doc": "RFC 4918",
+    "section": "8.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Servers MUST return authorization errors in preference to other errors. This avoids leaking information about protected resources (e.g., a client that finds that a hidden resource exists by seeing a 423 Locked response to an anonymous request to the resource).",
+    "topic": "permissions",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-8.2-1",
+    "doc": "RFC 4918",
+    "section": "8.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a server receives XML that is not well- formed, then the server MUST reject the entire request with a 400 (Bad Request). If a client receives XML that is not well-formed in a response, then the client MUST NOT assume anything about the outcome of the executed method and SHOULD treat the server as malfunctioning.",
+    "topic": "status-code",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-8.2-2",
+    "doc": "RFC 4918",
+    "section": "8.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Servers MAY reject questionable requests (even though they consist of well-formed XML), for instance, with a 400 (Bad Request) status code and an optional response body explaining the problem.",
+    "topic": "status-code",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-8.4-1",
+    "doc": "RFC 4918",
+    "section": "8.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Servers MUST examine all requests for a body, even when a body was not expected. In cases where a request body is present but would be ignored by a server, the server MUST reject the request with 415 (Unsupported Media Type).",
+    "topic": "status-code",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-8.5-1",
+    "doc": "RFC 4918",
+    "section": "8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The server MUST do authorization checks before checking any HTTP conditional header.",
+    "topic": "permissions",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-8.6-1",
+    "doc": "RFC 4918",
+    "section": "8.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Correct use of ETags is even more important in a distributed authoring environment, because ETags are necessary along with locks to avoid the lost-update problem. A client might fail to renew a lock, for example, when the lock times out and the client is accidentally offline or in the middle of a long upload.",
+    "topic": "integrity",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-8.6-2",
+    "doc": "RFC 4918",
+    "section": "8.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Strong ETags are much more useful for authoring use cases than weak ETags (see Section 13.3.3 of [RFC2616]).",
+    "topic": "integrity",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-8.6-3",
+    "doc": "RFC 4918",
+    "section": "8.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Note that the meaning of an ETag in a PUT response is not clearly defined either in this document or in RFC 2616 (i.e., whether the ETag means that the resource is octet-for-octet equivalent to the body of the PUT request, or whether the server could have made minor changes in the formatting or content of the document upon storage). This is an HTTP issue, not purely a WebDAV issue.",
+    "topic": "integrity",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-8.6-4",
+    "doc": "RFC 4918",
+    "section": "8.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Because clients may be forced to prompt users or throw away changed content if the ETag changes, a WebDAV server SHOULD NOT change the ETag (or the Last-Modified time) for a resource that has an unchanged body and location. The ETag represents the state of the body or contents of the resource.",
+    "topic": "integrity",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-8.7-1",
+    "doc": "RFC 4918",
+    "section": "8.7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The mechanism is particularly appropriate when a status code can mean many things (for example, 400 Bad Request can mean required headers are missing, headers are incorrectly formatted, or much more).",
+    "topic": "error-body",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-8.8-1",
+    "doc": "RFC 4918",
+    "section": "8.8",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "For any given URL, the \"Last-Modified\" value MUST increment every time the representation returned upon GET changes (within the limits of timestamp resolution).",
+    "topic": "integrity",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-8.8-2",
+    "doc": "RFC 4918",
+    "section": "8.8",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "For any given URL, an \"ETag\" value MUST NOT be reused for different representations returned by GET.",
+    "topic": "integrity",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-8.8-3",
+    "doc": "RFC 4918",
+    "section": "8.8",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Note that these considerations also apply to specific use cases, such as using PUT to create a new resource at a URL that has been mapped before, but has been deleted since then.",
+    "topic": "integrity",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-9.1.1-1",
+    "doc": "RFC 4918",
+    "section": "9.1.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "403 Forbidden - A server MAY reject PROPFIND requests on collections with depth header of \"Infinity\", in which case it SHOULD use this error with the precondition code 'propfind-finite-depth' inside the error body.",
+    "topic": "status-code",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.1.2-1",
+    "doc": "RFC 4918",
+    "section": "9.1.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "401 Unauthorized - The property cannot be viewed without appropriate authorization.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.1.2-2",
+    "doc": "RFC 4918",
+    "section": "9.1.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "403 Forbidden - The property cannot be viewed regardless of authentication.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.1.2-3",
+    "doc": "RFC 4918",
+    "section": "9.1.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "404 Not Found - The property does not exist.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.2-1",
+    "doc": "RFC 4918",
+    "section": "9.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Instructions MUST either all be executed or none executed. Thus, if any error occurs during processing, all executed instructions MUST be undone and a proper error result returned.",
+    "topic": "atomicity",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.2.1-1",
+    "doc": "RFC 4918",
+    "section": "9.2.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "409 (Conflict) - The client has provided a value whose semantics are not appropriate for the property.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.2.1-2",
+    "doc": "RFC 4918",
+    "section": "9.2.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "424 (Failed Dependency) - The property change could not be made because of another property change that failed.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.2.1-3",
+    "doc": "RFC 4918",
+    "section": "9.2.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "507 (Insufficient Storage) - The server did not have sufficient space to record the property.",
+    "topic": "destination",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.3-1",
+    "doc": "RFC 4918",
+    "section": "9.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If the Request-URI is already mapped to a resource, then the MKCOL MUST fail.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.3-2",
+    "doc": "RFC 4918",
+    "section": "9.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "When the MKCOL operation creates a new collection resource, all ancestors MUST already exist, or the method MUST fail with a 409 (Conflict) status code.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.3.1-1",
+    "doc": "RFC 4918",
+    "section": "9.3.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "403 (Forbidden) - This indicates at least one of two conditions: 1) the server does not allow the creation of collections at the given location in its URL namespace, or 2) the parent collection of the Request-URI exists but cannot accept members.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.3.1-2",
+    "doc": "RFC 4918",
+    "section": "9.3.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "405 (Method Not Allowed) - MKCOL can only be executed on an unmapped URL.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.3.1-3",
+    "doc": "RFC 4918",
+    "section": "9.3.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "409 (Conflict) - A collection cannot be made at the Request-URI until one or more intermediate collections have been created. The server MUST NOT create those intermediate collections automatically.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.3.1-4",
+    "doc": "RFC 4918",
+    "section": "9.3.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "507 (Insufficient Storage) - The resource does not have sufficient space to record the state of the resource after the execution of this method.",
+    "topic": "destination",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.6-1",
+    "doc": "RFC 4918",
+    "section": "9.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "MUST destroy locks rooted on the deleted resource",
+    "topic": "deletion",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.6-2",
+    "doc": "RFC 4918",
+    "section": "9.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "MUST remove the mapping from the Request-URI to any resource.",
+    "topic": "deletion",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.6-3",
+    "doc": "RFC 4918",
+    "section": "9.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Thus, after a successful DELETE operation (and in the absence of other actions), a subsequent GET/HEAD/PROPFIND request to the target Request-URI MUST return 404 (Not Found).",
+    "topic": "deletion",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.6.1-1",
+    "doc": "RFC 4918",
+    "section": "9.6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If any resource identified by a member URL cannot be deleted, then all of the member's ancestors MUST NOT be deleted, so as to maintain URL namespace consistency.",
+    "topic": "deletion",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.6.1-2",
+    "doc": "RFC 4918",
+    "section": "9.6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "When the DELETE method has completed processing, it MUST result in a consistent URL namespace.",
+    "topic": "namespace-consistency",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.6.1-3",
+    "doc": "RFC 4918",
+    "section": "9.6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If an error occurs deleting a member resource (a resource other than the resource identified in the Request-URI), then the response can be a 207 (Multi-Status). Multi-Status is used here to indicate which internal resources could NOT be deleted, including an error code, which should help the client understand which resources caused the failure.",
+    "topic": "multistatus",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-9.6.1-4",
+    "doc": "RFC 4918",
+    "section": "9.6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The server MAY return a 4xx status response, rather than a 207, if the request failed completely.",
+    "topic": "multistatus",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-9.6.1-5",
+    "doc": "RFC 4918",
+    "section": "9.6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "424 (Failed Dependency) status codes SHOULD NOT be in the 207 (Multi- Status) response for DELETE.",
+    "topic": "multistatus",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.6.1-6",
+    "doc": "RFC 4918",
+    "section": "9.6.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Additionally, 204 (No Content) errors SHOULD NOT be returned in the 207 (Multi-Status). The reason for this prohibition is that 204 (No Content) is the default success code.",
+    "topic": "multistatus",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.7.1-1",
+    "doc": "RFC 4918",
+    "section": "9.7.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A PUT performed on an existing resource replaces the GET response entity of the resource.",
+    "topic": "upload-completion",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.7.1-2",
+    "doc": "RFC 4918",
+    "section": "9.7.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A PUT that would result in the creation of a resource without an appropriately scoped parent collection MUST fail with a 409 (Conflict).",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.7.1-3",
+    "doc": "RFC 4918",
+    "section": "9.7.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Thus, a client SHOULD provide a Content-Type for a new resource if any is known. If the client does not provide a Content-Type for a new resource, the server MAY create a resource with no Content-Type assigned, or it MAY attempt to assign a Content-Type.",
+    "topic": "metadata",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.7.1-4",
+    "doc": "RFC 4918",
+    "section": "9.7.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Note that although a recipient ought generally to treat metadata supplied with an HTTP request as authoritative, in practice there's no guarantee that a server will accept client-supplied metadata (e.g., any request header beginning with \"Content-\").",
+    "topic": "metadata",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-9.7.2-1",
+    "doc": "RFC 4918",
+    "section": "9.7.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A PUT request to an existing collection MAY be treated as an error (405 Method Not Allowed).",
+    "topic": "status-code",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-9.8-1",
+    "doc": "RFC 4918",
+    "section": "9.8",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The COPY method creates a duplicate of the source resource identified by the Request-URI, in the destination resource identified by the URI in the Destination header. The Destination header MUST be present.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.8-2",
+    "doc": "RFC 4918",
+    "section": "9.8",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "However, support for the COPY method does not guarantee the ability to copy a resource. For example, separate programs may control resources on the same server. As a result, it may not be possible to copy a resource to a location that appears to be on the same server.",
+    "topic": "destination",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-9.8.1-1",
+    "doc": "RFC 4918",
+    "section": "9.8.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Subsequent alterations to the destination resource will not modify the source resource. Subsequent alterations to the source resource will not modify the destination resource.",
+    "topic": "finished-object",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-9.8.2-1",
+    "doc": "RFC 4918",
+    "section": "9.8.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "After a successful COPY invocation, all dead properties on the source resource SHOULD be duplicated on the destination resource.",
+    "topic": "metadata",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.8.2-2",
+    "doc": "RFC 4918",
+    "section": "9.8.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "When the destination is an unmapped URL, a COPY operation creates a new resource much like a PUT operation does. Live properties that are related to resource creation (such as DAV:creationdate) should have their values set accordingly.",
+    "topic": "metadata",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-9.8.3-1",
+    "doc": "RFC 4918",
+    "section": "9.8.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "When the COPY method has completed processing, it MUST have created a consistent URL namespace at the destination (see Section 5.1 for the definition of namespace consistency). However, if an error occurs while copying an internal collection, the server MUST NOT copy any resources identified by members of this collection (i.e., the server must skip this subtree), as this would create an inconsistent namespace. After detecting an error, the COPY operation SHOULD try to finish as much of the original copy operation as possible (i.e., the server should still attempt to copy other subtrees and their members that are not descendants of an error-causing collection).",
+    "topic": "namespace-consistency",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.8.3-2",
+    "doc": "RFC 4918",
+    "section": "9.8.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If an error in executing the COPY method occurs with a resource other than the resource identified in the Request-URI, then the response MUST be a 207 (Multi-Status), and the URL of the resource causing the failure MUST appear with the specific error.",
+    "topic": "multistatus",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.8.3-3",
+    "doc": "RFC 4918",
+    "section": "9.8.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The 424 (Failed Dependency) status code SHOULD NOT be returned in the 207 (Multi-Status) response from a COPY method.",
+    "topic": "multistatus",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.8.3-4",
+    "doc": "RFC 4918",
+    "section": "9.8.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Additionally, 201 (Created)/204 (No Content) status codes SHOULD NOT be returned as values in 207 (Multi-Status) responses from COPY methods. They, too, can be safely omitted because they are the default success codes.",
+    "topic": "multistatus",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.8.4-1",
+    "doc": "RFC 4918",
+    "section": "9.8.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a COPY request has an Overwrite header with a value of \"F\", and a resource exists at the Destination URL, the server MUST fail the request.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.8.4-2",
+    "doc": "RFC 4918",
+    "section": "9.8.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "When a collection is overwritten, the membership of the destination collection after the successful COPY request MUST be the same membership as the source collection immediately before the COPY.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.8.5-1",
+    "doc": "RFC 4918",
+    "section": "9.8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "201 (Created) - The source resource was successfully copied. The COPY operation resulted in the creation of a new resource.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.8.5-2",
+    "doc": "RFC 4918",
+    "section": "9.8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "204 (No Content) - The source resource was successfully copied to a preexisting destination resource.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.8.5-3",
+    "doc": "RFC 4918",
+    "section": "9.8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "207 (Multi-Status) - Multiple resources were to be affected by the COPY, but errors on some of them prevented the operation from taking place.",
+    "topic": "multistatus",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.8.5-4",
+    "doc": "RFC 4918",
+    "section": "9.8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "403 (Forbidden) - The operation is forbidden. A special case for COPY could be that the source and destination resources are the same resource.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.8.5-5",
+    "doc": "RFC 4918",
+    "section": "9.8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "409 (Conflict) - A resource cannot be created at the destination until one or more intermediate collections have been created. The server MUST NOT create those intermediate collections automatically.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.8.5-6",
+    "doc": "RFC 4918",
+    "section": "9.8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "412 (Precondition Failed) - A precondition header check failed, e.g., the Overwrite header is \"F\" and the destination URL is already mapped to a resource.",
+    "topic": "destination",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.8.5-7",
+    "doc": "RFC 4918",
+    "section": "9.8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "423 (Locked) - The destination resource, or resource within the destination collection, was locked. This response SHOULD contain the 'lock-token-submitted' precondition element.",
+    "topic": "locking",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.8.5-8",
+    "doc": "RFC 4918",
+    "section": "9.8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "502 (Bad Gateway) - This may occur when the destination is on another server, repository, or URL namespace. Either the source namespace does not support copying to the destination namespace, or the destination namespace refuses to accept the resource. The client may wish to try GET/PUT and PROPFIND/PROPPATCH instead.",
+    "topic": "gateway",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.8.5-9",
+    "doc": "RFC 4918",
+    "section": "9.8.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "507 (Insufficient Storage) - The destination resource does not have sufficient space to record the state of the resource after the execution of this method.",
+    "topic": "destination",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.9-1",
+    "doc": "RFC 4918",
+    "section": "9.9",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The MOVE operation on a non-collection resource is the logical equivalent of a copy (COPY), followed by consistency maintenance processing, followed by a delete of the source, where all three actions are performed in a single operation.",
+    "topic": "destination",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.9-2",
+    "doc": "RFC 4918",
+    "section": "9.9",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The Destination header MUST be present on all MOVE methods and MUST follow all COPY requirements for the COPY part of the MOVE method.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.9-3",
+    "doc": "RFC 4918",
+    "section": "9.9",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a resource exists at the destination, the destination resource will be deleted as a side-effect of the MOVE operation, subject to the restrictions of the Overwrite header.",
+    "topic": "destination",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-9.9.1-1",
+    "doc": "RFC 4918",
+    "section": "9.9.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If the live properties will not work the same way at the destination, the server MAY fail the request.",
+    "topic": "metadata",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-9.9.1-2",
+    "doc": "RFC 4918",
+    "section": "9.9.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "For example, the DAV: creationdate property value SHOULD remain the same after a MOVE.",
+    "topic": "metadata",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.9.1-3",
+    "doc": "RFC 4918",
+    "section": "9.9.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Dead properties MUST be moved along with the resource.",
+    "topic": "metadata",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.9.2-1",
+    "doc": "RFC 4918",
+    "section": "9.9.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "When the MOVE method has completed processing, it MUST have created a consistent URL namespace at both the source and destination (see Section 5.1 for the definition of namespace consistency).",
+    "topic": "namespace-consistency",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.9.2-2",
+    "doc": "RFC 4918",
+    "section": "9.9.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If an error occurs with a resource other than the resource identified in the Request-URI, then the response MUST be a 207 (Multi-Status), and the errored resource's URL MUST appear with the specific error.",
+    "topic": "multistatus",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.9.3-1",
+    "doc": "RFC 4918",
+    "section": "9.9.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a resource exists at the destination and the Overwrite header is \"T\", then prior to performing the move, the server MUST perform a DELETE with \"Depth: infinity\" on the destination resource. If the Overwrite header is set to \"F\", then the operation will fail.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.9.4-1",
+    "doc": "RFC 4918",
+    "section": "9.9.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "201 (Created) - The source resource was successfully moved, and a new URL mapping was created at the destination.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.9.4-2",
+    "doc": "RFC 4918",
+    "section": "9.9.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "204 (No Content) - The source resource was successfully moved to a URL that was already mapped.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.9.4-3",
+    "doc": "RFC 4918",
+    "section": "9.9.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "403 (Forbidden) - Among many possible reasons for forbidding a MOVE operation, this status code is recommended for use when the source and destination resources are the same.",
+    "topic": "permissions",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-9.9.4-4",
+    "doc": "RFC 4918",
+    "section": "9.9.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "409 (Conflict) - A resource cannot be created at the destination until one or more intermediate collections have been created. The server MUST NOT create those intermediate collections automatically. Or, the server was unable to preserve the behavior of the live properties and still move the resource to the destination (see 'preserved-live-properties' postcondition).",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.9.4-5",
+    "doc": "RFC 4918",
+    "section": "9.9.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "412 (Precondition Failed) - A condition header failed. Specific to MOVE, this could mean that the Overwrite header is \"F\" and the destination URL is already mapped to a resource.",
+    "topic": "destination",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.9.4-6",
+    "doc": "RFC 4918",
+    "section": "9.9.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "423 (Locked) - The source or the destination resource, the source or destination resource parent, or some resource within the source or destination collection, was locked. This response SHOULD contain the 'lock-token-submitted' precondition element.",
+    "topic": "locking",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-9.9.4-7",
+    "doc": "RFC 4918",
+    "section": "9.9.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "502 (Bad Gateway) - This may occur when the destination is on another server and the destination server refuses to accept the resource. This could also occur when the destination is on another sub-section of the same server namespace.",
+    "topic": "gateway",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.10.1-1",
+    "doc": "RFC 4918",
+    "section": "9.10.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "LOCK method requests to create a new lock MUST have an XML request body.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.10.1-2",
+    "doc": "RFC 4918",
+    "section": "9.10.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "MUST include the Lock-Token response header with the token associated with the new lock.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.10.2-1",
+    "doc": "RFC 4918",
+    "section": "9.10.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "This request MUST NOT have a body and it MUST specify which lock to refresh by using the 'If' header with a single lock token (only one lock may be refreshed at a time). The request MAY contain a Timeout header, which a server MAY accept to change the duration remaining on the lock to the new value.",
+    "topic": "expiry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.10.3-1",
+    "doc": "RFC 4918",
+    "section": "9.10.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A successful result MUST return a single lock token. Similarly, if an UNLOCK is successfully executed on this token, all associated resources are unlocked. Hence, partial success is not an option for LOCK or UNLOCK. Either the entire hierarchy is locked or no resources are locked.",
+    "topic": "atomicity",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.10.3-2",
+    "doc": "RFC 4918",
+    "section": "9.10.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If the lock cannot be granted to all resources, the server MUST return a Multi-Status response with a 'response' element for at least one resource that prevented the lock from being granted, along with a suitable status code for that failure (e.g., 403 (Forbidden) or 423 (Locked)). Additionally, if the resource causing the failure was not the resource requested, then the server SHOULD include a 'response' element for the Request-URI as well, with a 'status' element containing 424 Failed Dependency.",
+    "topic": "multistatus",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.10.4-1",
+    "doc": "RFC 4918",
+    "section": "9.10.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A successful LOCK method MUST result in the creation of an empty resource that is locked (and that is not a collection) when a resource did not previously exist at that URL. Later on, the lock may go away but the empty resource remains.",
+    "topic": "upload-reservation",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.10.4-2",
+    "doc": "RFC 4918",
+    "section": "9.10.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A server MUST respond successfully to a GET request to an empty resource, either by using a 204 No Content response, or by using 200 OK with a Content-Length header indicating zero length",
+    "topic": "status-code",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.10.5-1",
+    "doc": "RFC 4918",
+    "section": "9.10.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "| Current State | Shared Lock OK | Exclusive Lock OK | +--------------------------+----------------+-------------------+ | None | True | True | | Shared Lock | True | False | | Exclusive Lock | False | False* |",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.10.5-2",
+    "doc": "RFC 4918",
+    "section": "9.10.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Legend: True = lock may be granted. False = lock MUST NOT be granted. *=It is illegal for a principal to request the same lock twice.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.10.6-1",
+    "doc": "RFC 4918",
+    "section": "9.10.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "200 (OK) - The LOCK request succeeded and the value of the DAV: lockdiscovery property is included in the response body.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.10.6-2",
+    "doc": "RFC 4918",
+    "section": "9.10.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "201 (Created) - The LOCK request was to an unmapped URL, the request succeeded and resulted in the creation of a new resource, and the value of the DAV:lockdiscovery property is included in the response body.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.10.6-3",
+    "doc": "RFC 4918",
+    "section": "9.10.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "409 (Conflict) - A resource cannot be created at the destination until one or more intermediate collections have been created. The server MUST NOT create those intermediate collections automatically.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.10.6-4",
+    "doc": "RFC 4918",
+    "section": "9.10.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "423 (Locked), potentially with 'no-conflicting-lock' precondition code - There is already a lock on the resource that is not compatible with the requested lock (see lock compatibility table above).",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.10.6-5",
+    "doc": "RFC 4918",
+    "section": "9.10.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "412 (Precondition Failed), with 'lock-token-matches-request-uri' precondition code - The LOCK request was made with an If header, indicating that the client wishes to refresh the given lock. However, the Request-URI did not fall within the scope of the lock identified by the token. The lock may have a scope that does not include the Request-URI, or the lock could have disappeared, or the token may be invalid.",
+    "topic": "expiry",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.11-1",
+    "doc": "RFC 4918",
+    "section": "9.11",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "For a successful response to this method, the server MUST delete the lock entirely.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.11-2",
+    "doc": "RFC 4918",
+    "section": "9.11",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If all resources that have been locked under the submitted lock token cannot be unlocked, then the UNLOCK request MUST fail.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-9.11-3",
+    "doc": "RFC 4918",
+    "section": "9.11",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A successful response to an UNLOCK method does not mean that the resource is necessarily unlocked. It means that the specific lock corresponding to the specified token no longer exists.",
+    "topic": "locking",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-9.11.1-1",
+    "doc": "RFC 4918",
+    "section": "9.11.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "204 (No Content) - Normal success response (rather than 200 OK, since 200 OK would imply a response body, and an UNLOCK success response does not normally contain a body).",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.11.1-2",
+    "doc": "RFC 4918",
+    "section": "9.11.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "400 (Bad Request) - No lock token was provided.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.11.1-3",
+    "doc": "RFC 4918",
+    "section": "9.11.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "403 (Forbidden) - The currently authenticated principal does not have permission to remove the lock.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-9.11.1-4",
+    "doc": "RFC 4918",
+    "section": "9.11.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "409 (Conflict), with 'lock-token-matches-request-uri' precondition - The resource was not locked, or the request was made to a Request-URI that was not within the scope of the lock.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-10.2-1",
+    "doc": "RFC 4918",
+    "section": "10.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Clients MUST NOT rely upon methods executing on members of their hierarchies in any particular order or on the execution being atomic unless the particular method explicitly provides such guarantees.",
+    "topic": "atomicity",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.2-2",
+    "doc": "RFC 4918",
+    "section": "10.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Upon execution, a method with a Depth header will perform as much of its assigned task as possible and then return a response specifying what it was able to accomplish and what it failed to do.",
+    "topic": "multistatus",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-10.2-3",
+    "doc": "RFC 4918",
+    "section": "10.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a source or destination resource within the scope of the Depth header is locked in such a way as to prevent the successful execution of the method, then the lock token for that resource MUST be submitted with the request in the If request header.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.3-1",
+    "doc": "RFC 4918",
+    "section": "10.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If the Destination value is an absolute-URI (Section 4.3 of [RFC3986]), it may name a different server (or different port or scheme). If the source server cannot attempt a copy to the remote server, it MUST fail the request.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.3-2",
+    "doc": "RFC 4918",
+    "section": "10.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If the Destination value is too long or otherwise unacceptable, the server SHOULD return 400 (Bad Request), ideally with helpful information in an error body.",
+    "topic": "destination",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-10.4.1-1",
+    "doc": "RFC 4918",
+    "section": "10.4.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If this header is evaluated and all state lists fail, then the request MUST fail with a 412 (Precondition Failed) status.",
+    "topic": "status-code",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.4.1-2",
+    "doc": "RFC 4918",
+    "section": "10.4.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Note that these two purposes need to be treated distinctly: a state token counts as being submitted independently of whether the server actually has evaluated the state list it appears in, and also independently of whether or not the condition it expressed was found to be true.",
+    "topic": "locking",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-10.4.3-1",
+    "doc": "RFC 4918",
+    "section": "10.4.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Finally, the whole If header evaluates to true if and only if at least one of the No-tag-list or Tagged-list productions evaluates to true. If the header evaluates to false, the server MUST reject the request with a 412 (Precondition Failed) status. Otherwise, execution of the request can proceed as if the header wasn't present.",
+    "topic": "status-code",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.4.4-1",
+    "doc": "RFC 4918",
+    "section": "10.4.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Matching entity tag: Where the entity tag matches an entity tag associated with the identified resource. Servers MUST use either the weak or the strong comparison function defined in Section 13.3.3 of [RFC2616].",
+    "topic": "integrity",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.4.4-2",
+    "doc": "RFC 4918",
+    "section": "10.4.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Matching state token: Where there is an exact match between the state token in the If header and any state token on the identified resource. A lock state token is considered to match if the resource is anywhere in the scope of the lock.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-10.4.4-3",
+    "doc": "RFC 4918",
+    "section": "10.4.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Handling unmapped URLs: For both ETags and state tokens, treat as if the URL identified a resource that exists but does not have the specified state.",
+    "topic": "destination",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-10.5-1",
+    "doc": "RFC 4918",
+    "section": "10.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The lock token in the Lock-Token request header MUST identify a lock that contains the resource identified by Request-URI as a member.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.6-1",
+    "doc": "RFC 4918",
+    "section": "10.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A value of \"F\" states that the server must not perform the COPY or MOVE operation if the destination URL does map to a resource. If the overwrite header is not included in a COPY or MOVE request, then the resource MUST treat the request as if it has an overwrite header of value \"T\".",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.6-2",
+    "doc": "RFC 4918",
+    "section": "10.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If a COPY or MOVE is not performed due to the value of the Overwrite header, the method MUST fail with a 412 (Precondition Failed) status code. The server MUST do authorization checks before checking this or any conditional header.",
+    "topic": "destination",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.7-1",
+    "doc": "RFC 4918",
+    "section": "10.7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Clients MAY include Timeout request headers in their LOCK requests. However, the server is not required to honor or even consider these requests. Clients MUST NOT submit a Timeout request header with any method other than a LOCK method.",
+    "topic": "expiry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-10.7-2",
+    "doc": "RFC 4918",
+    "section": "10.7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The \"Second\" TimeType specifies the number of seconds that will elapse between granting of the lock at the server, and the automatic removal of the lock. The timeout value for TimeType \"Second\" MUST NOT be greater than 2^32-1.",
+    "topic": "expiry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-11.1-1",
+    "doc": "RFC 4918",
+    "section": "11.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The 207 (Multi-Status) status code provides status for multiple independent operations (see Section 13 for more information).",
+    "topic": "multistatus",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-11.2-1",
+    "doc": "RFC 4918",
+    "section": "11.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The 422 (Unprocessable Entity) status code means the server understands the content type of the request entity (hence a 415(Unsupported Media Type) status code is inappropriate), and the syntax of the request entity is correct (thus a 400 (Bad Request) status code is inappropriate) but was unable to process the contained instructions.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-11.3-1",
+    "doc": "RFC 4918",
+    "section": "11.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The 423 (Locked) status code means the source or destination resource of a method is locked. This response SHOULD contain an appropriate precondition or postcondition code, such as 'lock-token-submitted' or 'no-conflicting-lock'.",
+    "topic": "locking",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-11.4-1",
+    "doc": "RFC 4918",
+    "section": "11.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The 424 (Failed Dependency) status code means that the method could not be performed on the resource because the requested action depended on another action and that action failed.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-11.5-1",
+    "doc": "RFC 4918",
+    "section": "11.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The 507 (Insufficient Storage) status code means the method could not be performed on the resource because the server is unable to store the representation needed to successfully complete the request. This condition is considered to be temporary.",
+    "topic": "destination",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-11.5-2",
+    "doc": "RFC 4918",
+    "section": "11.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If the request that received this status code was the result of a user action, the request MUST NOT be repeated until it is requested by a separate user action.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-12-1",
+    "doc": "RFC 4918",
+    "section": "12",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A 300-level response MUST NOT be used when the server has created a new resource in response to the request.",
+    "topic": "status-code",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-12.1-1",
+    "doc": "RFC 4918",
+    "section": "12.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If the server evaluates a conditional header, and if that condition fails to hold, then this error code MUST be returned. On the other hand, if the client did not include a conditional header in the request, then the server MUST NOT use this status code.",
+    "topic": "status-code",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-12.2-1",
+    "doc": "RFC 4918",
+    "section": "12.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "This status code is used in HTTP 1.1 only for Request-URIs, not URIs in other locations.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-13-1",
+    "doc": "RFC 4918",
+    "section": "13",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "100 series status codes SHOULD NOT be recorded in a 'response' XML element.",
+    "topic": "multistatus",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-13-2",
+    "doc": "RFC 4918",
+    "section": "13",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Although '207' is used as the overall response status code, the recipient needs to consult the contents of the multistatus response body for further information about the success or failure of the method execution. The response MAY be used in success, partial success and also in failure situations.",
+    "topic": "multistatus",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-13-3",
+    "doc": "RFC 4918",
+    "section": "13",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Each 'response' element MUST have an 'href' element to identify the resource.",
+    "topic": "multistatus",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-13-4",
+    "doc": "RFC 4918",
+    "section": "13",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "However, clients MUST be able to handle other status codes, using the generic rules defined in Section 10 of [RFC2616].",
+    "topic": "multistatus",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-13.2-1",
+    "doc": "RFC 4918",
+    "section": "13.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Servers MUST use this new element with redirect responses in Multi-Status.",
+    "topic": "multistatus",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-13.3-1",
+    "doc": "RFC 4918",
+    "section": "13.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "This specification does not define the meaning of other status codes that could appear in these responses.",
+    "topic": "multistatus",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-14.5-1",
+    "doc": "RFC 4918",
+    "section": "14.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Purpose: Error responses, particularly 403 Forbidden and 409 Conflict, sometimes need more information to indicate what went wrong. In these cases, servers MAY return an XML response body with a document element of 'error', containing child elements identifying particular condition codes.",
+    "topic": "error-body",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-14.5-2",
+    "doc": "RFC 4918",
+    "section": "14.5",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Description: Contains at least one XML element, and MUST NOT contain text or mixed content. Any element that is a child of the 'error' element is considered to be a precondition or postcondition code. Unrecognized elements MUST be ignored.",
+    "topic": "error-body",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-14.24-1",
+    "doc": "RFC 4918",
+    "section": "14.24",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A particular 'href' value MUST NOT appear more than once as the child of a 'response' XML element under a 'multistatus' XML element.",
+    "topic": "multistatus",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-14.29-1",
+    "doc": "RFC 4918",
+    "section": "14.29",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Purpose: The number of seconds remaining before a lock expires.",
+    "topic": "expiry",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-15.1-1",
+    "doc": "RFC 4918",
+    "section": "15.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Thus, clients SHOULD NOT use this property in synchronization logic (use DAV:getetag instead).",
+    "topic": "metadata",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-15.4-1",
+    "doc": "RFC 4918",
+    "section": "15.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Description: The DAV:getcontentlength property MUST be defined on any DAV-compliant resource that returns the Content-Length header in response to a GET.",
+    "topic": "finished-object",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-15.4-2",
+    "doc": "RFC 4918",
+    "section": "15.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "COPY/MOVE behavior: This property value is dependent on the size of the destination resource, not the value of the property on the source resource.",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-15.6-1",
+    "doc": "RFC 4918",
+    "section": "15.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Protected: MUST be protected because this value is created and controlled by the server.",
+    "topic": "integrity",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-15.6-2",
+    "doc": "RFC 4918",
+    "section": "15.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "COPY/MOVE behavior: This property value is dependent on the final state of the destination resource, not the value of the property on the source resource.",
+    "topic": "integrity",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-15.6-3",
+    "doc": "RFC 4918",
+    "section": "15.6",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Description: The getetag property MUST be defined on any DAV- compliant resource that returns the Etag header.",
+    "topic": "finished-object",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-15.7-1",
+    "doc": "RFC 4918",
+    "section": "15.7",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Description: The last-modified date on a resource SHOULD only reflect changes in the body (the GET responses) of the resource.",
+    "topic": "metadata",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-15.8-1",
+    "doc": "RFC 4918",
+    "section": "15.8",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "COPY/MOVE behavior: The value of this property depends on the lock state of the destination, not on the locks of the source resource. Recall that locks are not moved in a MOVE operation.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-16-1",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A \"precondition\" of a method describes the state of the server that must be true for that method to be performed. A \"postcondition\" of a method describes the state of the server that must be true after that method has been completed.",
+    "topic": "error-body",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-16-2",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The most common response status codes are 403 (Forbidden) if the request should not be repeated because it will always fail, and 409 (Conflict) if it is expected that the user might be able to resolve the conflict and resubmit the request.",
+    "topic": "recourse",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-16-3",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "This mechanism does not take the place of using a correct numeric status code as defined here or in HTTP, because the client must always be able to take a reasonable course of action based only on the numeric code.",
+    "topic": "recourse",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-16-4",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "A server supporting this specification SHOULD use the XML error whenever a precondition or postcondition defined in this document is violated. For error conditions not specified in this document, the server MAY simply choose an appropriate numeric status and leave the response body blank.",
+    "topic": "error-body",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-16-5",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Purpose: (precondition) -- A request may include a Lock-Token header to identify a lock for the UNLOCK method. However, if the Request-URI does not fall within the scope of the lock identified by the token, the server SHOULD use this error.",
+    "topic": "locking",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-16-6",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Purpose: The request could not succeed because a lock token should have been submitted. This element, if present, MUST contain at least one URL of a locked resource that prevented the request.",
+    "topic": "locking",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-16-7",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Purpose: A LOCK request failed due the presence of an already existing conflicting lock.",
+    "topic": "locking",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-16-8",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Purpose: (precondition) -- If the server rejects a client request because the request body contains an external entity, the server SHOULD use this error.",
+    "topic": "status-code",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RFC4918-16-9",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Purpose: (postcondition) -- The server received an otherwise-valid MOVE or COPY request, but cannot maintain the live properties with the same behavior at the destination.",
+    "topic": "destination",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-16-10",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Purpose: (precondition) -- This server does not allow infinite-depth PROPFIND requests on collections.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-16-11",
+    "doc": "RFC 4918",
+    "section": "16",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Purpose: (precondition) -- The client attempted to set a protected property in a PROPPATCH (such as DAV:getetag).",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-20.1-1",
+    "doc": "RFC 4918",
+    "section": "20.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Basic authentication MUST NOT be used to authenticate a WebDAV client to a server unless the connection is secure. Furthermore, a WebDAV server MUST NOT send a Basic authentication challenge in a WWW-Authenticate header unless the connection is secure.",
+    "topic": "permissions",
+    "level": "MUST"
+  },
+  {
+    "id": "RFC4918-20.2-1",
+    "doc": "RFC 4918",
+    "section": "20.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The underlying storage can be attacked by PUTting extremely large files.",
+    "topic": "resource-exhaustion",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-20.2-2",
+    "doc": "RFC 4918",
+    "section": "20.2",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The proper response to such an attack MAY be to simply drop the connection. Or, if the server is able to make a response, the server MAY use a 400-level status request such as 400 (Bad Request) and indicate why the request was refused (a 500- level status response would indicate that the problem is with the server, whereas unintentional DoS attacks are something the client is capable of remedying).",
+    "topic": "resource-exhaustion",
+    "level": "MAY"
+  },
+  {
+    "id": "RFC4918-20.3-1",
+    "doc": "RFC 4918",
+    "section": "20.3",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "Users of WebDAV servers are encouraged to use access control techniques to prevent unwanted access to resources, rather than depending on the relative obscurity of their resource names.",
+    "topic": "permissions",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-21.4-1",
+    "doc": "RFC 4918",
+    "section": "21.4",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "This specification defines the HTTP status codes o 207 Multi-Status (Section 11.1) o 422 Unprocessable Entity (Section 11.2), o 423 Locked (Section 11.3), o 424 Failed Dependency (Section 11.4) and o 507 Insufficient Storage (Section 11.5),",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "RFC4918-D-1",
+    "doc": "RFC 4918",
+    "section": "D",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "The server removes the lock-null resource entirely (its URI becomes unmapped) if its lock goes away before it is converted to a regular resource. Recall that locks go away not only when they expire or are unlocked, but are also removed if a resource is renamed or moved, or if any parent collection is renamed or moved.",
+    "topic": "upload-reservation",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-D.1-1",
+    "doc": "RFC 4918",
+    "section": "D.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "If the client wishes to avoid accidentally creating either lock- null or empty locked resources, an \"If-Match: *\" header can be included with LOCK requests to prevent the server from creating a new resource.",
+    "topic": "upload-reservation",
+    "level": "informative"
+  },
+  {
+    "id": "RFC4918-D.1-2",
+    "doc": "RFC 4918",
+    "section": "D.1",
+    "file": "drive-and-objects/rfc4918.txt",
+    "quote": "But with a locked empty resource, UNLOCK doesn't make the resource disappear. Therefore, the client might have to try both requests and ignore an error in one of the two requests.",
+    "topic": "recourse",
+    "level": "informative"
+  },
+  {
+    "id": "DRS-Introduction-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "Introduction",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/Introduction.md",
+    "quote": "The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).",
+    "topic": "conventions",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-Introduction-2",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "Introduction",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/Introduction.md",
+    "quote": "The primary functionality of DRS is to map a logical ID to a means for physically retrieving the data represented by the ID.",
+    "topic": "identity",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-DrsApiPrinciples.DRS-IDs-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "DrsApiPrinciples.DRS-IDs",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/DrsApiPrinciples.md",
+    "quote": "DRS IDs can contain other characters, but they MUST be encoded into valid DRS IDs whenever they are used in API calls.",
+    "topic": "identity",
+    "level": "MUST"
+  },
+  {
+    "id": "DRS-DrsApiPrinciples.DRS-IDs-2",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "DrsApiPrinciples.DRS-IDs",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/DrsApiPrinciples.md",
+    "quote": "One DRS ID MUST always return the same object data (or, in the case of a collection, the same set of objects). This constraint aids with reproducibility.",
+    "topic": "finished-object",
+    "level": "MUST"
+  },
+  {
+    "id": "DRS-DrsApiPrinciples.DRS-IDs-3",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "DrsApiPrinciples.DRS-IDs",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/DrsApiPrinciples.md",
+    "quote": "DRS implementations MAY have more than one ID that maps to the same object.",
+    "topic": "identity",
+    "level": "MAY"
+  },
+  {
+    "id": "DRS-DrsApiPrinciples.DRS-IDs-4",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "DrsApiPrinciples.DRS-IDs",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/DrsApiPrinciples.md",
+    "quote": "DRS version 1.x does NOT support semantics around multiple versions of an object. (For example, there’s no notion of “get latest version” or “list all versions”.) Individual implementations MAY choose an ID scheme that includes version hints.",
+    "topic": "identity",
+    "level": "MAY"
+  },
+  {
+    "id": "DRS-DrsApiPrinciples.Hostname-based-DRS-URIs-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "DrsApiPrinciples.Hostname-based-DRS-URIs",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/DrsApiPrinciples.md",
+    "quote": "The protocol is always https and the port is always the standard 443 SSL port. It is invalid to include a different port in a DRS hostname-based URI.",
+    "topic": "identity",
+    "level": "MUST"
+  },
+  {
+    "id": "DRS-DrsApiPrinciples.DRS-Datatypes-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "DrsApiPrinciples.DRS-Datatypes",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/DrsApiPrinciples.md",
+    "quote": "DRS's job is data access, period. Therefore, the DRS API supports a simple flat content model -- every `DrsObject`, like a file, represents a single opaque blob of bytes.",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-DrsApiPrinciples.Bundles-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "DrsApiPrinciples.Bundles",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/DrsApiPrinciples.md",
+    "quote": "As of v1.3, bundles have been deprecated in favor of the best practices documented in the [Appendix: Compound Objects](#tag/Working-With-Compound-Objects).",
+    "topic": "finished-object",
+    "level": "informative"
+  },
+  {
+    "id": "DRS-DrsApiPrinciples.Read-only-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "DrsApiPrinciples.Read-only",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/DrsApiPrinciples.md",
+    "quote": "DRS v1 is a read-only API. We expect that each implementation will define its own mechanisms and interfaces (graphical and/or programmatic) for adding and updating data.",
+    "topic": "upload-completion",
+    "level": "informative"
+  },
+  {
+    "id": "DRS-Auth.Making-DRS-Requests-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "Auth.Making-DRS-Requests",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/Auth.md",
+    "quote": "The DRS implementation is responsible for defining and enforcing an authorization policy that determines which users are allowed to make which requests.",
+    "topic": "permissions",
+    "level": "informative"
+  },
+  {
+    "id": "DRS-Auth.Fetching-DRS-Objects-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "Auth.Fetching-DRS-Objects",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/Auth.md",
+    "quote": "* public content: * server provides an `access_url` with a `url` and no `headers` * caller fetches the object bytes without providing any auth info",
+    "topic": "access",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-Auth.Fetching-DRS-Objects-2",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "Auth.Fetching-DRS-Objects",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/Auth.md",
+    "quote": "* private content that requires the caller to pass an Authorization token: * server provides an `access_url` with a `url` and `headers` * caller fetches the object bytes, passing auth info via the specified header(s)",
+    "topic": "access",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-Auth.Fetching-DRS-Objects-3",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "Auth.Fetching-DRS-Objects",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/Auth.md",
+    "quote": "* private content that uses an expensive-to-generate auth mechanism (e.g. a signed URL): * server provides an `access_id` * caller passes the `access_id` to the `/access` endpoint * server provides an `access_url` with the generated mechanism (e.g. a signed URL in the `url` field) * caller fetches the object bytes from the `url` (passing auth info from the specified headers, if any)",
+    "topic": "access",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-Auth.Fetching-DRS-Objects-4",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "Auth.Fetching-DRS-Objects",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/Auth.md",
+    "quote": "DRS implementers should ensure their solutions restrict access to targets as much as possible, detect attempts to exploit through log monitoring, and they are prepared to take action if an exploit in their DRS implementation is detected.",
+    "topic": "permissions",
+    "level": "informative"
+  },
+  {
+    "id": "DRS-Auth.Discovery-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "Auth.Discovery",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/Auth.md",
+    "quote": "The authorization mode may vary between DRS objects hosted by a service. The authorization mode may vary between the APIs to fetch a [DrsObject](#tag/DrsObjectModel) and an associated [AccessURL](#tag/AccessURLModel).",
+    "topic": "permissions",
+    "level": "informative"
+  },
+  {
+    "id": "DRS-schemas.DrsObject-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "required: - id - self_uri - size - created_time - checksums",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.id-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.id",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "description: An identifier unique to this `DrsObject`",
+    "topic": "identity",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.self_uri-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.self_uri",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "A drs:// hostname-based URI, as defined in the DRS documentation, that tells clients how to access this object.",
+    "topic": "identity",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.size-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.size",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "size: type: integer format: int64 description: |- For blobs, the blob size in bytes.",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.created_time-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.created_time",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "Timestamp of content creation in RFC3339. (This is the creation time of the underlying content, not of the JSON object.)",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.updated_time-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.updated_time",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "Timestamp of content update in RFC3339, identical to `created_time` in systems that do not support updates. (This is the update time of the underlying content, not of the JSON object.)",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.version-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.version",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "A string representing a version. (Some systems may use checksum, a RFC3339 timestamp, or an incrementing version number.)",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.mime_type-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.mime_type",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "description: A string providing the mime-type of the `DrsObject`.",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.checksums-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.checksums",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "checksums: type: array minItems: 1 items: $ref: './Checksum.yaml' description: >- The checksum of the `DrsObject`. At least one checksum must be provided.",
+    "topic": "integrity",
+    "level": "MUST"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.checksums-2",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.checksums",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "For blobs, the checksum is computed over the bytes in the blob.",
+    "topic": "integrity",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.checksums-3",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.checksums",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "For bundles, the checksum is computed over a sorted concatenation of the checksums of its top-level contained objects (not recursive, names not included). The list of checksums is sorted alphabetically (hex-code) before concatenation and a further checksum is performed on the concatenated checksum value.",
+    "topic": "integrity",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.access_methods-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.access_methods",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "access_methods: type: array minItems: 1 items: $ref: './AccessMethod.yaml' description: |- The list of access methods that can be used to fetch the `DrsObject`. Required for single blobs; optional for bundles.",
+    "topic": "finished-object",
+    "level": "MUST"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.contents-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.contents",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "If not set, this `DrsObject` is a single blob.",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsObject.name-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsObject.name",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsObject.yaml",
+    "quote": "This string is made up of uppercase and lowercase letters, decimal digits, hyphen, period, and underscore [A-Za-z0-9.-_].",
+    "topic": "identity",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.Checksum-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/Checksum",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/Checksum.yaml",
+    "quote": "required: - checksum - type",
+    "topic": "integrity",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.Checksum.checksum-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/Checksum.checksum",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/Checksum.yaml",
+    "quote": "description: The hex-string encoded checksum for the data",
+    "topic": "integrity",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.Checksum.type-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/Checksum.type",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/Checksum.yaml",
+    "quote": "The value (e.g. `sha-256`) SHOULD be listed as `Hash Name String` in the https://www.iana.org/assignments/named-information/named-information.xhtml#hash-alg[IANA Named Information Hash Algorithm Registry]. Other values MAY be used, as long as implementors are aware of the issues discussed in https://tools.ietf.org/html/rfc6920#section-9.4[RFC6920].",
+    "topic": "integrity",
+    "level": "SHOULD"
+  },
+  {
+    "id": "DRS-schemas.Checksum.type-2",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/Checksum.type",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/Checksum.yaml",
+    "quote": "Until then, if implementers do choose such an algorithm (e.g. because it's implemented by their storage provider), they SHOULD use an existing standard `type` value such as `md5`, `etag`, `crc32c`, `trunc512`, or `sha1`.",
+    "topic": "integrity",
+    "level": "SHOULD"
+  },
+  {
+    "id": "DRS-schemas.AccessMethod-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/AccessMethod",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/AccessMethod.yaml",
+    "quote": "required: - type properties: type: type: string enum: - s3 - gs - ftp - gsiftp - globus - htsget - https - file description: Type of the access method.",
+    "topic": "access",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.AccessMethod.access_url-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/AccessMethod.access_url",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/AccessMethod.yaml",
+    "quote": "An `AccessURL` that can be used to fetch the actual object bytes. Note that at least one of `access_url` and `access_id` must be provided.",
+    "topic": "access",
+    "level": "MUST"
+  },
+  {
+    "id": "DRS-schemas.AccessMethod.access_id-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/AccessMethod.access_id",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/AccessMethod.yaml",
+    "quote": "An arbitrary string to be passed to the `/access` method to get an `AccessURL`. This string must be unique within the scope of a single object. Note that at least one of `access_url` and `access_id` must be provided.",
+    "topic": "access",
+    "level": "MUST"
+  },
+  {
+    "id": "DRS-schemas.AccessMethod.available-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/AccessMethod.available",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/AccessMethod.yaml",
+    "quote": "Availablity of file in the cloud. This label defines if this file is immediately accessible via DRS. Any delay or requirement of thawing mechanism if the file is in offline/archival storage is classified as false, meaning it is unavailable.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.AccessMethod.authorizations-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/AccessMethod.authorizations",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/AccessMethod.yaml",
+    "quote": "When `access_id` is provided, `authorizations` provides information about how to authorize the `/access` method.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.AccessMethod.cloud-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/AccessMethod.cloud",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/AccessMethod.yaml",
+    "quote": "If the cloud service is Amazon Web Services, Google Cloud Platform or Azure the values should be `aws`, `gcp`, or `azure` respectively.",
+    "topic": "access",
+    "level": "SHOULD"
+  },
+  {
+    "id": "DRS-schemas.AccessURL-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/AccessURL",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/AccessURL.yaml",
+    "quote": "required: - url properties: url: type: string description: A fully resolvable URL that can be used to fetch the actual object bytes.",
+    "topic": "access",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.AccessURL.headers-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/AccessURL.headers",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/AccessURL.yaml",
+    "quote": "An optional list of headers to include in the HTTP request to `url`. These headers can be used to provide auth tokens required to fetch the object bytes.",
+    "topic": "access",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.Authorizations.supported_types-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/Authorizations.supported_types",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/Authorizations.yaml",
+    "quote": "enum: - None - BasicAuth - BearerAuth - PassportAuth description: >- An Optional list of support authorization types. More than one can be supported and tried in sequence. Defaults to `None` if empty or missing.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.Error-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/Error",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/Error.yaml",
+    "quote": "description: An object that can optionally include information about the error. properties: msg: type: string description: A detailed error message. status_code: type: integer description: The integer representing the HTTP status code (e.g. 200, 404).",
+    "topic": "error-body",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.unresolved-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/unresolved",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/unresolved.yaml",
+    "quote": "description: Error codes for each unresolved drs objects. items: type: object properties: error_code: type: integer object_ids:",
+    "topic": "multistatus",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.summary-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/summary",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/summary.yaml",
+    "quote": "description: A summary of what was resolved. properties: requested: type: integer description: Number of items requested. resolved: type: integer description: Number of objects resolved. unresolved: type: integer description: Number of objects not resolved.",
+    "topic": "multistatus",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-schemas.DrsService.maxBulkRequestLength-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "schemas/DrsService.maxBulkRequestLength",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/schemas/DrsService.yaml",
+    "quote": "The max length the bulk request endpoints can handle (>= 1) before generating a 413 error e.g. how long can the arrays bulk_object_ids and bulk_object_access_ids be for this server.",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-responses.202Accepted-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/202Accepted",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/202Accepted.yaml",
+    "quote": "The operation is delayed and will continue asynchronously. The client should retry this same request after the delay specified by Retry-After header.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "DRS-responses.202Accepted.Retry-After-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/202Accepted.Retry-After",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/202Accepted.yaml",
+    "quote": "Delay in seconds. The client should retry this same request after waiting for this duration. To simplify client response processing, this must be an integral relative time in seconds.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "DRS-responses.202Accepted.Retry-After-2",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/202Accepted.Retry-After",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/202Accepted.yaml",
+    "quote": "This value SHOULD represent the minimum duration the client should wait before attempting the operation again with a reasonable expectation of success. When it is not feasible for the server to determine the actual expected delay, the server may return a brief, fixed value instead.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "DRS-responses.202Accepted.Retry-After-3",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/202Accepted.Retry-After",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/202Accepted.yaml",
+    "quote": "schema: type: integer format: int64",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-responses.400BadRequest-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/400BadRequest",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/400BadRequest.yaml",
+    "quote": "description: The request is malformed.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-responses.401Unauthorized-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/401Unauthorized",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/401Unauthorized.yaml",
+    "quote": "description: The request is unauthorized.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-responses.403Forbidden-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/403Forbidden",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/403Forbidden.yaml",
+    "quote": "description: The requester is not authorized to perform this action.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-responses.404NotFoundDrsObject-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/404NotFoundDrsObject",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/404NotFoundDrsObject.yaml",
+    "quote": "description: The requested `DrsObject` wasn't found.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-responses.404NotFoundAccess-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/404NotFoundAccess",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/404NotFoundAccess.yaml",
+    "quote": "description: The requested `AccessURL` wasn't found.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-responses.413RequestTooLarge-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/413RequestTooLarge",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/413RequestTooLarge.yaml",
+    "quote": "description: The bulk request is too large.",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-responses.500InternalServerError-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/500InternalServerError",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/500InternalServerError.yaml",
+    "quote": "description: An unexpected error occurred.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-responses.AuthorizationsNotSupported-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "responses/AuthorizationsNotSupported",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/components/responses/AuthorizationsNotSupported.yaml",
+    "quote": "description: \"`Authorizations` are not supported for this object. Default to `None`.\"",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-paths.objects.{object_id}.get-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "paths/objects/{object_id}.get",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/paths/objects@{object_id}.yaml",
+    "quote": "operationId: GetObject parameters: - $ref: '../components/parameters/ObjectId.yaml' - $ref: '../components/parameters/Expand.yaml' responses: 200: $ref: '../components/responses/200OkDrsObject.yaml' 202: $ref: '../components/responses/202Accepted.yaml' 400: $ref: '../components/responses/400BadRequest.yaml' 401: $ref: '../components/responses/401Unauthorized.yaml' 403: $ref: '../components/responses/403Forbidden.yaml' 404: $ref: '../components/responses/404NotFoundDrsObject.yaml' 500: $ref: '../components/responses/500InternalServerError.yaml'",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-paths.objects.{object_id}.post-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "paths/objects/{object_id}.post",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/paths/objects@{object_id}.yaml",
+    "quote": "operationId: PostObject security: - PassportAuth: [] responses: 200: $ref: '../components/responses/200OkDrsObject.yaml' 202: $ref: '../components/responses/202Accepted.yaml' 400: $ref: '../components/responses/400BadRequest.yaml' 401: $ref: '../components/responses/401Unauthorized.yaml' 403: $ref: '../components/responses/403Forbidden.yaml' 404: $ref: '../components/responses/404NotFoundAccess.yaml' 500: $ref: '../components/responses/500InternalServerError.yaml'",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-paths.objects.{object_id}.options-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "paths/objects/{object_id}.options",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/paths/objects@{object_id}.yaml",
+    "quote": "operationId: OptionsObject parameters: - $ref: '../components/parameters/ObjectId.yaml' responses: 200: $ref: '../components/responses/200OkAuthorizations.yaml' 204: $ref: '../components/responses/AuthorizationsNotSupported.yaml' 400: $ref: '../components/responses/400BadRequest.yaml' 404: $ref: '../components/responses/404NotFoundDrsObject.yaml' 405: $ref: '../components/responses/AuthorizationsNotSupported.yaml' 500: $ref: '../components/responses/500InternalServerError.yaml'",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-paths.objects.{object_id}.access.{access_id}.get-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "paths/objects/{object_id}/access/{access_id}.get",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/paths/objects@{object_id}@access@{access_id}.yaml",
+    "quote": "operationId: GetAccessURL responses: 200: $ref: '../components/responses/200OkAccess.yaml' 202: $ref: '../components/responses/202Accepted.yaml' 400: $ref: '../components/responses/400BadRequest.yaml' 401: $ref: '../components/responses/401Unauthorized.yaml' 403: $ref: '../components/responses/403Forbidden.yaml' 404: $ref: '../components/responses/404NotFoundAccess.yaml' 500: $ref: '../components/responses/500InternalServerError.yaml'",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-paths.objects.{object_id}.access.{access_id}.get-2",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "paths/objects/{object_id}/access/{access_id}.get",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/paths/objects@{object_id}@access@{access_id}.yaml",
+    "quote": "Returns a URL that can be used to fetch the bytes of a `DrsObject`. This method only needs to be called when using an `AccessMethod` that contains an `access_id` (e.g., for servers that use signed URLs for fetching object bytes).",
+    "topic": "access",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-paths.objects.post-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "paths/objects.post",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/paths/bulkobjects@{object_id}.yaml",
+    "quote": "operationId: GetBulkObjects security: - PassportAuth: [] parameters: - $ref: '../components/parameters/Expand.yaml' responses: 200: $ref: '../components/responses/200OkDrsObjects.yaml' 202: $ref: '../components/responses/202Accepted.yaml' 400: $ref: '../components/responses/400BadRequest.yaml' 401: $ref: '../components/responses/401Unauthorized.yaml' 403: $ref: '../components/responses/403Forbidden.yaml' 404: $ref: '../components/responses/404NotFoundDrsObject.yaml' 413: $ref: '../components/responses/413RequestTooLarge.yaml' 500: $ref: '../components/responses/500InternalServerError.yaml'",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-paths.objects.access.post-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "paths/objects/access.post",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/paths/bulkobjects@access@{access_id}.yaml",
+    "quote": "operationId: GetBulkAccessURL security: - PassportAuth: [] responses: 200: $ref: '../components/responses/200OkAccesses.yaml' 202: $ref: '../components/responses/202Accepted.yaml' 400: $ref: '../components/responses/400BadRequest.yaml' 401: $ref: '../components/responses/401Unauthorized.yaml' 403: $ref: '../components/responses/403Forbidden.yaml' 404: $ref: '../components/responses/404NotFoundAccess.yaml' 413: $ref: '../components/responses/413RequestTooLarge.yaml' 500: $ref: '../components/responses/500InternalServerError.yaml'",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "DRS-paths.objects.access.post-2",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "paths/objects/access.post",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/paths/bulkobjects@access@{access_id}.yaml",
+    "quote": "Currently this is limited to use passports (one or more) or a single bearer token, so make sure your bulk request is for objects that all use the same passports/token.",
+    "topic": "permissions",
+    "level": "informative"
+  },
+  {
+    "id": "DRS-data_repository_service.openapi.yaml#servers-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "data_repository_service.openapi.yaml#servers",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/data_repository_service.openapi.yaml",
+    "quote": "DRS server endpoints MUST be prefixed by the '/ga4gh/drs/v1' endpoint path",
+    "topic": "identity",
+    "level": "MUST"
+  },
+  {
+    "id": "DRS-CompoundObjects-1",
+    "doc": "GA4GH DRS 1.5.0",
+    "section": "CompoundObjects",
+    "file": "drive-and-objects/ga4gh-drs-1.5.0/openapi/tags/CompoundObjects.md",
+    "quote": "In both cases, DRS isn't aware of the semantics of the objects it serves -- understanding those semantics is the responsibility of the applications that call DRS.",
+    "topic": "finished-object",
+    "level": "informative"
+  },
+  {
+    "id": "TES-tesState-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "Task state as defined by the server.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.UNKNOWN-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.UNKNOWN",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `UNKNOWN`: The state of the task is unknown. The cause for this status message may be dependent on the underlying system. The `UNKNOWN` states provides a safe default for messages where this field is missing so that a missing field does not accidentally imply that the state is QUEUED.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.QUEUED-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.QUEUED",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `QUEUED`: The task is queued and awaiting resources to begin computing.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.INITIALIZING-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.INITIALIZING",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `INITIALIZING`: The task has been assigned to a worker and is currently preparing to run. For example, the worker may be turning on, downloading input files, etc.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.RUNNING-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.RUNNING",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `RUNNING`: The task is running. Input files are downloaded and the first Executor has been started.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.PAUSED-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.PAUSED",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `PAUSED`: The task is paused. The reasons for this would be tied to the specific system running the job. An implementation may have the ability to pause a task, but this is not required.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.COMPLETE-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.COMPLETE",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `COMPLETE`: The task has completed running. Executors have exited without error and output files have been successfully uploaded.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.EXECUTOR_ERROR-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.EXECUTOR_ERROR",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `EXECUTOR_ERROR`: The task encountered an error in one of the Executor processes. Generally, this means that an Executor exited with a non-zero exit code.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.SYSTEM_ERROR-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.SYSTEM_ERROR",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `SYSTEM_ERROR`: The task was stopped due to a system error, but not from an Executor, for example an upload failed due to network issues, the worker's ran out of disk space, etc.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.CANCELED-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.CANCELED",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `CANCELED`: The task was canceled by the user, and downstream resources have been deleted.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.CANCELING-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.CANCELING",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `CANCELING`: The task was canceled by the user, but the downstream resources are still awaiting deletion.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.PREEMPTED-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.PREEMPTED",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "- `PREEMPTED`: The task is stopped (preempted) by the system. The reasons for this would be tied to the specific system running the job. Generally, this means that the system reclaimed the compute capacity for reallocation.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.enum-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.enum",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "default: UNKNOWN example: COMPLETE enum: - UNKNOWN - QUEUED - INITIALIZING - RUNNING - PAUSED - COMPLETE - EXECUTOR_ERROR - SYSTEM_ERROR - CANCELED - PREEMPTED - CANCELING",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesState.readOnly-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesState.readOnly",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "tesState: type: string readOnly: True",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-paths.tasks.get-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "paths/tasks.get",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "List tasks tracked by the TES server. This includes queued, active and completed tasks. How long completed tasks are stored by the system may be dependent on the underlying implementation.",
+    "topic": "expiry",
+    "level": "informative"
+  },
+  {
+    "id": "TES-paths.tasks.{id}:cancel-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "paths/tasks/{id}:cancel",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "summary: CancelTask description: Cancel a task based on providing an exact task ID.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "TES-paths.tasks.{id}:cancel-2",
+    "doc": "GA4GH TES 1.1",
+    "section": "paths/tasks/{id}:cancel",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "responses: 200: description: \"\" content: application/json: schema: $ref: '#/components/schemas/tesCancelTaskResponse'",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesCancelTaskResponse-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesCancelTaskResponse",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "tesCancelTaskResponse: type: object description: CancelTaskResponse describes a response from the CancelTask endpoint.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesCreateTaskResponse-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesCreateTaskResponse",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "CreateTaskResponse describes a response from the CreateTask endpoint. It will include the task ID that can be used to look up the status of the job.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesInput.url-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesInput.url",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "REQUIRED, unless \"content\" is set. URL in long term storage, for example:",
+    "topic": "import",
+    "level": "MUST"
+  },
+  {
+    "id": "TES-tesInput.content-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesInput.content",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "Implementations should support a minimum of 128 KiB in this field and may define their own maximum.",
+    "topic": "import",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TES-tesInput.content-2",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesInput.content",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "If content is not empty, \"url\" must be ignored.",
+    "topic": "import",
+    "level": "MUST"
+  },
+  {
+    "id": "TES-tesOutput.url-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesOutput.url",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "URL at which the TES server makes the output accessible after the task is complete.",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesOutputFileLog-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesOutputFileLog",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "tesOutputFileLog: required: - path - size_bytes - url",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesOutputFileLog.size_bytes-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesOutputFileLog.size_bytes",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "Size of the file in bytes. Note, this is currently coded as a string because official JSON doesn't support int64 numbers.",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesOutputFileLog-2",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesOutputFileLog",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "OutputFileLog describes a single output file. This describes file details after the task has completed successfully, for logging purposes.",
+    "topic": "finished-object",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesTaskLog.system_logs-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesTaskLog.system_logs",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "For example, the system may include the name of the host where the task is executing, an error message that caused a SYSTEM_ERROR state (e.g. disk is full), etc.",
+    "topic": "error-body",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesExecutor.ignore_error-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesExecutor.ignore_error",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "Default behavior of running an array of executors is that execution stops on the first error. If `ignore_error` is `True`, then the runner will record error exit codes, but will continue on to the next",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "TES-tesResources.preemptible-1",
+    "doc": "GA4GH TES 1.1",
+    "section": "tesResources.preemptible",
+    "file": "drive-and-objects/ga4gh-tes-1.1/openapi/task_execution_service.openapi.yaml",
+    "quote": "Define if the task is allowed to run on preemptible compute instances, for example, AWS Spot. This option may have no effect when utilized on some backends that don't have the concept of preemptible jobs.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.enum-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.enum",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "enum: - UNKNOWN - QUEUED - INITIALIZING - RUNNING - PAUSED - COMPLETE - EXECUTOR_ERROR - SYSTEM_ERROR - CANCELED - CANCELING - PREEMPTED",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.UNKNOWN-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.UNKNOWN",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ UNKNOWN: The state of the task is unknown. This provides a safe default for messages where this field is missing, for example, so that a missing field does not accidentally imply that the state is QUEUED.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.QUEUED-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.QUEUED",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ QUEUED: The task is queued.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.INITIALIZING-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.INITIALIZING",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ INITIALIZING: The task has been assigned to a worker and is currently preparing to run. For example, the worker may be turning on, downloading input files, etc.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.RUNNING-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.RUNNING",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ RUNNING: The task is running. Input files are downloaded and the first Executor has been started.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.PAUSED-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.PAUSED",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ PAUSED: The task is paused. An implementation may have the ability to pause a task, but this is not required.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.COMPLETE-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.COMPLETE",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ COMPLETE: The task has completed running. Executors have exited without error and output files have been successfully uploaded.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.EXECUTOR_ERROR-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.EXECUTOR_ERROR",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ EXECUTOR_ERROR: The task encountered an error in one of the Executor processes. Generally, this means that an Executor exited with a non-zero exit code.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.SYSTEM_ERROR-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.SYSTEM_ERROR",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ SYSTEM_ERROR: The task was stopped due to a system error, but not from an Executor, for example an upload failed due to network issues, the worker's ran out of disk space, etc.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.CANCELED-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.CANCELED",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ CANCELED: The task was canceled by the user.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.CANCELING-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.CANCELING",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ CANCELING: The task was canceled by the user, and is in the process of stopping.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "WES-State.PREEMPTED-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "State.PREEMPTED",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "+ PREEMPTED: The task is stopped (preempted) by the system. The reasons for this would be tied to the specific system running the job. Generally, this means that the system reclaimed the compute capacity for reallocation.",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-RunSummary.end_time-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "RunSummary.end_time",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "description: When the run stopped executing (completed, failed, or cancelled), in ISO 8601 format \"%Y-%m-%dT%H:%M:%SZ\"",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-ErrorResponse-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "ErrorResponse",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "ErrorResponse: title: ErrorResponse type: object properties: msg: type: string description: A detailed error message. status_code: type: integer description: The integer representing the HTTP status code (e.g. 200, 404). format: int32 description: An object that can optionally include information about the error.",
+    "topic": "error-body",
+    "level": "definition"
+  },
+  {
+    "id": "WES-paths.runs.{run_id}.cancel-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "paths/runs/{run_id}/cancel",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "summary: CancelRun description: Cancel a running workflow.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "WES-paths.runs.{run_id}.cancel-2",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "paths/runs/{run_id}/cancel",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "operationId: CancelRun parameters: - name: run_id in: path description: '' required: true style: simple schema: type: string responses: 200: description: '' headers: { } content: application/json: schema: $ref: '#/components/schemas/RunId' 401: description: The request is unauthorized.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "WES-paths.runs.{run_id}.status-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "paths/runs/{run_id}/status",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "This provides an abbreviated (and likely fast depending on implementation) status of the running workflow, returning a simple result with the overall state of the workflow run (e.g. RUNNING, see the State section).",
+    "topic": "state",
+    "level": "definition"
+  },
+  {
+    "id": "WES-paths.runs.{run_id}.status.404-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "paths/runs/{run_id}/status.404",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "description: The requested workflow run wasn't found.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "WES-paths.401-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "paths.401",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "description: The request is unauthorized.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "WES-paths.403-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "paths.403",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "description: The requester is not authorized to perform this action.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "WES-paths.400-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "paths.400",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "description: The request is malformed.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "WES-paths.500-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "paths.500",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "description: An unexpected error occurred.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "WES-RunListResponse.runs-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "RunListResponse.runs",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "A list of workflow runs that the service has executed or is executing. The list is filtered to only include runs that the caller has permission to see.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "WES-ServiceInfo.system_state_counts-1",
+    "doc": "GA4GH WES 1.1.0",
+    "section": "ServiceInfo.system_state_counts",
+    "file": "drive-and-objects/ga4gh-wes-1.1.0/openapi/workflow_execution_service.openapi.yaml",
+    "quote": "system_state_counts: type: object additionalProperties: type: integer format: int64",
+    "topic": "state",
+    "level": "definition"
+  }
+]

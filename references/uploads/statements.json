@@ -1,0 +1,2486 @@
+[
+  {
+    "id": "RESUMABLE-UPLOAD-13-1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "explicit client cancellation: e.g., terminating a user-agent process",
+    "topic": "cancellation causes",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "implicit client cancellation: e.g., terminating a tab, garbage collecting a process or internal error",
+    "topic": "cancellation causes",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-1-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "explicit server cancellation: e.g., scheduled maintenance",
+    "topic": "cancellation causes",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-1-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "implicit server cancellation: e.g., DoS mitigation or internal error",
+    "topic": "cancellation causes",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-1-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Connections can be dropped due to a variety of network or transport layer reasons triggered by endpoints or on-path elements.",
+    "topic": "interruption",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-1-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "When an upload is interrupted, clients can send subsequent requests to query the server state and use this information to send the remaining representation data. Alternatively, they can cancel the upload entirely. Unlike ranged downloads, this protocol does not support transferring an upload as multiple requests in parallel.",
+    "topic": "resume vs cancel; no parallel transfer",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-1-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Utilizing resumable uploads, applications can recover from unintended interruptions, but also interrupt an upload on purpose to later resume it, for example, when a user wants to pause an upload, the device's network connectivity changes, or bandwidth should be saved for higher priority tasks.",
+    "topic": "pause / intentional interruption",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "An _upload resource_ is a temporary resource on the server that facilitates the resumable upload of one representation (Section 4).",
+    "topic": "upload resource",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-3-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "By interacting with the upload resource, a client can retrieve the current offset of the upload (Section 4.3), append to the upload (Section 4.4), and cancel the upload (Section 4.5).",
+    "topic": "upload resource operations",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-3.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "3.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Once the remaining representation data is transferred, the server processes the entire representation and responds with whatever the initial request to /project/123/files would have produced if it had not been interrupted, e.g., a 200 (OK) response.",
+    "topic": "completion response semantics",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-3.1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "3.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client is not interested in completing the upload, it can instruct the server to delete the upload resource and all associated representation data (Section 4.5).",
+    "topic": "cancellation",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-3.2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "3.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Another use case is where the client does not know the final size of the representation data, such as when the data originates from a streaming source.",
+    "topic": "unknown length",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server is responsible for persisting the state of the upload resource (Section 4.1) and updating it as the upload progresses.",
+    "topic": "upload resource state persistence",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "An upload resource is specific to the upload of one representation. For uploading multiple representations, multiple upload resources have to be used.",
+    "topic": "upload resource cardinality",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server can clean up an upload resource and make it inaccessible immediately after the upload is complete. However, keeping the upload resource available for a period of time after completion allows the client to verify the state of the upload if it did not receive the last response acknowledging the completion. Implementations are responsible for deciding if they retain the resource and for what duration; they will need to consider the resource costs required to do so.",
+    "topic": "retention after completion / expiry",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "An upload resource SHOULD be unique. Reuse of a URI for a different upload resource SHOULD be avoided in order to reduce the chance of misdirected or corrupted upload resources, as well as the potential security issues described in Section 13.",
+    "topic": "upload resource uniqueness",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The state of an upload consists of the following properties that are tracked by the server.",
+    "topic": "upload state",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The offset is the number of bytes from the representation data that have been processed, either during the creation of the upload resource (Section 4.2) or by appending to it (Section 4.4).",
+    "topic": "offset",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The offset is required when appending representation data (Section 4.4) to synchronize the client and resource regarding the amount of transferred representation data.",
+    "topic": "offset",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.1-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The offset reflects application-level processing for the upload. Data may have been delivered and acknowledged at the transport layer without yet being reflected in the offset.",
+    "topic": "offset vs transport acknowledgement",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.1-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Upload-Offset is an Item Structured Header Field ([STRUCTURED-FIELDS]). Its value is a non-negative Integer (Section 3.3.1 of [STRUCTURED-FIELDS]) and indicates the current offset as viewed by the message sender. Other values MUST cause the entire header field to be ignored.",
+    "topic": "Upload-Offset field syntax",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.1-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Interim and final responses for creating the upload (Section 4.2) or appending (Section 4.4) with a non-2XX status code and the Upload-Complete: ?0 header can include the Upload-Offset header field.",
+    "topic": "offset in error responses",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.1-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Final responses for appending representation data (Section 4.4) with a 2XX status code and the Upload-Complete: ?0 header acknowledge that the entire request content was received and the offset increased by the length of the appended representation data. An Upload-Offset header field's value MUST match this inferred offset, if present.",
+    "topic": "offset inferred from 2xx append",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.1-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Representation data processed by the upload resource cannot be removed again and, therefore, the offset as seen by the client MUST NOT decrease.",
+    "topic": "offset monotonicity",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.1-8",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Clients can use this guarantee to free resources associated to transferred representation data, as no retransmission of it will be necessary.",
+    "topic": "offset monotonicity lets client free buffers",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.1-9",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the server loses any part of the state, it MUST deactivate the upload resource and reject further interaction with it.",
+    "topic": "state loss -> deactivate",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "An upload is incomplete until it is explicitly marked as completed by the client or the server. After this point, no more representation data can be appended.",
+    "topic": "completeness",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.2-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Upload-Complete is an Item Structured Header Field ([STRUCTURED-FIELDS]). Its value is a Boolean (Section 3.3.6 of [STRUCTURED-FIELDS]) and indicates whether the upload is complete or not. Other values MUST cause the entire header field to be ignored.",
+    "topic": "Upload-Complete field syntax",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.2-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "An upload is marked as completed either when a request for creating the upload resource (Section 4.2) or appending to it (Section 4.4) includes the Upload-Complete header field with a true value and the request content was fully processed, or when a response includes the Upload-Complete header field with a true value.",
+    "topic": "when an upload becomes complete",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.2-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "When used in an upload creation response (Section 4.2) or an upload append response (Section 4.4), Upload-Complete signals whether the response comes from the initial targeted resource. The value of true means that the semantics of the targeted resource apply, and the value of false means that the semantics of the resumable upload protocol apply.",
+    "topic": "Upload-Complete in responses: whose semantics apply",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.2-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The client SHOULD NOT perform upload resumption to the upload resource after receiving a response with the Upload- Complete field value set to true.",
+    "topic": "no resumption after complete",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.2-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Note that Upload-Complete can be true even when the full representation data was not transmitted in the case that the server decides to generate an early response when processing the targeted resource. Also note that Upload-Complete can be false in response to an invalid operation performed on a completed upload.",
+    "topic": "early response / invalid op on completed upload",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.3-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The length of the representation data might not be known when starting the transfer, for example, because the representation is taken from a streaming source. The representation's length will, however, be known at the latest when the client completes the upload (Section 4.1.2).",
+    "topic": "length may be unknown until completion",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.3-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Despite this, a client SHOULD communicate the representation's length to the server as soon as it becomes known to aid with resource management and facilitate early validation.",
+    "topic": "announce length early",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.3-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the request includes the Upload-Complete field value set to true, the request content is the remaining representation data. The representation's length is then the sum of the current offset (Section 4.1.1) and the request content's length, which might be announced in the Content-Length header field.",
+    "topic": "length indicator (1): completing request",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.3-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The request can include the Upload-Length header field defined below.",
+    "topic": "length indicator (2): Upload-Length",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.3-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The Upload-Length request and response header field is an Item Structured Header Field ([STRUCTURED-FIELDS]). Its value is a non- negative Integer (Section 3.3.1 of [STRUCTURED-FIELDS]) and indicates the representation's length as a number of bytes. Other values MUST cause the entire header field to be ignored.",
+    "topic": "Upload-Length field syntax",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.3-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If indicators (1) and (2) are both present in the same request, their indicated lengths MUST match. The representation's length, if known, MUST stay consistent across subsequent requests.",
+    "topic": "length consistency",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.3-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A server can use the problem type [PROBLEM] of \"https://iana.org/assignments/http- problem-types#inconsistent-upload-length\" (Section 7.2) in responses to indicate inconsistent length indicators.",
+    "topic": "inconsistent-upload-length problem type",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.3-8",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Note that the length and offset values do not determine whether an upload is complete. Instead, the client uses the Upload-Complete (Section 4.1.2) header field to indicate that a request completes the upload. The offset could match the length, but the upload can still be incomplete.",
+    "topic": "length/offset do not determine completeness",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A server MAY enforce one or multiple limits, which are communicated to the client via the Upload-Limit response header field.",
+    "topic": "limits",
+    "level": "MAY"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Upload- Limit is a Dictionary Structured Header Field ([STRUCTURED-FIELDS]). Its value is a Dictionary (Section 3.2 of [STRUCTURED-FIELDS]). Other values MUST cause the entire header field to be ignored.",
+    "topic": "Upload-Limit field syntax",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "max-size: Specifies a maximum size for the representation data, counted in bytes. The server might not create an upload resource if the representation's length (Section 4.1.3) deduced from the upload creation request is larger than the maximum size. The server might also deactivate the upload resource if the offset (Section 4.1.1) exceeds the maximum size. The value is an Integer.",
+    "topic": "limit max-size",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "min-size: Specifies a minimum size for the representation data, counted in bytes, for the server to offer resumable uploads. The server might not create an upload resource if the representation's length (Section 4.1.3) deduced from the upload creation request is smaller than the minimum size or no length can be deduced at all. Resumable uploads impose additional overhead on the server, which might not be acceptable for small representations. Requests with representation data below this value might still be accepted by the server, although without the ability to resume them. The value is an Integer.",
+    "topic": "limit min-size",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "max-append-size: Specifies a maximum size counted in bytes for the request content in a single upload append (Section 4.4) or upload creation (Section 4.2) request. The server might reject requests exceeding this limit. A client that is aware of this limit MUST NOT send larger upload append or upload creation requests. The value is an Integer.",
+    "topic": "limit max-append-size",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "min-append-size: Specifies a minimum size counted in bytes for the request content in a single upload append (Section 4.4) or upload creation (Section 4.2) request. The server might reject requests below this limit. A client that is aware of this limit MUST NOT send smaller upload append or upload creation requests. The value is an Integer. This limit does not apply to upload creation requests with no content, or to requests completing the upload by including the Upload-Complete: ?1 header field.",
+    "topic": "limit min-append-size",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "max-age: Specifies the remaining lifetime of the upload resource in seconds counted from the generation of the response. After the resource's lifetime is reached, the server might make the upload resource inaccessible. The value is an Integer.",
+    "topic": "limit max-age (expiry)",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-8",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Clients usually discover limits through the Upload-Limit header field when the upload resource is created (Section 4.2). Throughout the lifetime of the upload resource, these limits SHOULD NOT change in a way that causes failures for clients adhering to the initially discovered limits. If the client discovers that it cannot continue the upload while adhering to the limits, it SHOULD stop the current request immediately (Section 12) and cancel the upload (Section 4.5).",
+    "topic": "limit stability; client recourse on limit violation",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-9",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "max-size and max-append-size SHOULD NOT decrease.",
+    "topic": "limit monotonicity",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-10",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "min-size and min-append-size SHOULD NOT increase.",
+    "topic": "limit monotonicity",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-11",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Between subsequent responses, the end of the upload resource's lifetime as implied by max-age SHOULD NOT decrease.",
+    "topic": "expiry monotonicity",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-12",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Where the Dictionary is successfully parsed, this document places two additional requirements on Dictionary members. First, a member with an unknown key MUST be ignored. Second, a member with a known key but a value of unexpected type MUST cause the entire Upload-Limit header field to be ignored, or alternatively the complete HTTP message MUST be treated as malformed.",
+    "topic": "Upload-Limit parsing",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-13",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "When responding to an OPTIONS request without the Upload-Complete header field, if the resource that is the target of the request supports the creation of a resumable upload resource (Section 4.2), the server MUST include the Upload-Limit header field with the corresponding limits in the response.",
+    "topic": "OPTIONS discovery",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-14",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If a server is configured such that all of its resources support the creation of upload resources with identical limits, it SHOULD include the Upload-Limit header field in response to an OPTIONS request for the target * (if this target is supported).",
+    "topic": "OPTIONS discovery",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-15",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the server does not apply any limits, it MUST use min-size=0 instead of an empty header value.",
+    "topic": "no limits encoding",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-16",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "To reduce the likelihood of failing requests, the limits announced in an OPTIONS response SHOULD NOT be less restrictive than the limits applied to an upload once the upload resource has been created, unless the request to create an upload resource included additional information that warrants different limits.",
+    "topic": "OPTIONS limits vs actual limits",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-17",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "When a request is rejected because limits were violated, the response SHOULD include the Upload-Limit header field carrying all limits of the corresponding upload if possible. This might not be possible if intermediaries enforce limits.",
+    "topic": "limit violation response carries limits",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-18",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "There is no standard mechanism to communicate such existing size restriction. A server that implements one can respond with a 413 (Content Too Large) status code; see Section 15.5.14 of [HTTP].",
+    "topic": "413 for per-message size restriction",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-19",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Servers might apply restrictions that are smaller than the append limits, which would also result in a failed request.",
+    "topic": "restrictions smaller than append limits",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-20",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "When a client receives a response with a 413 (Content Too Large) status code during upload creation (Section 4.2) or append (Section 4.4), it SHOULD retry the request with a smaller size residing between min-append-size and max-append-size.",
+    "topic": "413 recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.1.4-21",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.1.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If these limits are unknown at the time of receiving such a response, the client can attempt to discover them through an OPTIONS request. Retrying with the same request content size will likely yield the same error response. Cases where the request content size matches the min-append-size limit yet fails with a 413 (Content Too Large) response might indicate a deployment mismatch that cannot be recovered from.",
+    "topic": "413 recourse; unrecoverable deployment mismatch",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A client can start a resumable upload from any request that can carry content by including the Upload-Complete header field (Section 4.1.2).",
+    "topic": "upload creation",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The Upload-Complete header field is set to true if the request content includes the entire representation data that the client intends to upload.",
+    "topic": "Upload-Complete true on creation",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client knows the representation's length, it SHOULD indicate the length in the request to help the server allocate necessary resources for the upload and provide early feedback if the representation violates a limit (Section 4.1.4), as described in Section 4.1.3.",
+    "topic": "announce length on creation",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Clients are not required to discover limits (Section 4.1.4) before starting the upload and might therefore be initially unaware of limits enforced by the server.",
+    "topic": "limits may be unknown at start",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "However, the client SHOULD respect any limits (Section 4.1.4) announced during the upload process in the",
+    "topic": "respect limits (sentence continues across page break in next statement)",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Upload-Limit header field in interim or final responses. In particular, if the allowed maximum size is less than the amount of representation data the client intends to upload, the client SHOULD stop the current request immediately (Section 12) and cancel the upload (Section 4.5).",
+    "topic": "respect limits (continuation); max-size recourse = cancel",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client knows that the representation data is smaller than min-size, it cannot expect resumability to be offered. The client might still attempt to transfer the representation in a single request, either in a request with the Upload-Complete header field set to true (see Section 10.1.1) or via a conventional upload.",
+    "topic": "below min-size: no resumability",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-8",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The request content can be empty. If the Upload-Complete header field is then set to true, the client intends to upload an empty representation. An Upload-Complete header field set to false is also valid. This can be used to retrieve the upload resource's URI before transferring any representation data.",
+    "topic": "empty creation request",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-9",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Representation metadata included in the initial request (see Section 8.2 of [HTTP]) can affect how servers act on the uploaded representation data. The Content-Type header field (Section 8.3 of [HTTP]) indicates the media type of the representation. The Content- Encoding header field (Section 8.4 of [HTTP]) names the content codings applied to the representation.",
+    "topic": "metadata of finished object",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-10",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The Content-Disposition header field ([CONTENT-DISPOSITION]) can be used to transmit a filename. For this purpose, the inline disposition type is RECOMMENDED.",
+    "topic": "filename via Content-Disposition",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-11",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client received a final response with the Upload-Complete: ?1 header field, the upload is complete and the corresponding response comes from the resource processing the representation according to the initial request (Section 4.1.2). Note that this does not necessarily indicate success. 4xx (Client Error) or 5xx (Server Error) status codes indicate in this case an error occurred while processing the representation, and therefore, resuming the upload would not resolve this error.",
+    "topic": "complete response may be an error; resuming will not help",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-12",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client receives a 2xx successful final response with the Upload-Complete header field set to false or missing, and the client's Upload-Complete request header field was set to false, the Location response header field points the client to the created upload resource. The client can continue appending representation data to it (Section 4.4).",
+    "topic": "2xx incomplete creation -> continue appending",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.1-13",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client receives a 4xx client error or 5xx server error final response with the Upload-Complete header field set to false or missing, or if it did not receive a final response, it can apply the heuristics described in Section 4.7 to retry or resume the upload.",
+    "topic": "4xx/5xx incomplete creation -> retry heuristics",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Upon receiving a request with the Upload-Complete header field, the server can choose to offer resumption support for this request by creating an upload resource. If so, the server SHOULD announce the upload resource by sending an interim response with the 104 (Upload Resumption Supported) status code unless the server is not capable of sending interim responses.",
+    "topic": "104 announcement",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "When sent, it MUST include Location header field pointing to the upload resource and MUST include the Upload-Limit header field with the corresponding limits (Section 4.1.4) if existing.",
+    "topic": "104 contents",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The resource targeted by this initial request is responsible for processing the representation data transferred in the resumable upload according to the method and header fields in the initial request. The upload resource, on the other hand, enables resuming the transfer.",
+    "topic": "targeted resource vs upload resource",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the Upload-Complete request header field is set to true, the client intends to transfer the entire representation data in one request. If the request content was fully processed, no resumable upload is needed and the server proceeds to process the request and generate a response. The server MUST NOT emit a 2xx successful response with the Upload-Complete header field set to false or missing in response to a request with the Upload-Complete request header field set to true.",
+    "topic": "completing creation: no 2xx-incomplete",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the Upload-Complete request header field is set to false, the client intends to transfer the representation over multiple requests. If the request content was fully processed, the server MUST include the Location response header field pointing to the upload resource and MUST include the Upload-Limit header field with the corresponding limits if existing. Servers are RECOMMENDED to use the 201 (Created) status code.",
+    "topic": "incomplete creation response",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server MUST record the representation's length according to Section 4.1.3 if the Upload-Length or Upload-Complete: ?1 header fields are included in the request.",
+    "topic": "record length on creation",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "While the request content is being processed, the server MAY send multiple interim responses with a 104 (Upload Resumption Supported) status code and the Upload-Offset header field set to the current offset to inform the client about the upload progress.",
+    "topic": "progress interim responses",
+    "level": "MAY"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-8",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Where a response requires a Location header field to be included, all interim and final response messages for the same request MUST contain an identical Location value. However, final responses including the Upload-Complete: ?1 header field are exempt from this requirement because they are the result of processing the transferred representation and the Location value does not necessarily represent the upload location. Where the Location value is expected to be identical across multiple messages, clients SHOULD verify this. If verification fails, clients SHOULD abort the current request and cancel the upload (Section 4.5).",
+    "topic": "Location consistency; client recourse on mismatch",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-9",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server SHOULD include the Upload-Complete (Section 4.1.2) header field in the response to indicate whether it is the result of processing the uploaded representation.",
+    "topic": "Upload-Complete in responses",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-10",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server SHOULD NOT generate a response with the 301 (Moved Permanently), 302 (Found), or 303 (See Other) status codes and the Upload-Complete: ?0 header field because clients might follow the redirect without preserving the original method.",
+    "topic": "no 301/302/303 on incomplete creation",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.2-11",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server might not process the entire request content when the upload is interrupted, for example because of dropped connection or canceled request. In this case, the server SHOULD append as much of the request content as possible to the upload resource, allowing the client to resume the upload from where it was interrupted. In addition, the upload resource MUST NOT be considered complete then.",
+    "topic": "interrupted creation: keep prefix, not complete",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.3-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The following example shows an upload creation, where the server responds with a 5xx status code. Thanks to the interim response containing the upload resource URI, the client can resume the upload.",
+    "topic": "example: 5xx after 104 is resumable",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.3-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The following example shows an upload creation being rejected by the server because the request content cannot be decoded. The Upload-Complete header in the response is set to true since the server is uninterested in receiving the full representation after the decoding failure, and the upload is complete in its perspective. The client cannot continue the upload.",
+    "topic": "example: decode failure completes upload with 400",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.2.3-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.2.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "HTTP/1.1 400 Bad Request Upload-Complete: ?1",
+    "topic": "example: decode failure response",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.3.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.3.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "It can fetch the offset by sending a HEAD or GET request to the upload resource. Using HEAD is RECOMMENDED, since response content is not required for resumption.",
+    "topic": "offset retrieval method",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.3.1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.3.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The offset can be less than or equal to the number of bytes of representation data that the client has already sent. The client is expected to handle backtracking of a reasonable length. On the other hand, the offset can be greater than the amount of sent representation data, for example, if the server obtained additional representation data on behalf of the client. If the client is not able to provide the representation data at the given offset, the upload MUST be considered a failure. The client then MUST NOT continue the upload and SHOULD cancel the upload (Section 4.5).",
+    "topic": "offset backtracking / unprovidable offset -> failure",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.3.1-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.3.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The client MUST NOT perform offset retrieval while the creation (Section 4.2) of or appending (Section 4.4) to the same upload resource is in progress as this can cause the previous request to be terminated by the server as described in Section 4.6.",
+    "topic": "no offset retrieval during transfer",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.3.1-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.3.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client receives a 2xx successful response with a valid Upload- Offset header field, the client can continue appending representation data to it (Section 4.4).",
+    "topic": "offset retrieval success",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.3.1-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.3.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client receives a 2xx successful response without a valid Upload-Offset header field, a 4xx client error, or 5xx server error response, or if it did not receive a response, the client MAY retry retrieving the offset.",
+    "topic": "offset retrieval retry",
+    "level": "MAY"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.3.2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.3.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A successful response to a HEAD or GET request against an upload resource * MUST include the offset in the Upload-Offset header field (Section 4.1.1), * MUST indicate the limits in the Upload-Limit header field (Section 4.1.4), and * SHOULD include the Cache-Control header field with the value no- store to prevent HTTP caching ([CACHING]).",
+    "topic": "offset retrieval response contents",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.3.2-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.3.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server SHOULD NOT generate a response with the 301 (Moved Permanently), 302 (Found), or 303 (See Other) status codes because clients might follow the redirect without preserving the HEAD method.",
+    "topic": "no 301/302/303 on offset retrieval",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.3.2-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.3.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A client does not require response content for an offset retrieval request in order to successfully resume an upload. Therefore, serving response content for a GET request is unexpected. Its meaning is not defined by this protocol.",
+    "topic": "GET content undefined",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.3.3-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.3.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "HTTP/1.1 204 No Content Upload-Complete: ?0 Upload-Offset: 25000000 Upload-Length: 100000000 Upload-Limit: max-age=3600 Cache-Control: no-store",
+    "topic": "example offset retrieval response",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A client can continue the upload and append representation data by sending a PATCH request with the application/partial-upload media type (Section 6) to the upload resource. The request content is the representation data to append.",
+    "topic": "upload append",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The client MUST indicate the offset of the request content inside the representation data by including the Upload-Offset header field. To ensure that the upload resource will accept the request, the offset SHOULD be taken from an immediate previous response for retrieving the offset (Section 4.3), creating the upload (Section 4.2), or appending representation data (Section 4.4).",
+    "topic": "append carries offset",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.1-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The request MUST include the Upload-Complete header field. Its value is true in two cases: * the request has content that is the end of the representation data. Once the content is fully processed by the server, the upload is complete. * the request has no content. Once the request is processed by the server, the upload is complete. This usage requires the full representation data to have been processed during prior requests.",
+    "topic": "append carries Upload-Complete; completion cases",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.1-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client received a final response with the Upload-Complete: ?1 header field, the upload is complete and the corresponding response comes from the resource processing the representation according to the initial request (Section 4.1.2).",
+    "topic": "complete append response comes from targeted resource (sentence continues across page break)",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.1-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "necessarily indicate success. 4xx (Client Error) or 5xx (Server Error) status codes indicate in this case an error occurred while processing the representation, and therefore, resuming the upload would not resolve this error.",
+    "topic": "complete response may be an error; resuming will not help (continuation)",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.1-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client received a 4xx client error or 5xx server error final response with the Upload-Complete header field set to false or missing, or if it did not receive a final response, it can apply the heuristics described in Section 4.7 to retry or resume the upload. Otherwise, the upload is considered a failure.",
+    "topic": "4xx/5xx incomplete append -> retry heuristics, else failure",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A server applies a PATCH request with the application/partial-upload media type (Section 6) to an upload resource by appending the patch document in the request content.",
+    "topic": "append semantics",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.2-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server might not process the entire patch document when the upload is interrupted, for example because of a dropped connection or canceled request. In this case, the server SHOULD append as much of the patch document as possible to the upload resource, starting at its beginning and without discontinuities. Appending a continuous section starting at the patch document's beginning constitutes a successful PATCH as defined in Section 2 of [PATCH]. Saving the processed data allows the client to resume the upload from where it was interrupted. In addition, the upload resource MUST NOT be considered complete then.",
+    "topic": "interrupted append: contiguous prefix, not complete",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.2-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the Upload-Offset request header field value does not match the current offset (Section 4.1.1), the server MUST reject the request with a 409 (Conflict) status code and the Upload-Complete header field set to false. The response MUST include the correct offset in the Upload-Offset header field. The response can use the problem type [PROBLEM] of \"https://iana.org/assignments/http-problem- types#mismatching-upload-offset\" (Section 7.1).",
+    "topic": "offset mismatch -> 409",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.2-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the Upload-Complete request header field is set to true, the client intends to transfer the remaining representation data in one request. If the request content was fully processed, the upload is marked as complete and the server SHOULD generate the response that matches what the resource, that was targeted by the initial upload creation (Section 4.2), would have generated if it had processed the entire representation in the initial request. However, the response MUST include the Upload-Complete header field with a true value, allowing clients to identify whether a response, in particular error responses, is related to the resumable upload itself or the processing of the uploaded representation. The server MUST NOT emit a 2xx successful response with the Upload-Complete header field set to false or missing in response to a request with the Upload-Complete request header field set to true.",
+    "topic": "completing append response",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.2-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the Upload-Complete request header field is set to false, the client intends to transfer the remaining representation data over multiple requests. If the request content was fully processed, the server acknowledges the appended data by sending a 2xx (Successful) response with the Upload-Complete header field set to false.",
+    "topic": "non-completing append acknowledgement",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.2-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Even if the upload is complete (Section 4.1.2) in the server's perspective and the final response from the targeted resource has already been sent, the client might still perform an upload append (Section 4.4) after an offset retrieval (Section 4.3) due to the response being lost during transmission. The server can choose to replay the final response to the client if the request to append to the completed upload is valid.",
+    "topic": "lost final response; replay",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.2-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server MUST record the representation's length according to Section 4.1.3 if the Upload-Length or Upload-Complete header fields are included in the request. If the representation's length is known, the server MUST prevent the offset from exceeding the representation's length by rejecting the request once the offset exceeds the length, marking the upload resource invalid and rejecting any further interaction with it. It is not sufficient to rely on the Content-Length header field for enforcement because this header field might not be present.",
+    "topic": "record length; offset must not exceed length -> invalid",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.2-8",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "While the request content is being processed, the server SHOULD send interim responses with a 104 (Upload Resumption Supported) status code and the Upload-Offset header field set to the current offset to inform the client about the upload progress. These interim responses MUST NOT include the Location header field.",
+    "topic": "append progress interim responses",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.2-9",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server SHOULD NOT generate a response with the 301 (Moved Permanently), 302 (Found), or 303 (See Other) status codes and the Upload-Complete: ?0 header field because clients might follow the redirect without preserving the PATCH method.",
+    "topic": "no 301/302/303 on incomplete append",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.4.3-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.4.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "HTTP/1.1 204 No Content Upload-Complete: ?0",
+    "topic": "example non-completing append response",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.5.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.5.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client wants to terminate the transfer without the ability to resume, it can send a DELETE request to the upload resource. Doing so is an indication that the client is no longer interested in continuing the upload, and that the server can release any resources associated with it.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.5.2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.5.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Upon receiving a DELETE request, the server SHOULD deactivate the upload resource.",
+    "topic": "cancellation -> deactivate",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.5.2-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.5.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server SHOULD terminate any in-flight requests to the upload resource before sending the response by abruptly terminating their HTTP connection(s) or stream(s) as described in Section 4.6.",
+    "topic": "cancellation terminates in-flight requests",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.5.2-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.5.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The server SHOULD NOT generate a response with the 301 (Moved Permanently), 302 (Found), or 303 (See Other) status codes because clients might follow the redirect without preserving the DELETE method.",
+    "topic": "no 301/302/303 on cancellation",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.5.3-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.5.3",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "DELETE /upload/5688a431c HTTP/1.1 Host: example.com HTTP/1.1 204 No Content",
+    "topic": "example cancellation response",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.6-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.6",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The client MUST NOT perform multiple representation data transfers for the same upload resource in parallel, or perform representation data transfers while the creation of the same upload resource is still in progress.",
+    "topic": "no parallel transfers (client)",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.6-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.6",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Even if the client is well-behaved and doesn't send concurrent requests, network interruptions can occur in such a way that the client considers a request as failed while the server is unaware of the problem and considers the request still ongoing.",
+    "topic": "half-open requests",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.6-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.6",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Therefore, the server MUST take measures to prevent race conditions, data loss and corruption from concurrent requests to append representation data (Section 4.4) and/or cancellation (Section 4.5) to the same upload resource. In addition, the server MUST NOT send outdated information in responses. This means that the offset communicated through final responses as defined in Section 4.1.1 MUST be accepted in a subsequent request to append representation data if no other request to append representation data or cancel was received in the meantime. In other words, clients have to be able to use received offsets.",
+    "topic": "server concurrency safety; offsets must be usable",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.6-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.6",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The RECOMMENDED approach is as follows: If a server receives a new request to retrieve the offset (Section 4.3), append representation data (Section 4.4), or cancel the upload (Section 4.5) while a previous request for creating the upload (Section 4.2) or appending representation data (Section 4.4) to the same upload resource is still ongoing, the server SHOULD prevent race conditions, data loss, and corruption by terminating the previous request before processing the new request.",
+    "topic": "newer request terminates previous",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.6-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.6",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Since the client is not allowed to perform multiple transfers for the same upload resource in parallel, the server can assume that the previous attempt has already failed. Therefore, the server MAY abruptly terminate the previous HTTP connection or stream.",
+    "topic": "abrupt termination of previous request",
+    "level": "MAY"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.6-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.6",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A simpler approach is that the server only processes a new request to retrieve the offset (Section 4.3), append representation data (Section 4.4), or cancellation (Section 4.5) once all previous requests have been processed. This effectively implements exclusive access to the upload resource through an access lock.",
+    "topic": "lock-based alternative",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.6-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.6",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Therefore, the recommended approach is to terminate previous requests to enable quick resumption of uploads.",
+    "topic": "lock-based alternative drawback",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.7-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.7",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If the client received a 4xx client error or 5xx server error response with the Upload-Complete header field set to false or missing when creating the upload resource (Section 4.2) or appending to it (Section 4.4), it can apply the heuristics described below to retry or resume the upload.",
+    "topic": "retry heuristics scope",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.7-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.7",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "409 (Conflict) with the Upload-Complete header field set to false can be resumed with the correct offset (Section 4.1.1). If no Upload-Offset header field is provided, the client SHOULD retrieve the offset (Section 4.3) before resuming.",
+    "topic": "retry: 409",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.7-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.7",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "413 (Content Too Large) can be resumed after applying appropriate limits (Section 4.1.4).",
+    "topic": "retry: 413",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.7-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.7",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "429 (Too Many Requests) can be retried after appropriate delays.",
+    "topic": "retry: 429",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.7-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.7",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "5xx (Server Error) status codes can be retried.",
+    "topic": "retry: 5xx",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.7-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.7",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If no final response was received at all due to connectivity issues, the client MAY automatically attempt upload resumption by retrieving the current offset (Section 4.3).",
+    "topic": "retry: no response",
+    "level": "MAY"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-4.7-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "4.7",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The client SHOULD limit the number of retries it performs before considering the upload a failure.",
+    "topic": "retry budget",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-5-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "5",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "When responding to requests to create uploads, an interim response with the 104 (Upload Resumption Supported) status code can be sent to indicate the resource's support for resumable uploads, as well as the URI and limits of the corresponding upload resource in the Location and Upload-Limit header fields, respectively (see Section 4.2).",
+    "topic": "104 purpose 1: announce upload resource",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-5-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "5",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "While processing the content of a request to append representation data or create an upload, the server can regularly send interim responses with the 104 (Upload Resumption Supported) status code to indicate the current upload progress in the Upload-Offset header field (see Section 4.2 and Section 4.4).",
+    "topic": "104 purpose 2: progress",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-5-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "5",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "In addition, clients can use this information to release representation data that was buffered, knowing that it doesn't have to be retransmitted.",
+    "topic": "progress lets client release buffers",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-5-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "5",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The client MAY treat an interim response with the 104 (Upload Resumption Supported) status code as fulfilling the 100-continue expectation and start sending the request content. However, the server MUST NOT omit the 100 (Continue) response because it has sent an interim response with the 104 (Upload Resumption Supported) status code.",
+    "topic": "104 vs 100-continue",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-6-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "6",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The application/partial-upload media type describes a contiguous block from the representation data that should be uploaded to a resource. There is no minimum block size and the block might be empty.",
+    "topic": "application/partial-upload",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-7.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "7.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A server can use this problem type when responding to an upload append request (Section 4.4) to indicate that the Upload-Offset header field in the request does not match the upload resource's offset.",
+    "topic": "problem type mismatching-upload-offset",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-7.1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "7.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Two problem type extension members are defined: the expected-offset and provided-offset members. A response using this problem type SHOULD populate both members, with the value of expected-offset taken from the upload resource and the value of provided-offset taken from the upload append request.",
+    "topic": "problem members expected-offset / provided-offset",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-7.1-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "7.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "HTTP/1.1 409 Conflict Content-Type: application/problem+json Upload-Offset: 12500000 Upload-Complete: ?0",
+    "topic": "example 409 problem response",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-7.1-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "7.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "\"title\": \"offset from request does not match offset of resource\",",
+    "topic": "example 409 problem title",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-7.2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "7.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A server can use this problem type when responding to an upload creation (Section 4.2) or upload append request (Section 4.4) to indicate that the request includes inconsistent length values, as described in Section 4.1.3.",
+    "topic": "problem type inconsistent-upload-length",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-7.2-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "7.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "HTTP/1.1 400 Bad Request Content-Type: application/problem+json Upload-Complete: ?0",
+    "topic": "example 400 problem response",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-7.2-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "7.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "\"title\": \"inconsistent length values for upload\"",
+    "topic": "example 400 problem title",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-8-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "8",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Since the codings listed in Content-Encoding are a characteristic of the representation (see Section 8.4 of [HTTP]), both the client and the server always compute the values for Upload-Offset and optionally Upload-Length on the content coded data (that is, the representation data). Moreover, the content codings are retained throughout the entire upload, meaning that the server is not required to decode the representation data to support resumable uploads. See Appendix A of [DIGEST-FIELDS] for more information.",
+    "topic": "offsets/digests over content-coded data",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-9-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "9",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "This means that a client does not have to consider the transfer codings to compute the upload offset, while a server is responsible for transfer decoding the message before computing the upload offset. The same applies to the value of Upload-Length.",
+    "topic": "offsets exclude transfer coding",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-10.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "10.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If an upload is interrupted before the client receives a 104 (Upload Resumption Supported) interim response with the upload resource's URI, the client cannot resume that upload due to the missing URI.",
+    "topic": "no 104 -> cannot resume",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-10.1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "10.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Without a 104 response, the client needs to either treat the upload as failed or retry the entire upload creation request if this is allowed by the application.",
+    "topic": "no 104 -> fail or restart",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-10.1.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "10.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The Upload-Length header field SHOULD be added if the representation's length is known upfront.",
+    "topic": "upgrade: Upload-Length",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-10.1.1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "10.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A resource that does not support resumable uploads or does not want to upgrade to a resumable upload for this request ignores the Upload-Complete: ?1 header. The transfer then falls back to a non-resumable upload without additional cost.",
+    "topic": "upgrade fallback",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-10.1.1-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "10.1.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The last response received by the client is considered the response for the entire upload and should be provided to the user.",
+    "topic": "last response is the upload's response",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-10.2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "10.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "The client should inspect the response for the Upload-Limit header field, which would indicate limits applying to the remaining upload procedure.",
+    "topic": "careful creation: limits",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-11-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "11",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "To support incremental processing, it is RECOMMENDED that clients send request content incrementally and minimize buffering.",
+    "topic": "incremental sending",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-12-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "12",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "A client or server might want to interrupt an in-flight message transfer intentionally for various reasons (see Section 1). The mechanism to do so depends on the HTTP version in use:",
+    "topic": "request cancellation",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-12-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "12",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "However, for all versions of HTTP, resumable uploads allow the server to process received representation data and expose the upload offset via the upload resource, enabling continuation of the upload after interruption.",
+    "topic": "request cancellation keeps offset",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Without further protection of this URI, an attacker may obtain information about an upload, append data to it, or cancel it. To prevent this, the server SHOULD ensure that only authorized clients can access the upload resource. To reduce the risk of unauthorized access, it is RECOMMENDED to generate upload resource URIs in such a way that makes it hard to be guessed by unauthorized clients.",
+    "topic": "authorization of upload resource",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "If so, they MUST ensure that no internal information is leaked in the URI that is not intended to be exposed.",
+    "topic": "no internal info in URI",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13-3",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Uploaded representation data and its metadata are untrusted input.",
+    "topic": "metadata is untrusted",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13-4",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "In addition, metadata MUST be validated and/or sanitized if the server takes its values into consideration for processing or storing the representation.",
+    "topic": "metadata validation",
+    "level": "MUST"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13-5",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Any scanning mechanism that relies on receiving a complete representation in a single request message can be defeated by resumable uploads because content can be split across multiple messages. Servers or intermediaries wishing to perform content scanning SHOULD consider how resumable uploads can circumvent scanning and take appropriate measures. Possible strategies include waiting for the upload to complete before scanning the entire representation, or disabling resumable uploads.",
+    "topic": "scanning after completion",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13-6",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "There can be a significant delay between the creation of an upload resource and its completion. Policy decisions or authorization checks performed on the initial request might become outdated or invalid by the time the upload completes. To mitigate vulnerabilities arising from time-of-check to time-of-use (TOCTOU) conditions, the server SHOULD validate that the user is still allowed",
+    "topic": "re-authorize before finalizing (sentence continues across page break in next statement)",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13-7",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "to perform the requested action before finalizing the upload. This includes, for example, validating access privileges and quota policies associated with the upload resource.",
+    "topic": "re-authorize before finalizing (continuation): privileges and quota",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13-8",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Servers SHOULD provide mitigations for Slowloris attacks, such as increasing the maximum number of clients the server will allow, limiting the number of uploads a single client is allowed to make, imposing restrictions on the minimum transfer speed an upload is allowed to have, and restricting the length of time an upload resource can exist.",
+    "topic": "Slowloris mitigation; bounded lifetime",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13-9",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Servers or intermediaries need to consider that relying solely on message content limits to constrain resources allocated to uploads might not be an effective strategy when using resumable uploads.",
+    "topic": "per-message limits insufficient",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13.1-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Credentials and other per-origin state associated with the initially targeted resource are not necessarily applicable to the upload resource, and remain scoped to their respective origins. Clients also have to consider that disclosing an upload resource URI to a different origin can leak the capability to read, append to, or cancel the upload.",
+    "topic": "different origins: credentials scope",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-13.1-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "13.1",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "To avoid this, the server MAY respond to the request that completes the upload with a 303 (See Other) status code, redirecting the user agent to the origin of the initially targeted resource.",
+    "topic": "303 on completion across origins",
+    "level": "MAY"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-14.2-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "14.2",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Value: 104 (suggested value) Description: Upload Resumption Supported",
+    "topic": "status code 104 registration",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-14.4-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "14.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Title: Mismatching Upload Offset Recommended HTTP status code: 409",
+    "topic": "problem type registration 409",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-14.4-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "14.4",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Title: Inconsistent Upload Length Values Recommended HTTP status code: 400",
+    "topic": "problem type registration 400",
+    "level": "definition"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-A-1",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "A",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Upload-Complete and Upload-Length are no longer required on offset retrieval responses.",
+    "topic": "change since -12",
+    "level": "informative"
+  },
+  {
+    "id": "RESUMABLE-UPLOAD-13-A-2",
+    "doc": "draft-ietf-httpbis-resumable-upload-13",
+    "section": "A",
+    "file": "uploads/draft-ietf-httpbis-resumable-upload-13.txt",
+    "quote": "Disallow successful responses indicating an incomplete upload when the request indicated completion.",
+    "topic": "change since -12",
+    "level": "informative"
+  },
+  {
+    "id": "TUS-1.0.0-Core-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core",
+    "file": "uploads/tus-protocol.md",
+    "quote": "All Clients and Servers MUST implement the core protocol.",
+    "topic": "core protocol",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core-2",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core",
+    "file": "uploads/tus-protocol.md",
+    "quote": "In addition, the implementation of authentication and authorization is left for the Server to decide.",
+    "topic": "authorization left to server",
+    "level": "informative"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Headers.Upload-Offset-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Headers.Upload-Offset",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Upload-Offset` request and response header indicates a byte offset within a resource. The value MUST be a non-negative integer.",
+    "topic": "offset",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Headers.Upload-Length-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Headers.Upload-Length",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Upload-Length` request and response header indicates the size of the entire upload in bytes. The value MUST be a non-negative integer.",
+    "topic": "length",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Headers.Tus-Resumable-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Headers.Tus-Resumable",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Tus-Resumable` header MUST be included in every request and response except for `OPTIONS` requests.",
+    "topic": "version header",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Headers.Tus-Resumable-2",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Headers.Tus-Resumable",
+    "file": "uploads/tus-protocol.md",
+    "quote": "If the version specified by the Client is not supported by the Server, it MUST respond with the `412 Precondition Failed` status and MUST include the `Tus-Version` header into the response. In addition, the Server MUST NOT process the request.",
+    "topic": "unsupported version -> 412",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Headers.Tus-Max-Size-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Headers.Tus-Max-Size",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Tus-Max-Size` response header MUST be a non-negative integer indicating the maximum allowed size of an entire upload in bytes. The Server SHOULD set this header if there is a known hard limit.",
+    "topic": "max size",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.HEAD-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.HEAD",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server MUST always include the `Upload-Offset` header in the response for a `HEAD` request, even if the offset is `0`, or the upload is already considered completed. If the size of the upload is known, the Server MUST include the `Upload-Length` header in the response. If the resource is not found, the Server SHOULD return either the `404 Not Found`, `410 Gone` or `403 Forbidden` status without the `Upload-Offset` header.",
+    "topic": "HEAD offset; not found -> 404/410/403",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.HEAD-2",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.HEAD",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server SHOULD acknowledge successful `HEAD` requests with a `200 OK` or `204 No Content` status.",
+    "topic": "HEAD success codes",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.HEAD-3",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.HEAD",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server MUST prevent the client and/or proxies from caching the response by adding the `Cache-Control: no-store` header to the response.",
+    "topic": "HEAD no-store",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.PATCH-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.PATCH",
+    "file": "uploads/tus-protocol.md",
+    "quote": "All `PATCH` requests MUST use `Content-Type: application/offset+octet-stream`, otherwise the server SHOULD return a `415 Unsupported Media Type` status.",
+    "topic": "PATCH content type -> 415",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.PATCH-2",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.PATCH",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Upload-Offset` header's value MUST be equal to the current offset of the resource. In order to achieve parallel upload the [Concatenation](#concatenation) extension MAY be used. If the offsets do not match, the Server MUST respond with the `409 Conflict` status without modifying the upload resource.",
+    "topic": "offset mismatch -> 409 without modification",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.PATCH-3",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.PATCH",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Client SHOULD send all the remaining bytes of an upload in a single `PATCH` request, but MAY also use multiple small requests successively for scenarios where this is desirable.",
+    "topic": "chunking",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.PATCH-4",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.PATCH",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server MUST acknowledge successful `PATCH` requests with the `204 No Content` status. It MUST include the `Upload-Offset` header containing the new offset. The new offset MUST be the sum of the offset before the `PATCH` request and the number of bytes received and processed or stored during the current `PATCH` request.",
+    "topic": "PATCH success 204; new offset arithmetic",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.PATCH-5",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.PATCH",
+    "file": "uploads/tus-protocol.md",
+    "quote": "If the server receives a `PATCH` request against a non-existent resource it SHOULD return a `404 Not Found` status.",
+    "topic": "PATCH not found -> 404",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.PATCH-6",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.PATCH",
+    "file": "uploads/tus-protocol.md",
+    "quote": "Both Client and Server, SHOULD attempt to detect and handle network errors predictably. They MAY do so by checking for read/write socket errors, as well as setting read/write timeouts. A timeout SHOULD be handled by closing the underlying connection.",
+    "topic": "network errors and timeouts",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.PATCH-7",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.PATCH",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server SHOULD always attempt to store as much of the received data as possible.",
+    "topic": "store partial data",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Core.Requests.OPTIONS-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Core.Requests.OPTIONS",
+    "file": "uploads/tus-protocol.md",
+    "quote": "A successful response indicated by the `204 No Content` or `200 OK` status MUST contain the `Tus-Version` header.",
+    "topic": "OPTIONS",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Example-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Example",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The new resource has an implicit offset of `0` allowing the Client to use the core protocol for performing the actual upload.",
+    "topic": "new upload offset is 0",
+    "level": "definition"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Headers.Upload-Defer-Length-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Headers.Upload-Defer-Length",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Upload-Defer-Length` request and response header indicates that the size of the upload is not known currently and will be transferred later. Its value MUST be `1`. If the length of an upload is not deferred, this header MUST be omitted.",
+    "topic": "deferred length",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Headers.Upload-Metadata-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Headers.Upload-Metadata",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Upload-Metadata` request and response header MUST consist of one or more comma-separated key-value pairs. The key and value MUST be separated by a space. The key MUST NOT contain spaces and commas and MUST NOT be empty. The key SHOULD be ASCII encoded and the value MUST be Base64 encoded. All keys MUST be unique. The value MAY be empty. In these cases, the space, which would normally separate the key and the value, MAY be left out.",
+    "topic": "metadata syntax",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Headers.Upload-Metadata-2",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Headers.Upload-Metadata",
+    "file": "uploads/tus-protocol.md",
+    "quote": "Since metadata can contain arbitrary binary values, Servers SHOULD carefully validate metadata values or sanitize them before using them as header values to avoid header smuggling.",
+    "topic": "metadata sanitization",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Requests.POST-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Requests.POST",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Client MUST send a `POST` request against a known upload creation URL to request a new upload resource. The request MUST include one of the following headers:",
+    "topic": "creation requires length or deferral",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Requests.POST-2",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Requests.POST",
+    "file": "uploads/tus-protocol.md",
+    "quote": "a) `Upload-Length` to indicate the size of an entire upload in bytes.",
+    "topic": "creation length option a",
+    "level": "definition"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Requests.POST-3",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Requests.POST",
+    "file": "uploads/tus-protocol.md",
+    "quote": "b) `Upload-Defer-Length: 1` if upload size is not known at the time. If the `Upload-Defer-Length` header contains any other value than `1` the server should return a `400 Bad Request` status.",
+    "topic": "creation length option b; invalid defer -> 400",
+    "level": "informative"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Requests.POST-4",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Requests.POST",
+    "file": "uploads/tus-protocol.md",
+    "quote": "If the length was deferred using `Upload-Defer-Length: 1`, the Client MUST set the `Upload-Length` header in the next `PATCH` request, once the length is known. Once set the length MUST NOT be changed. As long as the length of the upload is not known, the Server MUST set `Upload-Defer-Length: 1` in all responses to `HEAD` requests.",
+    "topic": "deferred length declaration; immutability",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Requests.POST-5",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Requests.POST",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Upload-Length` header MAY be set to 0, indicating that the Client wants to upload an empty file. Such an upload is immediately complete after its creation without transferring data using `PATCH` requests.",
+    "topic": "empty upload complete at creation",
+    "level": "MAY"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Requests.POST-6",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Requests.POST",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Client MAY supply the `Upload-Metadata` header to add additional metadata to the upload creation request. The Server MAY decide to ignore or use this information to further process the request or to reject it. If an upload contains additional metadata, responses to `HEAD` requests MUST include the `Upload-Metadata` header and its value as specified by the Client during the creation.",
+    "topic": "metadata echoed on HEAD",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Requests.POST-7",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Requests.POST",
+    "file": "uploads/tus-protocol.md",
+    "quote": "If the length of the upload exceeds the maximum, which MAY be specified using the `Tus-Max-Size` header, the Server MUST respond with the `413 Request Entity Too Large` status.",
+    "topic": "too large -> 413",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Creation.Requests.POST-8",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation.Requests.POST",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server MUST acknowledge a successful upload creation with the `201 Created` status. The Server MUST set the `Location` header to the URL of the created resource. This URL MAY be absolute or relative.",
+    "topic": "creation success 201 + Location",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Creation With Upload-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Creation With Upload",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Client MUST include the `Content-Type: application/offset+octet-stream` header. The Server SHOULD accept as many bytes as possible and MUST include the `Upload-Offset` header in the response and MUST set its value to the offset of the upload after applying the accepted bytes.",
+    "topic": "creation with data: offset in response",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Expiration-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Expiration",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server MAY remove unfinished uploads once they expire. In order to indicate this behavior to the Client, the Server MUST add `expiration` to the `Tus-Extension` header.",
+    "topic": "expiry of unfinished uploads",
+    "level": "MAY"
+  },
+  {
+    "id": "TUS-1.0.0-Expiration.Example-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Expiration.Example",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The unfinished upload is available until the time specified in `Upload-Expires`. After this date the upload can not be resumed.",
+    "topic": "expired upload cannot be resumed",
+    "level": "informative"
+  },
+  {
+    "id": "TUS-1.0.0-Expiration.Headers.Upload-Expires-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Expiration.Headers.Upload-Expires",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Upload-Expires` response header indicates the time after which the unfinished upload expires. A Server MAY wish to remove incomplete uploads after a given period of time to prevent abandoned uploads from taking up extra storage. The Client SHOULD use this header to determine if an upload is still valid before attempting to resume the upload.",
+    "topic": "Upload-Expires",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Expiration.Headers.Upload-Expires-2",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Expiration.Headers.Upload-Expires",
+    "file": "uploads/tus-protocol.md",
+    "quote": "This header MUST be included in every `PATCH` response if the upload is going to expire. If the expiration is known at the creation, the `Upload-Expires` header MUST be included in the response to the initial `POST` request. Its value MAY change over time.",
+    "topic": "Upload-Expires presence",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Expiration.Headers.Upload-Expires-3",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Expiration.Headers.Upload-Expires",
+    "file": "uploads/tus-protocol.md",
+    "quote": "If a Client does attempt to resume an upload which has since been removed by the Server, the Server SHOULD respond with the `404 Not Found` or `410 Gone` status. The latter one SHOULD be used if the Server is keeping track of expired uploads. In both cases the Client SHOULD start a new upload.",
+    "topic": "expired -> 404/410; recourse = new upload",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Expiration.Headers.Upload-Expires-4",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Expiration.Headers.Upload-Expires",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The value of the `Upload-Expires` header MUST be in [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html#name-date-time-formats) datetime format.",
+    "topic": "Upload-Expires format",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Checksum-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Checksum",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Client and the Server MAY implement and use this extension to verify data integrity of each `PATCH` request.",
+    "topic": "per-request integrity",
+    "level": "MAY"
+  },
+  {
+    "id": "TUS-1.0.0-Checksum-2",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Checksum",
+    "file": "uploads/tus-protocol.md",
+    "quote": "A Client MAY include the `Upload-Checksum` header in a `PATCH` request. Once the entire request has been received, the Server MUST verify the uploaded chunk against the provided checksum using the specified algorithm. Depending on the result the Server MAY respond with one of the following status code: 1) `400 Bad Request` if the checksum algorithm is not supported by the server, 2) `460 Checksum Mismatch` if the checksums mismatch or 3) `204 No Content` if the checksums match and the processing of the data succeeded. In the first two cases the uploaded chunk MUST be discarded, and the upload and its offset MUST NOT be updated.",
+    "topic": "checksum outcomes: 400 / 460 / 204; discard on failure",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Checksum-3",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Checksum",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server MUST support at least the SHA1 checksum algorithm identified by `sha1`. The names of the checksum algorithms MUST only consist of ASCII characters with the modification that uppercase characters are excluded.",
+    "topic": "checksum algorithms",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Checksum-4",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Checksum",
+    "file": "uploads/tus-protocol.md",
+    "quote": "If the hash cannot be calculated at the beginning of the upload, it MAY be included as a trailer.",
+    "topic": "checksum trailer",
+    "level": "MAY"
+  },
+  {
+    "id": "TUS-1.0.0-Checksum.Headers.Upload-Checksum-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Checksum.Headers.Upload-Checksum",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The `Upload-Checksum` request header contains information about the checksum of the current body payload. The header MUST consist of the name of the used checksum algorithm and the Base64 encoded checksum separated by a space.",
+    "topic": "Upload-Checksum syntax",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Termination-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Termination",
+    "file": "uploads/tus-protocol.md",
+    "quote": "This extension defines a way for the Client to terminate completed and unfinished uploads allowing the Server to free up used resources.",
+    "topic": "termination",
+    "level": "definition"
+  },
+  {
+    "id": "TUS-1.0.0-Termination.Requests.DELETE-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Termination.Requests.DELETE",
+    "file": "uploads/tus-protocol.md",
+    "quote": "When receiving a `DELETE` request for an existing upload the Server SHOULD free associated resources and MUST respond with the `204 No Content` status confirming that the upload was terminated. For all future requests to this URL, the Server SHOULD respond with the `404 Not Found` or `410 Gone` status.",
+    "topic": "DELETE -> 204; afterwards 404/410",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Concatenation-1",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Concatenation",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server SHOULD NOT process these partial uploads until they are concatenated to form a final upload. The length of the final upload MUST be the sum of the length of all partial uploads.",
+    "topic": "partial uploads; final length",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Concatenation-2",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Concatenation",
+    "file": "uploads/tus-protocol.md",
+    "quote": "This concatenation request SHOULD happen after all of the corresponding partial uploads are completed. The Client MUST NOT include the `Upload-Length` header in the final upload creation.",
+    "topic": "final creation",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Concatenation-3",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Concatenation",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Client MAY send the concatenation request while the partial uploads are still in progress. This feature MUST be explicitly announced by the Server by adding `concatenation-unfinished` to the `Tus-Extension` header.",
+    "topic": "concatenation-unfinished",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Concatenation-4",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Concatenation",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server MAY delete partial uploads after concatenation.",
+    "topic": "partials deletable",
+    "level": "MAY"
+  },
+  {
+    "id": "TUS-1.0.0-Concatenation-5",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Concatenation",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The Server MUST respond with the `403 Forbidden` status to `PATCH` requests against a final upload URL and MUST NOT modify the final or its partial uploads.",
+    "topic": "PATCH on final -> 403",
+    "level": "MUST"
+  },
+  {
+    "id": "TUS-1.0.0-Concatenation-6",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Concatenation",
+    "file": "uploads/tus-protocol.md",
+    "quote": "The response to a HEAD request for a final upload SHOULD NOT contain the `Upload-Offset` header unless the concatenation has been successfully finished.",
+    "topic": "final upload offset before concatenation",
+    "level": "SHOULD"
+  },
+  {
+    "id": "TUS-1.0.0-Concatenation-7",
+    "doc": "tus resumable upload protocol 1.0.0",
+    "section": "Concatenation",
+    "file": "uploads/tus-protocol.md",
+    "quote": "After successful concatenation, the `Upload-Offset` and `Upload-Length` MUST be set and their values MUST be equal.",
+    "topic": "finished final upload: offset == length",
+    "level": "MUST"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrUnsupportedVersion-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrUnsupportedVersion",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrUnsupportedVersion = NewError(\"ERR_UNSUPPORTED_VERSION\", \"missing, invalid or unsupported Tus-Resumable header\", http.StatusPreconditionFailed)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrMaxSizeExceeded-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrMaxSizeExceeded",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrMaxSizeExceeded = NewError(\"ERR_MAX_SIZE_EXCEEDED\", \"maximum size exceeded\", http.StatusRequestEntityTooLarge)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrInvalidContentType-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrInvalidContentType",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrInvalidContentType = NewError(\"ERR_INVALID_CONTENT_TYPE\", \"missing or invalid Content-Type header\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrInvalidUploadLength-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrInvalidUploadLength",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrInvalidUploadLength = NewError(\"ERR_INVALID_UPLOAD_LENGTH\", \"missing or invalid Upload-Length header\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrInvalidOffset-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrInvalidOffset",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrInvalidOffset = NewError(\"ERR_INVALID_OFFSET\", \"missing or invalid Upload-Offset header\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrNotFound-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrNotFound",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrNotFound = NewError(\"ERR_UPLOAD_NOT_FOUND\", \"upload not found\", http.StatusNotFound)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrFileLocked-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrFileLocked",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrFileLocked = NewError(\"ERR_UPLOAD_LOCKED\", \"file currently locked\", http.StatusLocked)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrLockTimeout-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrLockTimeout",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrLockTimeout = NewError(\"ERR_LOCK_TIMEOUT\", \"failed to acquire lock before timeout\", http.StatusInternalServerError)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrMismatchOffset-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrMismatchOffset",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrMismatchOffset = NewError(\"ERR_MISMATCHED_OFFSET\", \"mismatched offset\", http.StatusConflict)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrSizeExceeded-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrSizeExceeded",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrSizeExceeded = NewError(\"ERR_UPLOAD_SIZE_EXCEEDED\", \"upload's size exceeded\", http.StatusRequestEntityTooLarge)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrNotImplemented-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrNotImplemented",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrNotImplemented = NewError(\"ERR_NOT_IMPLEMENTED\", \"feature not implemented\", http.StatusNotImplemented)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrUploadNotFinished-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrUploadNotFinished",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrUploadNotFinished = NewError(\"ERR_UPLOAD_NOT_FINISHED\", \"one of the partial uploads is not finished\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrInvalidConcat-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrInvalidConcat",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrInvalidConcat = NewError(\"ERR_INVALID_CONCAT\", \"invalid Upload-Concat header\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrConcatenationUnsupported-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrConcatenationUnsupported",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrConcatenationUnsupported = NewError(\"ERR_CONCATENATION_UNSUPPORTED\", \"Upload-Concat header is not supported by server\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrModifyFinal-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrModifyFinal",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrModifyFinal = NewError(\"ERR_MODIFY_FINAL\", \"modifying a final upload is not allowed\", http.StatusForbidden)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrUploadLengthAndUploadDeferLength-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrUploadLengthAndUploadDeferLength",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrUploadLengthAndUploadDeferLength = NewError(\"ERR_AMBIGUOUS_UPLOAD_LENGTH\", \"provided both Upload-Length and Upload-Defer-Length\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrInvalidUploadDeferLength-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrInvalidUploadDeferLength",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrInvalidUploadDeferLength = NewError(\"ERR_INVALID_UPLOAD_LENGTH_DEFER\", \"invalid Upload-Defer-Length header\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrUploadStoppedByServer-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrUploadStoppedByServer",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrUploadStoppedByServer = NewError(\"ERR_UPLOAD_STOPPED\", \"upload has been stopped by server\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrUploadRejectedByServer-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrUploadRejectedByServer",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrUploadRejectedByServer = NewError(\"ERR_UPLOAD_REJECTED\", \"upload creation has been rejected by server\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrUploadTerminationRejected-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrUploadTerminationRejected",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrUploadTerminationRejected = NewError(\"ERR_UPLOAD_TERMINATION_REJECTED\", \"upload termination has been rejected by server\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrUploadInterrupted-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrUploadInterrupted",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrUploadInterrupted = NewError(\"ERR_UPLOAD_INTERRUPTED\", \"upload has been interrupted by another request for this upload resource\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrServerShutdown-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrServerShutdown",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrServerShutdown = NewError(\"ERR_SERVER_SHUTDOWN\", \"request has been interrupted because the server is shutting down\", http.StatusServiceUnavailable)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrOriginNotAllowed-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrOriginNotAllowed",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrOriginNotAllowed = NewError(\"ERR_ORIGIN_NOT_ALLOWED\", \"request origin is not allowed\", http.StatusForbidden)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrUnexpectedEOF-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrUnexpectedEOF",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrUnexpectedEOF = NewError(\"ERR_UNEXPECTED_EOF\", \"server expected to receive more bytes\", http.StatusBadRequest)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrReadTimeout-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrReadTimeout",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrReadTimeout = NewError(\"ERR_READ_TIMEOUT\", \"timeout while reading request body\", http.StatusInternalServerError)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrConnectionReset-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrConnectionReset",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "ErrConnectionReset = NewError(\"ERR_CONNECTION_RESET\", \"TCP connection reset by peer\", http.StatusInternalServerError)",
+    "topic": "error table row (code, message, HTTP status)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-errors.ErrReadTimeout-2",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "errors.ErrReadTimeout",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "// These two responses are 500 for backwards compatability. Clients might receive a timeout response // when the upload got interrupted. Most clients will not retry 4XX but only 5XX, so we responsd with 500 here.",
+    "topic": "why timeouts/resets are 500 (client retry policy)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-sendError-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "sendError",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "detailedErr = NewError(\"ERR_INTERNAL_SERVER_ERROR\", err.Error(), http.StatusInternalServerError)",
+    "topic": "unknown errors map to 500",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-PatchFile-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "PatchFile",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "offset, err := strconv.ParseInt(r.Header.Get(\"Upload-Offset\"), 10, 64) if err != nil || offset < 0 { handler.sendError(c, ErrInvalidOffset) return }",
+    "topic": "offset validation",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-PatchFile-2",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "PatchFile",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "if info.IsFinal { handler.sendError(c, ErrModifyFinal) return }",
+    "topic": "final upload immutable",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-PatchFile-3",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "PatchFile",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "if offset != info.Offset { handler.sendError(c, ErrMismatchOffset) return }",
+    "topic": "offset mismatch",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-PatchFile-4",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "PatchFile",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "// Do not proxy the call to the data store if the upload is already completed if !info.SizeIsDeferred && info.Offset == info.Size { resp.Header[\"Upload-Offset\"] = strconv.FormatInt(offset, 10) handler.sendResp(c, resp) return }",
+    "topic": "PATCH on completed upload is a no-op 204",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-PatchFile-5",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "PatchFile",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "uploadLength, err := parseUploadLength(r.Header.Get(\"Upload-Length\")) if err != nil || uploadLength < info.Offset || handler.validateMaxSize(uploadLength) != nil {",
+    "topic": "deferred length declaration rules",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-PatchFile-6",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "PatchFile",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "if !info.SizeIsDeferred { handler.sendError(c, ErrInvalidUploadLength) return }",
+    "topic": "length already known -> cannot redeclare",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-writeChunk-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "writeChunk",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "if !info.SizeIsDeferred && offset+length > info.Size { return resp, ErrSizeExceeded }",
+    "topic": "chunk must fit declared size",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-writeChunk-2",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "writeChunk",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "newOffset := offset + bytesWritten resp.Header[\"Upload-Offset\"] = strconv.FormatInt(newOffset, 10)",
+    "topic": "new offset = old offset + bytes written (even on error)",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-writeChunk-3",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "writeChunk",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "// We try to finish the upload, even if an error occurred. If we have a previous error, // we return it and its HTTP response.",
+    "topic": "finish attempted even after error",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-finishUploadIfComplete-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "finishUploadIfComplete",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "if !info.SizeIsDeferred && info.Offset == info.Size {",
+    "topic": "tus completion rule: offset == size and size known",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-HeadFile-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "HeadFile",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "isUploadCompleteNow := !info.SizeIsDeferred && info.Offset == info.Size",
+    "topic": "IETF draft completeness derived from offset == size",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-validateNewUploadLengthHeaders-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "validateNewUploadLengthHeaders",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "if lengthIsDeferred && !handler.composer.UsesLengthDeferrer { err = ErrNotImplemented } else if haveBothLengthHeaders { err = ErrUploadLengthAndUploadDeferLength } else if haveInvalidDeferHeader { err = ErrInvalidUploadDeferLength } else if lengthIsDeferred { uploadLengthDeferred = true } else { uploadLength, err = parseUploadLength(uploadLengthHeader) }",
+    "topic": "creation length header decision table",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-parseUploadLength-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "parseUploadLength",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "if err != nil || uploadLength < 0 { return 0, ErrInvalidUploadLength }",
+    "topic": "negative length rejected",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-validateMaxSize-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "validateMaxSize",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "if handler.config.MaxSize > 0 && size > handler.config.MaxSize { return ErrMaxSizeExceeded }",
+    "topic": "max size",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-getIETFDraftUploadLength-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "getIETFDraftUploadLength",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "// If both lengths are set, they must match if hasLengthFromContentLength && hasLengthFromUploadLength && lengthFromUploadLength != lengthFromContentLength { return 0, false, ErrInvalidUploadLength }",
+    "topic": "IETF length indicators must match",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-sizeOfUploads-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "sizeOfUploads",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "if info.SizeIsDeferred || info.Offset != info.Size { err = ErrUploadNotFinished return nil, 0, err }",
+    "topic": "concatenation requires finished partials",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-lockUpload-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "lockUpload",
+    "file": "uploads/tusd/unrouted_handler.go",
+    "quote": "releaseLock := func() { c.log.InfoContext(c, \"UploadInterrupted\") c.cancel(ErrUploadInterrupted) }",
+    "topic": "newer request interrupts holder of lock",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-bodyReader.Read-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "bodyReader.Read",
+    "file": "uploads/tusd/body_reader.go",
+    "quote": "if err == io.ErrClosedPipe || err == io.ErrUnexpectedEOF { err = ErrUnexpectedEOF }",
+    "topic": "client abort -> ERR_UNEXPECTED_EOF",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-bodyReader.Read-2",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "bodyReader.Read",
+    "file": "uploads/tusd/body_reader.go",
+    "quote": "if errors.As(err, &maxBytesErr) { err = ErrSizeExceeded }",
+    "topic": "body over limit -> ERR_UPLOAD_SIZE_EXCEEDED",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-FileInfo-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "FileInfo",
+    "file": "uploads/tusd/datastore.go",
+    "quote": "// Total file size in bytes specified in the NewUpload call Size int64 // Indicates whether the total file size is deferred until later SizeIsDeferred bool // Offset in bytes (zero-based) Offset int64",
+    "topic": "upload state fields",
+    "level": "informative"
+  },
+  {
+    "id": "TUSD-2.10.1-TerminatableUpload-1",
+    "doc": "tusd v2.10.1 pkg/handler (implementation, not a standard)",
+    "section": "TerminatableUpload",
+    "file": "uploads/tusd/datastore.go",
+    "quote": "// Terminate an upload so any further requests to the upload resource will // return the ErrNotFound error.",
+    "topic": "terminated -> not found",
+    "level": "informative"
+  },
+  {
+    "id": "TUS-JS-CLIENT-4.3.1-defaultOptions-1",
+    "doc": "tus-js-client v4.3.1 (implementation, not a standard)",
+    "section": "defaultOptions",
+    "file": "uploads/tus-js-client/upload.js",
+    "quote": "retryDelays: [0, 1000, 3000, 5000],",
+    "topic": "default retry delays (ms)",
+    "level": "informative"
+  },
+  {
+    "id": "TUS-JS-CLIENT-4.3.1-defaultOnShouldRetry-1",
+    "doc": "tus-js-client v4.3.1 (implementation, not a standard)",
+    "section": "defaultOnShouldRetry",
+    "file": "uploads/tus-js-client/upload.js",
+    "quote": "return (!inStatusCategory(status, 400) || status === 409 || status === 423) && isOnline()",
+    "topic": "retryable status rule",
+    "level": "informative"
+  },
+  {
+    "id": "TUS-JS-CLIENT-4.3.1-shouldRetry-1",
+    "doc": "tus-js-client v4.3.1 (implementation, not a standard)",
+    "section": "shouldRetry",
+    "file": "uploads/tus-js-client/upload.js",
+    "quote": "// We only attempt a retry if // - retryDelays option is set // - we didn't exceed the maxium number of retries, yet, and // - this error was caused by a request or it's response and // - the error is server error (i.e. not a status 4xx except a 409 or 423) or // a onShouldRetry is specified and returns true // - the browser does not indicate that we are offline",
+    "topic": "retry preconditions",
+    "level": "informative"
+  },
+  {
+    "id": "TUS-JS-CLIENT-4.3.1-_resumeUpload-1",
+    "doc": "tus-js-client v4.3.1 (implementation, not a standard)",
+    "section": "_resumeUpload",
+    "file": "uploads/tus-js-client/upload.js",
+    "quote": "// If the upload is locked (indicated by the 423 Locked status code), we // emit an error instead of directly starting a new upload. This way the // retry logic can catch the error and will retry the upload. An upload // is usually locked for a short period of time and will be available // afterwards.",
+    "topic": "423 locked is transient",
+    "level": "informative"
+  },
+  {
+    "id": "TUS-JS-CLIENT-4.3.1-_resumeUpload-2",
+    "doc": "tus-js-client v4.3.1 (implementation, not a standard)",
+    "section": "_resumeUpload",
+    "file": "uploads/tus-js-client/upload.js",
+    "quote": "if (inStatusCategory(status, 400)) { // Remove stored fingerprint and corresponding endpoint, // on client errors since the file can not be found this._removeFromUrlStorage() }",
+    "topic": "4xx on HEAD -> forget URL, create new upload",
+    "level": "informative"
+  }
+]

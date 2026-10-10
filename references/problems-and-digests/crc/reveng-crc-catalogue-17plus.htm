@@ -1,0 +1,1116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML LANG="en">
+<HEAD PROFILE="http://www.w3.org/2005/10/profile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.css" TITLE="stylesheet">
+<STYLE TYPE="text/css">
+*.attested, *.attested * {color: black}
+*.confirmed, *.confirmed * {color: black}
+*.academic, *.academic * {color: navy}
+*.third-party, *.third-party * {color: maroon}
+*.unconfirmed, *.unconfirmed * {color: red}
+</STYLE>
+<LINK REL="icon" TYPE="image/vnd.microsoft.icon" HREF="../favicon.ico">
+<TITLE>Catalogue of parametrised CRC algorithms</TITLE>
+</HEAD>
+<BODY>
+<P STYLE="float: right;"><A HREF="../"><IMG ALT="CRC RevEng" TITLE="CRC RevEng" SRC="../logo.png" WIDTH="200" HEIGHT="200" STYLE="vertical-align: top;"></A></P>
+<H1 CLASS="centred"><A NAME="_top">CRC RevEng</A></H1>
+<P CLASS="centred">[ <A HREF="../">Home</A> | <A HREF="./">Up</A> | <A HREF="16.htm">Prev</A> | <A HREF="legend.htm">Next</A> | <A HREF="#disclaimer">Disclaimer</A> ]</P>
+
+<H2><A NAME="crc">Catalogue of parametrised CRC algorithms with 17 or more bits</A></H2>
+
+<H3><A NAME="crc.cat-bits.17"></A><A NAME="crc.cat.crc-17-can-fd">CRC-17/CAN-FD</A></H3>
+<P CLASS="academic"><CODE>width=17  poly=0x1685b  init=0x00000  refin=false  refout=false  xorout=0x00000  check=0x04f03  residue=0x00000  name="CRC-17/CAN-FD"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI>Robert Bosch GmbH (17 April 2012), <A HREF="https://web.archive.org/web/20151017122935/http://www.bosch-semiconductors.de/media/pdf_1/canliteratur/can_fd_spec.pdf">CAN with Flexible Data-Rate: Specification</A>, version 1.0 (courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>I</STRONG> Full definition (except Check); pseudocode (Section 3.2.1, pp.13&ndash;14)</LI>
+</UL>
+</LI>
+<LI>Created: 20 June 2017</LI>
+<LI>Updated: 3 January 2021</LI>
+</UL>
+
+<H3><A NAME="crc.cat-bits.21"></A><A NAME="crc.cat.crc-21-can-fd">CRC-21/CAN-FD</A></H3>
+<P CLASS="academic"><CODE>width=21  poly=0x102899  init=0x000000  refin=false  refout=false  xorout=0x000000  check=0x0ed841  residue=0x000000  name="CRC-21/CAN-FD"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI>Robert Bosch GmbH (17 April 2012), <A HREF="https://web.archive.org/web/20151017122935/http://www.bosch-semiconductors.de/media/pdf_1/canliteratur/can_fd_spec.pdf">CAN with Flexible Data-Rate: Specification</A>, version 1.0 (courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>I</STRONG> Full definition (except Check); pseudocode (Section 3.2.1, pp.13&ndash;14)</LI>
+</UL>
+</LI>
+<LI>Robert Bosch GmbH (23 December 2011), CRC for CAN with flexible data rate (CAN FD)
+<UL>
+<LI><STRONG>I</STRONG> Error control properties; theory of polynomial construction (Section 2, p.1; Section 3, p.2)</LI>
+</UL>
+</LI>
+<LI>Created: 20 June 2017</LI>
+<LI>Updated: 3 January 2021</LI>
+</UL>
+
+<H3><A NAME="crc.cat-bits.24"></A><A NAME="crc.cat.crc-24-ble">CRC-24/BLE</A></H3>
+<P CLASS="attested"><CODE>width=24  poly=0x00065b  init=0x555555  refin=true  refout=true  xorout=0x000000  check=0xc25a56  residue=0x000000  name="CRC-24/BLE"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Reference from named polynomial in Prof. Koopman's <A HREF="https://users.ece.cmu.edu/~koopman/crc/notes.html">CRC Polynomial Zoo</A>.</LI>
+<LI>The Init value applies to Bluetooth Low Energy (BLE) test packets and (device-) advertising channel packets.  Data channel packets use a custom Init value defined at connection time.</LI>
+<LI>BLE sniffer screenshot reference from "volta77" (29 May 2014), <A HREF="https://devzone.nordicsemi.com/question/2104/ble-crc-calculation/">Nordic Developer Zone post</A></LI>
+<LI>Bluetooth SIG (31 January 2023), <A HREF="https://www.bluetooth.com/specifications/">Bluetooth Specification</A>, <A HREF="https://www.bluetooth.org/DocMan/handlers/DownloadDoc.ashx?doc_id=521059">Core Version 5.4</A>
+<UL>
+<LI><STRONG>I</STRONG> Full definition (except Check) (Section 6.B.3.1.1, pp.2746&ndash;7)</LI>
+<LI><STRONG>I</STRONG> Shift register diagram (Figure 6.B.3.4, p.2747)</LI>
+<LI><STRONG>IV</STRONG> 2 codewords (Section 6.C.2.1, p.2922; Section 6.C.4.2.1, p.2928)
+<UL>
+<LI><CODE>0003424C&#8203;45290ACE</CODE></LI>
+<LI><CODE>01000010&#8203;10010000&#8203;01100101&#8203;10100101&#8203;00100101&#8203;11000101&#8203;01000101&#8203;10000011&#8203;10000000&#8203;01000000&#8203;11000000&#8203;10110101&#8203;00101101&#8203;11010111</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Texas Instruments, Inc. (12 March 2013), Processors wiki, <!-- A HREF="http://processors.wiki.ti.com/index.php/BLE_sniffer_guide" -->BLE sniffer guide<!-- /A -->
+<UL>
+<LI><STRONG>II</STRONG> Transcripts confirming implementation with 4 codewords (plus 3 with custom Init)
+<UL>
+<LI><CODE>00119992&#8203;B1EBD790&#8203;02010507&#8203;02031802&#8203;180418A8&#8203;5DEF</CODE></LI>
+<LI><CODE>030C5F96&#8203;EA301800&#8203;9992B1EB&#8203;D790DF02&#8203;EB</CODE></LI>
+<LI><CODE>04129992&#8203;B1EBD790&#8203;0B094B65&#8203;79666F62&#8203;64656D6F&#8203;D39F03</CODE></LI>
+<LI><CODE>05225F96&#8203;EA301800&#8203;9992B1EB&#8203;D7901B0A&#8203;8560A77B&#8203;22020F00&#8203;50000000&#8203;D007FFFF&#8203;FFFF1FA9&#8203;48DA02</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Liam Goudge (1 October 2014), <A HREF="https://www.cocoasteam.com/?p=384">"Custom Bluetooth Low Energy board with 2.4GHz antenna hack and Nordic nRF51822&hellip;"</A>
+<UL>
+<LI><STRONG>II</STRONG> Transcript confirming implementation with 2 codewords (plus 8 with custom Init)
+<UL>
+<LI><CODE>4021EE04&#8203;A5DDA7F9&#8203;0B094C69&#8203;616D7342&#8203;4C457632&#8203;03194103&#8203;02010607&#8203;030D180F&#8203;180A181C&#8203;929E</CODE></LI>
+<LI><CODE>C522C4A5&#8203;F2BE7479&#8203;EE04A5DD&#8203;A7F96672&#8203;65500B08&#8203;5B030500&#8203;18000000&#8203;4800FFFF&#8203;FFFF1FA9&#8203;E478D0</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Anonymous (7 September 2012), <A HREF="https://e2e.ti.com/cfs-file/__key/communityserver-discussions-components-files/538/4353.btproblem2.png">BLE sniffer screenshot</A> (courtesy of Texas Instruments, Inc.  E2E&trade; Community forum)
+<UL>
+<LI><STRONG>II</STRONG> Transcript confirming implementation with 2 codewords (plus 7 with custom Init)
+<UL>
+<LI><CODE>00090DEF&#8203;84B72D3C&#8203;020105C2&#8203;E2A4</CODE></LI>
+<LI><CODE>0522AB2F&#8203;85311800&#8203;0DEF84B7&#8203;2D3C7821&#8203;18C9567F&#8203;A2022700&#8203;50000000&#8203;D007FFFF&#8203;FFFF1FAF&#8203;0F1957</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 7 February 2016</LI>
+<LI>Updated: 4 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-24-flexray-a">CRC-24/FLEXRAY-A</A></H3>
+<P CLASS="attested"><CODE>width=24  poly=0x5d6dcb  init=0xfedcba  refin=false  refout=false  xorout=0x000000  check=0x7979bd  residue=0x000000  name="CRC-24/FLEXRAY-A"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Channels A and B have different initial vectors to prevent frames crossing channels.</LI>
+<LI>FlexRay Consortium (October 2010), <A HREF="https://svn.ipd.kit.edu/nlrp/public/FlexRay/FlexRay%E2%84%A2%20Protocol%20Specification%20Version%203.0.1.pdf">FlexRay Communications System Protocol Specification</A>, version 3.0.1 (courtesy of nlrp Benchmark)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly, Init, RefOut (Section 4.4, pp.117&ndash;8)</LI>
+<LI><STRONG>I</STRONG> Pseudocode (Section 4.5, pp.118&ndash;20)</LI>
+</UL>
+</LI>
+<LI>FlexRay Consortium (October 2010), <A HREF="https://svn.ipd.kit.edu/nlrp/public/FlexRay/FlexRay%E2%84%A2%20Protocol%20Conformance%20Test%20Specification%20Version%203.0.1.pdf">FlexRay Protocol Conformance Test Specification</A>, version 3.0.1 (courtesy of nlrp Benchmark)
+<UL>
+<LI><STRONG>IV</STRONG> 5 codewords (Section 2.7.5, p.681)
+<UL>
+<LI><CODE>18020209&#8203;880000F3&#8203;39C1</CODE></LI>
+<LI><CODE>600A0248&#8203;C8010264&#8203;6D70</CODE></LI>
+<LI><CODE>205606C8&#8203;48102030&#8203;40506047&#8203;4380</CODE></LI>
+<LI><CODE>202E06C8&#8203;48102030&#8203;40506096&#8203;C9D1</CODE></LI>
+<LI><CODE>201A06C8&#8203;48102030&#8203;405060B0&#8203;72EB</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 3 November 2007</LI>
+<LI>Updated: 6 February 2017</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-24-flexray-b">CRC-24/FLEXRAY-B</A></H3>
+<P CLASS="attested"><CODE>width=24  poly=0x5d6dcb  init=0xabcdef  refin=false  refout=false  xorout=0x000000  check=0x1f23b8  residue=0x000000  name="CRC-24/FLEXRAY-B"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Channels A and B have different initial vectors to prevent frames crossing channels.</LI>
+<LI>FlexRay Consortium (October 2010), <A HREF="https://svn.ipd.kit.edu/nlrp/public/FlexRay/FlexRay%E2%84%A2%20Protocol%20Specification%20Version%203.0.1.pdf">FlexRay Communications System Protocol Specification</A>, version 3.0.1 (courtesy of nlrp Benchmark)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly, Init, RefOut (Section 4.4, pp.117&ndash;8)</LI>
+<LI><STRONG>I</STRONG> Pseudocode (Section 4.5, pp.118&ndash;20)</LI>
+</UL>
+</LI>
+<LI>FlexRay Consortium (October 2010), <A HREF="https://svn.ipd.kit.edu/nlrp/public/FlexRay/FlexRay%E2%84%A2%20Protocol%20Conformance%20Test%20Specification%20Version%203.0.1.pdf">FlexRay Protocol Conformance Test Specification</A>, version 3.0.1 (courtesy of nlrp Benchmark)
+<UL>
+<LI><STRONG>IV</STRONG> 5 codewords (Section 2.7.5, p.681)
+<UL>
+<LI><CODE>18020209&#8203;880000D5&#8203;B910</CODE></LI>
+<LI><CODE>600A0248&#8203;C8010242&#8203;EDA1</CODE></LI>
+<LI><CODE>205606C8&#8203;48102030&#8203;405060E6&#8203;D9BE</CODE></LI>
+<LI><CODE>202E06C8&#8203;48102030&#8203;40506037&#8203;53EF</CODE></LI>
+<LI><CODE>201A06C8&#8203;48102030&#8203;40506011&#8203;E8D5</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 3 November 2007</LI>
+<LI>Updated: 6 February 2017</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-24-interlaken">CRC-24/INTERLAKEN</A></H3>
+<P CLASS="academic"><CODE>width=24  poly=0x328b63  init=0xffffff  refin=false  refout=false  xorout=0xffffff  check=0xb4f3e6  residue=0x144e63  name="CRC-24/INTERLAKEN"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI>Reference from named polynomial in Prof. Koopman's <A HREF="https://users.ece.cmu.edu/~koopman/crc/notes.html">CRC Polynomial Zoo</A>.</LI>
+<LI><A HREF="https://interlakenalliance.com/">The Interlaken Alliance</A> (7 October 2008), <A HREF="https://4b1b46.a2cdn1.secureserver.net/wp-content/uploads/2019/12/Interlaken_Protocol_Definition_v1.2.pdf">Interlaken Protocol Definition</A>, version 1.2
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly (Section 5.3.2.2, p.18)</LI>
+<LI><STRONG>I</STRONG> Definition: Init, RefIn, RefOut, XorOut (Appendix B, p.48)</LI>
+<LI><STRONG>IV</STRONG> 1 codeword (Appendix B, p.48)
+<UL>
+<LI><CODE>520BB104&#8203;7D585E00&#8203;C2B4B401&#8203;BBAF0100&#8203;0000FCB0&#8203;B3A8468E&#8203;1A0A01E1&#8203;BA38A9DF&#8203;00003677&#8203;EEA56DDA&#8203;BEB48D4D&#8203;93A88A12&#8203;00001F95&#8203;15F655DC&#8203;C3857A64&#8203;1B260C51&#8203;F1000000&#8203;00000000&#8203;59E69D</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Created: 10 February 2016</LI>
+<LI>Updated: 4 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-24-lte-a">CRC-24/LTE-A</A></H3>
+<P CLASS="academic"><CODE>width=24  poly=0x864cfb  init=0x000000  refin=false  refout=false  xorout=0x000000  check=0xcde703  residue=0x000000  name="CRC-24/LTE-A"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI>Reference from named polynomial in Prof. Koopman's <A HREF="https://users.ece.cmu.edu/~koopman/crc/notes.html">CRC Polynomial Zoo</A>.</LI>
+<LI>3rd Generation Partnership Project (3GPP) <A HREF="https://www.3gpp.org/ftp/Specs/latest/Rel-17/36_series/36212-h10.zip">TS 36.212</A> version 17.1.0 (March 2022) (zipped MS Word document) &mdash; ETSI <A HREF="https://www.etsi.org/deliver/etsi_ts/136200_136299/136212/17.01.00_60/ts_136212v170100p.pdf">TS 136 212</A> version 17.1.0 (April 2022)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly, Init, XorOut, Residue (Section 5.1.1, pp.10&ndash;11)</LI>
+<LI><STRONG>I</STRONG> Attachment relation, defining RefIn ^ RefOut (Section 5.1.1, p.11)</LI>
+</UL>
+</LI>
+<LI>3rd Generation Partnership Project (3GPP) <A HREF="https://www.3gpp.org/ftp/Specs/2023-06/Rel-17/36_series/36321-h50.zip">TS 36.321</A> version 17.5.0 (June 2023) (zipped MS Word document) &mdash; ETSI <A HREF="https://www.etsi.org/deliver/etsi_ts/136300_136399/136321/17.05.00_60/ts_136321v170500p.pdf">TS 136 321</A> version 17.5.0 (July 2023)
+<UL>
+<LI>Referenced from TS 136 212 section 5.2.2.1, p.26</LI>
+<LI><STRONG>I</STRONG> Definition: RefIn, RefOut (Section 6.1.1, p.90)</LI>
+</UL>
+</LI>
+<LI>Created: 13 February 2016</LI>
+<LI>Updated: 5 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-24-lte-b">CRC-24/LTE-B</A></H3>
+<P CLASS="academic"><CODE>width=24  poly=0x800063  init=0x000000  refin=false  refout=false  xorout=0x000000  check=0x23ef52  residue=0x000000  name="CRC-24/LTE-B"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI>Reference from named polynomial in Prof. Koopman's <A HREF="https://users.ece.cmu.edu/~koopman/crc/notes.html">CRC Polynomial Zoo</A>.</LI>
+<LI>3rd Generation Partnership Project (3GPP) <A HREF="https://www.3gpp.org/ftp/Specs/latest/Rel-17/36_series/36212-h10.zip">TS 36.212</A> version 17.1.0 (March 2022) (zipped MS Word document) &mdash; ETSI <A HREF="https://www.etsi.org/deliver/etsi_ts/136200_136299/136212/17.01.00_60/ts_136212v170100p.pdf">TS 136 212</A> version 17.1.0 (April 2022)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly, Init, XorOut, Residue (Section 5.1.1, pp.10&ndash;11)</LI>
+<LI><STRONG>I</STRONG> Attachment relation, defining RefIn ^ RefOut (Section 5.1.1, p.11)</LI>
+</UL>
+</LI>
+<LI>3rd Generation Partnership Project (3GPP) <A HREF="https://www.3gpp.org/ftp/Specs/2023-06/Rel-17/36_series/36321-h50.zip">TS 36.321</A> version 17.5.0 (June 2023) (zipped MS Word document) &mdash; ETSI <A HREF="https://www.etsi.org/deliver/etsi_ts/136300_136399/136321/17.05.00_60/ts_136321v170500p.pdf">TS 136 321</A> version 17.5.0 (July 2023)
+<UL>
+<LI>Referenced from TS 136 212 section 5.2.2.1, p.26</LI>
+<LI><STRONG>I</STRONG> Definition: RefIn, RefOut (Section 6.1.1, p.90)</LI>
+</UL>
+</LI>
+<LI>Created: 13 February 2016</LI>
+<LI>Updated: 5 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-24-openpgp">CRC-24/OPENPGP</A></H3>
+<P CLASS="attested"><CODE>width=24  poly=0x864cfb  init=0xb704ce  refin=false  refout=false  xorout=0x000000  check=0x21cf02  residue=0x000000  name="CRC-24/OPENPGP"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.crc-24"><STRONG>CRC-24</STRONG></A></LI>
+<LI><A HREF="https://datatracker.ietf.org/doc/html/rfc4880">IETF RFC 4880</A> (November 2007)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly, Init (Section 6, p.53)</LI>
+<LI><STRONG>I</STRONG> Code: C (Section 6.1, p.54)</LI>
+</UL>
+</LI>
+<LI>PVL Team (25 October 2008), CRC .NET control, version 14.0.0.0
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Berndt M. Gammel (29 October 2006), <A HREF="https://www.matpack.de/">Matpack 1.9.1</A> class <CODE>MpCRC</CODE> documentation
+<UL>
+<LI><STRONG>III</STRONG> All parameters (except Residue)</LI>
+</UL>
+</LI>
+<LI>Created: 2 November 2007</LI>
+<LI>Updated: 4 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-24-os-9">CRC-24/OS-9</A></H3>
+<P CLASS="attested"><CODE>width=24  poly=0x800063  init=0xffffff  refin=false  refout=false  xorout=0xffffff  check=0x200fa5  residue=0x800fe3  name="CRC-24/OS-9"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Microware Systems Corporation (January 1983), <A HREF="https://www.roug.org/soren/6809/os9sysprog.pdf">OS-9 Operating System, System Programmer's Manual</A>, revision F-1 (PDF, <A HREF="https://www.roug.org/soren/6809/os9sysprog.html">HTML</A>) (courtesy of S&oslash;ren Roug)<!-- want to see scans of these pages + inside cover -->
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly, Init, XorOut, Residue (Section 10.1.4, pp.51&ndash;2)</LI>
+<LI><STRONG>I</STRONG> Code: C (Section 10.1.4, p.52)</LI>
+</UL>
+</LI>
+<LI>Microware Systems Corporation (August 2000), <A HREF="https://web.archive.org/web/20140829020824/http://rab.ict.pwr.wroc.pl/dydaktyka/supwa/os9/MWARE/pdf/os9k_tech.pdf">OS-9 Technical Manual, version 2.2</A>, revision I (courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Init, Residue (Chapter 8, p.228)</LI>
+</UL>
+</LI>
+<LI>Microware Inc., TPUG Inc. (1985), <A HREF="https://web.archive.org/web/20230121021519/http://mikenaberezny.com/wp-content/uploads/2009/11/os9-systemdisk.d80">SuperOS-9 system disk</A> (courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>II</STRONG> Transcript confirming implementation with at least 7 codewords (selection)
+<UL>
+<LI><CODE>87CD0032&#8203;0021F181&#8203;D6002600&#8203;29FF0000&#8203;000F0104&#8203;00000100&#8203;06010100&#8203;10001001&#8203;01445261&#8203;ED015242&#8203;C643626D&#8203;4473EB0C&#8203;4EDF</CODE></LI>
+<LI><CODE>87CD0020&#8203;000D1181&#8203;08001500&#8203;FA556E4D&#8203;6F756EF4&#8203;01113F21&#8203;265F103F&#8203;06782872</CODE></LI>
+<LI><CODE>87CD003C&#8203;002CF181&#8203;D5003000&#8203;33030003&#8203;051A0000&#8203;01000101&#8203;00011808&#8203;180D1B04&#8203;01170305&#8203;08070000&#8203;002C0000&#8203;546572ED&#8203;5343C643&#8203;626D436F&#8203;EE81D4AA</CODE></LI>
+<LI><CODE>87CD0030&#8203;0021F181&#8203;D4002400&#8203;27FF0000&#8203;000F0100&#8203;00000100&#8203;23010100&#8203;10001001&#8203;0144B001&#8203;5242C643&#8203;626D4473&#8203;EBA297DD</CODE></LI>
+<LI><CODE>87CD0030&#8203;0021F181&#8203;D4002400&#8203;27FF0000&#8203;000F0101&#8203;00000100&#8203;23010100&#8203;10001001&#8203;0144B101&#8203;5242C643&#8203;626D4473&#8203;EBC1CCD5</CODE></LI>
+<LI><CODE>87CD0030&#8203;0021F181&#8203;D4002400&#8203;27FF0000&#8203;000F0102&#8203;00000100&#8203;23010100&#8203;10001001&#8203;0144B201&#8203;5242C643&#8203;626D4473&#8203;EB6421CD</CODE></LI>
+<LI><CODE>87CD0030&#8203;0021F181&#8203;D4002400&#8203;27FF0000&#8203;000F0103&#8203;00000100&#8203;23010100&#8203;10001001&#8203;0144B301&#8203;5242C643&#8203;626D4473&#8203;EB077AC5</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>S&oslash;ren Roug (15 May 2018), <A HREF="https://github.com/sorenroug/osnine-java">osnine-java</A>, module <A HREF="https://github.com/sorenroug/osnine-java/blob/master/os9l1/src/main/java/org/roug/osnine/os9/OS9.java"><CODE>os9l1/src/main/java/org/roug/osnine/os9/OS9.java</CODE></A>
+<UL>
+<LI><STRONG>III</STRONG> Code: Java (ll.953&ndash;94)</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 25 July 2018</LI>
+<LI>Updated: 4 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat-bits.30"></A><A NAME="crc.cat.crc-30-cdma">CRC-30/CDMA</A></H3>
+<P CLASS="academic"><CODE>width=30  poly=0x2030b9c7  init=0x3fffffff  refin=false  refout=false  xorout=0x3fffffff  check=0x04c34abf  residue=0x34efa55a  name="CRC-30/CDMA"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI>Reference from named polynomial in Prof. Koopman's <A HREF="https://users.ece.cmu.edu/~koopman/crc/notes.html">CRC Polynomial Zoo</A>.</LI>
+<LI>CCSA Telecommunication Industry Standard <A HREF="https://web.archive.org/web/20181118221951/https://www.ccsa.org.cn/english/yd1838/Technical%20Requirements%20of%20Link%20Access%20Control%20(LAC)%20for%20the%20CDMA-based%20Digital%20Trunking%20Mobile%20Communication%20System.pdf">YD/T 1838.3-2008</A> (5 November 2008; courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>I</STRONG> Full definition (except Check, Residue) (Section 2.1.1.5.1.2, pp.2-44&ndash;5)</LI>
+</UL>
+</LI>
+<LI>Created: 20 February 2016</LI>
+<LI>Updated: 4 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat-bits.31"></A><A NAME="crc.cat.crc-31-philips">CRC-31/PHILIPS</A></H3>
+<P CLASS="confirmed"><CODE>width=31  poly=0x04c11db7  init=0x7fffffff  refin=false  refout=false  xorout=0x7fffffff  check=0x0ce9e46c  residue=0x4eaf26f1  name="CRC-31/PHILIPS"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="confirmed">confirmed</SPAN></LI>
+<LI>Sincere thanks to Luigi (gigirex) for his assistance.</LI>
+<LI>AVMagazine.it has a <A HREF="https://www.avmagazine.it/forum/107-disc-ufficiali-lcd-full-hd/50543-philips-37pf9731/" HREFLANG="it">forum topic</A> on the Philips TV (in Italian).</LI>
+<LI>Philips 37PF9731 LCD TV
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>"gigirex" (1 March 2012), Computer Interfacing Forum <A HREF="https://web.archive.org/web/20181116141051/https://www.lammertbies.nl/forum/viewtopic.php?t=1774">topic 1774</A> (courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>IV</STRONG> 7 codewords (76 bytes each)</LI>
+</UL>
+</LI>
+<LI>Created: 12 April 2012</LI>
+<LI>Updated: 28 December 2019</LI>
+</UL>
+
+<H3><A NAME="crc.cat-bits.32"></A><A NAME="crc.cat.crc-32-aixm">CRC-32/AIXM</A></H3>
+<P CLASS="attested"><CODE>width=32  poly=0x814141ab  init=0x00000000  refin=false  refout=false  xorout=0x00000000  check=0x3010bf7f  residue=0x00000000  name="CRC-32/AIXM"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.crc-32q"><STRONG>CRC-32Q</STRONG></A></LI>
+<LI>Used for aeronautical data.  Recognised by the ICAO.</LI>
+<LI>EUROCONTROL (20 March 2006), <A HREF="https://www.aixm.aero/sites/aixm.aero/files/imce/library/aixm_primer_4-5.pdf">AIXM Primer 4.5</A>
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly, Init, XorOut, RefIn (Section 6.2, pp.23&ndash;5)</LI>
+<LI><STRONG>I</STRONG> Flowchart (p.24)</LI>
+<LI><STRONG>I</STRONG> Code: Java (Appendix B, pp.41&ndash;5)</LI>
+<LI><STRONG>IV</STRONG> 8 codewords (Table 6.1, p.25)
+<UL>
+<LI><CODE>34383036&#8203;33374EA5&#8203;A7C704</CODE></LI>
+<LI><CODE>30313633&#8203;34313145&#8203;A1AE5741</CODE></LI>
+<LI><CODE>34383036&#8203;33374E30&#8203;31363334&#8203;313145A1&#8203;BA30EE</CODE></LI>
+<LI><CODE>3738326C&#8203;297100</CODE></LI>
+<LI><CODE>34383036&#8203;33374E30&#8203;31363334&#8203;31314537&#8203;38326A25&#8203;9F4E</CODE></LI>
+<LI><CODE>34362E37&#8203;266D25C1</CODE></LI>
+<LI><CODE>34383036&#8203;33374E30&#8203;31363334&#8203;31314534&#8203;362E372F&#8203;866D6D</CODE></LI>
+<LI><CODE>34383036&#8203;33374E30&#8203;31363334&#8203;31314537&#8203;38323436&#8203;2E375E5D&#8203;C940</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Created: 29 April 2009</LI>
+<LI>Updated: 2 January 2021</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-autosar">CRC-32/AUTOSAR</A></H3>
+<P CLASS="attested"><CODE>width=32  poly=0xf4acfb13  init=0xffffffff  refin=true  refout=true  xorout=0xffffffff  check=0x1697d06a  residue=0x904cddbf  name="CRC-32/AUTOSAR"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>AUTOSAR (24 November 2022), <A HREF="https://www.autosar.org/standards/classic-platform/">AUTOSAR Classic Platform</A> release R22-11, <A HREF="https://www.autosar.org/fileadmin/user_upload/standards/classic/22-11/AUTOSAR_SWS_CRCLibrary.pdf">Specification of CRC Routines</A>
+<UL>
+<LI><STRONG>I</STRONG> Comprehensive primer on CRC theory (Section 7.1, pp.19&ndash;22)</LI>
+<LI><STRONG>I</STRONG> All parameters (Section 7.2.3.2, pp.28&ndash;9)</LI>
+<LI><STRONG>IV</STRONG> 7 codewords (Section 7.2.3.2, p.29)
+<UL>
+<LI><CODE>00000000&#8203;4022B36F</CODE></LI>
+<LI><CODE>F2018325&#8203;1A724F</CODE></LI>
+<LI><CODE>0FAA0055&#8203;F82D6620</CODE></LI>
+<LI><CODE>00FF5511&#8203;6E99D79B</CODE></LI>
+<LI><CODE>332255AA&#8203;BBCCDDEE&#8203;FF3D345A&#8203;A6</CODE></LI>
+<LI><CODE>926B5578&#8203;8A68EE</CODE></LI>
+<LI><CODE>FFFFFFFF&#8203;FFFFFFFF</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 24 July 2016</LI>
+<LI>Updated: 28 July 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-base91-d">CRC-32/BASE91-D</A></H3>
+<P CLASS="confirmed"><CODE>width=32  poly=0xa833982b  init=0xffffffff  refin=true  refout=true  xorout=0xffffffff  check=0x87315576  residue=0x45270551  name="CRC-32/BASE91-D"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="confirmed">confirmed</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.crc-32d"><STRONG>CRC-32D</STRONG></A></LI>
+<LI>Greg Cook (21 August 2020), <!-- A HREF="http://regregex.bbcmicro.net/#prog.base91" -->Base91<!-- /A --> level 1 version 3.12
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+<LI><STRONG>III</STRONG> Full mathematical description</LI>
+<LI><STRONG>III</STRONG> All parameters</LI>
+<LI><STRONG>III</STRONG> Code: C</LI>
+</UL>
+</LI>
+<LI>Prof. Philip Koopman (July 2002), <A HREF="https://users.ece.cmu.edu/~koopman/networks/dsn02/dsn02_koopman.pdf">"32-Bit Cyclic Redundancy Codes for Internet Applications"</A>, Proceedings of The International Conference on Dependable Systems and Networks
+<UL>
+<LI><STRONG>III</STRONG> Polynomial discovered by Castagnoli; properties confirmed by Koopman</LI>
+</UL>
+</LI>
+<LI>Created: 28 November 2008</LI>
+<LI>Updated: 8 August 2024</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-bzip2">CRC-32/BZIP2</A></H3>
+<P CLASS="attested"><CODE>width=32  poly=0x04c11db7  init=0xffffffff  refin=false  refout=false  xorout=0xffffffff  check=0xfc891918  residue=0xc704dd7b  name="CRC-32/BZIP2"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.crc-32-aal5"><STRONG>CRC-32/AAL5</STRONG></A>, <A NAME="crc.cat.crc-32-dect-b"><STRONG>CRC-32/DECT-B</STRONG></A>, <A NAME="crc.cat.b-crc-32"><STRONG>B-CRC-32</STRONG></A></LI>
+<LI>Used in DECT B-fields.
+<LI>Black's example AAL5 cells, with bytes <CODE>00 00 00 28</CODE> inserted between the described data fields and their CRCs, equal the examples in I.363.5.</LI>
+<LI><A HREF="https://www.itu.int/rec/T-REC-I.363.5/en">ITU-T Recommendation I.363.5</A> (August 1996)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Residue; full mathematical description (Section 9.2.1.2 (f), p.12)</LI>
+<LI><STRONG>IV</STRONG> 3 codewords (Appendix I, p.39)
+<UL>
+<LI><CODE>00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000028&#8203;864D7F99</CODE></LI>
+<LI><CODE>FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;00000028&#8203;C55E457A</CODE></LI>
+<LI><CODE>01020304&#8203;05060708&#8203;090A0B0C&#8203;0D0E0F10&#8203;11121314&#8203;15161718&#8203;191A1B1C&#8203;1D1E1F20&#8203;21222324&#8203;25262728&#8203;00000028&#8203;BF671ED0</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>ETSI <A HREF="https://www.etsi.org/deliver/etsi_en/300100_300199/30017503/02.05.01_60/en_30017503v020501p.pdf">EN 300 175-3</A> version 2.5.1 (August 2013)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Residue; full mathematical description (Section 6.2.5.5, p.102)</LI>
+</UL>
+</LI>
+<LI>Julian Seward (4 September 1999), bzip2 0.9.5d
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>PVL Team (25 October 2008), CRC .NET control, version 14.0.0.0
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Emil Lenchak, Texas Instruments, Inc. (June 2018), <A HREF="https://www.ti.com/lit/an/slaa221a/slaa221a.pdf">CRC Implementation With MSP430</A>
+<UL>
+<LI><STRONG>III</STRONG> All parameters (except Residue) (Section 4.6, p.6)</LI>
+</UL>
+</LI>
+<LI>Richard Black (18 February 1994), <A HREF="https://www.cl.cam.ac.uk/research/srg/bluebook/21/crc/node6.html">Fast CRC32 in Software: Software Implementations</A>
+<UL>
+<LI><STRONG>III</STRONG> Code: C</LI>
+</UL>
+</LI>
+<LI>Richard Black (18 February 1994), <A HREF="https://www.cl.cam.ac.uk/research/srg/bluebook/21/crc/node4.html">Fast CRC32 in Software: Some Examples</A>
+<UL>
+<LI><STRONG>IV</STRONG> 3 codewords (same as in I.363.5)</LI>
+</UL>
+</LI>
+<LI>Angie Tso, Telecommunications Techniques Corp. (24 October 1994), <A HREF="https://web.archive.org/web/20061009235306/http://cell-relay.indiana.edu/cell-relay/publications/software/CRC/32bitCRC.testcases.html">Cell Relay mailing list post</A> (courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>IV</STRONG> 4 codewords (first three same as in I.363.5)
+<UL>
+<LI><CODE>01020304&#8203;05060708&#8203;090A0B0C&#8203;0D0E0F10&#8203;11121314&#8203;15161718&#8203;191A1B1C&#8203;1D1E1F20&#8203;21222324&#8203;25262728&#8203;11220028&#8203;ACBA602A</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Ryan Luecke, James Lyons (11 October 2011), <A HREF="https://web.archive.org/web/20170117015325/https://blog.box.com/blog/crc32-checksums-the-good-the-bad-and-the-ugly/">CRC32 Checksums; The Good, The Bad, And The Ugly</A> (courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>IV</STRONG> 1 codeword
+<UL>
+<LI><CODE>6173640A&#8203;86FA4F5B</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 8 October 2008</LI>
+<LI>Updated: 22 August 2022</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-cd-rom-edc">CRC-32/CD-ROM-EDC</A></H3>
+<P CLASS="academic"><CODE>width=32  poly=0x8001801b  init=0x00000000  refin=true  refout=true  xorout=0x00000000  check=0x6ec2edc4  residue=0x00000000  name="CRC-32/CD-ROM-EDC"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI><A HREF="https://www.ecma-international.org/wp-content/uploads/ECMA-130_2nd_edition_june_1996.pdf">ECMA standard ECMA-130</A>, edition 2 (June 1996) &mdash; ISO/IEC 10149:1995
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly, Refin, RefOut, Residue (Section 14.3, p.16)</LI>
+</UL>
+</LI>
+<LI>Heiko Ei&szlig;feldt, J&ouml;rg Schilling (28 April 2013), <A HREF="https://www.berlios.de/software/cdrtools/" HREFLANG="de">cdrtools</A> 3.01 (in German), <A HREF="https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2/download">source code distribution</A> (Bzip2 compressed tarfile), modules <CODE>cdrtools-3.01/libedc/crctable.out</CODE>, <CODE>cdrtools-3.01/libedc/edc_ecc.c</CODE>
+<UL>
+<LI><STRONG>III</STRONG> Parameters: Width, Poly, RefIn</LI>
+<LI><STRONG>III</STRONG> Code: C</LI>
+</UL>
+</LI>
+<LI>Created: 19 April 2019</LI>
+<LI>Updated: 4 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-cksum">CRC-32/CKSUM</A></H3>
+<P CLASS="attested"><CODE>width=32  poly=0x04c11db7  init=0x00000000  refin=false  refout=false  xorout=0xffffffff  check=0x765e7680  residue=0xc704dd7b  name="CRC-32/CKSUM"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.cksum"><STRONG>CKSUM</STRONG></A>, <A NAME="crc.cat.crc-32-posix"><STRONG>CRC-32/POSIX</STRONG></A></LI>
+<LI>The <CODE>cksum</CODE> program processes a representation of the input stream length following the input.  It returns <CODE>930766865</CODE> (<CODE>0x377A6011</CODE>) on the check string, processed internally as <CODE>31 32 33 34 35 36 37 38 39 09</CODE>.  See the definition for details.</LI>
+<LI>The Open Group (1997), Single Unix Specification, version 2, Commands &amp; Utilities Issue 5, Reference Pages: <A HREF="https://pubs.opengroup.org/onlinepubs/7990989775/xcu/cksum.html">cksum</A>
+<UL>
+<LI><STRONG>I</STRONG> Full definition (except Check, Residue)</LI>
+</UL>
+</LI>
+<LI>Q. Frank Xia (December 1999), GNU cksum 2.0a
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Michael Niedermayer, Aur&eacute;lien Jacobs <DFN>et al.</DFN> (27 February 2023), <A HREF="https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz">FFmpeg 6.0</A> (XZ compressed tarfile), module <A HREF="https://github.com/FFmpeg/FFmpeg/blob/master/libavutil/tests/crc.c"><CODE>ffmpeg-6.0/libavutil/tests/crc.c</CODE></A>
+<UL>
+<LI><STRONG>IV</STRONG> 1 codeword (before XorOut stage)
+<UL>
+<LI><CODE>(i+i*i)</CODE> &times; 1999 + <CODE>3F0A451F</CODE> (source: + <CODE>C0F5BAE0</CODE>)</LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Created: 30 March 2005</LI>
+<LI>Updated: 8 August 2024</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-iscsi">CRC-32/ISCSI</A></H3>
+<P CLASS="attested"><CODE>width=32  poly=0x1edc6f41  init=0xffffffff  refin=true  refout=true  xorout=0xffffffff  check=0xe3069283  residue=0xb798b438  name="CRC-32/ISCSI"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.crc-32-base91-c"><STRONG>CRC-32/BASE91-C</STRONG></A>, <A NAME="crc.cat.crc-32-castagnoli"><STRONG>CRC-32/CASTAGNOLI</STRONG></A>, <A NAME="crc.cat.crc-32-interlaken"><STRONG>CRC-32/INTERLAKEN</STRONG></A>, <A NAME="crc.cat.crc-32c"><STRONG>CRC-32C</STRONG></A>, <A NAME="crc.cat.crc-32-nvme"><STRONG>CRC-32/NVME</STRONG></A></LI>
+<LI><A HREF="https://datatracker.ietf.org/doc/html/rfc7143">IETF RFC 7143</A> (April 2014)
+<UL>
+<LI><STRONG>I</STRONG> Full definition (except Check) (Section 13.1, pp.230&ndash;1)</LI>
+</UL>
+</LI>
+<LI><A HREF="https://datatracker.ietf.org/doc/html/rfc3385">IETF RFC 3385</A> (September 2002)
+<UL>
+<LI><STRONG>I</STRONG> Code: Verilog (implementation in hardware)</LI>
+<LI><STRONG>III</STRONG> Survey of literature and discussion of polynomial properties</LI>
+</UL>
+</LI>
+<LI>NVM Express, Inc. (27 December 2023), <A HREF="https://nvmexpress.org/wp-content/uploads/NVM-Express-TCP-Transport-Specification-1.0d-2023.12.27-Ratified.pdf">NVM Express&reg; TCP Transport Specification</A>, Revision 1.0d
+<UL>
+<LI><STRONG>I</STRONG> Citation for algorithm: IETF RFC 3385 (Section 3.3.1.1, p.14)</LI>
+</UL>
+</LI>
+<LI><A HREF="https://interlakenalliance.com/">The Interlaken Alliance</A> (7 October 2008), <A HREF="https://4b1b46.a2cdn1.secureserver.net/wp-content/uploads/2019/12/Interlaken_Protocol_Definition_v1.2.pdf">Interlaken Protocol Definition</A>, version 1.2
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly (Section 5.4.6, p.33)</LI>
+<LI><STRONG>I</STRONG> Definition: Init, RefIn, RefOut, XorOut (Appendix B, p.48)</LI>
+</UL>
+</LI>
+<LI>Dipl. Inf. Johann F. L&ouml;fflmann (30 July 2006), Jacksum 1.7.0
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Greg Cook (21 August 2020), <!-- A HREF="http://regregex.bbcmicro.net/#prog.base91" -->Base91<!-- /A --> level 1 version 3.12
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+<LI><STRONG>III</STRONG> Full mathematical description</LI>
+<LI><STRONG>III</STRONG> All parameters</LI>
+<LI><STRONG>III</STRONG> Code: C</LI>
+</UL>
+</LI>
+<LI>Mark Bakke, Julian Satran, Venkat Rangan (May&ndash;June 2001), <A HREF="https://www.pdl.cmu.edu/mailinglists/ips/mail/msg04970.html">IP Storage Mailing List thread</A>
+<UL>
+<LI><STRONG>III</STRONG> All parameters (except Residue) (Bakke, Rangan)</LI>
+<LI><STRONG>III</STRONG> Definition: Width, Poly, Init, XorOut (Satran)</LI>
+<LI><STRONG>III</STRONG> Code: C (Rangan)</LI>
+<LI><STRONG>IV</STRONG> 3 codewords (Bakke)
+<UL>
+<LI><CODE>00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;AA36918A</CODE></LI>
+<LI><CODE>FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;FFFFFFFF&#8203;43ABA862</CODE></LI>
+<LI><CODE>00010203&#8203;04050607&#8203;08090A0B&#8203;0C0D0E0F&#8203;10111213&#8203;14151617&#8203;18191A1B&#8203;1C1D1E1F&#8203;4E79DD46</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>NVM Express, Inc. (10 January 2024), <A HREF="https://nvmexpress.org/wp-content/uploads/NVM-Express-Management-Interface-Specification-1.2d-2024.01.10-Ratified.pdf">NVM Express&reg; Management Interface Specification</A>, Revision 1.2d
+<UL>
+<LI><STRONG>IV</STRONG> 7 codewords (Appendix C, pp.162&ndash;5)
+<UL>
+<LI><CODE>84100000&#8203;06030100&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;04000000&#8203;14000000&#8203;00000000&#8203;00000000&#8203;01000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;4AC32CFA</CODE></LI>
+<LI><CODE>84900000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;00000000&#8203;415A3132&#8203;33343536&#8203;20202020&#8203;20202020&#8203;20202020&#8203;7A1FC47B</CODE></LI>
+<LI><CODE>84080000&#8203;01000000&#8203;00000000&#8203;00000080&#8203;AAEF81B4</CODE></LI>
+<LI><CODE>84880000&#8203;00000000&#8203;38FF1E05&#8203;01000000&#8203;C83B3B57</CODE></LI>
+<LI><CODE>84000000&#8203;04450000&#8203;CD21EC1E</CODE></LI>
+<LI><CODE>84800000&#8203;00450100&#8203;BD860283</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 10 September 2005</LI>
+<LI>Updated: 8 August 2024</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-iso-hdlc">CRC-32/ISO-HDLC</A></H3>
+<P CLASS="attested"><CODE>width=32  poly=0x04c11db7  init=0xffffffff  refin=true  refout=true  xorout=0xffffffff  check=0xcbf43926  residue=0xdebb20e3  name="CRC-32/ISO-HDLC"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.crc-32"><STRONG>CRC-32</STRONG></A>, <A NAME="crc.cat.crc-32-adccp"><STRONG>CRC-32/ADCCP</STRONG></A>, <A NAME="crc.cat.crc-32-v-42"><STRONG>CRC-32/V-42</STRONG></A>, <A NAME="crc.cat.crc-32-xz"><STRONG>CRC-32/XZ</STRONG></A>, <A NAME="crc.cat.pkzip"><STRONG>PKZIP</STRONG></A></LI>
+<LI>HDLC is defined in ISO/IEC 13239.</LI>
+<LI><A HREF="https://www.itu.int/rec/T-REC-V.42/en">ITU-T Recommendation V.42</A> (March 2002)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Residue; full mathematical description (Section 8.1.1.6.2, p.17)</LI>
+</UL>
+</LI>
+<LI>AUTOSAR (24 November 2022), <A HREF="https://www.autosar.org/standards/classic-platform/">AUTOSAR Classic Platform</A> release R22-11, <A HREF="https://www.autosar.org/fileadmin/user_upload/standards/classic/22-11/AUTOSAR_SWS_CRCLibrary.pdf">Specification of CRC Routines</A>
+<UL>
+<LI><STRONG>I</STRONG> Comprehensive primer on CRC theory (Section 7.1, pp.19&ndash;22)</LI>
+<LI><STRONG>I</STRONG> All parameters (Section 7.2.3.1, pp.27&ndash;8)</LI>
+<LI><STRONG>IV</STRONG> 7 codewords (Section 7.2.3.1, p.28)
+<UL>
+<LI><CODE>00000000&#8203;1CDF4421</CODE></LI>
+<LI><CODE>F2018377&#8203;9DAB24</CODE></LI>
+<LI><CODE>0FAA0055&#8203;87B2C9B6</CODE></LI>
+<LI><CODE>00FF5511&#8203;1262A032</CODE></LI>
+<LI><CODE>332255AA&#8203;BBCCDDEE&#8203;FF3D86AE&#8203;B0</CODE></LI>
+<LI><CODE>926B559B&#8203;A2DE9C</CODE></LI>
+<LI><CODE>FFFFFFFF&#8203;FFFFFFFF</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Lasse Collin, Igor Pavlov <DFN>et al.</DFN> (27 August 2009), <A HREF="https://tukaani.org/xz/xz-file-format.txt">The .xz file format</A>, version 1.0.4
+<UL>
+<LI><STRONG>I</STRONG> Code: C (Section 6)</LI>
+</UL>
+</LI>
+<LI><A HREF="https://datatracker.ietf.org/doc/html/rfc1662">IETF RFC 1662</A> (July 1994)
+<UL>
+<LI><STRONG>I</STRONG> Code: C (Appendix C.3, pp.21&ndash;3)</LI>
+</UL>
+</LI>
+<LI>PKWARE Inc. (1 February 1993), PKZIP 2.04g
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Frank J. T. Wojcik, Guy Eric Schalnat, Andreas Dilger, Glenn Randers-Pehrson <DFN>et al.</DFN> (15 October 1999), libpng 1.0.5
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Lasse Collin, Igor Pavlov <DFN>et al.</DFN> (21 May 2011), XZ Utils 5.0.3
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Lammert Bies (August 2011), <A HREF="https://www.lammertbies.nl/comm/info/crc-calculation">CRC calculator</A>
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>PVL Team (25 October 2008), CRC .NET control, version 14.0.0.0
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Dr Ross N. Williams (19 August 1993), <A HREF="https://web.archive.org/web/20190527220400/http://www.ross.net/crc/download/crc_v3.txt">"A Painless Guide to CRC Error Detection Algorithms"</A> (courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>III</STRONG> All parameters (except Residue)</LI>
+</UL>
+</LI>
+<LI>Emil Lenchak, Texas Instruments, Inc. (June 2018), <A HREF="https://www.ti.com/lit/an/slaa221a/slaa221a.pdf">CRC Implementation With MSP430</A>
+<UL>
+<LI><STRONG>III</STRONG> All parameters (except Residue) (Section 4.6, p.6)</LI>
+</UL>
+</LI>
+<LI>Berndt M. Gammel (29 October 2006), <A HREF="https://www.matpack.de/">Matpack 1.9.1</A> class <CODE>MpCRC</CODE> documentation
+<UL>
+<LI><STRONG>III</STRONG> All parameters (except Residue)</LI>
+</UL>
+</LI>
+<LI>NVM Express, Inc. (11 January 2024), <A HREF="https://nvmexpress.org/wp-content/uploads/NVM-Express-Base-Specification-2.0d-2024.01.11-Ratified.pdf">NVM Express&reg; Base Specification</A>, Revision 2.0d
+<UL>
+<LI><STRONG>IV</STRONG> 1 codeword (Section 8.13.5.8, p.409)
+<UL>
+<LI><CODE>89AEB31A&#8203;874EAF84&#8203;841B4673&#8203;6B0DFDF2&#8203;BA58D30A&#8203;A2A545A3&#8203;E235A352&#8203;1E07594C&#8203;FA690DA7</CODE> (source: <CODE>ia6zGodO&#8203;r4SEG0Zz&#8203;aw398rpY&#8203;0wqipUWj&#8203;4jWjUh4H&#8203;WUz6aQ2n</CODE>)</LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>NVM Express, Inc. (27 December 2023), <A HREF="https://nvmexpress.org/wp-content/uploads/NVM-Express-TCP-Transport-Specification-1.0d-2023.12.27-Ratified.pdf">NVM Express&reg; TCP Transport Specification</A>, Revision 1.0d
+<UL>
+<LI><STRONG>IV</STRONG> 1 codeword (Section 3.6.1.5, p.27)
+<UL>
+<LI><CODE>5512DBB6&#8203;737D0106&#8203;F65975B7&#8203;73DFB011&#8203;FFC344BC&#8203;F442E2DD&#8203;6D8BC487&#8203;0B5D5B03&#8203;5FF4BAD9</CODE> (source: <CODE>VRLbtnN9&#8203;AQb2WXW3&#8203;c9+wEf/D&#8203;RLz0QuLd&#8203;bYvEhwtd&#8203;WwNf9LrZ</CODE>)</LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Cisco Systems (September 2013), <A HREF="https://meraki.cisco.com/lib/pdf/meraki_whitepaper_air_marshal.pdf">Meraki Air Marshal white paper</A>
+<UL>
+<LI><STRONG>IV</STRONG> 1 codeword (p.9)
+<UL>
+<LI><CODE>C0083000&#8203;28CFE952&#8203;1D3B08EA&#8203;449900E8&#8203;08EA4499&#8203;00E83001&#8203;02007E64&#8203;9416</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Ryan Luecke, James Lyons (11 October 2011), <A HREF="https://blog.box.com/blog/crc32-checksums-the-good-the-bad-and-the-ugly/">CRC32 Checksums; The Good, The Bad, And The Ugly</A>
+<UL>
+<LI><STRONG>IV</STRONG> 1 codeword
+<UL>
+<LI><CODE>6173640A&#8203;CEDE2D15</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 30 March 2005</LI>
+<LI>Updated: 11 December 2024</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-jamcrc">CRC-32/JAMCRC</A></H3>
+<P CLASS="confirmed"><CODE>width=32  poly=0x04c11db7  init=0xffffffff  refin=true  refout=true  xorout=0x00000000  check=0x340bc6d9  residue=0x00000000  name="CRC-32/JAMCRC"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="confirmed">confirmed</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.jamcrc"><STRONG>JAMCRC</STRONG></A></LI>
+<LI>PVL Team (25 October 2008), CRC .NET control, version 14.0.0.0
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Altera Corporation (April 1999), <A HREF="https://web.archive.org/web/20070221144121/http://www.msc.rl.ac.uk/europractice/vendors/dscrc.pdf">crc MegaCore Function Data Sheet</A>, version 2 (courtesy of the Internet Archive)
+<UL>
+<LI><STRONG>III</STRONG> All parameters (except Residue) (p.6)</LI>
+</UL>
+</LI>
+<LI>Created: 30 March 2005</LI>
+<LI>Updated: 21 November 2018</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-mef">CRC-32/MEF</A></H3>
+<P CLASS="attested"><CODE>width=32  poly=0x741b8cd7  init=0xffffffff  refin=true  refout=true  xorout=0x00000000  check=0xd2c22f51  residue=0x00000000  name="CRC-32/MEF"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Reference courtesy of Greg Nelson, Grammatech Inc.</LI>
+<LI>Mayo Foundation (19 February 2016), <A HREF="https://github.com/msel-source/meflib/raw/multiplatform/MEF%203%20Specification.pdf">Multiscale Electrophysiology File Format Version 3.0 (MEF3) specification</A> (courtesy of GitHub) <!-- does not name its authors, but uploaded to GitHub by Ben Brinkmann and formerly hosted on the Mayo Foundation web site. Version at https://web.archive.org/web/20170528095458/http://msel.mayo.edu/files/codes/MEF%203%20Specification.pdf is dated 7 October 2015 -->
+<UL>
+<LI><STRONG>I</STRONG> Definition: Init (p.90), Width (p.91)</LI>
+<LI><STRONG>I</STRONG> Citation for Poly: "Koopman" (p.91)</LI>
+</UL>
+</LI>
+<LI>Dan Crepeau (27 Sep 2021), <A HREF="https://github.com/msel-source/sampledata/raw/master/sample_data.mefd.tar">Sample MEF 3.0 data</A> (tar archive)
+<UL>
+<LI><STRONG>II</STRONG> Recording confirming implementation with at least 32 codewords (selection)
+<UL>
+<LI><CODE>4E6F7465&#8203;00010000&#8203;30000000&#8203;40F2E0C8&#8203;E6740400&#8203;54686973&#8203;20697320&#8203;74686520&#8203;74657874&#8203;206F6620&#8203;74686520&#8203;66697273&#8203;74206E6F&#8203;74652E00&#8203;7E7E7E7E&#8203;7E7E7E7E&#8203;7E7E7E7E&#8203;42342AB7</CODE></LI>
+<LI><CODE>4E6F7465&#8203;00010000&#8203;30000000&#8203;C08879C9&#8203;E6740400&#8203;54686973&#8203;20697320&#8203;74686520&#8203;74657874&#8203;206F6620&#8203;74686520&#8203;7365636F&#8203;6E64206E&#8203;6F74652E&#8203;007E7E7E&#8203;7E7E7E7E&#8203;7E7E7E7E&#8203;78CE3BA8</CODE></LI>
+<LI><CODE>42342AB7&#8203;4E6F7465&#8203;00010000&#8203;30000000&#8203;40F2E0C8&#8203;E6740400&#8203;54686973&#8203;20697320&#8203;74686520&#8203;74657874&#8203;206F6620&#8203;74686520&#8203;66697273&#8203;74206E6F&#8203;74652E00&#8203;7E7E7E7E&#8203;7E7E7E7E&#8203;7E7E7E7E&#8203;78CE3BA8&#8203;4E6F7465&#8203;00010000&#8203;30000000&#8203;C08879C9&#8203;E6740400&#8203;54686973&#8203;20697320&#8203;74686520&#8203;74657874&#8203;206F6620&#8203;74686520&#8203;7365636F&#8203;6E64206E&#8203;6F74652E&#8203;007E7E7E&#8203;7E7E7E7E&#8203;7E7E7E7E&#8203;266D44ED</CODE></LI>
+<LI><CODE>4E6F7465&#8203;00010000&#8203;00040000&#8203;00000000&#8203;40F2E0C8&#8203;E6740400&#8203;4E6F7465&#8203;00010000&#8203;48040000&#8203;00000000&#8203;C08879C9&#8203;E6740400&#8203;D1D99813</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Matt Stead, Ben Brinkmann, Dan Crepeau, Mayo Foundation (2013), <A HREF="https://github.com/msel-source/meflib">Multiscale Electrophysiology Format (MEF) version 3.0 library</A>, modules <A HREF="https://github.com/msel-source/meflib/blob/multiplatform/meflib/meflib.c"><CODE>meflib/meflib.c</CODE></A>, <A HREF="https://github.com/msel-source/meflib/blob/multiplatform/meflib/meflib.h"><CODE>meflib/meflib.h</CODE></A>
+<UL>
+<LI><STRONG>III</STRONG> Code: C</LI>
+</UL>
+</LI>
+<LI>Created: 10 January 2022</LI>
+<LI>Updated: 4 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-mpeg-2">CRC-32/MPEG-2</A></H3>
+<P CLASS="attested"><CODE>width=32  poly=0x04c11db7  init=0xffffffff  refin=false  refout=false  xorout=0x00000000  check=0x0376e6e7  residue=0x00000000  name="CRC-32/MPEG-2"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>ISO/IEC 13818-1:2000 &mdash; ITU-T Recommendation H.222.0 (February 2000)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly, Init, RefIn, RefOut, Residue (Annex A, p.97)</LI>
+<LI><STRONG>I</STRONG> CRC checking algorithm (Annex A, p.97)</LI>
+<LI><STRONG>I</STRONG> Partial shift register diagram (Annex A, p.97)</LI>
+</UL>
+</LI>
+<LI>Dipl. Inf. Johann F. L&ouml;fflmann (30 July 2006), Jacksum 1.7.0
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>VideoLAN Organization (13 October 2022), <A HREF="https://www.videolan.org/vlc/">VLC 3.0.18</A> module <A HREF="https://code.videolan.org/videolan/vlc/-/blob/master/modules/mux/mpeg/ps.c"><CODE>vlc-3.0.11/modules/mux/mpeg/ps.c</CODE></A>
+<UL>
+<LI><STRONG>III</STRONG> Code: C</LI>
+</UL>
+</LI>
+<LI>Created: 8 October 2008</LI>
+<LI>Updated: 4 August 2023</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-32-xfer">CRC-32/XFER</A></H3>
+<P CLASS="confirmed"><CODE>width=32  poly=0x000000af  init=0x00000000  refin=false  refout=false  xorout=0x00000000  check=0xbd0be338  residue=0x00000000  name="CRC-32/XFER"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="confirmed">confirmed</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.xfer"><STRONG>XFER</STRONG></A></LI>
+<LI>Jon Welch (12 January 2007), <A HREF="https://www.g7jjf.com/bbc.htm">XFER in C, version 5.1a</A>
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>William H. Press, Brian P. Flannery, Saul A. Teukolsky, William T. Vetterling (1992), <!-- A HREF="http://apps.nrbook.com/c/index.html" --><CITE>Numerical recipes in C: The art of scientific computing</CITE><!-- /A -->, 2nd ed., Cambridge University Press, ISBN 0-521-43108-5
+<UL>
+<LI><STRONG>III</STRONG> Presents polynomial and its properties (p.299)</LI>
+</UL>
+</LI>
+<LI>Created: 30 March 2005</LI>
+<LI>Updated: 2 January 2021</LI>
+</UL>
+
+<H3><A NAME="crc.cat-bits.40"></A><A NAME="crc.cat.crc-40-gsm">CRC-40/GSM</A></H3>
+<P CLASS="academic"><CODE>width=40  poly=0x0004820009  init=0x0000000000  refin=false  refout=false  xorout=0xffffffffff  check=0xd4164fc646  residue=0xc4ff8071ff  name="CRC-40/GSM"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI>Correction to XorOut by Mark Cammidge, Peralex Electronics (Pty) Ltd.</LI>
+<LI>ETSI <A HREF="https://www.etsi.org/deliver/etsi_ts/100900_100999/100909/08.09.00_60/ts_100909v080900p.pdf">TS 100 909</A> version 8.9.0 (January 2005)
+<UL>
+<LI><STRONG>I</STRONG> Full mathematical description (Section 4.1.2, p.61)</LI>
+</UL>
+</LI>
+<LI>Patrick Geremia, Texas Instruments, Inc. (April 1999), <A HREF="https://www.ti.com/lit/an/spra530/spra530.pdf">Cyclic Redundancy Check Computation: An Implementation Using the TMS320C54x</A>
+<UL>
+<LI><STRONG>III</STRONG> Definition: Width, Poly (p.5)</LI>
+<LI><STRONG>III</STRONG> Code: TMS320C54x assembler (Appendix E, pp.30&ndash;33)</LI>
+</UL>
+</LI>
+<LI>Berndt M. Gammel (29 October 2006), <A HREF="https://www.matpack.de/">Matpack 1.9.1</A> class <CODE>MpCRC</CODE> documentation
+<UL>
+<LI><STRONG>III</STRONG> Definition: Width, Poly</LI>
+</UL>
+</LI>
+<LI>Created: 10 December 2009</LI>
+<LI>Updated: 25 March 2019</LI>
+</UL>
+
+<H3><A NAME="crc.cat-bits.64"></A><A NAME="crc.cat.crc-64-ecma-182">CRC-64/ECMA-182</A></H3>
+<P CLASS="academic"><CODE>width=64  poly=0x42f0e1eba9ea3693  init=0x0000000000000000  refin=false  refout=false  xorout=0x0000000000000000  check=0x6c40df5f0b497347  residue=0x0000000000000000  name="CRC-64/ECMA-182"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.crc-64"><STRONG>CRC-64</STRONG></A></LI>
+<LI>Used in DLT-1 tape cartridges.  For the algorithm often misidentified as ECMA, see <A HREF="#crc.cat.crc-64-xz">CRC-64/XZ</A>.</LI>
+<LI><A HREF="https://www.ecma-international.org/wp-content/uploads/ECMA-182_1st_edition_december_1992.pdf">ECMA standard ECMA-182</A> (December 1992) &mdash; ISO/IEC 13421:1993
+<UL>
+<LI><STRONG>I</STRONG> Full mathematical description (Annex B, p.51)</LI>
+</UL>
+</LI>
+<LI>Created: 6 April 2009</LI>
+<LI>Updated: 7 May 2022</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-64-go-iso">CRC-64/GO-ISO</A></H3>
+<P CLASS="confirmed"><CODE>width=64  poly=0x000000000000001b  init=0xffffffffffffffff  refin=true  refout=true  xorout=0xffffffffffffffff  check=0xb90956c775a41001  residue=0x5300000000000000  name="CRC-64/GO-ISO"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="confirmed">confirmed</SPAN></LI>
+<LI>Go implementation reference contributed by "freetrader".</LI>
+<LI>The Go Authors, <A HREF="https://go.dev/">The Go Programming Language</A>, package <A HREF="https://pkg.go.dev/hash/crc64"><CODE>crc64</CODE></A>
+<UL>
+<LI><STRONG>II</STRONG> Implementation (using constant <CODE>crc64.ISO</CODE>)</LI>
+</UL>
+</LI>
+<LI>The Go Authors (26 January 2017), The Go Programming Language, module <A HREF="https://go.dev/src/hash/crc64/crc64.go"><CODE>src/hash/crc64/crc64.go</CODE></A>
+<UL>
+<LI><STRONG>III</STRONG> Code: Go</LI>
+</UL>
+</LI>
+<LI>The Go Authors (26 January 2017), The Go Programming Language, module <A HREF="https://go.dev/src/hash/crc64/crc64_test.go"><CODE>src/hash/crc64/crc64_test.go</CODE></A>
+<UL>
+<LI><STRONG>IV</STRONG> 32 codewords (selection)
+<UL>
+<LI><CODE>00000000&#8203;00000000</CODE></LI>
+<LI><CODE>61000000&#8203;00000020&#8203;34</CODE></LI>
+<LI><CODE>61620000&#8203;00000020&#8203;C436</CODE></LI>
+<LI><CODE>61626300&#8203;00000020&#8203;C47637</CODE></LI>
+<LI><CODE>61626364&#8203;00000020&#8203;C4766733</CODE></LI>
+<LI><CODE>61626364&#8203;65000020&#8203;C47667D3&#8203;32</CODE></LI>
+<LI><CODE>61626364&#8203;65660020&#8203;C47667D3&#8203;0230</CODE></LI>
+<LI><CODE>61626364&#8203;65666720&#8203;C47667D3&#8203;02B031</CODE></LI>
+<LI><CODE>61626364&#8203;65666768&#8203;C47667D3&#8203;02B0210E</CODE></LI>
+<LI><CODE>61626364&#8203;65666768&#8203;697667D3&#8203;02B0216E&#8203;8B</CODE></LI>
+<LI><CODE>61626364&#8203;65666768&#8203;696A67D3&#8203;02B0216E&#8203;5B7F</CODE></LI>
+<LI><CODE>48652077&#8203;686F2068&#8203;61732061&#8203;20736861&#8203;64792070&#8203;61737420&#8203;6B6E6F77&#8203;73207468&#8203;6174206E&#8203;69636520&#8203;67757973&#8203;2066696E&#8203;69736820&#8203;6C617374&#8203;2EB45ABE&#8203;E25917DB&#8203;C7</CODE></LI>
+<LI><CODE>46726565&#8203;21204672&#8203;6565212F&#8203;41207472&#8203;69702F74&#8203;6F204D61&#8203;72732F66&#8203;6F722039&#8203;30302F65&#8203;6D707479&#8203;206A6172&#8203;732F4275&#8203;726D6120&#8203;53686176&#8203;65EFA0DA&#8203;A61142FC&#8203;EA</CODE></LI>
+<LI><CODE>4E657061&#8203;6C207072&#8203;656D6965&#8203;7220776F&#8203;6E277420&#8203;72657369&#8203;676E2EA6&#8203;28EFD66A&#8203;865552</CODE></LI>
+<LI><CODE>48697320&#8203;6D6F6E65&#8203;79206973&#8203;20747769&#8203;63652074&#8203;61696E74&#8203;65643A20&#8203;27746169&#8203;6E742079&#8203;6F757273&#8203;20616E64&#8203;20277461&#8203;696E7420&#8203;6D696E65&#8203;2E16499D&#8203;643A9678&#8203;88</CODE></LI>
+<LI><CODE>73697A65&#8203;3A202061&#8203;2E6F7574&#8203;3A202062&#8203;6164206D&#8203;61676963&#8203;D2ADCDDA&#8203;653C55F3</CODE></LI>
+<LI><CODE>54686520&#8203;6D616A6F&#8203;72207072&#8203;6F626C65&#8203;6D206973&#8203;20776974&#8203;68207365&#8203;6E646D61&#8203;696C2E20&#8203;202D4D61&#8203;726B2048&#8203;6F72746F&#8203;6EB976A6&#8203;8740035E&#8203;9D</CODE></LI>
+<LI><CODE>54686973&#8203;20697320&#8203;61207465&#8203;7374206F&#8203;66207468&#8203;6520656D&#8203;65726765&#8203;6E637920&#8203;62726F61&#8203;64636173&#8203;74207379&#8203;7374656D&#8203;2E613B50&#8203;6B00F1FC&#8203;E7</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 28 January 2017</LI>
+<LI>Updated: 29 August 2024</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-64-ms">CRC-64/MS</A></H3>
+<P CLASS="attested"><CODE>width=64  poly=0x259c84cba6426349  init=0xffffffffffffffff  refin=true  refout=true  xorout=0x0000000000000000  check=0x75d4b74f024eceea  residue=0x0000000000000000  name="CRC-64/MS"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Reference courtesy of Greg Nelson, Grammatech Inc.</LI>
+<LI>Reportedly also used in <CITE>AppID</CITE> hashes and the <CODE>thumbcache.dll</CODE> file.</LI>
+<LI>Microsoft Corporation (25 June 2021), <A HREF="https://winprotocoldoc.blob.core.windows.net/productionwindowsarchives/MS-FCIADS/%5bMS-FCIADS%5d.pdf">[MS-FCIADS]: File Classification Infrastructure Alternate Data Stream (ADS) File Format</A>
+<UL>
+<LI><STRONG>I</STRONG> Full mathematical description (Section 2.8, pp.11&ndash;12)</LI>
+<LI><STRONG>IV</STRONG> 1 codeword (Section 3, pp.13&ndash;15)
+<UL>
+<LI><CODE>EBDBF499&#8203;B234C901&#8203;8A000000&#8203;00000000&#8203;00000000&#8203;02000000&#8203;D8AE24AF&#8203;CF9C941F&#8203;01000000&#8203;08000000&#8203;36000000&#8203;2E000000&#8203;42007500&#8203;73006900&#8203;6E006500&#8203;73007300&#8203;49006D00&#8203;70006100&#8203;63007400&#8203;00004800&#8203;42004900&#8203;00000700&#8203;00000800&#8203;00001C00&#8203;00001800&#8203;00005000&#8203;49004900&#8203;00003100&#8203;00005365&#8203;C6807317&#8203;DACE</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Hexacorn Ltd (30 April 2013), <A HREF="https://www.hexacorn.com/blog/2013/04/30/jumplists-file-names-and-appid-calculator/">JumpLists file names and AppID calculator</A>
+<UL>
+<LI><STRONG>II</STRONG> Implementation (with <CITE>AppID</CITE> string translation)</LI>
+<LI><STRONG>III</STRONG> Code: Perl</LI>
+<LI><STRONG>IV</STRONG> 7 codewords
+<UL>
+<LI><CODE>4D004900&#8203;43005200&#8203;4F005300&#8203;4F004600&#8203;54002E00&#8203;49004E00&#8203;54004500&#8203;52004E00&#8203;45005400&#8203;45005800&#8203;50004C00&#8203;4F005200&#8203;45005200&#8203;2E004400&#8203;45004600&#8203;41005500&#8203;4C005400&#8203;A149B5EA&#8203;6DB8C828</CODE></LI>
+<LI><CODE>4D004900&#8203;43005200&#8203;4F005300&#8203;4F004600&#8203;54002E00&#8203;57004900&#8203;4E004400&#8203;4F005700&#8203;53002E00&#8203;53005400&#8203;49004300&#8203;4B005900&#8203;4E004F00&#8203;54004500&#8203;530058C7&#8203;73F29AD5&#8203;7E33</CODE></LI>
+<LI><CODE>7B003100&#8203;41004300&#8203;31003400&#8203;45003700&#8203;37002D00&#8203;30003200&#8203;45003700&#8203;2D003400&#8203;45003500&#8203;44002D00&#8203;42003700&#8203;34003400&#8203;2D003200&#8203;45004200&#8203;31004100&#8203;45003500&#8203;31003900&#8203;38004200&#8203;37007D00&#8203;5C004E00&#8203;4F005400&#8203;45005000&#8203;41004400&#8203;2E004500&#8203;58004500&#8203;2B4EC2C1&#8203;69DC9C9B</CODE></LI>
+<LI><CODE>7B004400&#8203;36003500&#8203;32003300&#8203;31004200&#8203;30002D00&#8203;42003200&#8203;46003100&#8203;2D003400&#8203;38003500&#8203;37002D00&#8203;41003400&#8203;43004500&#8203;2D004100&#8203;38004500&#8203;37004300&#8203;36004500&#8203;41003700&#8203;44003200&#8203;37007D00&#8203;5C004E00&#8203;4F005400&#8203;45005000&#8203;41004400&#8203;2E004500&#8203;58004500&#8203;237ED143&#8203;CB0E8E91</CODE></LI>
+<LI><CODE>7B003900&#8203;30003500&#8203;45003600&#8203;33004200&#8203;36002D00&#8203;43003100&#8203;42004600&#8203;2D003400&#8203;39003400&#8203;45002D00&#8203;42003200&#8203;39004300&#8203;2D003600&#8203;35004200&#8203;37003300&#8203;32004400&#8203;33004400&#8203;32003100&#8203;41007D00&#8203;5C004900&#8203;45005800&#8203;50004C00&#8203;4F005200&#8203;45002E00&#8203;45005800&#8203;450006B6&#8203;151674EB&#8203;A0C3</CODE></LI>
+<LI><CODE>7B003600&#8203;44003800&#8203;30003900&#8203;33003700&#8203;37002D00&#8203;36004100&#8203;46003000&#8203;2D003400&#8203;34003400&#8203;42002D00&#8203;38003900&#8203;35003700&#8203;2D004100&#8203;33003700&#8203;37003300&#8203;46003000&#8203;32003200&#8203;30003000&#8203;45007D00&#8203;5C004900&#8203;45005800&#8203;50004C00&#8203;4F005200&#8203;45002E00&#8203;45005800&#8203;4500CE6D&#8203;913EB0E3&#8203;70E2</CODE></LI>
+<LI><CODE>7B003700&#8203;43003500&#8203;41003400&#8203;30004500&#8203;46002D00&#8203;41003000&#8203;46004200&#8203;2D003400&#8203;42004600&#8203;43002D00&#8203;38003700&#8203;34004100&#8203;2D004300&#8203;30004600&#8203;32004500&#8203;30004200&#8203;39004600&#8203;41003800&#8203;45007D00&#8203;5C004900&#8203;45005800&#8203;50004C00&#8203;4F005200&#8203;45002E00&#8203;45005800&#8203;4500A5A7&#8203;93B7B47F&#8203;220E</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 7 January 2022</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-64-nvme">CRC-64/NVME</A></H3>
+<P CLASS="attested"><CODE>width=64  poly=0xad93d23594c93659  init=0xffffffffffffffff  refin=true  refout=true  xorout=0xffffffffffffffff  check=0xae8b14860a799888  residue=0xf310303b2b6f6e42  name="CRC-64/NVME"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Contributed by Don MacAskill.</LI>
+<LI>NVM Express, Inc. (28 December 2023), <A HREF="https://nvmexpress.org/wp-content/uploads/NVM-Express-NVM-Command-Set-Specification-1.0d-2023.12.28-Ratified.pdf">NVM Express&reg; NVM Command Set Specification</A>, Revision 1.0d
+<UL>
+<LI><STRONG>I</STRONG> Full mathematical description and procedure (Section 5.2.1.3, pp.80&ndash;4)</LI>
+<LI><STRONG>I</STRONG> All parameters (except Check, Residue) (Section 5.2.1.3.4, pp.82&ndash;3)</LI>
+<LI><STRONG>IV</STRONG> 4 codewords (Section 5.2.1.3.5, p.84)
+<UL>
+<LI><CODE>00</CODE> &times; 4096 + <CODE>4EB622EB&#8203;67D38264</CODE></LI>
+<LI><CODE>FF</CODE> &times; 4096 + <CODE>ACA3EC02&#8203;73BADDC0</CODE></LI>
+<LI><CODE>(i)</CODE> &times; 4096 + <CODE>9C445067&#8203;5F9F723E</CODE></LI>
+<LI><CODE>(4095 - i)</CODE> &times; 4096 + <CODE>7E519E8E&#8203;4BF62D9A</CODE></LI>
+</UL>
+</LI>
+<LI>The published Check value is incorrect. (Figure 120, p.83)</LI>
+</UL>
+</LI>
+<LI>Coly Li, Keith Busch <DFN>et al.</DFN> (7 March 2022), Linux module <A HREF="https://github.com/torvalds/linux/blob/master/lib/crc64.c"><CODE>lib/crc64.c</CODE></A>
+<UL>
+<LI><STRONG>III</STRONG> Code: C</LI>
+</UL>
+</LI>
+<LI>Created: 8 August 2024</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-64-redis">CRC-64/REDIS</A></H3>
+<P CLASS="academic"><CODE>width=64  poly=0xad93d23594c935a9  init=0x0000000000000000  refin=true  refout=true  xorout=0x0000000000000000  check=0xe9c6d914c4b8d9ca  residue=0x0000000000000000  name="CRC-64/REDIS"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="academic">academic</SPAN></LI>
+<LI>Contributed by <A HREF="https://sourceforge.net/p/reveng/discussion/general/thread/6d6bd1102b/#b6b6">Johann N. L&ouml;fflmann</A>.</LI>
+<LI>Matt Stancliff <DFN>et al.</DFN> (16 November 2021), <A HREF="https://github.com/redis/redis">Redis</A> module <A HREF="https://github.com/redis/redis/blob/unstable/src/crc64.c"><CODE>redis/src/crc64.c</CODE></A>
+<UL>
+<LI><STRONG>III</STRONG> Definition: Width, Poly, RefIn, RefOut, XorOut, Check</LI>
+<LI><STRONG>III</STRONG> Code: C</LI>
+<LI><STRONG>IV</STRONG> 1 codeword (454 bytes)</LI>
+</UL>
+</LI>
+<LI>Created: 24 August 2022</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-64-we">CRC-64/WE</A></H3>
+<P CLASS="confirmed"><CODE>width=64  poly=0x42f0e1eba9ea3693  init=0xffffffffffffffff  refin=false  refout=false  xorout=0xffffffffffffffff  check=0x62ec59e3f1a4f00a  residue=0xfcacbebd5931a992  name="CRC-64/WE"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="confirmed">confirmed</SPAN></LI>
+<LI>Wolfgang Ehrhardt (27 March 2012), <!-- A HREF="http://www.wolfgang-ehrhardt.de/crchash_en.html" -->CRC/Hash plugin for FAR Manager<!--/A -->
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>Created: 8 November 2009</LI>
+<LI>Updated: 28 December 2019</LI>
+</UL>
+
+<H3><A NAME="crc.cat.crc-64-xz">CRC-64/XZ</A></H3>
+<P CLASS="attested"><CODE>width=64  poly=0x42f0e1eba9ea3693  init=0xffffffffffffffff  refin=true  refout=true  xorout=0xffffffffffffffff  check=0x995dc9bbdf1939fa  residue=0x49958c9abd7d353f  name="CRC-64/XZ"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>Alias: <A NAME="crc.cat.crc-64-go-ecma"><STRONG>CRC-64/GO-ECMA</STRONG></A></LI>
+<LI>An algorithm commonly misidentified as ECMA.  For the true ECMA algorithm see <A HREF="#crc.cat.crc-64-ecma-182">CRC-64/ECMA-182</A>.</LI>
+<LI>Go implementation reference contributed by "freetrader".</LI>
+<LI>AUTOSAR (24 November 2022), <A HREF="https://www.autosar.org/standards/classic-platform/">AUTOSAR Classic Platform</A> release R22-11, <A HREF="https://www.autosar.org/fileadmin/user_upload/standards/classic/22-11/AUTOSAR_SWS_CRCLibrary.pdf">Specification of CRC Routines</A>
+<UL>
+<LI><STRONG>I</STRONG> Comprehensive primer on CRC theory (Section 7.1, pp.19&ndash;22)</LI>
+<LI><STRONG>I</STRONG> All parameters (Section 7.2.4.1, pp.29&ndash;30)</LI>
+<LI><STRONG>IV</STRONG> 7 codewords (Section 7.2.4.1, p.30)
+<UL>
+<LI><CODE>00000000&#8203;4B9F1B1E&#8203;3586A5F4</CODE></LI>
+<LI><CODE>F20183C6&#8203;F1648166&#8203;279C31</CODE></LI>
+<LI><CODE>0FAA0055&#8203;75157C66&#8203;F7D0C554</CODE></LI>
+<LI><CODE>00FF5511&#8203;E604077E&#8203;BE2238A6</CODE></LI>
+<LI><CODE>332255AA&#8203;BBCCDDEE&#8203;FFD5E5A8&#8203;19B2CE1E&#8203;70</CODE></LI>
+<LI><CODE>926B554E&#8203;3E9FB5A9&#8203;96AA5F</CODE></LI>
+<LI><CODE>FFFFFFFF&#8203;00000000&#8203;FFFFFFFF</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Lasse Collin, Igor Pavlov <DFN>et al.</DFN> (27 August 2009), <A HREF="https://tukaani.org/xz/xz-file-format.txt">The .xz file format</A>, version 1.0.4
+<UL>
+<LI><STRONG>I</STRONG> Code: C (Section 6)</LI>
+</UL>
+</LI>
+<LI>Lasse Collin, Igor Pavlov <DFN>et al.</DFN> (21 May 2011), XZ Utils 5.0.3
+<UL>
+<LI><STRONG>II</STRONG> Implementation</LI>
+</UL>
+</LI>
+<LI>The Go Authors, <A HREF="https://golang.org/">The Go Programming Language</A>, package <A HREF="https://golang.org/pkg/hash/crc64/"><CODE>crc64</CODE></A>
+<UL>
+<LI><STRONG>II</STRONG> Implementation (using constant <CODE>crc64.ECMA</CODE>)</LI>
+</UL>
+</LI>
+<LI>The Go Authors (26 January 2017), The Go Programming Language, module <A HREF="https://golang.org/src/hash/crc64/crc64.go"><CODE>src/hash/crc64/crc64.go</CODE></A>
+<UL>
+<LI><STRONG>III</STRONG> Code: Go</LI>
+</UL>
+</LI>
+<LI>The Go Authors (26 January 2017), The Go Programming Language, module <A HREF="https://golang.org/src/hash/crc64/crc64_test.go"><CODE>src/hash/crc64/crc64_test.go</CODE></A>
+<UL>
+<LI><STRONG>IV</STRONG> 32 codewords (selection)
+<UL>
+<LI><CODE>00000000&#8203;00000000</CODE></LI>
+<LI><CODE>61052B65&#8203;2E778402&#8203;33</CODE></LI>
+<LI><CODE>616246B0&#8203;840E2073&#8203;65BC</CODE></LI>
+<LI><CODE>61626327&#8203;76271A4A&#8203;09D82C</CODE></LI>
+<LI><CODE>61626364&#8203;BA60596E&#8203;59289D3C</CODE></LI>
+<LI><CODE>61626364&#8203;65F29508&#8203;FB58DF0B&#8203;04</CODE></LI>
+<LI><CODE>61626364&#8203;6566F400&#8203;A745859F&#8203;8ED0</CODE></LI>
+<LI><CODE>61626364&#8203;65666766&#8203;0E71CCA8&#8203;A320EC</CODE></LI>
+<LI><CODE>61626364&#8203;65666768&#8203;590C7A64&#8203;0AF3B467</CODE></LI>
+<LI><CODE>61626364&#8203;65666768&#8203;698EEF56&#8203;9DC8F666&#8203;99</CODE></LI>
+<LI><CODE>61626364&#8203;65666768&#8203;696AF473&#8203;57CD2E3A&#8203;0932</CODE></LI>
+<LI><CODE>48652077&#8203;686F2068&#8203;61732061&#8203;20736861&#8203;64792070&#8203;61737420&#8203;6B6E6F77&#8203;73207468&#8203;6174206E&#8203;69636520&#8203;67757973&#8203;2066696E&#8203;69736820&#8203;6C617374&#8203;2E0DA0B9&#8203;2AACC062&#8203;85</CODE></LI>
+<LI><CODE>46726565&#8203;21204672&#8203;6565212F&#8203;41207472&#8203;69702F74&#8203;6F204D61&#8203;72732F66&#8203;6F722039&#8203;30302F65&#8203;6D707479&#8203;206A6172&#8203;732F4275&#8203;726D6120&#8203;53686176&#8203;658A513E&#8203;35303860&#8203;1F</CODE></LI>
+<LI><CODE>4E657061&#8203;6C207072&#8203;656D6965&#8203;7220776F&#8203;6E277420&#8203;72657369&#8203;676E2E41&#8203;5A746AB1&#8203;F20E79</CODE></LI>
+<LI><CODE>48697320&#8203;6D6F6E65&#8203;79206973&#8203;20747769&#8203;63652074&#8203;61696E74&#8203;65643A20&#8203;27746169&#8203;6E742079&#8203;6F757273&#8203;20616E64&#8203;20277461&#8203;696E7420&#8203;6D696E65&#8203;2E6D100B&#8203;66B2419E&#8203;04</CODE></LI>
+<LI><CODE>73697A65&#8203;3A202061&#8203;2E6F7574&#8203;3A202062&#8203;6164206D&#8203;61676963&#8203;4D3AD6D8&#8203;6CE4B5E3</CODE></LI>
+<LI><CODE>54686520&#8203;6D616A6F&#8203;72207072&#8203;6F626C65&#8203;6D206973&#8203;20776974&#8203;68207365&#8203;6E646D61&#8203;696C2E20&#8203;202D4D61&#8203;726B2048&#8203;6F72746F&#8203;6E51A0F2&#8203;946BAF5A&#8203;86</CODE></LI>
+<LI><CODE>54686973&#8203;20697320&#8203;61207465&#8203;7374206F&#8203;66207468&#8203;6520656D&#8203;65726765&#8203;6E637920&#8203;62726F61&#8203;64636173&#8203;74207379&#8203;7374656D&#8203;2E72BC5B&#8203;C17F18DB&#8203;27</CODE></LI>
+</UL>
+</LI>
+</UL>
+</LI>
+<LI>Unique effective solution of codeword set</LI>
+<LI>Created: 4 July 2011</LI>
+<LI>Updated: 29 August 2024</LI>
+</UL>
+
+<H3><A NAME="crc.cat-bits.82"></A><A NAME="crc.cat.crc-82-darc">CRC-82/DARC</A></H3>
+<P CLASS="attested"><CODE>width=82  poly=0x0308c0111011401440411  init=0x000000000000000000000  refin=true  refout=true  xorout=0x000000000000000000000  check=0x09ea83f625023801fd612  residue=0x000000000000000000000  name="CRC-82/DARC"</CODE></P>
+<UL>
+<LI>Class: <SPAN CLASS="attested">attested</SPAN></LI>
+<LI>The single codeword is supported by the codewords confirming <A HREF="1-15.htm#crc.cat.crc-6-darc">CRC-6/DARC</A>, defined identically apart from Width, Poly in the same standard. The source presents the codeword in transmission order, whereas the codeword is composed of the bytes of data sent LSB first.  The example input message is 190 bits long, considering that the inner CRC is 14 bits.  The CRC mask is &hellip;<CODE>C0 FF FF FF FF FF FF FF FF FF FF</CODE>.</LI>
+<LI>ETSI <A HREF="https://www.etsi.org/deliver/etsi_en/300700_300799/300751/01.02.01_60/en_300751v010201p.pdf">EN 300 751</A> version 1.2.1 (January 2003)
+<UL>
+<LI><STRONG>I</STRONG> Definition: Width, Poly (Section 11.1, p.67)</LI>
+<LI><STRONG>I</STRONG> Definition: RefIn, RefOut (Section 12, pp.69&ndash;70)</LI>
+<LI><STRONG>IV</STRONG> 1 codeword (Section 11.1, p.67)
+<UL>
+<LI><CODE>02000102&#8203;37205052&#8203;4F4A4543&#8203;54204D41&#8203;494E4D45&#8203;4E553B48&#8203;42406500&#8203;1049B5FB&#8203;9ADE</CODE> (source: <CODE>40008040&#8203;EC040A4A&#8203;F252A2C2&#8203;2A04B282&#8203;9272B2A2&#8203;72AADC12&#8203;4202A600&#8203;0892ADDF&#8203;597B</CODE>)</LI>
+</UL>
+</LI>
+<LI>See section 12 for details of the transmission order.</LI>
+</UL>
+</LI>
+<LI><SAMP>reveng -m CRC-82/DARC -X -c 02000102&#8203;37205052&#8203;4F4A4543&#8203;54204D41&#8203;494E4D45&#8203;4E553B48&#8203;42406500&#8203;1049B5FB&#8203;9ADE</SAMP> &rarr; <CODE>00000000&#8203;00000000&#8203;000000</CODE></LI>
+<LI><SAMP>reveng -m CRC-82/DARC -a 1 -A 8 -r -X -c 01000000&#8203;00000000&#8203;10000000&#8203;01000000&#8203;11101100&#8203;00000100&#8203;00001010&#8203;01001010&#8203;11110010&#8203;01010010&#8203;10100010&#8203;11000010&#8203;00101010&#8203;00000100&#8203;10110010&#8203;10000010&#8203;10010010&#8203;01110010&#8203;10110010&#8203;10100010&#8203;01110010&#8203;10101010&#8203;11011100&#8203;000100</SAMP> &rarr; <CODE>40424065&#8203;001049B5&#8203;FB9ADE</CODE>
+<LI>Created: 14 December 2009</LI>
+<LI>Updated: 23 December 2021</LI>
+</UL>
+
+<H2><A NAME="disclaimer">Disclaimer</A></H2>
+
+<P>Every effort has been made to ensure accuracy, however there may be
+occasional errors or omissions.  All trademarks and registered trademarks
+are the intellectual property of their respective owners.  The code and
+documentation included in this document are supplied without warranty,
+not even the implied warranties of merchantability or fitness for a
+particular purpose.  In no event shall the author or his suppliers be
+liable for any loss, damage, injury or death, of any nature and
+howsoever caused, arising from the use of, or failure, inability or
+unwillingness to use, this software or documentation.</P>
+
+<P CLASS="centred">[ <A HREF="#_top">Top of page</A> ]</P>
+
+<HR>
+
+<ADDRESS>Greg Cook, <IMG ALT="[email address]" STYLE="vertical-align: text-bottom;" SRC="../email.png" WIDTH="139" HEIGHT="13"><BR>
+<A HREF="https://reveng.sourceforge.io/crc-catalogue/17plus.htm">https://reveng.sourceforge.io/crc-catalogue/17plus.htm</A> Last updated 11 December 2024<BR>
+Links last verified 20 July 2023
+</ADDRESS>
+
+<P><A HREF="https://validator.w3.org/check?uri=https://reveng.sourceforge.io/crc-catalogue/17plus.htm"><IMG ALT="Valid HTML 4.01 Strict." TITLE="Valid HTML 4.01 Strict" SRC="../valid-html401.png" WIDTH="88" HEIGHT="31" STYLE="vertical-align: middle;"></A><SPAN STYLE="float: right;">&nbsp;Hosting by <A HREF="https://sourceforge.net/"><IMG ALT="SourceForge.net" TITLE="SourceForge.net" SRC="https://sourceforge.net/sflogo.php?group_id=781152&amp;type=2" WIDTH="125" HEIGHT="37" STYLE="vertical-align: middle;"></A></SPAN></P>
+
+<P CLASS="centred">[ <A HREF="#_top">Top of page</A> ]</P>
+
+</BODY>
+</HTML>

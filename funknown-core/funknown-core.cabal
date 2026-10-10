@@ -1,0 +1,86 @@
+cabal-version: 3.0
+name:          funknown-core
+version:       0.1.0.0
+synopsis:      Pure core of an upload-managing drive: decisions over values, proved by LiquidHaskell
+build-type:    Simple
+
+common lh
+  build-depends:    base, containers, liquidhaskell == 0.9.14.1.1
+  default-language: Haskell2010
+  ghc-options:      -Wall -Werror=incomplete-patterns -fplugin=LiquidHaskell
+
+common plain
+  build-depends:    base, containers, funknown-core
+  default-language: Haskell2010
+  ghc-options:      -Wall -Werror=incomplete-patterns
+
+library
+  import:           lh
+  hs-source-dirs:   src
+  exposed-modules:  Funknown.Proof
+                    Funknown.Opt
+                    Funknown.Basis
+                    Funknown.Http.Method
+                    Funknown.Http.Validator
+                    Funknown.Http.Precondition
+                    Funknown.Http.Range
+                    Funknown.Http.Retry
+                    Funknown.Http.Admission
+                    Funknown.Http.Status
+                    Funknown.Rpc.Code
+                    Funknown.Rpc.Recourse
+                    Funknown.Digest
+                    Funknown.Problem
+                    Funknown.Store.Algorithm
+                    Funknown.Store.Receipt
+                    Funknown.Upload
+                    Funknown.Fault
+                    Funknown.Kernel.Bound
+                    Funknown.Kernel.Types
+                    Funknown.Kernel.Reconcile
+                    Funknown.Kernel.Model
+                    Funknown.Kernel.Converge
+
+-- The port-side lemmas that let one value per class stand for the whole
+-- class in the retry diffs, checked by LiquidHaskell.
+library port-check
+  import:           lh
+  hs-source-dirs:   test
+  exposed-modules:  Port.Urllib3
+                    Port.GoTransport
+
+test-suite exhaustive-precondition
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          ExhaustivePrecondition.hs
+  other-modules:    Port.GoFs
+
+test-suite exhaustive-range-receipt
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          ExhaustiveRangeReceipt.hs
+  other-modules:    Port.GoFsRange
+
+test-suite exhaustive-retry
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          ExhaustiveRetry.hs
+  other-modules:    Port.Urllib3
+                    Port.GoTransport
+
+test-suite registries
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Registries.hs
+  other-modules:    Registries.Vendored
+                    Port.HttpTypesStatus
+
+test-suite kernel-guards
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          KernelGuards.hs

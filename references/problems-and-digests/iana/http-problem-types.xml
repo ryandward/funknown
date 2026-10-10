@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="http-problem-types.xsl"?>
+<?xml-model href="http-problem-types.rng" schematypens="http://relaxng.org/ns/structure/1.0" ?>
+<registry xmlns="http://www.iana.org/assignments" id="http-problem-types">
+  <title>Hypertext Transfer Protocol (HTTP) Problem Types</title>
+  <created>2023-05-02</created>
+  <updated>2026-06-26</updated>
+  <registry id="http-problem-type-uris">
+    <title>HTTP Problem Types</title>
+    <xref type="rfc" data="rfc9457"/>
+    <registration_rule>Specification Required</registration_rule>
+    <expert>Mark Nottingham, Sanjay Dalal</expert>
+    <note>New problem types and changes to existing ones can be requested using 
+the <xref type="uri" data="https://github.com/protocol-registries/http-problem-types">registration request interface</xref> or the <xref type="uri" data="https://www.ietf.org/mailman/listinfo/httpapi">HTTPAPI mailing list</xref>.
+    </note>
+    <record date="2023-05-02">
+      <type>about:blank</type>
+      <name>See HTTP Status Code</name>
+      <rec>N/A</rec>
+      <xref type="rfc" data="rfc9457"/>
+    </record>
+    <record date="2023-05-02">
+      <type>https://iana.org/assignments/http-problem-types#date</type>
+      <name>Date Not Acceptable</name>
+      <rec>400</rec>
+      <xref type="rfc" data="rfc9458" section="6.5.2">RFC9458, Section 6.5.2</xref>
+    </record>
+    <record date="2023-05-02">
+      <type>https://iana.org/assignments/http-problem-types#ohttp-key</type>
+      <name>Oblivious HTTP key configuration not acceptable</name>
+      <rec>400</rec>
+      <xref type="rfc" data="rfc9458" section="5.3">RFC9458, Section 5.3</xref>
+    </record>
+    <record date="2026-06-26">
+      <type>https://iana.org/assignments/http-problem-types#digest-unsupported-algorithms</type>
+      <name>Unsupported Hashing Algorithms</name>
+      <rec>400</rec>
+      <xref type="draft" data="RFC-ietf-httpapi-digest-fields-problem-types-06" section="3.1">RFC-ietf-httpapi-digest-fields-problem-types-06, Section 3.1</xref>
+    </record>
+    <record date="2026-06-26">
+      <type>https://iana.org/assignments/http-problem-types#digest-invalid-values</type>
+      <name>Invalid Digest Values</name>
+      <rec>400</rec>
+      <xref type="draft" data="RFC-ietf-httpapi-digest-fields-problem-types-06" section="3.2">RFC-ietf-httpapi-digest-fields-problem-types-06, Section 3.2</xref>
+    </record>
+    <record date="2026-06-26">
+      <type>https://iana.org/assignments/http-problem-types#digest-mismatched-values</type>
+      <name>Mismatched Digest Values</name>
+      <rec>400</rec>
+      <xref type="draft" data="RFC-ietf-httpapi-digest-fields-problem-types-06" section="3.3">RFC-ietf-httpapi-digest-fields-problem-types-06, Section 3.3</xref>
+    </record>
+  </registry>
+  <people/>
+</registry>

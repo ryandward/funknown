@@ -1,0 +1,2756 @@
+[
+  {
+    "id": "GRPC-STATUSCODES-OK",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: OK",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| OK | 0 | Not an error; returned on success. |",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-CANCELLED",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: CANCELLED",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| CANCELLED | 1 | The operation was cancelled, typically by the caller. |",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-UNKNOWN",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: UNKNOWN",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| UNKNOWN | 2 | Unknown error. For example, this error may be returned when a `Status` value received from another address space belongs to an error space that is not known in this address space. Also errors raised by APIs that do not return enough error information may be converted to this error. |",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-INVALID_ARGUMENT",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: INVALID_ARGUMENT",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| INVALID_ARGUMENT | 3 | The client specified an invalid argument. Note that this differs from `FAILED_PRECONDITION`. `INVALID_ARGUMENT` indicates arguments that are problematic regardless of the state of the system (e.g., a malformed file name). |",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-DEADLINE_EXCEEDED",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: DEADLINE_EXCEEDED",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| DEADLINE_EXCEEDED | 4 | The deadline expired before the operation could complete. For operations that change the state of the system, this error may be returned even if the operation has completed successfully. For example, a successful response from a server could have been delayed long |",
+    "topic": "deadline",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-NOT_FOUND",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: NOT_FOUND",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| NOT_FOUND | 5 | Some requested entity (e.g., file or directory) was not found.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-ALREADY_EXISTS",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: ALREADY_EXISTS",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| ALREADY_EXISTS | 6 | The entity that a client attempted to create (e.g., file or directory) already exists. |",
+    "topic": "destination-conflict",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-PERMISSION_DENIED",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: PERMISSION_DENIED",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| PERMISSION_DENIED | 7 | The caller does not have permission to execute the specified operation.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-RESOURCE_EXHAUSTED",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: RESOURCE_EXHAUSTED",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| RESOURCE_EXHAUSTED | 8 | Some resource has been exhausted, perhaps a per-user quota, or perhaps the entire file system is out of space. |",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-FAILED_PRECONDITION",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: FAILED_PRECONDITION",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| FAILED_PRECONDITION | 9 | The operation was rejected because the system is not in a state required for the operation's execution. For example, the directory to be deleted is non-empty, an rmdir operation is applied to a non-directory, etc.",
+    "topic": "precondition",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-ABORTED",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: ABORTED",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| ABORTED | 10 | The operation was aborted, typically due to a concurrency issue such as a sequencer check failure or transaction abort. See the guidelines above for deciding between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`. |",
+    "topic": "concurrency-conflict",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-OUT_OF_RANGE",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: OUT_OF_RANGE",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| OUT_OF_RANGE | 11 | The operation was attempted past the valid range. E.g., seeking or reading past end-of-file. Unlike `INVALID_ARGUMENT`, this error indicates a problem that may be fixed if the system state changes. For example, a 32-bit file system will generate `INVALID_ARGUMENT` if asked to read at an offset that is not in the range [0,2^32-1], but it will generate `OUT_OF_RANGE` if asked to read from an offset past the current file size.",
+    "topic": "upload-offset",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-UNIMPLEMENTED",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: UNIMPLEMENTED",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| UNIMPLEMENTED | 12 | The operation is not implemented or is not supported/enabled in this service. |",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-INTERNAL",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: INTERNAL",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| INTERNAL | 13 | Internal errors. This means that some invariants expected by the underlying system have been broken. This error code is reserved for serious errors. |",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-UNAVAILABLE",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: UNAVAILABLE",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| UNAVAILABLE | 14 | The service is currently unavailable. This is most likely a transient condition, which can be corrected by retrying with a backoff. Note that it is not always safe to retry non-idempotent operations. |",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-DATA_LOSS",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: DATA_LOSS",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| DATA_LOSS | 15 | Unrecoverable data loss or corruption. |",
+    "topic": "integrity",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-UNAUTHENTICATED",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: UNAUTHENTICATED",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| UNAUTHENTICATED | 16 | The request does not have valid authentication credentials for the operation. |",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-NOT_FOUND-2",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: NOT_FOUND",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "Note to server developers: if a request is denied for an entire class of users, such as gradual feature rollout or undocumented allowlist, `NOT_FOUND` may be used. If a request is denied for some users within a class of users, such as user-based access control, `PERMISSION_DENIED` must be used.",
+    "topic": "permissions",
+    "level": "MUST"
+  },
+  {
+    "id": "GRPC-STATUSCODES-PERMISSION_DENIED-2",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: PERMISSION_DENIED",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "`PERMISSION_DENIED` must not be used for rejections caused by exhausting some resource (use `RESOURCE_EXHAUSTED` instead for those errors). `PERMISSION_DENIED` must not be used if the caller can not be identified (use `UNAUTHENTICATED` instead for those errors). This error code does not imply the request is valid or the requested entity exists or satisfies other pre-conditions.",
+    "topic": "permissions",
+    "level": "MUST"
+  },
+  {
+    "id": "GRPC-STATUSCODES-FAILED_PRECONDITION-2",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: FAILED_PRECONDITION",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "Service implementors can use the following guidelines to decide between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`: (a) Use `UNAVAILABLE` if the client can retry just the failing call. (b) Use `ABORTED` if the client should retry at a higher level (e.g., when a client-specified test-and-set fails, indicating the client should restart a read-modify-write sequence). (c) Use `FAILED_PRECONDITION` if the client should not retry until the system state has been explicitly fixed. E.g., if an \"rmdir\" fails because the directory is non-empty, `FAILED_PRECONDITION` should be returned since the client should not retry unless the files are deleted from the directory. |",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "GRPC-STATUSCODES-OUT_OF_RANGE-2",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status code table: OUT_OF_RANGE",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "There is a fair bit of overlap between `FAILED_PRECONDITION` and `OUT_OF_RANGE`. We recommend using `OUT_OF_RANGE` (the more specific error) when it applies so that callers who are iterating through a space can easily look for an `OUT_OF_RANGE` error to detect when they are done. |",
+    "topic": "upload-offset",
+    "level": "SHOULD"
+  },
+  {
+    "id": "GRPC-STATUSCODES-status-1",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status object",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "All RPCs started at a client return a `status` object composed of an integer `code` and a string `message`. The server-side can choose the status it returns for a given RPC.",
+    "topic": "error-model",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-status-2",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status object",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "Applications should only use values defined above.",
+    "topic": "error-model",
+    "level": "SHOULD"
+  },
+  {
+    "id": "GRPC-STATUSCODES-status-3",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Status object",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "gRPC libraries that encounter values outside this range must either propagate them directly or convert them to UNKNOWN.",
+    "topic": "error-model",
+    "level": "MUST"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-cancel",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Client Application cancelled the request | CANCELLED | Both |",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-deadline",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Deadline expires before server returns status | DEADLINE_EXCEEDED | Both |",
+    "topic": "deadline",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-shutdown",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Server shutting down | UNAVAILABLE | Server|",
+    "topic": "upstream-failure",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-exception",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Server side application throws an exception (or does something other than returning a Status code to terminate an RPC) | UNKNOWN | Server|",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-noresponse",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| No response received before Deadline expires. This may occur either when the client is unable to send the request to the server or when the server fails to respond in time. | DEADLINE_EXCEEDED | Both|",
+    "topic": "deadline",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-connbreak",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Some data transmitted (e.g., request metadata written to TCP connection) before connection breaks | UNAVAILABLE | Client |",
+    "topic": "upstream-failure",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-flowcontrol",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Server temporarily out of resources (e.g., Flow-control resource limits reached) | RESOURCE_EXHAUSTED | Server|",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-clientmem",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Client does not have enough memory to hold the server response | RESOURCE_EXHAUSTED | Client |",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-auth",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Incorrect Auth metadata ( Credentials failed to get metadata, Incompatible credentials set on channel and call, Invalid host set in `:authority` metadata, etc.) | UNAUTHENTICATED | Both |",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-toolarge",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Sent or received message was larger than configured limit | RESOURCE_EXHAUSTED | Both |",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-keepalive",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "| Keepalive watchdog times out | UNAVAILABLE | Both |",
+    "topic": "upstream-failure",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-libgen-never",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Codes generated by the gRPC libraries",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "The following status codes are never generated by the library: - INVALID_ARGUMENT - NOT_FOUND - ALREADY_EXISTS - FAILED_PRECONDITION - ABORTED - OUT_OF_RANGE - DATA_LOSS",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-STATUSCODES-retry",
+    "doc": "gRPC doc/statuscodes.md",
+    "section": "Retry",
+    "file": "status-and-supervision/grpc/statuscodes.md",
+    "quote": "Therefore, there is no fixed list of status codes on which it is appropriate to retry in all applications. As a result, individual applications must make their own determination as to which status codes should cause an RPC to be retried.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "GRPC-HTTPMAP-scope-1",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "HTTP to gRPC Status Code Mapping",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "Since intermediaries are a common part of HTTP infrastructure some responses to gRPC requests may be received that do not include the grpc-status header. In some cases mapping error codes from an intermediary allows the gRPC client to behave more appropriately to the error situation without overloading the semantics of either error code.",
+    "topic": "upstream-failure",
+    "level": "informative"
+  },
+  {
+    "id": "GRPC-HTTPMAP-scope-2",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "HTTP to gRPC Status Code Mapping",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "This table is to be used _only_ for clients that received a response that did not include grpc-status. If grpc-status was provided, it _must_ be used. Servers _must not_ use this table to determine an HTTP status code to use; the mappings are neither symmetric nor 1-to-1.",
+    "topic": "http-mapping",
+    "level": "MUST"
+  },
+  {
+    "id": "GRPC-HTTPMAP-table-400",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "| 400 Bad Request | INTERNAL |",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-HTTPMAP-table-401",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "| 401 Unauthorized | UNAUTHENTICATED |",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-HTTPMAP-table-403",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "| 403 Forbidden | PERMISSION\\_DENIED |",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-HTTPMAP-table-404",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "| 404 Not Found | UNIMPLEMENTED |",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-HTTPMAP-table-429",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "| 429 Too Many Requests | UNAVAILABLE |",
+    "topic": "upstream-failure",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-HTTPMAP-table-502",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "| 502 Bad Gateway | UNAVAILABLE |",
+    "topic": "upstream-failure",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-HTTPMAP-table-503",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "| 503 Service Unavailable | UNAVAILABLE |",
+    "topic": "upstream-failure",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-HTTPMAP-table-504",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "| 504 Gateway Timeout | UNAVAILABLE |",
+    "topic": "upstream-failure",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-HTTPMAP-table-other",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "| _All other codes_ | UNKNOWN |",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "GRPC-HTTPMAP-200",
+    "doc": "gRPC doc/http-grpc-status-mapping.md",
+    "section": "Mapping table notes",
+    "file": "status-and-supervision/grpc/http-grpc-status-mapping.md",
+    "quote": "200 is UNKNOWN because there should be a grpc-status in case of truly OK response.",
+    "topic": "http-mapping",
+    "level": "informative"
+  },
+  {
+    "id": "RPC-CODE-Code-1",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "Sometimes multiple error codes may apply. Services should return // the most specific error code that applies. For example, prefer // `OUT_OF_RANGE` over `FAILED_PRECONDITION` if both codes apply. // Similarly prefer `NOT_FOUND` or `ALREADY_EXISTS` over `FAILED_PRECONDITION`.",
+    "topic": "status-code",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-CODE-OK-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: OK",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 200 OK OK = 0;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-CANCELLED-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: CANCELLED",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 499 Client Closed Request CANCELLED = 1;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-UNKNOWN-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: UNKNOWN",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 500 Internal Server Error UNKNOWN = 2;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-INVALID_ARGUMENT-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: INVALID_ARGUMENT",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 400 Bad Request INVALID_ARGUMENT = 3;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-DEADLINE_EXCEEDED-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: DEADLINE_EXCEEDED",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 504 Gateway Timeout DEADLINE_EXCEEDED = 4;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-NOT_FOUND-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: NOT_FOUND",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 404 Not Found NOT_FOUND = 5;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-ALREADY_EXISTS-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: ALREADY_EXISTS",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 409 Conflict ALREADY_EXISTS = 6;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-PERMISSION_DENIED-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: PERMISSION_DENIED",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 403 Forbidden PERMISSION_DENIED = 7;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-UNAUTHENTICATED-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: UNAUTHENTICATED",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 401 Unauthorized UNAUTHENTICATED = 16;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-RESOURCE_EXHAUSTED-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: RESOURCE_EXHAUSTED",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 429 Too Many Requests RESOURCE_EXHAUSTED = 8;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-FAILED_PRECONDITION-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: FAILED_PRECONDITION",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 400 Bad Request FAILED_PRECONDITION = 9;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-ABORTED-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: ABORTED",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 409 Conflict ABORTED = 10;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-OUT_OF_RANGE-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: OUT_OF_RANGE",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 400 Bad Request OUT_OF_RANGE = 11;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-UNIMPLEMENTED-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: UNIMPLEMENTED",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 501 Not Implemented UNIMPLEMENTED = 12;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-INTERNAL-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: INTERNAL",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 500 Internal Server Error INTERNAL = 13;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-UNAVAILABLE-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: UNAVAILABLE",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 503 Service Unavailable UNAVAILABLE = 14;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-DATA_LOSS-http",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: DATA_LOSS",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "// // HTTP Mapping: 500 Internal Server Error DATA_LOSS = 15;",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-CODE-DEADLINE_EXCEEDED-1",
+    "doc": "googleapis google/rpc/code.proto",
+    "section": "enum Code: DEADLINE_EXCEEDED",
+    "file": "status-and-supervision/googleapis/code.proto",
+    "quote": "The deadline expired before the operation could complete. For operations // that change the state of the system, this error may be returned // even if the operation has completed successfully. For example, a // successful response from a server could have been delayed long // enough for the deadline to expire.",
+    "topic": "deadline",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-STATUS-Status-1",
+    "doc": "googleapis google/rpc/status.proto",
+    "section": "message Status",
+    "file": "status-and-supervision/googleapis/status.proto",
+    "quote": "Each `Status` message contains // three pieces of data: error code, error message, and error details.",
+    "topic": "error-model",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-STATUS-code",
+    "doc": "googleapis google/rpc/status.proto",
+    "section": "message Status: code",
+    "file": "status-and-supervision/googleapis/status.proto",
+    "quote": "The status code, which should be an enum value of // [google.rpc.Code][google.rpc.Code].",
+    "topic": "error-model",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-STATUS-message",
+    "doc": "googleapis google/rpc/status.proto",
+    "section": "message Status: message",
+    "file": "status-and-supervision/googleapis/status.proto",
+    "quote": "A developer-facing error message, which should be in English. Any // user-facing error message should be localized and sent in the // [google.rpc.Status.details][google.rpc.Status.details] field, or localized // by the client.",
+    "topic": "error-model",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-STATUS-details",
+    "doc": "googleapis google/rpc/status.proto",
+    "section": "message Status: details",
+    "file": "status-and-supervision/googleapis/status.proto",
+    "quote": "A list of messages that carry the error details. There is a common set of // message types for APIs to use.",
+    "topic": "error-model",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ErrorInfo-1",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ErrorInfo",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Describes the cause of the error with structured details.",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ErrorInfo-reason",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ErrorInfo: reason",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "The reason of the error. This is a constant value that identifies the // proximate cause of the error. Error reasons are unique within a particular // domain of errors. This should be at most 63 characters and match a // regular expression of `[A-Z][A-Z0-9_]+[A-Z0-9]`, which represents // UPPER_SNAKE_CASE.",
+    "topic": "error-details",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ErrorInfo-domain",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ErrorInfo: domain",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "The logical grouping to which the \"reason\" belongs. The error domain // is typically the registered service name of the tool or product that // generates the error. Example: \"pubsub.googleapis.com\". If the error is // generated by some common infrastructure, the error domain must be a // globally unique value that identifies the infrastructure.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ErrorInfo-metadata-1",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ErrorInfo: metadata",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Keys must match a regular expression of `[a-z][a-zA-Z0-9-_]+` but should // ideally be lowerCamelCase. Also, they must be limited to 64 characters in // length.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ErrorInfo-metadata-2",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ErrorInfo: metadata",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "When identifying the current value of an exceeded limit, the units // should be contained in the key, not the value.",
+    "topic": "error-details",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-ERRDETAILS-RetryInfo-1",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message RetryInfo",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Describes when the clients can retry a failed request. Clients could ignore // the recommendation here or retry when this information is missing from error // responses.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-RetryInfo-2",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message RetryInfo",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "It's always recommended that clients should use exponential backoff when // retrying.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-ERRDETAILS-RetryInfo-3",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message RetryInfo",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Clients should wait until `retry_delay` amount of time has passed since // receiving the error response before retrying. If retrying requests also // fail, clients should use an exponential backoff scheme to gradually increase // the delay between retries based on `retry_delay`, until either a maximum // number of retries have been reached or a maximum retry delay cap has been // reached.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-ERRDETAILS-RetryInfo-retry_delay",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message RetryInfo: retry_delay",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Clients should wait at least this long between retrying the same request.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-ERRDETAILS-DebugInfo",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message DebugInfo",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Describes additional debugging info.",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-QuotaFailure-1",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message QuotaFailure",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Describes how a quota check failed.",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-QuotaFailure-2",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message QuotaFailure",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Also see RetryInfo and Help types for other details about handling a // quota failure.",
+    "topic": "resource-exhaustion",
+    "level": "informative"
+  },
+  {
+    "id": "RPC-ERRDETAILS-QuotaFailure-subject",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message QuotaFailure.Violation: subject",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "The subject on which the quota check failed.",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-QuotaFailure-quota_value",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message QuotaFailure.Violation: quota_value",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "The enforced quota value at the time of the `QuotaFailure`.",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-PreconditionFailure-1",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message PreconditionFailure",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Describes what preconditions have failed.",
+    "topic": "precondition",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-PreconditionFailure-type",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message PreconditionFailure.Violation: type",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "The type of PreconditionFailure. We recommend using a service-specific // enum type to define the supported precondition violation subjects. For // example, \"TOS\" for \"Terms of Service violation\".",
+    "topic": "precondition",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-ERRDETAILS-PreconditionFailure-subject",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message PreconditionFailure.Violation: subject",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "The subject, relative to the type, that failed.",
+    "topic": "precondition",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-PreconditionFailure-description",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message PreconditionFailure.Violation: description",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "A description of how the precondition failed. Developers can use this // description to understand how to fix the failure.",
+    "topic": "precondition",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-BadRequest-1",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message BadRequest",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Describes violations in a client request. This error type focuses on the // syntactic aspects of the request.",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-BadRequest-reason",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message BadRequest.FieldViolation: reason",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "The reason of the field-level error. This is a constant value that // identifies the proximate cause of the field-level error. It should // uniquely identify the type of the FieldViolation within the scope of the // google.rpc.ErrorInfo.domain.",
+    "topic": "error-details",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-ERRDETAILS-RequestInfo-request_id",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message RequestInfo: request_id",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "An opaque string that should only be interpreted by the service generating // it.",
+    "topic": "error-details",
+    "level": "SHOULD"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ResourceInfo-1",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ResourceInfo",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Describes the resource that is being accessed.",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ResourceInfo-resource_type",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ResourceInfo: resource_type",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "A name for the type of resource being accessed, e.g. \"sql table\", // \"cloud storage bucket\", \"file\", \"Google calendar\"; or the type URL // of the resource: e.g. \"type.googleapis.com/google.pubsub.v1.Topic\".",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ResourceInfo-resource_name",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ResourceInfo: resource_name",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "The name of the resource being accessed.",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ResourceInfo-owner",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ResourceInfo: owner",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "The owner of the resource (optional).",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-ResourceInfo-description",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message ResourceInfo: description",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Describes what error is encountered when accessing this resource.",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-Help",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message Help",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Provides links to documentation or for performing an out of band action.",
+    "topic": "recourse",
+    "level": "definition"
+  },
+  {
+    "id": "RPC-ERRDETAILS-LocalizedMessage",
+    "doc": "googleapis google/rpc/error_details.proto",
+    "section": "message LocalizedMessage",
+    "file": "status-and-supervision/googleapis/error_details.proto",
+    "quote": "Provides a localized error message that is safe to return to the user // which can be attached to an RPC error.",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-Operations-1",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "service Operations",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "When an API method normally takes long time to complete, it can be designed // to return [Operation][google.longrunning.Operation] to the client, and the // client can use this interface to receive the real response asynchronously by // polling the operation resource",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-GetOperation",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "rpc GetOperation",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "Gets the latest state of a long-running operation. Clients can use this // method to poll the operation result at intervals as recommended by the API // service.",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-DeleteOperation",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "rpc DeleteOperation",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "Deletes a long-running operation. This method indicates that the client is // no longer interested in the operation result. It does not cancel the // operation.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-unimplemented",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "rpc DeleteOperation / CancelOperation",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "If the server doesn't support this method, it returns // `google.rpc.Code.UNIMPLEMENTED`.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-CancelOperation-1",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "rpc CancelOperation",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "Starts asynchronous cancellation on a long-running operation. The server // makes a best effort to cancel the operation, but success is not // guaranteed.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-CancelOperation-2",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "rpc CancelOperation",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "Clients can use // [Operations.GetOperation][google.longrunning.Operations.GetOperation] or // other methods to check whether the cancellation succeeded or whether the // operation completed despite cancellation.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-CancelOperation-3",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "rpc CancelOperation",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "On successful cancellation, // the operation is not deleted; instead, it becomes an operation with // an [Operation.error][google.longrunning.Operation.error] value with a // [google.rpc.Status.code][google.rpc.Status.code] of `1`, corresponding to // `Code.CANCELLED`.",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-WaitOperation-1",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "rpc WaitOperation",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "Waits until the specified long-running operation is done or reaches at most // a specified timeout, returning the latest state. If the operation is // already done, the latest state is immediately returned.",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-WaitOperation-2",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "rpc WaitOperation",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "Note that this method is on a best-effort basis. It may return the latest // state before the specified timeout (including immediately), meaning even an // immediate response is no guarantee that the operation is done.",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-Operation-name",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "message Operation: name",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "The server-assigned name, which is only unique within the same service that // originally returns it.",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-Operation-metadata",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "message Operation: metadata",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "Service-specific metadata associated with the operation. It typically // contains progress information and common metadata such as create time.",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-Operation-done",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "message Operation: done",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "If the value is `false`, it means the operation is still in progress. // If `true`, the operation is completed, and either `error` or `response` is // available.",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-Operation-result",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "message Operation: result",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "The operation result, which can be either an `error` or a valid `response`. // If `done` == `false`, neither `error` nor `response` is set. // If `done` == `true`, exactly one of `error` or `response` can be set. // Some services might not provide the result.",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-Operation-error",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "message Operation: error",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "The error result of the operation in case of failure or cancellation.",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "LRO-Operation-response",
+    "doc": "googleapis google/longrunning/operations.proto",
+    "section": "message Operation: response",
+    "file": "status-and-supervision/googleapis/operations.proto",
+    "quote": "The normal, successful response of the operation. If the original // method returns no data on success, such as `Delete`, the response is // `google.protobuf.Empty`. If the original method is standard // `Get`/`Create`/`Update`, the response should be the resource.",
+    "topic": "finished-object",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP193-Guidance-1",
+    "doc": "AIP-193 Errors",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Services **must** return a [`google.rpc.Status`][Status] message when an API error occurs, and **must** use the canonical error codes defined in [`google.rpc.Code`][Code].",
+    "topic": "error-model",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-Guidance-2",
+    "doc": "AIP-193 Errors",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Error messages **should** help a reasonably technical user *understand* and *resolve* the issue, and **should not** assume that the user is an expert in your particular API. Additionally, error messages **must not** assume that the user will know anything about its underlying implementation.",
+    "topic": "recourse",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-Guidance-3",
+    "doc": "AIP-193 Errors",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Error messages **should** be brief but actionable. Any extra information **should** be provided in the `details` field.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP193-Status.message-1",
+    "doc": "AIP-193 Errors",
+    "section": "Status.message",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Any dynamic aspects of the message **must** be included as metadata within the `ErrorInfo` that appears in [`details`](#status-details).",
+    "topic": "error-model",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-Status.message-2",
+    "doc": "AIP-193 Errors",
+    "section": "Status.message",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Messages **should** use simple descriptive language that is easy to understand (without technical jargon) to clearly state the problem that results in an error, and offer an actionable resolution to it.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP193-Status.code",
+    "doc": "AIP-193 Errors",
+    "section": "Status.code",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "The `code` field is the status code, which **must** be the numeric value of one of the elements of the [`google.rpc.Code`][Code] enum.",
+    "topic": "error-model",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-Status.details-1",
+    "doc": "AIP-193 Errors",
+    "section": "Status.details",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Services **should** use these standard detail payloads when feasible.",
+    "topic": "error-details",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP193-Status.details-2",
+    "doc": "AIP-193 Errors",
+    "section": "Status.details",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Each type of detail payload **must** be included at most once.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-Status.details-3",
+    "doc": "AIP-193 Errors",
+    "section": "Status.details",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "All error responses **must** include an `ErrorInfo` within `details`. This provides machine-readable identifiers so that users can write code against specific aspects of the error.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-ErrorInfo-1",
+    "doc": "AIP-193 Errors",
+    "section": "ErrorInfo",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Contextual information **should** be included in `metadata` in `ErrorInfo` and **must** be included if it appears within an error message.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-ErrorInfo-2",
+    "doc": "AIP-193 Errors",
+    "section": "ErrorInfo",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "The reason **must** be at most 63 characters and match a regular expression of `[A-Z][A-Z0-9_]+[A-Z0-9]`.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-ErrorInfo-3",
+    "doc": "AIP-193 Errors",
+    "section": "ErrorInfo",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "The domain **must** be a globally unique value, and is typically the name of the service that generated the error, e.g. `pubsub.googleapis.com`.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-ErrorInfo-4",
+    "doc": "AIP-193 Errors",
+    "section": "ErrorInfo",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "The (reason, domain) pair form a machine-readable way of identifying a particular error. Services **must** use the same (reason, domain) pair for the same error, and **must not** use the same (reason, domain) pair for logically different errors.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-ErrorInfo-5",
+    "doc": "AIP-193 Errors",
+    "section": "ErrorInfo",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "The decision about whether two errors are \"the same\" or not is not always clear, but **should** generally be considered in terms of the expected action a client might take to resolve them.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP193-ErrorInfo-6",
+    "doc": "AIP-193 Errors",
+    "section": "ErrorInfo",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Each key within `metadata` **must** be at most 64 characters long, and conform to the regular expression `[a-z][a-zA-Z0-9-_]+`.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-ErrorInfo-7",
+    "doc": "AIP-193 Errors",
+    "section": "ErrorInfo",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Any request-specific information which contributes to the `Status.message` or `LocalizedMessage.message` messages **must** be represented within `metadata`.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-ErrorInfo-8",
+    "doc": "AIP-193 Errors",
+    "section": "ErrorInfo",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "- New keys **may** be included - All keys that have been included **must** continue to be included (but may have empty values)",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-LocalizedMessage-1",
+    "doc": "AIP-193 Errors",
+    "section": "LocalizedMessage",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Regardless of how the locale for the message was determined, both the `locale` and `message` fields **must** be populated.",
+    "topic": "error-details",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-LocalizedMessage-2",
+    "doc": "AIP-193 Errors",
+    "section": "LocalizedMessage",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "The `LocalizedMessage` payload **should** contain the complete resolution to the error. If more information is needed than can reasonably fit in this payload, then additional resolution information **must** be provided in a `Help` payload.",
+    "topic": "recourse",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-Help-1",
+    "doc": "AIP-193 Errors",
+    "section": "Help",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "When other textual error messages (in `Status.message` or `LocalizedMessage.message`) don't provide the user sufficient context or actionable next steps, or if there are multiple points of failure that need to be considered in troubleshooting, a link to supplemental troubleshooting documentation **must** be provided in the `Help` payload.",
+    "topic": "recourse",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-Help-2",
+    "doc": "AIP-193 Errors",
+    "section": "Help",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "The `url` field is the URL to link to. This **must** be an absolute URL, including scheme.",
+    "topic": "recourse",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-Changing-1",
+    "doc": "AIP-193 Errors",
+    "section": "Changing error messages",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Otherwise, the content of `Status.message` **must** be stable, providing the same text with the same request-specific information.",
+    "topic": "error-model",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-Partial-1",
+    "doc": "AIP-193 Errors",
+    "section": "Partial errors",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "APIs **should not** support partial errors.",
+    "topic": "operation-state",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP193-Partial-2",
+    "doc": "AIP-193 Errors",
+    "section": "Partial errors",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "Methods that require partial errors **should** use [long-running operations][], and the method **should** put partial failure information in the metadata message. The errors themselves **must** still be represented with a [`google.rpc.Status`][Status] object.",
+    "topic": "operation-state",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-PermissionDenied-1",
+    "doc": "AIP-193 Errors",
+    "section": "Permission Denied",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "If the user does not have permission to access the resource or parent, regardless of whether or not it exists, the service **must** error with `PERMISSION_DENIED` (HTTP 403). Permission **must** be checked prior to checking if the resource or parent exists.",
+    "topic": "permissions",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-PermissionDenied-2",
+    "doc": "AIP-193 Errors",
+    "section": "Permission Denied",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "If the user does have proper permission, but the requested resource or parent does not exist, the service **must** error with `NOT_FOUND` (HTTP 404).",
+    "topic": "permissions",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP193-HTTP-1",
+    "doc": "AIP-193 Errors",
+    "section": "HTTP/1.1+JSON representation",
+    "file": "status-and-supervision/aip/0193.md",
+    "quote": "The most important difference is that the `code` field in the JSON is an HTTP status code, *not* the direct value of `google.rpc.Status.code`.",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "AIP194-Guidance-1",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "Clients **should** automatically retry requests for which repeated runs would not cause unintended state changes, which are non-transactional, and which are [unary](https://grpc.io/docs/guides/concepts/).",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-Guidance-2",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "Clients **should not** automatically retry transactional requests; instead these requests **should** have application-level retry logic that retries the entire transaction block from the start.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-Guidance-3",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "Clients **should not** automatically retry requests in which repeated runs would cause unintended state changes.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-Retryable-UNAVAILABLE",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "For methods listed as retryable above, clients **should** retry the following error codes: - `UNAVAILABLE`: This code generally results from network hiccups, and is generally transient. It is retryable under the expectation that the connection will become available (soon).",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-NonRetryable-0",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "The following codes **should not** be automatically retried for any request:",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-NonRetryable-OK",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `OK`: The request succeeded.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-NonRetryable-CANCELLED",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `CANCELLED`: An application can cancel a request, which **must** be honored.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP194-NonRetryable-DEADLINE_EXCEEDED",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `DEADLINE_EXCEEDED`: An application can set a deadline, which **must** be honored.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP194-NonRetryable-INVALID_ARGUMENT",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `INVALID_ARGUMENT`: Retrying a request with an invalid argument will never succeed.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-NonRetryable-DATA_LOSS",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `DATA_LOSS`: This is an unrecoverable error and **must** immediately be surfaced to the application.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-0",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "The following codes generally **should not** be automatically retried for any request:",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-RESOURCE_EXHAUSTED",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `RESOURCE_EXHAUSTED`: This code may be a signal that quota is exhausted. Retries therefore may not be expected to work for several hours; meanwhile the retries may have billing implications. If `RESOURCE_EXHAUSTED` is used for other reasons than quota and the expected time for the resource to become available is much shorter, it may be retryable.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-INTERNAL",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `INTERNAL`: This code generally means that some internal part of the system has failed, and usually means a bug should be filed against the system. These **should** immediately be surfaced to the application.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-UNKNOWN",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `UNKNOWN`: Unlike `INTERNAL`, this code is reserved for truly unknown-to-the-system errors, and therefore may not be safe to retry. These **should** immediately be surfaced to the application.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-ABORTED",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `ABORTED`: This code typically means that the request failed due to a sequencer check failure or transaction abort. These **should not** be retried for an individual request; they **should** be retried at a level higher (the entire transaction, for example).",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-may",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "Some codes **may** be automatically retried if a system is designed without synchronization or signaling between various components. For example, client might retry `NOT_FOUND` on a read operation, which is designed to hang forever until the resource is created. However, these types of systems are generally discouraged.",
+    "topic": "retry",
+    "level": "MAY"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-NOT_FOUND",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `NOT_FOUND`: A client **should not** retry until a resource is created.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-ALREADY_EXISTS",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `ALREADY_EXISTS`: A client **should not** retry until a resource is deleted.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-PERMISSION_DENIED",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `PERMISSION_DENIED`: A client **should not** retry until it has permission.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-UNAUTHORIZED",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `UNAUTHORIZED`: A client **should not** retry until it is authorized.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-UNAUTHENTICATED",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `UNAUTHENTICATED`: A client **should not** retry until it is authenticated.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-FAILED_PRECONDITION",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `FAILED_PRECONDITION`: A client **should not** retry until system state changes.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-OUT_OF_RANGE",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `OUT_OF_RANGE`: A client **should not** retry until the range is extended.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP194-GenerallyNonRetryable-UNIMPLEMENTED",
+    "doc": "AIP-194 Automatic retry configuration",
+    "section": "Generally non-retryable codes",
+    "file": "status-and-supervision/aip/0194.md",
+    "quote": "- `UNIMPLEMENTED`: A client **should not** retry until the RPC is implemented.",
+    "topic": "recourse",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP151-Guidance-1",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "Individual API methods that might take a significant amount of time to complete **should** return a [`google.longrunning.Operation`][lro] object instead of the ultimate response message.",
+    "topic": "operation-state",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP151-Guidance-2",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "The metadata type is used to provide information such as progress, partial failures, and similar information on each `GetOperation` call.",
+    "topic": "operation-state",
+    "level": "definition"
+  },
+  {
+    "id": "AIP151-Guidance-3",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "APIs with messages that return `Operation` **must** implement the [`Operations`][lro] service. Individual APIs **must not** define their own interfaces for long-running operations to avoid non-uniformity.",
+    "topic": "operation-state",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP151-Guidance-4",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Guidance (validate-only)",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "Successful validation **must** eventually be represented by an operation with `done=true` and a valid (but potentially empty) wrapped response message in the `response` field. Unsuccessful validation **must** eventually be represented by an operation with `done=true` and the error details provided in the `error` field.",
+    "topic": "operation-state",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP151-Guidance-5",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "**Note:** User expectations can vary on what is considered \"a significant amount of time\" depending on what work is being done. A good rule of thumb is 10 seconds.",
+    "topic": "operation-state",
+    "level": "informative"
+  },
+  {
+    "id": "AIP151-StandardMethods-1",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Standard methods",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "When creating or deleting a resource with a long-running operation, the resource **should** be included in [`List`][aip-132] and [`Get`][aip-131] calls; however, the resource **should** indicate that it is not usable, generally with a [state enum][aip-216].",
+    "topic": "resource-state",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP151-Parallel-1",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Parallel operations",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "Resources that accept multiple parallel operations **may** place them in a queue rather than work on the operations simultaneously.",
+    "topic": "concurrency-conflict",
+    "level": "MAY"
+  },
+  {
+    "id": "AIP151-Parallel-2",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Parallel operations",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "Resources that do not permit multiple operations in parallel (denying any new operation until the one that is in progress finishes) **must** return `ABORTED` if a user attempts a parallel operation, and include an error message explaining the situation.",
+    "topic": "concurrency-conflict",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP151-Parallel-3",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Parallel operations",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "Resources with [declarative-friendly APIs][aip-128] **may** allow subsequent updates to preempt existing operations. In this case, the latest update begins processing and previous operations are marked as `ABORTED` with an error message explaining the situation.",
+    "topic": "concurrency-conflict",
+    "level": "MAY"
+  },
+  {
+    "id": "AIP151-Expiration-1",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Expiration",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "APIs **may** allow their operation resources to expire after sufficient time has elapsed after the operation completed.",
+    "topic": "expiry",
+    "level": "MAY"
+  },
+  {
+    "id": "AIP151-Expiration-2",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Expiration",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "**Note:** A good rule of thumb for operation expiry is 30 days.",
+    "topic": "expiry",
+    "level": "informative"
+  },
+  {
+    "id": "AIP151-Errors-1",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Errors",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "Errors that prevent a long-running operation from _starting_ **must** return an error response ([AIP-193][]), similar to any other method.",
+    "topic": "operation-state",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP151-Errors-2",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Errors",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "Operations that fail during their execution phase **must** return an error response ([AIP-193][]), placed in the `Operation.error` [google.rpc.Status][] field.",
+    "topic": "operation-state",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP151-Errors-3",
+    "doc": "AIP-151 Long-running operations",
+    "section": "Errors",
+    "file": "status-and-supervision/aip/0151.md",
+    "quote": "Non-terminal errors that occur over the course of an operation **may** be placed in the metadata message and the field(s) **must** be [AIP-193][] compliant [google.rpc.Status][].",
+    "topic": "operation-state",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP216-Intro",
+    "doc": "AIP-216 States",
+    "section": "States",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "Many API resources carry a concept of \"state\": ordinarily, the resource's place in its life cycle.",
+    "topic": "resource-state",
+    "level": "informative"
+  },
+  {
+    "id": "AIP216-Guidance-1",
+    "doc": "AIP-216 States",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "Resources needing to communicate their state **should** use an enum, which **should** be called `State` (or, if more specificity is required, end in the word `State`).",
+    "topic": "resource-state",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP216-Guidance-2",
+    "doc": "AIP-216 States",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "**Important:** We use the term `State`, and _not_ `Status` (which is reserved for the HTTP and gRPC statuses).",
+    "topic": "resource-state",
+    "level": "definition"
+  },
+  {
+    "id": "AIP216-EnumValues-1",
+    "doc": "AIP-216 States",
+    "section": "Enum values",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "- Resources that are available for use are `ACTIVE` (preferred over terms such as \"ready\" or \"available\").",
+    "topic": "resource-state",
+    "level": "definition"
+  },
+  {
+    "id": "AIP216-EnumValues-2",
+    "doc": "AIP-216 States",
+    "section": "Enum values",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "- Resources that have completed a (usually terminal) requested action use past participles (usually ending in `-ED`), such as `SUCCEEDED` (not \"successful\"), `FAILED` (not \"failure\"), `DELETED`, `SUSPENDED`, and so on.",
+    "topic": "resource-state",
+    "level": "definition"
+  },
+  {
+    "id": "AIP216-EnumValues-3",
+    "doc": "AIP-216 States",
+    "section": "Enum values",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "- Resources that are currently undergoing a state change use present participles (usually ending in `-ING`), such as `RUNNING`, `CREATING`, `DELETING`, and so on. In this case, it is expected that the state is temporary and will resolve to another state on its own, with no further user action.",
+    "topic": "resource-state",
+    "level": "definition"
+  },
+  {
+    "id": "AIP216-EnumValues-4",
+    "doc": "AIP-216 States",
+    "section": "Enum values",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "Exposing a large number of states simply because they exist in your internal system is unnecessary and adds confusion for customers. Each state must come with a use case for why it is necessary.",
+    "topic": "resource-state",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP216-OutputOnly-1",
+    "doc": "AIP-216 States",
+    "section": "Output only",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "The field referencing the `State` enum in a resource **should** behave and be documented as \"Output only\", in accordance with [AIP-203](./0203.md).",
+    "topic": "resource-state",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP216-OutputOnly-2",
+    "doc": "AIP-216 States",
+    "section": "Output only",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "APIs **should not** allow a `State` enum to be directly updated through an \"update\" method (or directly set through the \"create\" method), and **should** instead use custom state transition methods.",
+    "topic": "resource-state",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP216-OutputOnly-3",
+    "doc": "AIP-216 States",
+    "section": "Output only",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "This is because update methods are generally not expected to have side effects, and also because updating state directly implies that it is possible to set the state to any available value, whereas states generally reflect a resource's progression through a lifecycle.",
+    "topic": "resource-state",
+    "level": "informative"
+  },
+  {
+    "id": "AIP216-Transition-1",
+    "doc": "AIP-216 States",
+    "section": "State transition methods",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "State transition methods are a special type of custom method that are responsible for transitioning a state field from one enum value to another.",
+    "topic": "resource-state",
+    "level": "definition"
+  },
+  {
+    "id": "AIP216-Transition-2",
+    "doc": "AIP-216 States",
+    "section": "State transition methods",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "- If the state transition is not allowed, the service **must** error with `FAILED_PRECONDITION` (HTTP 400).",
+    "topic": "precondition",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP216-Default",
+    "doc": "AIP-216 States",
+    "section": "Default value",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "Resources **should not** provide an unspecified state to users, and this value **should not** actually be used.",
+    "topic": "resource-state",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP216-Breaking-1",
+    "doc": "AIP-216 States",
+    "section": "Breaking changes",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "API documentation **should** actively encourage users to code against state enums with the expectation that they may receive new values in the future.",
+    "topic": "resource-state",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP216-Breaking-2",
+    "doc": "AIP-216 States",
+    "section": "Breaking changes",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "APIs **may** add new states to an existing State enum when appropriate, and adding a new state is _not_ considered a breaking change.",
+    "topic": "resource-state",
+    "level": "MAY"
+  },
+  {
+    "id": "AIP216-Avoid",
+    "doc": "AIP-216 States",
+    "section": "When to avoid states",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "Sometimes, a `State` enum may not be what is best for your API, particularly in situations where a state has a very small number of potential values, or when states are not mutually exclusive.",
+    "topic": "resource-state",
+    "level": "informative"
+  },
+  {
+    "id": "AIP216-Common-1",
+    "doc": "AIP-216 States",
+    "section": "Common states",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "APIs **should** consider prior art when determining state names, and **should** value local consistency above global consistency in the case of conflicting precedent.",
+    "topic": "resource-state",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP216-Resting",
+    "doc": "AIP-216 States",
+    "section": "Resting states",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "\"Resting states\" are lifecycle states that, absent user action, are expected to remain indefinitely. However, the user can initiate an action to move a resource in a resting state into certain other states (resting or active). - `ACCEPTED` - `ACTIVE` - `CANCELLED` - `DELETED` - `FAILED` - `SUCCEEDED` - `SUSPENDED` - `VERIFIED`",
+    "topic": "resource-state",
+    "level": "definition"
+  },
+  {
+    "id": "AIP216-Active-1",
+    "doc": "AIP-216 States",
+    "section": "Active states",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "\"Active states\" are lifecycle states that typically resolve on their own into a single expected resting state.",
+    "topic": "resource-state",
+    "level": "definition"
+  },
+  {
+    "id": "AIP216-Active-2",
+    "doc": "AIP-216 States",
+    "section": "Active states",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "Active states are valuable only if the resource will be in that state for a sufficient period of time. If state changes are immediate, active states are not necessary.",
+    "topic": "resource-state",
+    "level": "informative"
+  },
+  {
+    "id": "AIP216-Active-3",
+    "doc": "AIP-216 States",
+    "section": "Active states",
+    "file": "status-and-supervision/aip/0216.md",
+    "quote": "- `CREATING` (usually becomes `ACTIVE`) - `DELETING` (usually becomes `DELETED`) - `PENDING` (usually becomes `RUNNING`) - `REPAIRING` (usually becomes `ACTIVE`) - `RUNNING` (usually becomes `SUCCEEDED`) - `SUSPENDING` (usually becomes `SUSPENDED`)",
+    "topic": "resource-state",
+    "level": "definition"
+  },
+  {
+    "id": "AIP154-Guidance-1",
+    "doc": "AIP-154 Resource freshness validation",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0154.md",
+    "quote": "- The etag field **must** be provided by the server on output, and values **should** conform to [RFC 7232][].",
+    "topic": "precondition",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP154-Guidance-2",
+    "doc": "AIP-154 Resource freshness validation",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0154.md",
+    "quote": "- If a user sends back an etag which matches the current etag value, the service **must** permit the request (unless there is some other reason for failure).",
+    "topic": "precondition",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP154-Guidance-3",
+    "doc": "AIP-154 Resource freshness validation",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0154.md",
+    "quote": "- If a user sends back an etag which does not match the current etag value, the service **must** send an `ABORTED` error response (unless another error takes precedence, such as `PERMISSION_DENIED` if the user is not authorized).",
+    "topic": "concurrency-conflict",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP154-Guidance-4",
+    "doc": "AIP-154 Resource freshness validation",
+    "section": "Guidance",
+    "file": "status-and-supervision/aip/0154.md",
+    "quote": "- If the user does not send an etag value at all, the service **should** permit the request. However, services with strong consistency or parallelism requirements **may** require users to send etags all the time and reject the request with an `INVALID_ARGUMENT` error in this case.",
+    "topic": "precondition",
+    "level": "SHOULD"
+  },
+  {
+    "id": "AIP154-StrongWeak-1",
+    "doc": "AIP-154 Resource freshness validation",
+    "section": "Strong and weak etags",
+    "file": "status-and-supervision/aip/0154.md",
+    "quote": "- A strongly validated etag means that two resources bearing the same etag are byte-for-byte identical. - A weakly validated etag means that two resources bearing the same etag are equivalent, but may differ in ways that the service does not consider to be important.",
+    "topic": "integrity",
+    "level": "definition"
+  },
+  {
+    "id": "AIP154-StrongWeak-2",
+    "doc": "AIP-154 Resource freshness validation",
+    "section": "Strong and weak etags",
+    "file": "status-and-supervision/aip/0154.md",
+    "quote": "Additionally, weak etags **must** have a `W/` prefix as mandated by [RFC 7232][].",
+    "topic": "integrity",
+    "level": "MUST"
+  },
+  {
+    "id": "AIP154-Changelog-1",
+    "doc": "AIP-154 Resource freshness validation",
+    "section": "Changelog",
+    "file": "status-and-supervision/aip/0154.md",
+    "quote": "**2021-03-05**: Changed the etag error from `FAILED_PRECONDITION` (which becomes HTTP 400) to `ABORTED` (409).",
+    "topic": "http-mapping",
+    "level": "informative"
+  },
+  {
+    "id": "ABSL-STATUS-sync",
+    "doc": "Abseil absl/status/status.h",
+    "section": "absl::StatusCode preamble",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "The following canonical error codes should always be in sync with // https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto.",
+    "topic": "status-code",
+    "level": "SHOULD"
+  },
+  {
+    "id": "ABSL-STATUS-StatusCode-1",
+    "doc": "Abseil absl/status/status.h",
+    "section": "absl::StatusCode",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "In most cases, an `absl::Status` indicates a // recoverable error, and the purpose of signalling an error is to indicate what // action to take in response to that error.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUS-StatusCode-2",
+    "doc": "Abseil absl/status/status.h",
+    "section": "absl::StatusCode",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "In general, try to return the most specific error that applies if more than // one error may pertain. For example, prefer `kOutOfRange` over // `kFailedPrecondition` if both codes apply. Similarly prefer `kNotFound` or // `kAlreadyExists` over `kFailedPrecondition`.",
+    "topic": "status-code",
+    "level": "SHOULD"
+  },
+  {
+    "id": "ABSL-STATUS-kInvalidArgument",
+    "doc": "Abseil absl/status/status.h",
+    "section": "StatusCode::kInvalidArgument",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "Note that use // of such errors should be narrowly limited to indicate the invalid nature of // the arguments themselves. Errors with validly formed arguments that may // cause errors with the state of the receiving system should be denoted with // `kFailedPrecondition` instead.",
+    "topic": "precondition",
+    "level": "SHOULD"
+  },
+  {
+    "id": "ABSL-STATUS-kPermissionDenied",
+    "doc": "Abseil absl/status/status.h",
+    "section": "StatusCode::kPermissionDenied",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "Note that this // error is different than an error due to an *un*authenticated user.",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUS-kUnimplemented",
+    "doc": "Abseil absl/status/status.h",
+    "section": "StatusCode::kUnimplemented",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "kUnimplemented (gRPC code \"UNIMPLEMENTED\") indicates the operation is not // implemented or supported in this service. In this case, the operation // should not be re-attempted.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "ABSL-STATUS-kUnavailable",
+    "doc": "Abseil absl/status/status.h",
+    "section": "StatusCode::kUnavailable",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "kUnavailable (gRPC code \"UNAVAILABLE\") indicates the service is currently // unavailable and that this is most likely a transient condition. An error // such as this can be corrected by retrying with a backoff scheme. Note that // it is not always safe to retry non-idempotent operations.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUS-kDataLoss",
+    "doc": "Abseil absl/status/status.h",
+    "section": "StatusCode::kDataLoss",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "kDataLoss (gRPC code \"DATA_LOSS\") indicates that unrecoverable data loss or // corruption has occurred. As this error is serious, proper alerting should // be attached to errors such as this.",
+    "topic": "integrity",
+    "level": "SHOULD"
+  },
+  {
+    "id": "ABSL-STATUS-kUnauthenticated",
+    "doc": "Abseil absl/status/status.h",
+    "section": "StatusCode::kUnauthenticated",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "kUnauthenticated (gRPC code \"UNAUTHENTICATED\") indicates that the request // does not have valid authentication credentials for the operation. Correct // the authentication and try again.",
+    "topic": "recourse",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUS-kDoNotUse",
+    "doc": "Abseil absl/status/status.h",
+    "section": "StatusCode::DoNotUseReservedForFutureExpansionUseDefaultInSwitchInstead_",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "The purpose of this enumerated value is to force people who handle status // codes with `switch()` statements to *not* simply enumerate all possible // values, but instead provide a \"default:\" case. Providing such a default // case ensures that code will compile when new codes are added.",
+    "topic": "status-code",
+    "level": "informative"
+  },
+  {
+    "id": "ABSL-STATUS-StatusCodeToString",
+    "doc": "Abseil absl/status/status.h",
+    "section": "StatusCodeToString()",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "Returns the name for the status code, or \"\" if it is an unknown value.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUS-Status-1",
+    "doc": "Abseil absl/status/status.h",
+    "section": "absl::Status",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "Handling multiple error codes may justify // use of switch statement, but only check for error codes you know how to // handle; do not try to exhaustively match against all canonical error codes. // Errors that cannot be handled should be logged and/or propagated for higher // levels to deal with.",
+    "topic": "error-model",
+    "level": "SHOULD"
+  },
+  {
+    "id": "ABSL-STATUS-Payload-1",
+    "doc": "Abseil absl/status/status.h",
+    "section": "Payload Management APIs",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "You // may attach multiple payloads (with differing type URLs) to any given // status object, provided that the status is currently exhibiting an error // code (i.e. is not OK).",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUS-Payload-2",
+    "doc": "Abseil absl/status/status.h",
+    "section": "Status::SetPayload()",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "NOTE: This function does nothing if the Status is ok.",
+    "topic": "error-details",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUS-ErrnoToStatusCode",
+    "doc": "Abseil absl/status/status.h",
+    "section": "ErrnoToStatusCode()",
+    "file": "status-and-supervision/abseil/status.h",
+    "quote": "Returns the StatusCode for `error_number`, which should be an `errno` value.",
+    "topic": "status-code",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUSCC-ErrnoToStatusCode-ENOSPC",
+    "doc": "Abseil absl/status/status.cc",
+    "section": "ErrnoToStatusCode()",
+    "file": "status-and-supervision/abseil/status.cc",
+    "quote": "case ENOSPC: // No space left on device #ifdef EDQUOT case EDQUOT: // Disk quota exceeded #endif",
+    "topic": "resource-exhaustion",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUSCC-ErrnoToStatusCode-EFBIG",
+    "doc": "Abseil absl/status/status.cc",
+    "section": "ErrnoToStatusCode()",
+    "file": "status-and-supervision/abseil/status.cc",
+    "quote": "case EFBIG: // File too large case EOVERFLOW: // Value too large to be stored in data type case ERANGE: // Result too large return StatusCode::kOutOfRange;",
+    "topic": "upload-offset",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUSCC-ErrnoToStatusCode-EEXIST",
+    "doc": "Abseil absl/status/status.cc",
+    "section": "ErrnoToStatusCode()",
+    "file": "status-and-supervision/abseil/status.cc",
+    "quote": "case EEXIST: // File exists",
+    "topic": "destination-conflict",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUSCC-ErrnoToStatusCode-EACCES",
+    "doc": "Abseil absl/status/status.cc",
+    "section": "ErrnoToStatusCode()",
+    "file": "status-and-supervision/abseil/status.cc",
+    "quote": "case EPERM: // Operation not permitted case EACCES: // Permission denied",
+    "topic": "permissions",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUSCC-ErrnoToStatusCode-ESTALE",
+    "doc": "Abseil absl/status/status.cc",
+    "section": "ErrnoToStatusCode()",
+    "file": "status-and-supervision/abseil/status.cc",
+    "quote": "case EDEADLK: // Resource deadlock avoided #ifdef ESTALE case ESTALE: // Stale file handle #endif return StatusCode::kAborted;",
+    "topic": "concurrency-conflict",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUSCC-ErrnoToStatusCode-ECANCELED",
+    "doc": "Abseil absl/status/status.cc",
+    "section": "ErrnoToStatusCode()",
+    "file": "status-and-supervision/abseil/status.cc",
+    "quote": "case ECANCELED: // Operation cancelled return StatusCode::kCancelled; default: return StatusCode::kUnknown;",
+    "topic": "cancellation",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUSOR-1",
+    "doc": "Abseil absl/status/statusor.h",
+    "section": "absl::StatusOr<T>",
+    "file": "status-and-supervision/abseil/statusor.h",
+    "quote": "The `absl::StatusOr<T>` models an object that is // either a usable object, or an error (of type `absl::Status`) explaining why // such an object is not present.",
+    "topic": "error-model",
+    "level": "definition"
+  },
+  {
+    "id": "ABSL-STATUSOR-2",
+    "doc": "Abseil absl/status/statusor.h",
+    "section": "absl::StatusOr<T>",
+    "file": "status-and-supervision/abseil/statusor.h",
+    "quote": "An `absl::StatusOr<T>` can never hold an \"OK\" status (an // `absl::StatusCode::kOk` value); instead, the presence of an object of type // `T` indicates success.",
+    "topic": "error-model",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-MaxAttempts-1",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Maximum Number of Retries",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "`maxAttempts` specifies the maximum number of RPC attempts, including the original request.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-MaxAttempts-2",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Maximum Number of Retries",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "gRPC's call deadline applies across all attempts for a given RPC.",
+    "topic": "deadline",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Backoff",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Exponential Backoff",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "The initial retry attempt will occur after `initialBackoff * random(0.8, 1.2)`. After that, the `n`-th attempt will occur after `min(initialBackoff*backoffMultiplier**(n-1), maxBackoff) * random(0.8, 1.2))`.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Retryable-1",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Retryable Status Codes",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "In general, only status codes that indicate the service did not process the request should be retried.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "GRFC-A6-Retryable-2",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Retryable Status Codes",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "However, it is entirely possible to implement a non-idempotent delete method that has adverse side effects if called multiple times, and such a method should not be retried unless the error codes guarantee the original RPC was not processed. It is up to the service owner to pick the correct set of retryable status codes given the semantics of their service.",
+    "topic": "retry",
+    "level": "SHOULD"
+  },
+  {
+    "id": "GRFC-A6-Validation-1",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Validation of retryPolicy",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "1. `maxAttempts` MUST be specified and MUST be a JSON integer value greater than 1. Values greater than 5 are treated as 5 without being considered a validation error.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "GRFC-A6-Validation-2",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Validation of retryPolicy",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "4. `retryableStatusCodes` MUST be specified as a JSON array of status codes and be non-empty.",
+    "topic": "retry",
+    "level": "MUST"
+  },
+  {
+    "id": "GRFC-A6-Hedging-1",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Hedging Policy",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "Because hedged RPCs may be be executed multiple times on the server side, typically by different backends, it is important that hedging is only enabled for methods that are safe to execute multiple times without adverse affect.",
+    "topic": "retry",
+    "level": "informative"
+  },
+  {
+    "id": "GRFC-A6-Throttling-1",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Throttling Retry Attempts and Hedged RPCs",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "For each server name, the gRPC client maintains a `token_count` variable which is initially set to `maxTokens` and can take values between `0` and `maxTokens`. Every outgoing RPC (regardless of service or method invoked) will effect `token_count` as follows: * Every failed RPC will decrement the `token_count` by 1. * Every successful RPC will increment the `token_count` by `tokenRatio`.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Throttling-2",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Throttling Retry Attempts and Hedged RPCs",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "If `token_count` is less than or equal to the threshold, defined to be `(maxTokens / 2)`, then RPCs will not be retried until `token_count` rises over the threshold.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Throttling-3",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Throttling Retry Attempts and Hedged RPCs",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "The only RPCs that are counted as failures for the throttling policy are RPCs that fail with a status code that qualifies as a [retryable](#retryable-status-codes) or [non-fatal status code](#hedging-policy), or that receive a pushback response indicating not to retry. This avoids conflating server failure with responses to malformed requests (such as the `INVALID_ARGUMENT` status code).",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Pushback-1",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Pushback",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "Servers may explicitly pushback by setting metadata in their response to the client. The pushback can either tell the client to retry after a given delay or to not retry at all. If the client has already exhausted its `maxAttempts`, the call will not be retried even if the server says to retry after a given delay.",
+    "topic": "retry",
+    "level": "MAY"
+  },
+  {
+    "id": "GRFC-A6-Pushback-2",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Pushback",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "A new metadata key, `\"grpc-retry-pushback-ms\"`, will be added to support server pushback. The value is to be an ASCII encoded signed 32-bit integer with no unnecessary leading zeros that represents how many milliseconds to wait before sending a retry. If the value for pushback is negative or unparseble, then it will be seen as the server asking the client not to retry at all.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Pushback-3",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Pushback",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "When a client receives an explicit pushback response from a server, and it is appropriate to retry the RPC, it will retry after exactly that delay. For subsequent retries, the delay period will be reset to the `initialBackoff` setting and scale according to the [Exponential Backoff](#exponential-backoff) section above, unless an explicit pushback response is received again.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Summary-0",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Summary of Retry and Hedging Logic",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "There are five possible types of server responses. The list below enumerates the behavior of retry and hedging policies for each type of response. In all cases, if the maximum number of retry attempts or the maximum number of hedged requests is reached, no further RPCs are sent.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Summary-1",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Summary of Retry and Hedging Logic",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "1. OK 1. Retry policy: Successful response, return success to client application",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Summary-2",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Summary of Retry and Hedging Logic",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "2. Fatal Status Code 1. Retry policy: Don't retry, return failure to client application",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Summary-3",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Summary of Retry and Hedging Logic",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "3. Retryable/Non-Fatal Status Code without Server Pushback 1. Retry policy: Retry according to policy",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Summary-4",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Summary of Retry and Hedging Logic",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "4. Pushback: Don't Retry 1. Retry policy: Don't retry, return failure to client application",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Summary-5",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Summary of Retry and Hedging Logic",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "5. Pushback: Retry in *n* ms 1. Retry policy: Retry in *n* ms. If this attempt also fails, retry delay will reset to initial backoff for the following retry (if applicable)",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Committed-1",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "When Retries are Valid",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "In certain cases it is not valid to retry an RPC. These cases occur when the RPC has been *committed*, and thus it does not make sense to perform the retry.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Committed-2",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "When Retries are Valid",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "An RPC becomes *committed* in two scenarios: 1. The client receives [Response-Headers](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#responses). 2. The client’s outgoing message has overflowed the gRPC client library’s buffer.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Committed-3",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "When Retries are Valid",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "The gRPC client library buffers outgoing messages, and as long as the entirety of the outgoing message is in the buffer, it can be resent and retried. But as soon as the outgoing message grows too large to buffer, the gRPC client library cannot replay the entire stream of messages, and thus retries are not valid.",
+    "topic": "upload-offset",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Transparent-1",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Transparent Retries",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "RPC failures can occur in four distinct ways: 1. The RPC fails at the client-side load balancing step. 2. Load balancing succeeds but the RPC never leaves the client. 3. The RPC reaches the server, but has never been seen by the server application logic. 4. The RPC is seen by the server application logic, and fails.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Transparent-2",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Transparent Retries",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "We are able to do this because these request have not made it to the server application logic, and thus are always safe to retry.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRFC-A6-Metadata",
+    "doc": "gRFC A6 gRPC Retry Design",
+    "section": "Exposed Retry Metadata",
+    "file": "status-and-supervision/grpc/A6-client-retries.md",
+    "quote": "the client library will set the outgoing initial metadata entry `\"grpc-previous-rpc-attempts\"` with a value equal to the number of preceding retry atttempts. Thus, it will not be present on the first RPC, will be 1 for the second RPC, and so on.",
+    "topic": "retry",
+    "level": "definition"
+  },
+  {
+    "id": "GRPCGW-HTTPStatusFromCode-1",
+    "doc": "grpc-gateway runtime/errors.go",
+    "section": "HTTPStatusFromCode",
+    "file": "status-and-supervision/grpc-gateway/errors.go",
+    "quote": "HTTPStatusFromCode converts a gRPC error code into the corresponding HTTP response status.",
+    "topic": "http-mapping",
+    "level": "definition"
+  },
+  {
+    "id": "GRPCGW-HTTPStatusFromCode-412",
+    "doc": "grpc-gateway runtime/errors.go",
+    "section": "HTTPStatusFromCode",
+    "file": "status-and-supervision/grpc-gateway/errors.go",
+    "quote": "case codes.FailedPrecondition: // Note, this deliberately doesn't translate to the similarly named '412 Precondition Failed' HTTP response status. return http.StatusBadRequest",
+    "topic": "precondition",
+    "level": "informative"
+  },
+  {
+    "id": "GRPCGW-HTTPStatusFromCode-default",
+    "doc": "grpc-gateway runtime/errors.go",
+    "section": "HTTPStatusFromCode",
+    "file": "status-and-supervision/grpc-gateway/errors.go",
+    "quote": "default: grpclog.Warningf(\"Unknown gRPC error code: %v\", code) return http.StatusInternalServerError",
+    "topic": "http-mapping",
+    "level": "informative"
+  },
+  {
+    "id": "GRPC-STATUSCONV-noerror",
+    "doc": "gRPC src/core/lib/transport/status_conversion.cc",
+    "section": "grpc_http2_error_to_grpc_status",
+    "file": "status-and-supervision/grpc/status_conversion.cc",
+    "quote": "if (error == Http2ErrorCode::kNoError) { // should never be received return GRPC_STATUS_INTERNAL; }",
+    "topic": "upstream-failure",
+    "level": "informative"
+  },
+  {
+    "id": "GRPC-STATUSCONV-http",
+    "doc": "gRPC src/core/lib/transport/status_conversion.cc",
+    "section": "grpc_http2_status_to_grpc_status",
+    "file": "status-and-supervision/grpc/status_conversion.cc",
+    "quote": "// these HTTP2 status codes are called out explicitly in status.proto",
+    "topic": "upstream-failure",
+    "level": "informative"
+  },
+  {
+    "id": "OTP-SUPERVISOR-Principles-1",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Supervision Principles",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "The supervisor is responsible for starting, stopping, and monitoring its child processes. The basic idea of a supervisor is that it must keep its child processes alive by restarting them when necessary.",
+    "topic": "supervision",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-Principles-2",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Supervision Principles",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "When the supervisor is started, the child processes are started in order from left to right according to this list. When the supervisor is going to terminate, it first terminates its child processes in reversed start order, from right to left.",
+    "topic": "supervision",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-Strategy-one_for_one",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Restart Strategies",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "- `one_for_one` \\- If one child process terminates and is to be restarted, only that child process is affected. This is the default restart strategy.",
+    "topic": "supervision-strategy",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-Strategy-one_for_all",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Restart Strategies",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "- `one_for_all` \\- If one child process terminates and is to be restarted, all other child processes are terminated and then all child processes are restarted.",
+    "topic": "supervision-strategy",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-Strategy-rest_for_one",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Restart Strategies",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "- `rest_for_one` \\- If one child process terminates and is to be restarted, the 'rest' of the child processes (that is, the child processes after the terminated child process in the start order) are terminated. Then the terminated child process and all child processes after it are restarted.",
+    "topic": "supervision-strategy",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-Strategy-simple_one_for_one",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Restart Strategies",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "- `simple_one_for_one` \\- A simplified `one_for_one` supervisor, where all child processes are dynamically added instances of the same process type, that is, running the same code.",
+    "topic": "supervision-strategy",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-Intensity",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Restart intensity and period",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "To prevent a supervisor from getting into an infinite loop of child process terminations and restarts, a _maximum restart intensity_ is defined using two integer values specified with keys `intensity` and `period` in the above map. Assuming the values `MaxR` for `intensity` and `MaxT` for `period`, then, if more than `MaxR` restarts occur within `MaxT` seconds, the supervisor terminates all child processes and then itself. The termination reason for the supervisor itself in that case will be `shutdown`. `intensity` defaults to `1` and `period` defaults to `5`.",
+    "topic": "supervision-intensity",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-AutoShutdown-never",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Automatic Shutdown",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "- `never` \\- Automatic shutdown is disabled. This is the default setting. With `auto_shutdown` set to `never`, child specs with the `significant` flag set to `true` are considered invalid and will be rejected.",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-AutoShutdown-any_significant",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Automatic Shutdown",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "- `any_significant` \\- The supervisor will shut itself down when _any_ significant child terminates, that is, when a `transient` significant child terminates normally or when a `temporary` significant child terminates normally or abnormally.",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-AutoShutdown-all_significant",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Automatic Shutdown",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "- `all_significant` \\- The supervisor will shut itself down when _all_ significant children have terminated, that is, when the _last active_ significant child terminates. The same rules as for `any_significant` apply.",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-ChildSpec-start-1",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Child specification: start",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "The start function _must create and link to_ the child process, and must return `{ok,Child}` or `{ok,Child,Info}`, where `Child` is the pid of the child process and `Info` any term that is ignored by the supervisor.",
+    "topic": "supervision",
+    "level": "MUST"
+  },
+  {
+    "id": "OTP-SUPERVISOR-ChildSpec-start-2",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Child specification: start",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "The start function can also return `ignore` if the child process for some reason cannot be started, in which case the child specification is kept by the supervisor (unless it is a temporary child) but the non-existing child process is ignored.",
+    "topic": "supervision",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-ChildSpec-restart",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Child specification: restart",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "`restart` defines when a terminated child process must be restarted. A `permanent` child process is always restarted. A `temporary` child process is never restarted (even when the supervisor's restart strategy is `rest_for_one` or `one_for_all` and a sibling's death causes the temporary process to be terminated). A `transient` child process is restarted only if it terminates abnormally, that is, with another exit reason than `normal`, `shutdown`, or `{shutdown,Term}`.",
+    "topic": "supervision-restart",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-ChildSpec-restart-default",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Child specification: restart",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "The `restart` key is optional. If it is not specified, it defaults to `permanent`.",
+    "topic": "supervision-restart",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-ChildSpec-significant",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Child specification: significant",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "Setting this option to `true` when the [restart type](`m:supervisor#restart`) is `permanent` is invalid. Also, it is considered invalid to start children with this option set to `true` in a supervisor when the [`auto_shutdown`](`m:supervisor#auto_shutdown`) supervisor flag is set to `never`.",
+    "topic": "supervision-shutdown",
+    "level": "MUST"
+  },
+  {
+    "id": "OTP-SUPERVISOR-ChildSpec-shutdown-1",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Child specification: shutdown",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "`shutdown` defines how a child process must be terminated. `brutal_kill` means that the child process is unconditionally terminated using [`exit_signal(Child,kill)`](`exit_signal/2`). An integer time-out value means that the supervisor tells the child process to terminate by calling [`exit_signal(Child,shutdown)`](`exit_signal/2`) and then wait for an exit signal with reason `shutdown` back from the child process. If no exit signal is received within the specified number of milliseconds, the child process is unconditionally terminated using [`exit_signal(Child,kill)`](`exit_signal/2`).",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-ChildSpec-shutdown-2",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Child specification: shutdown",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "If the child process is another supervisor, the shutdown time must be set to `infinity` to give the subtree ample time to shut down.",
+    "topic": "supervision-shutdown",
+    "level": "MUST"
+  },
+  {
+    "id": "OTP-SUPERVISOR-ChildSpec-shutdown-default",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "Child specification: shutdown",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "The `shutdown` key is optional. If it is not specified, it defaults to `5000` if the child is of type `worker` and it defaults to `infinity` if the child is of type `supervisor`.",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-types-restart",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "type restart()",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "-type restart() :: 'permanent' | 'transient' | 'temporary'.",
+    "topic": "supervision-restart",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-types-strategy",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "type strategy()",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "-type strategy() :: 'one_for_all' | 'one_for_one' | 'rest_for_one' | 'simple_one_for_one'.",
+    "topic": "supervision-strategy",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-types-auto_shutdown",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "type auto_shutdown()",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "-type auto_shutdown() :: 'never' | 'any_significant' | 'all_significant'.",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-code-do_restart",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "do_restart/3",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "do_restart(Reason, Child, State) when ?is_permanent(Child) -> ?report_error(child_terminated, Reason, Child, State#state.name), restart(Child, State); do_restart(normal, Child, State) -> NState = del_child(Child, State), do_auto_shutdown(Child, NState); do_restart(shutdown, Child, State) -> NState = del_child(Child, State), do_auto_shutdown(Child, NState); do_restart({shutdown, _Term}, Child, State) -> NState = del_child(Child, State), do_auto_shutdown(Child, NState); do_restart(Reason, Child, State) when ?is_transient(Child) -> ?report_error(child_terminated, Reason, Child, State#state.name), restart(Child, State); do_restart(Reason, Child, State) when ?is_temporary(Child) -> ?report_error(child_terminated, Reason, Child, State#state.name), NState = del_child(Child, State), do_auto_shutdown(Child, NState).",
+    "topic": "supervision-restart",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-code-restart-escalate",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "restart/2",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "{terminate, NState} -> ?report_error(shutdown, reached_max_restart_intensity, Child, State#state.name), {shutdown, del_child(Child, NState)}",
+    "topic": "supervision-escalation",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-code-add_restart-1",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "add_restart/1",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "%%% Add a new restart and calculate if the max restart %%% intensity has been reached (in that case the supervisor %%% shall terminate). %%% All restarts accured inside the period amount of seconds %%% are kept in the #state.restarts list. %%% Returns: {ok, State'} | {terminate, State'}",
+    "topic": "supervision-intensity",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-code-add_restart-2",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "add_restart/1",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "%% shortcut: if the intensity limit is 0, no restarts are allowed; %% it is safe to disallow the restart flat out add_restart(#state{intensity = 0} = State) -> {terminate, State};",
+    "topic": "supervision-intensity",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPERVISOR-code-validSignificant",
+    "doc": "Erlang/OTP lib/stdlib/src/supervisor.erl (moduledoc + code)",
+    "section": "validSignificant/3",
+    "file": "status-and-supervision/otp/supervisor.erl",
+    "quote": "validSignificant(true, _RestartType, never) -> throw({bad_combination, [{auto_shutdown, never}, {significant, true}]}); validSignificant(true, permanent, _AutoShutdown) -> throw({bad_combination, [{restart, permanent}, {significant, true}]});",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-Principles",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Supervision Principles",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "The child processes are started in the order specified by this list, and are terminated in the reverse order.",
+    "topic": "supervision",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-one_for_one",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "one_for_one",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "If a child process terminates, only that process is restarted.",
+    "topic": "supervision-strategy",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-one_for_all",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "one_for_all",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "If a child process terminates, all remaining child processes are terminated. Subsequently, all child processes, including the terminated one, are restarted.",
+    "topic": "supervision-strategy",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-rest_for_one",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "rest_for_one",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "If a child process terminates, the child processes after the terminated process in start order are terminated. Subsequently, the terminated child process and the remaining child processes are restarted.",
+    "topic": "supervision-strategy",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-MaxIntensity-1",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Maximum Restart Intensity",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "If more than `MaxR` number of restarts occur in the last `MaxT` seconds, the supervisor terminates all the child processes and then itself. The termination reason for the supervisor itself in that case will be `shutdown`.",
+    "topic": "supervision-intensity",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-MaxIntensity-2",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Maximum Restart Intensity",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "When the supervisor terminates, then the next higher-level supervisor takes some action. It either restarts the terminated supervisor or terminates itself.",
+    "topic": "supervision-escalation",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-MaxIntensity-3",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Maximum Restart Intensity",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "The intention of the restart mechanism is to prevent a situation where a process repeatedly dies for the same reason, only to be restarted again.",
+    "topic": "supervision-intensity",
+    "level": "informative"
+  },
+  {
+    "id": "OTP-SUPPRINC-Tuning-1",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Tuning the intensity and period",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "If you set intensity to 10 and set the period as low as 1, the supervisor will allow child processes to keep restarting up to 10 times per second, forever, filling your logs with crash reports until someone intervenes manually.",
+    "topic": "supervision-intensity",
+    "level": "informative"
+  },
+  {
+    "id": "OTP-SUPPRINC-Tuning-2",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Tuning the intensity and period",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "Keep in mind that the total number of restarts (before the top level supervisor gives up and terminates the application) will be the product of the intensity values of all the supervisors above the failing child process.",
+    "topic": "supervision-escalation",
+    "level": "informative"
+  },
+  {
+    "id": "OTP-SUPPRINC-AutoShutdown-1",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Automatic Shutdown",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "This is useful when a supervisor represents a work unit of cooperating children, as opposed to independent workers. When the work unit has finished its work, that is, when any or all significant child processes have terminated, the supervisor should then shut down by terminating all remaining child processes in reverse start order according to the respective shutdown specifications, and then itself.",
+    "topic": "supervision-shutdown",
+    "level": "SHOULD"
+  },
+  {
+    "id": "OTP-SUPPRINC-AutoShutdown-2",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Automatic Shutdown",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "> The automatic shutdown facility only applies when significant children > terminate by themselves, not when their termination was caused by > the supervisor. Specifically, neither the termination of a child as a > consequence of a sibling's termination in the `one_for_all` or `rest_for_one` > strategies nor the manual termination of a child by > `supervisor:terminate_child/2` will trigger an automatic shutdown.",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-AutoShutdown-never",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "never",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "In this mode, specifying significant children is not accepted. If the child specs returned from `init` contain significant children, the supervisor will refuse to start. Attempts to start significant children dynamically will be rejected.",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-AutoShutdown-permanent",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Automatic Shutdown",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "> Supervisors configured for automatic shutdown should not be made > [permanent](sup_princ.md#restart) children of their respective parent > supervisors, as they would be restarted immediately after having automatically > shut down, only to shut down automatically again after a while, and may thus > exhaust the [Maximum Restart Intensity](sup_princ.md#max_intensity) of the > parent supervisor.",
+    "topic": "supervision-escalation",
+    "level": "SHOULD"
+  },
+  {
+    "id": "OTP-SUPPRINC-ChildSpec-restart",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Child Specification: restart",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "- A `permanent` child process is always restarted. - A `temporary` child process is never restarted (not even when the supervisor restart strategy is `rest_for_one` or `one_for_all` and a sibling death causes the temporary process to be terminated). - A `transient` child process is restarted only if it terminates abnormally, that is, with an exit reason other than `normal`, `shutdown`, or `{shutdown,Term}`.",
+    "topic": "supervision-restart",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-ChildSpec-significant",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Child Specification: significant",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "It is invalid to set this option to `true` for a child with [restart type](sup_princ.md#restart) `permanent` or in a supervisor with [auto_shutdown](sup_princ.md#automatic-shutdown) set to `never`.",
+    "topic": "supervision-shutdown",
+    "level": "MUST"
+  },
+  {
+    "id": "OTP-SUPPRINC-AddingChild",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Adding a Child Process",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "Child processes added using `start_child/2` behave in the same way as the other child processes, with one important exception: if a supervisor dies and is recreated, then all child processes that were dynamically added to the supervisor are lost.",
+    "topic": "supervision",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-StoppingChild",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Stopping a Child Process",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "Stopping a [significant child](sup_princ.md#significant_child) of a supervisor configured for [automatic shutdown](sup_princ.md#automatic-shutdown) will not trigger an automatic shutdown.",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  },
+  {
+    "id": "OTP-SUPPRINC-Stopping",
+    "doc": "Erlang/OTP Design Principles: Supervisor Behaviour (system/doc/design_principles/sup_princ.md)",
+    "section": "Stopping",
+    "file": "status-and-supervision/otp/sup_princ.md",
+    "quote": "When asked to shut down, a supervisor terminates all child processes in reverse start order according to the respective shutdown specifications before terminating itself.",
+    "topic": "supervision-shutdown",
+    "level": "definition"
+  }
+]
