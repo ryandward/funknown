@@ -159,7 +159,7 @@ export class Round extends Data.Class<{ readonly synced: Synced; readonly row: R
 const finish = (d: Decision, n: Model): Round => new Round({ synced: observedNow(d.next, n), row: d.row })
 
 /** The round for a decision, whatever reached it. In Haskell the decision's
- *  type is `Step a`, which carries K0 to K10 and Prog; here it is any
+ *  type is `Step a`, which carries K0 to K13 and Prog; here it is any
  *  Decision, and the reconciler's claims are the reconciler's tests. */
 export const roundWith = (s: Synced, d: Decision): Round => finish(d, perform(s.asset.goal, d.command, s.model))
 

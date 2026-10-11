@@ -1,12 +1,12 @@
 # What the proved kernel became in TypeScript
 
-We have a Haskell kernel whose claims LiquidHaskell proves: the reconciler's safety claims K0 to K10 on every step, a progress lemma for every round, and convergence against an adversary, all on top of a proved data model. Four agents ported the data model and the kernel moves to strict TypeScript with Effect, and we wanted an honest answer to two questions. Does the port compute what the Haskell computes? And what is each proved claim now: a type the compiler holds, a run-time check, a test, or nothing?
+We have a Haskell kernel whose claims LiquidHaskell proves: the reconciler's safety claims K0 to K13 on every step, a progress lemma for every round, and convergence against an adversary, all on top of a proved data model. Four agents ported the data model and the kernel moves to strict TypeScript with Effect, and we wanted an honest answer to two questions. Does the port compute what the Haskell computes? And what is each proved claim now: a type the compiler holds, a run-time check, a test, or nothing?
 
 ## The short answer
 
 The port computes the same thing. I ran the Haskell kernel, with the LiquidHaskell plugin turned off, on 9499 inputs and fed the same inputs to the TypeScript, and every decision, round and converged run came back identical. The inputs were the whole guard domain, generated reconciler steps, rounds of the store model and full adversary runs, and every row R0 to R19 shows up in each of the three kinds.
 
-What changed is the strength of the claims. Very little of what LiquidHaskell proves became a type. The parts that did are shapes: which fields go together, which commands carry which arguments, which preconditions a function accepts, and exhaustiveness. Every claim that relates a result to its input became a sampled property test. That covers all of K0 to K10, Prog, KMove's equalities, the progress lemma and convergence. Relations between fields became checks inside the one constructor that can build the value. The port was fast because TypeScript asks for so much less.
+What changed is the strength of the claims. Very little of what LiquidHaskell proves became a type. The parts that did are shapes: which fields go together, which commands carry which arguments, which preconditions a function accepts, and exhaustiveness. Every claim that relates a result to its input became a sampled property test. That covers all of K0 to K13, Prog, KMove's equalities, the progress lemma and convergence. Relations between fields became checks inside the one constructor that can build the value. The port was fast because TypeScript asks for so much less.
 
 The LiquidHaskell negative controls still get caught. I translated 33 of them into the TypeScript, and every one is caught except R1, which turns out to behave exactly like the original code because a second check stops it. The catch is that most of them are caught by tests rather than by tsc. Two of the controls LiquidHaskell itself missed are caught in TypeScript, but only by the differential test, which is a comparison against the Haskell and not a claim of the port's own.
 
@@ -76,9 +76,11 @@ I added the test to the suite, so `npm test` and every mutant in `npm run contro
 | tag measures in range; Config, Env and Decision field bounds; Row in R0..R19 | type: literal unions and brands |
 | K6 (`stateOf`) | property |
 | `rank` relations, `gapI` against the table | property (gapI exhaustive at 288 points) |
-| K0, K1, K1b, K3, K4, K5n, K8, K9, K10, Prog, authorised unchanged (the `Step` type) | property: 2000 generated steps per claim plus all 1320 guard points; none enforced |
+| K0, K1, K1b, K3, K4, K5n, K8, K9, K10, K11, K12, K13, Prog, authorised unchanged (the `Step` type) | property: 2000 generated steps per claim plus all 1320 guard points; none enforced |
 | K2 (Seal names nothing), K5 (Remove carries a Version, Discard a StagingRef) | type: the `Cmd` constructors' fields |
-| preconditions of `issue`, `failWith`, `adopt` | type: `StoreCmd`, `KeepView`, `AssemblingView` |
+| preconditions of `issue`, `failWith`, `adopt` | type: `StoreCmd`, `KeepView` and `StoreFault`, `AssemblingView` |
+| `failWith`'s postcondition `failedOnStore (outcome (next d)) == storeFault f` | property: K12 reads the fault back from the ending |
+| precondition of `spend` (assembled, no receipt, the object seen and not yet vouched) | weaker: the parameter type says only assembled; `decide` reaches `spend` only from the NotYetVouched branch, and K12's Unavailable clause checks it on the step where `spend` ends the asset |
 | K7: guards exhaustive and exclusive, and `reconcile` follows them | split: tsc holds the decision tree's shape and that every row has a leaf (`everyRowDecided`); that each leaf is the right row is the exhaustive guard test, as in Haskell |
 | `received`'s precondition (the Bound has the assembled length) | constructor: `makeAsset` checks again, and its Left goes to R10 |
 | `pending` is a Nat | constructor |

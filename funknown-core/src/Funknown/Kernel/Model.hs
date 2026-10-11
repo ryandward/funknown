@@ -43,7 +43,8 @@ dropRef r (SCons st@(Staging r' _) ss)
 -- * Open creates a staging area, discoverable under the file's id;
 -- * Seal makes the goal's staging area the object, create-only (rule 2), and
 --   a successful seal consumes the staging area;
--- * Discard removes the staging area it names, idempotently;
+-- * Discard removes the staging area it names, idempotently, and like Open
+--   it leaves the object alone;
 -- * Remove removes the object only at the version it names (rule 2);
 -- * Observe and no command change nothing.
 {-@ perform :: g:Goal -> c:Cmd -> m:Model
@@ -57,7 +58,9 @@ dropRef r (SCons st@(Staging r' _) ss)
                 && ((cmdTag c == 4 && Set_mem (discardRef c) (obsRefs (mObs m)))
                       => (obsStagings (mObs m') < obsStagings (mObs m) && obsObjTag (mObs m') == obsObjTag (mObs m)))
                 && ((cmdTag c == 5 && obsObjTag (mObs m) /= 0 && removeVersion c == obsVersion (mObs m))
-                      => (obsStagings (mObs m') == obsStagings (mObs m) && obsObjTag (mObs m') == 0)) } @-}
+                      => (obsStagings (mObs m') == obsStagings (mObs m) && obsObjTag (mObs m') == 0))
+                && ((cmdTag c == 2 || cmdTag c == 4)
+                      => (obsObjTag (mObs m') == obsObjTag (mObs m) && obsVersion (mObs m') == obsVersion (mObs m))) } @-}
 perform :: Goal -> Cmd -> Model -> Model
 perform _ NoCmd m = m
 perform _ DoObserve m = m
@@ -110,11 +113,21 @@ round :: Env -> Asset -> Model -> Round
 round env a m = roundWith a m (reconcile env a)
 
 -- | The round for any decision with the reconciler's guarantees, so the
--- lemma rests on 'Step' alone and not on how 'reconcile' reached it.
+-- lemma rests on 'Step' alone and not on how 'reconcile' reached it. A
+-- store command never rests: it always lowers the metric, so a shell that
+-- loses only the command's answer still holds a lower state (see
+-- "Funknown.Kernel.Inputs").
 {-@ roundWith :: a:Asset -> m:{Model | Coherent a m} -> d:Step a
               -> {r:Round | (isFixedRow (rRow r) || Lower a m (rAsset r) (rModel r))
+                           && (cmdTag (command d) >= 2 => Lower a m (rAsset r) (rModel r))
+                           && ((cmdTag (command d) /= 3 && cmdTag (command d) /= 5)
+                                 => (obsObjTag (mObs (rModel r)) == obsObjTag (mObs m)
+                                     && obsVersion (mObs (rModel r)) == obsVersion (mObs m)))
                            && Coherent (rAsset r) (rModel r) && isSeen (seen (rAsset r))
-                           && authorised (rAsset r) == authorised a} @-}
+                           && goal (rAsset r) == goal (next d) && vouch (rAsset r) == vouch (next d)
+                           && budget (rAsset r) == budget (next d)
+                           && authorised (rAsset r) == authorised a && rRow r == row d
+                           && (cmdTag (command d) <= 1 => mObs (rModel r) == mObs m)} @-}
 roundWith :: Asset -> Model -> Decision -> Round
 roundWith a m d = case command d of
   NoCmd         -> finish d (perform (goal a) NoCmd m)

@@ -247,7 +247,7 @@ test("K7: every row of the table is reached somewhere in the domain", () => {
   )
 })
 
-test("Step claims K0-K10 and Prog hold at all 1320 points of the guard domain", () => {
+test("Step claims K0-K13 and Prog hold at all 1320 points of the guard domain", () => {
   const failures: Array<string> = []
   for (const p of domain) {
     const a = toAsset(p)

@@ -6,6 +6,7 @@
   "scripts": {
     "fixture": "mkdir -p test/fixtures && cd .. && cabal run -v0 haskell-dump > funknown-ts/test/fixtures/haskell-dump.jsonl",
     "build": "tsc -p tsconfig.json",
+    "schema": "npm run build && node tools/write-wire-schema.mjs",
     "test": "npm run fixture && npm run build && node --test \"dist/test/**/*.test.js\"",
     "controls": "npm run fixture && npm run build && node controls/run.mjs"
   },
@@ -13,5 +14,8 @@
   "dependencies": {
     "effect": "3.22.2",
     "typescript": "7.0.2"
+  },
+  "devDependencies": {
+    "zod": "4.6.5"
   }
 }

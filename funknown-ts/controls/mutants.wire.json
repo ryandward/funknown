@@ -1,0 +1,402 @@
+[
+  {
+    "name": "Limits lets maxChunk fall below minChunk",
+    "claim": "Limits: maxChunk >= minChunk",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "([minChunk, maxChunk]) => maxChunk >= minChunk",
+        "to": "([minChunk, maxChunk]) => maxChunk + 1 >= minChunk"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "Chunks lets the total run past maxSize",
+    "claim": "Chunks: total <= maxSize",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "if (total > maxSize)",
+        "to": "if (total > maxSize * 2)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "Chunks lets the count run past maxChunks",
+    "claim": "Chunks: count <= maxChunks",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "if (c.list.length > maxChunks)",
+        "to": "if (c.list.length > maxChunks + 1)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "Chunks lets a chunk run past maxChunk",
+    "claim": "Chunks: every chunk <= maxChunk",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "if (n > maxChunk)",
+        "to": "if (n > maxChunk + 1)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "Chunks lets the second-newest chunk be short",
+    "claim": "Chunks: only the newest chunk may be short",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "if (i > 0 && n < minChunk)",
+        "to": "if (i > 1 && n < minChunk)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "a receipt may be longer than the assembly",
+    "claim": "Asset: a receipt has the assembled length",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "a.vouch.size === offsetOf(a.goal.chunks)",
+        "to": "a.vouch.size >= offsetOf(a.goal.chunks)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "an assembled goal may carry an ending",
+    "claim": "Asset: an ending exactly when the goal is Clear",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "goal: AssembledGoal, outcome: z.null(),",
+        "to": "goal: AssembledGoal, outcome: Ending.nullable(),"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "an assembly may hold a receipt",
+    "claim": "Asset: no receipt while assembling",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "outcome: z.null(), vouch: z.null(), ...common",
+        "to": "outcome: z.null(), vouch: Receipt.nullable(), ...common"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "the checksum bound moves to 2^64",
+    "claim": "Checksum: below 2^64",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "checksumMax = \"18446744073709551615\"",
+        "to": "checksumMax = \"18446744073709551616\""
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "the checksum pattern drops the bound itself",
+    "claim": "Checksum: 2^64 - 1 is a checksum",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "  alts.push(bound)\n",
+        "to": ""
+      }
+    ],
+    "expect": "tests",
+    "catches": "the checksum pattern accepts exactly"
+  },
+  {
+    "name": "budget may be 6",
+    "claim": "Asset: budget <= attemptCap (zod's output type has to fit the port's Attempts, so the compiler refuses it before any test runs)",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "budget: z.literal([0, 1, 2, 3, 4, 5])",
+        "to": "budget: z.literal([0, 1, 2, 3, 4, 5, 6])"
+      }
+    ],
+    "expect": "tsc"
+  },
+  {
+    "name": "a persisted state may carry seen",
+    "claim": "PersistedState: seen lasts one round and is not kept",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "const common = {\n",
+        "to": "const common = {\n  seen: Observation.optional(),\n"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each bound zod states alone refuses its mutant"
+  },
+  {
+    "name": "staging areas take excess keys",
+    "claim": "Observation: strict objects",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "stagings: z.array(z.strictObject({ ref: Str, tokens: z.array(Str) }))",
+        "to": "stagings: z.array(z.object({ ref: Str, tokens: z.array(Str) }))"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each bound zod states alone refuses its mutant"
+  },
+  {
+    "name": "Backoff lets initialBackoff pass maxBackoff",
+    "claim": "Backoff: initialBackoff <= maxBackoff",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "([initial, max]) => initial <= max",
+        "to": "([initial, max]) => initial <= max * 2"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each bound zod states alone refuses its mutant"
+  },
+  {
+    "name": "waitFor may be negative",
+    "claim": "Decision: waitFor is a Nat",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "waitFor: Nat,",
+        "to": "waitFor: Int,"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each bound zod states alone refuses its mutant"
+  },
+  {
+    "name": "the shell can't say it has no observation",
+    "claim": "Observation: null is Unseen (stateOf and statesOf pass null, so the compiler refuses it)",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "export const Observation = Observed.nullable().meta({",
+        "to": "export const Observation = Observed.meta({"
+      }
+    ],
+    "expect": "tsc"
+  },
+  {
+    "name": "persisted drops the budget",
+    "claim": "persisted: the shell keeps every field but seen",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "    budget: a.budget,\n",
+        "to": ""
+      }
+    ],
+    "expect": "tests",
+    "catches": "splits into a PersistedState and an Observation"
+  },
+  {
+    "name": "the Env JSON Schema file drifts from zod",
+    "claim": "JSON Schema: generated from zod",
+    "file": "src/wire/Env.schema.json",
+    "edits": [
+      {
+        "from": "\"title\": \"Env\"",
+        "to": "\"title\": \"Environment\""
+      }
+    ],
+    "expect": "tests",
+    "catches": "the JSON Schema files are what the zod schemas generate"
+  },
+  {
+    "name": "a Clear asset takes excess keys",
+    "claim": "PersistedState and Asset: every member strict",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "const clearMember = z.strictObject(",
+        "to": "const clearMember = z.object("
+      }
+    ],
+    "expect": "tests",
+    "catches": "every object refuses an excess key and every integer refuses a fraction"
+  },
+  {
+    "name": "a SourceAnswered status may be fractional",
+    "claim": "Fault: status is an Int",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "z.strictObject({ t: z.literal(\"SourceAnswered\"), status: Int })",
+        "to": "z.strictObject({ t: z.literal(\"SourceAnswered\"), status: z.number() })"
+      }
+    ],
+    "expect": "tests",
+    "catches": "every object refuses an excess key and every integer refuses a fraction"
+  },
+  {
+    "name": "a write deadline may be fractional",
+    "claim": "authorised: [Int, Int]",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "authorised: z.array(z.tuple([Int, Int]))",
+        "to": "authorised: z.array(z.tuple([Int, z.number()]))"
+      }
+    ],
+    "expect": "tests",
+    "catches": "every object refuses an excess key and every integer refuses a fraction"
+  },
+  {
+    "name": "Revoked goes missing from Fault",
+    "claim": "Fault: exactly the Haskell constructors",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "  \"Revoked\",\n",
+        "to": ""
+      }
+    ],
+    "expect": "tests",
+    "catches": "every tag schema accepts exactly the constructors"
+  },
+  {
+    "name": "a fault the Haskell doesn't have",
+    "claim": "Fault: no tag the port's Fault lacks (zod's output has to fit the port's Fault type)",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "  \"SourceChanged\"\n] as const",
+        "to": "  \"SourceChanged\",\n  \"Timeout\"\n] as const"
+      }
+    ],
+    "expect": "tsc"
+  },
+  {
+    "name": "the shared assembled member drops the receipt-length refinement",
+    "claim": "PersistedState and Asset: a receipt has the assembled length",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": ".refine(receiptHasAssembledLength, receiptLengthIssue)",
+        "to": ".refine((a) => receiptHasAssembledLength(a) || true, receiptLengthIssue)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "each Asset refinement refuses its mutant"
+  },
+  {
+    "name": "Env lets now + writeDeadline pass 2^53",
+    "claim": "Env: the stored sums stay safe integers",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "e.now + Math.max(e.writeDeadline, e.backoff[1]) <= Number.MAX_SAFE_INTEGER",
+        "to": "e.now <= Number.MAX_SAFE_INTEGER"
+      }
+    ],
+    "expect": "tests",
+    "catches": "an Env whose now plus writeDeadline"
+  },
+  {
+    "name": "keep forgets the wait",
+    "claim": "Stored: notBefore is now + waitFor",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "notBefore: env.now + d.waitFor",
+        "to": "notBefore: env.now"
+      }
+    ],
+    "expect": "tests",
+    "catches": "keep holds every step's wait and state"
+  },
+  {
+    "name": "keep takes the state after seen is dropped",
+    "claim": "Stored: state is stateOf the decision's asset",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "state: stateOf(d.next) })",
+        "to": "state: stateOf({ ...d.next, seen: null }) })"
+      }
+    ],
+    "expect": "tests",
+    "catches": "keep holds every step's wait and state"
+  },
+  {
+    "name": "Stored accepts any state",
+    "claim": "Stored: state is one stateOf gives for the asset",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "statesOf(s.asset).some((x) => sameState(x, s.state))",
+        "to": "statesOf(s.asset).length > 0 || sameState(s.state, s.state)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "a Stored state that is not the asset's"
+  },
+  {
+    "name": "the wire's stateOf forgets unreported writes",
+    "claim": "stateOf: DELETED needs every write reported",
+    "file": "src/Wire.ts",
+    "edits": [
+      {
+        "from": "heldNothing(a.seen) && a.authorised.length === 0",
+        "to": "heldNothing(a.seen)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "a Stored state that is not the asset's"
+  },
+  {
+    "name": "holds checks that the staging area is listed, not its tokens",
+    "claim": "a kept view is wrong after a producer's chunk",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "chunkList(c).every((ch) => s.tokens.includes(ch.ctoken))",
+        "to": "chunkList(c).every((ch) => ch.ctoken === ch.ctoken)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "a producer's chunk makes a kept view wrong"
+  },
+  {
+    "name": "R11 rests on Unvouchable instead of failing",
+    "claim": "a partial answer changes the asset for good",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "Unvouchable: () => failWith(\"R11\", v, Fault.ObjectWithoutReceipt()),",
+        "to": "Unvouchable: () => rest(\"R11\", a),"
+      }
+    ],
+    "expect": "tests",
+    "catches": "a failed call is null, never a partial answer"
+  }
+]

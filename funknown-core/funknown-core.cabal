@@ -41,6 +41,7 @@ library
                     Funknown.Kernel.Reconcile
                     Funknown.Kernel.Model
                     Funknown.Kernel.Converge
+                    Funknown.Kernel.Inputs
                     Funknown.Client.Types
                     Funknown.Client.Contract
                     Funknown.Client.Core

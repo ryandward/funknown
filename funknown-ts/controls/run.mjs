@@ -144,6 +144,9 @@ mutants.forEach((mu, i) => {
   }
   const layer = caughtBy.split(":")[0]
   verdict(layer === mu.expect, `${mu.name} [${mu.claim}]`, `expected ${mu.expect}; caught by ${caughtBy}`)
+  // Each copy carries the fixture, so a hundred of them can fill a small
+  // tmpfs; drop each one as soon as it has its verdict.
+  fs.rmSync(dir, { recursive: true, force: true })
 })
 
 fs.rmSync(buildDir, { recursive: true, force: true })

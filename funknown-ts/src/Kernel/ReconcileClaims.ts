@@ -9,7 +9,8 @@
 // return Option, so `==` on two measures becomes `sameOpt`. Every clause below
 // that compares measures also requires the tags that make both sides Some, as
 // the Haskell does, so the two readings agree.
-import { Equal, HashSet, Option } from "effect"
+import { Equal, HashSet, Match, Option } from "effect"
+import type { Fault } from "../Fault.js"
 import {
   type Asset,
   type Decision,
@@ -25,6 +26,7 @@ import {
   isEnded,
   isFixedRow,
   isSeen,
+  type Outcome,
   rank,
   removeVersion,
   seenObjTag,
@@ -168,6 +170,86 @@ export const prog = (a: Asset, d: Decision): boolean => {
   )
 }
 
+/** K11: an asset with no observation comes back exactly as it went in, with
+ *  no alarm, so a failed observe call turned into Unseen costs nothing but
+ *  the call. */
+export const k11 = (a: Asset, d: Decision): boolean =>
+  implies(
+    !isSeen(a.seen),
+    Equal.equals(d.next.goal, a.goal) &&
+      Equal.equals(d.next.outcome, a.outcome) &&
+      Equal.equals(d.next.vouch, a.vouch) &&
+      Equal.equals(d.next.seen, a.seen) &&
+      d.next.budget === a.budget &&
+      d.next.backoffAt === a.backoffAt &&
+      sameWrites(d.next.authorised, a.authorised) &&
+      !d.alarm
+  )
+
+/** Which of the faults an observation of the store can justify on its own
+ *  (Haskell's storeFault): 1 StateLost, 2 Contradiction, 3 SizeMismatch,
+ *  4 ObjectWithoutReceipt, 5 Unavailable, and 0 for the rest, which name a
+ *  call's result or a client-side check. The table is keyed by every Fault
+ *  tag, so a new fault doesn't compile until it is placed here. */
+const storeFaultOf = {
+  StateLost: 1,
+  Contradiction: 2,
+  SizeMismatch: 3,
+  ObjectWithoutReceipt: 4,
+  Unavailable: 5,
+  Expired: 0,
+  FinalizeTimedOut: 0,
+  OutOfRange: 0,
+  TooLarge: 0,
+  QuotaAtFinalize: 0,
+  Revoked: 0,
+  Empty: 0,
+  CreationRefused: 0,
+  CreationInterrupted: 0,
+  StoreRefusedUs: 0,
+  SourceUnreachable: 0,
+  SourceAnswered: 0,
+  SourceChanged: 0
+} as const satisfies Record<Fault["_tag"], 0 | 1 | 2 | 3 | 4 | 5>
+
+/** The store fault an ending names, as storeFaultOf numbers it, or 0
+ *  (Haskell's failedOnStore). */
+const failedOnStore = (o: Outcome): 0 | 1 | 2 | 3 | 4 | 5 =>
+  Match.valueTags(o, {
+    Ongoing: () => 0 as const,
+    Ended: ({ ending }) => (ending._tag === "Failed" ? storeFaultOf[ending.fault._tag] : 0)
+  })
+
+/** K12: a fault the reconciler sets is one of the five an observation can
+ *  justify, and the observation it was decided on shows exactly that. */
+export const k12 = (a: Asset, d: Decision): boolean => {
+  const f = failedOnStore(d.next.outcome)
+  const t = seenObjTag(a.seen)
+  return implies(
+    !isEnded(a.outcome) && isEnded(d.next.outcome),
+    f !== 0 &&
+      isSeen(a.seen) &&
+      implies(f === 1, t === 0 || (hasReceipt(a.vouch) && !sameOpt(seenVersion(a.seen), vouchVersion(a.vouch)))) &&
+      implies(f === 2, t !== 0) &&
+      implies(f === 3, t === 1) &&
+      implies(f === 4, t === 2) &&
+      implies(f === 5, t === 3 && a.budget === 0)
+  )
+}
+
+/** K13: the converse of K9. While a receipt is held for an assembled goal
+ *  and the observation shows the object at the receipt's version, the goal
+ *  and the receipt stay as they are. */
+export const k13 = (a: Asset, d: Decision): boolean =>
+  implies(
+    goalTag(a.goal) === 1 &&
+      hasReceipt(a.vouch) &&
+      isSeen(a.seen) &&
+      seenObjTag(a.seen) !== 0 &&
+      sameOpt(seenVersion(a.seen), vouchVersion(a.vouch)),
+    Equal.equals(d.next.goal, a.goal) && Equal.equals(d.next.vouch, a.vouch)
+  )
+
 /** authorised (next d) == authorised a */
 export const keepsAuthorised = (a: Asset, d: Decision): boolean => sameWrites(d.next.authorised, a.authorised)
 
@@ -184,6 +266,9 @@ export const stepClaims = {
   K8: k8,
   K9: k9,
   K10: k10,
+  K11: k11,
+  K12: k12,
+  K13: k13,
   Prog: prog,
   authorised: keepsAuthorised
 } satisfies Record<string, (a: Asset, d: Decision) => boolean>

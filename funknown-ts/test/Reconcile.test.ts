@@ -1,5 +1,5 @@
 // Properties of Funknown.Kernel.Reconcile: every claim of LiquidHaskell's
-// Step type (K0 to K10, Prog, authorised unchanged) over generated assets and
+// Step type (K0 to K13, Prog, authorised unchanged) over generated assets and
 // observations, one test per claim so a failure names it; the asset each step
 // leaves behind is still a valid Asset; and the lookups' postconditions.
 // These are sampled, not proved.
@@ -34,6 +34,9 @@ claimTest("K5n")
 claimTest("K8")
 claimTest("K9")
 claimTest("K10")
+claimTest("K11")
+claimTest("K12")
+claimTest("K13")
 claimTest("Prog")
 claimTest("authorised")
 

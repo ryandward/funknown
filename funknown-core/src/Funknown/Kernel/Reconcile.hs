@@ -4,12 +4,12 @@
 -- closes the gap. Rows R0 to R19 of docs/design/kernel.md. Their guards are
 -- mutually exclusive, so each row below is reached by exactly one path.
 --
--- Every row returns a 'Step', whose type states the safety claims K1 to K5
--- and K8 once, so LiquidHaskell holds every row to all of them.
+-- Every row returns a 'Step', whose type states the safety claims K0 to K5
+-- and K8 to K13 once, so LiquidHaskell holds every row to all of them.
 module Funknown.Kernel.Reconcile
   ( reconcile
   , Found (..), isFound, foundRef
-  , firstRef, firstOther, listed, isFailed
+  , firstRef, firstOther, listed, isFailed, storeFault, failedOnStore
   ) where
 
 import Funknown.Opt
@@ -18,6 +18,43 @@ import Funknown.Http.Retry (Wait (..), nextWait)
 import Funknown.Kernel.Bound (Bound, bind, boundSize, boundVersion)
 import Funknown.Kernel.Types
 import Funknown.Upload (Chunk (..), ChunkToken, Chunks, chunkList, offsetOf)
+
+-- | Which of the faults an observation of the store can justify on its own
+-- this is: 1 StateLost, 2 Contradiction, 3 SizeMismatch,
+-- 4 ObjectWithoutReceipt, 5 Unavailable, and 0 for the rest. The rest name a
+-- call's result (SourceUnreachable, SourceAnswered, StoreRefusedUs,
+-- CreationInterrupted, FinalizeTimedOut) or a client-side check, and only
+-- the client side may set them.
+{-@ measure storeFault @-}
+{-@ storeFault :: Fault -> {n:Int | 0 <= n && n <= 5} @-}
+storeFault :: Fault -> Int
+storeFault StateLost            = 1
+storeFault Contradiction        = 2
+storeFault SizeMismatch         = 3
+storeFault ObjectWithoutReceipt = 4
+storeFault Unavailable          = 5
+storeFault Expired              = 0
+storeFault FinalizeTimedOut     = 0
+storeFault OutOfRange           = 0
+storeFault TooLarge             = 0
+storeFault QuotaAtFinalize      = 0
+storeFault Revoked              = 0
+storeFault Empty                = 0
+storeFault CreationRefused      = 0
+storeFault CreationInterrupted  = 0
+storeFault StoreRefusedUs       = 0
+storeFault SourceUnreachable    = 0
+storeFault (SourceAnswered _)   = 0
+storeFault SourceChanged        = 0
+
+-- | The store fault an ending names, as 'storeFault' numbers it, or 0.
+{-@ measure failedOnStore @-}
+{-@ failedOnStore :: Outcome -> {n:Int | 0 <= n && n <= 5} @-}
+failedOnStore :: Outcome -> Int
+failedOnStore (Ended (Failed f)) = storeFault f
+failedOnStore (Ended Deleted)    = 0
+failedOnStore (Ended Cancelled)  = 0
+failedOnStore Ongoing            = 0
 
 {-@ measure isFailed @-}
 isFailed :: Outcome -> Bool
@@ -109,8 +146,42 @@ isFailed Ongoing            = False
       (goalTag (goal A) /= 0 && goalAdopted (goal A) && not (hasReceipt (vouch A)) && cmdTag (command D) == 4)
         => discardRef (command D) /= goalStaging (goal A) @-}
 
-{-@ type Step A = {d:Decision | authorised (next d) == authorised A && K10 A d && K8 A d && K1 A d && K1b A d && K2 A d && K3 A d && K4 A d && K5n A d && K0 A d && K9 A d
-                               && Prog A d} @-}
+-- K11  an asset with no observation comes back exactly as it went in, with
+--      no alarm: a shell that turns a failed observe call into Unseen loses
+--      nothing but the call. With K0 the command is an Observe.
+{-@ predicate K11 A D = not (isSeen (seen A)) => (next D == A && not (alarm D)) @-}
+
+-- K12  a fault the reconciler sets is one of the five an observation can
+--      justify, and the observation it was decided on shows exactly that:
+--      StateLost, no object, or an object at a version other than the
+--      receipt's; Contradiction, an object; SizeMismatch, a vouched object;
+--      ObjectWithoutReceipt, an object the store will never vouch for; and
+--      Unavailable, an object not yet vouched with the budget spent. With K0
+--      it is decided only on an observation, so a call can end an asset
+--      through the reconciler only if the shell reads a failed call as an
+--      observation, which A1 rules out ("Funknown.Kernel.Inputs" lifts K12
+--      from the observation to the store under that premise).
+{-@ predicate K12 A D =
+      (not (isEnded (outcome A)) && isEnded (outcome (next D)))
+        => (failedOnStore (outcome (next D)) /= 0 && isSeen (seen A)
+            && (failedOnStore (outcome (next D)) == 1
+                  => (seenObjTag (seen A) == 0
+                      || (hasReceipt (vouch A) && seenVersion (seen A) /= vouchVersion (vouch A))))
+            && (failedOnStore (outcome (next D)) == 2 => seenObjTag (seen A) /= 0)
+            && (failedOnStore (outcome (next D)) == 3 => seenObjTag (seen A) == 1)
+            && (failedOnStore (outcome (next D)) == 4 => seenObjTag (seen A) == 2)
+            && (failedOnStore (outcome (next D)) == 5 => (seenObjTag (seen A) == 3 && budget A == 0))) @-}
+
+-- K13  the converse of K9: while a receipt is held for an assembled goal and
+--      the observation shows the object at the receipt's version, the goal
+--      and the receipt stay as they are.
+{-@ predicate K13 A D =
+      (goalTag (goal A) == 1 && hasReceipt (vouch A) && isSeen (seen A)
+       && seenObjTag (seen A) /= 0 && seenVersion (seen A) == vouchVersion (vouch A))
+        => (goal (next D) == goal A && vouch (next D) == vouch A) @-}
+
+{-@ type Step A = {d:Decision | authorised (next d) == authorised A && K11 A d && K10 A d && K8 A d && K1 A d && K1b A d && K2 A d && K3 A d && K4 A d && K5n A d && K0 A d && K9 A d
+                               && K12 A d && K13 A d && Prog A d} @-}
 
 -- Looking things up in an observation ------------------------------------------
 
@@ -184,8 +255,9 @@ rest r a = Decision a NoCmd 0 False r
 
 -- | The goal can't be reached: clear it, as Failed. No command yet; the next
 -- step, on the same observation, starts the cleanup (R16, R17).
-{-@ failWith :: Row -> a:{Asset | goalTag (goal a) /= 0} -> Fault -> Bool
+{-@ failWith :: Row -> a:{Asset | goalTag (goal a) /= 0} -> {f:Fault | storeFault f /= 0} -> Bool
              -> {d:Decision | goalTag (goal (next d)) == 0 && rank (goal (next d)) == 0 && isFailed (outcome (next d))
+                             && failedOnStore (outcome (next d)) == storeFault f
                              && seen (next d) == seen a && vouch (next d) == vouch a
                              && budget (next d) == budget a && authorised (next d) == authorised a
                              && cmdTag (command d) == 0} @-}
@@ -250,7 +322,8 @@ received (Asset g o s _ b st w) bnd = Decision (Asset g o s (HasReceipt bnd) b s
 -- | R12: the store holds the object but can't vouch yet. Spend one attempt
 -- and observe again after backoff (R SS:GRFC-A6-Backoff), or fail when the
 -- budget is spent.
-{-@ spend :: Env -> a:{Asset | goalTag (goal a) == 1 && rank (goal a) == 1 && not (hasReceipt (vouch a)) && isSeen (seen a)} -> Step a @-}
+{-@ spend :: Env -> a:{Asset | goalTag (goal a) == 1 && rank (goal a) == 1 && not (hasReceipt (vouch a)) && isSeen (seen a)
+                            && seenObjTag (seen a) == 3} -> Step a @-}
 spend :: Env -> Asset -> Decision
 spend env a@(Asset g o _ v b st w)
   | b > 0     = let Wait d st' = nextWait (backoff (cfg env)) Absent st

@@ -26,9 +26,9 @@
 // for the rows that build a new asset through asset() or makeAsset(), which
 // take shapes. The shape is where the LiquidHaskell preconditions of failWith
 // (goal not Clear), adopt (assembling, so no receipt) and clearing (Clear)
-// went.
+// went. failWith's other precondition, a store fault, is StoreFault.
 //
-// The safety claims K0 to K10 and Prog, which LiquidHaskell states once in
+// The safety claims K0 to K13 and Prog, which LiquidHaskell states once in
 // the Step type, are predicates in Kernel/ReconcileClaims.ts and FastCheck
 // properties in test/Reconcile.test.ts. They are tested, not enforced.
 import { Either, Match, Option } from "effect"
@@ -72,6 +72,14 @@ export type AssemblingView = AssetCommon & AssemblingShape
 export type AssembledView = AssetCommon & AssembledShape
 /** A goal that keeps the asset: LiquidHaskell's {a | goalTag (goal a) /= 0}. */
 export type KeepView = AssemblingView | AssembledView
+
+/** The five faults an observation of the store can justify, the ones
+ *  LiquidHaskell's storeFault numbers 1 to 5: {f:Fault | storeFault f /= 0}.
+ *  The rest name a call's result or a client-side check, and the reconciler
+ *  never sets them. */
+export type StoreFault = Fault & {
+  readonly _tag: "StateLost" | "Contradiction" | "SizeMismatch" | "ObjectWithoutReceipt" | "Unavailable"
+}
 
 /** The commands that touch the store: LiquidHaskell's {c | cmdTag c >= 2}. */
 export type StoreCmd = Cmd & { readonly _tag: "DoOpen" | "DoSeal" | "DoDiscard" | "DoRemove" }
@@ -143,8 +151,9 @@ export const rest = <R extends Row>(row: R, a: Asset): Leaf<R> => leaf(row, a, C
 
 /** The goal can't be reached: clear it, as Failed. No command yet; the next
  *  step, on the same observation, starts the cleanup (R16, R17). Only a goal
- *  that keeps the asset can fail, which the parameter type says. */
-export const failWith = <R extends Row>(row: R, v: KeepView, fault: Fault): Leaf<R> =>
+ *  that keeps the asset can fail, and only with a store fault, which the
+ *  parameter types say. */
+export const failWith = <R extends Row>(row: R, v: KeepView, fault: StoreFault): Leaf<R> =>
   leaf(
     row,
     asset({ ...v, goal: Goal.Clear(), outcome: Outcome.Ended({ ending: Ending.Failed({ fault }) }) }),

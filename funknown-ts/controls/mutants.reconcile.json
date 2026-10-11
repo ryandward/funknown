@@ -305,5 +305,115 @@
       }
     ],
     "expect": "tsc"
+  },
+  {
+    "name": "R0 raises an alarm when nothing was observed",
+    "claim": "K11: no observation, no change and no alarm",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "leaf(\"R0\", a, Cmd.DoObserve(), zero, false)",
+        "to": "leaf(\"R0\", a, Cmd.DoObserve(), zero, true)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K11 holds"
+  },
+  {
+    "name": "R12 fails with StoreRefusedUs when the budget is spent",
+    "claim": "K12 as a type: failWith takes only a StoreFault",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "failWith(\"R12\", v, Fault.Unavailable())",
+        "to": "failWith(\"R12\", v, Fault.StoreRefusedUs())"
+      }
+    ],
+    "expect": "tsc"
+  },
+  {
+    "name": "failWith takes any Fault, and R12 fails with StoreRefusedUs when the budget is spent",
+    "claim": "K12: a fault the reconciler sets is one an observation justifies",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "export const failWith = <R extends Row>(row: R, v: KeepView, fault: StoreFault): Leaf<R> =>",
+        "to": "export const failWith = <R extends Row>(row: R, v: KeepView, fault: Fault): Leaf<R> =>"
+      },
+      {
+        "from": "failWith(\"R12\", v, Fault.Unavailable())",
+        "to": "failWith(\"R12\", v, Fault.StoreRefusedUs())"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K12 holds"
+  },
+  {
+    "name": "R5 fails with SourceUnreachable when the staging area is gone",
+    "claim": "K12 as a type: failWith takes only a StoreFault",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "failWith(\"R5\", v, Fault.StateLost())",
+        "to": "failWith(\"R5\", v, Fault.SourceUnreachable())"
+      }
+    ],
+    "expect": "tsc"
+  },
+  {
+    "name": "failWith takes any Fault, and R5 fails with SourceUnreachable when the staging area is gone",
+    "claim": "K12: a fault the reconciler sets is one an observation justifies",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "export const failWith = <R extends Row>(row: R, v: KeepView, fault: StoreFault): Leaf<R> =>",
+        "to": "export const failWith = <R extends Row>(row: R, v: KeepView, fault: Fault): Leaf<R> =>"
+      },
+      {
+        "from": "failWith(\"R5\", v, Fault.StateLost())",
+        "to": "failWith(\"R5\", v, Fault.SourceUnreachable())"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K12 holds"
+  },
+  {
+    "name": "R11 fails with Unavailable on an object the store will never vouch for",
+    "claim": "K12: each store fault on the observation that justifies it",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "failWith(\"R11\", v, Fault.ObjectWithoutReceipt())",
+        "to": "failWith(\"R11\", v, Fault.Unavailable())"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K12 holds"
+  },
+  {
+    "name": "R11 spends an attempt instead when the budget is already spent",
+    "claim": "spend's precondition (the object seen, not yet vouched), held by K12",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "Unvouchable: () => failWith(\"R11\", v, Fault.ObjectWithoutReceipt()),",
+        "to": "Unvouchable: () => (a.budget === 0 ? spend(env, a, v) : failWith(\"R11\", v, Fault.ObjectWithoutReceipt())),"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K12 holds"
+  },
+  {
+    "name": "R14 fails a healthy ACTIVE asset with Contradiction",
+    "claim": "K13: the converse of K9",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "onNone: () => rest(\"R14\", a)",
+        "to": "onNone: () => failWith(\"R14\", v, Fault.Contradiction())"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K13 holds"
   }
 ]

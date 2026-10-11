@@ -40,7 +40,9 @@ str :: String -> String
 str s = "\"" ++ concatMap esc s ++ "\""
   where esc '"' = "\\\""
         esc '\\' = "\\\\"
-        esc c = [c]
+        esc c | fromEnum c < 0x20 = "\\u00" ++ [hex (fromEnum c `div` 16), hex (fromEnum c `mod` 16)]
+              | otherwise = [c]
+        hex n = "0123456789abcdef" !! n
 
 obj :: [(String, String)] -> String
 obj kvs = "{" ++ intercalate "," [str k ++ ":" ++ v | (k, v) <- kvs] ++ "}"

@@ -64,10 +64,10 @@ These modules port the Haskell kernel's data model: `Funknown.Opt`, `Upload`, `F
 ### `Kernel/Reconcile.ts`
 - `reconcile(env, a): Decision`, one step of rows R0 to R19. `decide(env, a)` returns the same decision as a `Leaf` whose row is a literal type; `RowsDecided` is the union of rows some leaf decides, and `everyRowDecided` compiles only when that is every row.
 - Lookups: `firstRef`, `firstOther` (both `Option<StagingRef>`, Haskell's `Found`), `listed`, `holds`, `pending`, and the measure `isFailed`.
-- Shapes: `ClearView`, `AssemblingView`, `AssembledView`, `KeepView` (an asset's fields, narrowed by goal) and `StoreCmd`. `issue`, `rest`, `failWith` and `adopt` are exported only for `controls/compile/reconcile-by-type.ts`.
+- Shapes: `ClearView`, `AssemblingView`, `AssembledView`, `KeepView` (an asset's fields, narrowed by goal), `StoreFault` (the five faults `failWith` takes) and `StoreCmd`. `issue`, `rest`, `failWith` and `adopt` are exported only for `controls/compile/reconcile-by-type.ts`.
 
 ### `Kernel/ReconcileClaims.ts`
-`k0`, `k1`, `k1b`, `k2`, `k3`, `k4`, `k5n`, `k8`, `k9`, `k10`, `prog`, `keepsAuthorised`, and `stepClaims` (all of them by name): LiquidHaskell's Step type as predicates over `(asset, decision)`, for the properties in `test/Reconcile.test.ts` and for Model and Converge to reuse.
+`k0`, `k1`, `k1b`, `k2`, `k3`, `k4`, `k5n`, `k8`, `k9`, `k10`, `k11`, `k12`, `k13`, `prog`, `keepsAuthorised`, and `stepClaims` (all of them by name): LiquidHaskell's Step type as predicates over `(asset, decision)`, for the properties in `test/Reconcile.test.ts` and for Model and Converge to reuse.
 
 ### `Client/Core.ts`
 - Shapes: `KeepAsset`, `AssemblingAsset`, `AssembledAsset`, `ClearAsset` (each an `Extract` of `Asset`), `AdoptedGoal` and `AdoptedAsset` (an assembly whose staging area is `Option.Some`).
@@ -76,6 +76,16 @@ These modules port the Haskell kernel's data model: `Funknown.Opt`, `Upload`, `F
 
 ### `Client/Contract.ts`
 `goalOffset` (Option where Haskell answers -1), `kMoveClauses(a, b)` (each KMove clause by name) and `kMove(a, b)`.
+
+### `Wire.ts` (and `src/wire/*.schema.json`)
+The messages a shell exchanges with the kernel, as zod schemas over the JSON that `funknown-core/dump/Dump.hs` already writes, so the shell, the differential test and the Haskell share one encoding. The header of `Wire.ts` walks through one run of a shell.
+- `PersistedState`: the asset between runs, every field but `seen` (goal, outcome, vouch, budget, backoffAt, authorised).
+- `Observation`: this round's `Observed`, or `null` (Unseen). All or nothing: when any call the observation takes failed, it is `null`, never a partial answer. K11 proves `null` costs nothing but the call.
+- `Env`: `now` is the shell's clock for this run; `maxAttempts`, `backoff` and `writeDeadline` are deployment config.
+- `Decision`: the kernel's answer; `next` is a full `Asset`.
+- `Stored`: what the shell keeps between runs, made by `keep(env, decision)`: the asset without `seen`, `notBefore` (`now + waitFor`), and the AIP-216 `state`, taken from `decision.next` before `seen` is dropped.
+- `Asset` (the kernel's input: a PersistedState plus `seen`), `Observed`, `Fault`, `Ending`, `Vouching`, `Cmd`, `State`, `rows`, `stateOf`, `statesOf`, `kernelAsset(state, seen)` and `persisted(asset)`; the joins are parsed so their results are checked.
+- `jsonSchemaText(name)` is the text of `src/wire/<name>.schema.json` (draft 2020-12), generated from the zod schema. `npm run schema` rewrites the files, and `test/Wire.test.ts` fails when they drift.
 
 ## Building assets in the reconciler and the client side
 
