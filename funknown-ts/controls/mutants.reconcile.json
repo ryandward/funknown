@@ -1,0 +1,309 @@
+[
+  {
+    "name": "R0 opens instead of observing",
+    "claim": "K0: nothing but Observe before an observation",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "leaf(\"R0\", a, Cmd.DoObserve(), zero, false)",
+        "to": "leaf(\"R0\", a, Cmd.DoOpen(), zero, false)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K0 holds"
+  },
+  {
+    "name": "issue keeps the observation fresh",
+    "claim": "K0: every store command makes the observation stale",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "leaf(row, stale(a), c, zero, false)",
+        "to": "leaf(row, a, c, zero, false)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K0 holds"
+  },
+  {
+    "name": "R9 binds the receipt to the staging area's name",
+    "claim": "K1: the receipt names the version observed",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "import { type Version, bind, boundVersion } from \"./Bound.js\"",
+        "to": "import { Version, bind, boundVersion } from \"./Bound.js\""
+      },
+      {
+        "from": "HasObject: ({ version, vouching }) =>",
+        "to": "HasObject: ({ vouching }) =>"
+      },
+      {
+        "from": "Vouched: ({ report }) => vouched(v, version, report)",
+        "to": "Vouched: ({ report }) => vouched(v, Version(r), report)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K1 holds"
+  },
+  {
+    "name": "R15 rebinds the receipt to the version now seen",
+    "claim": "K1b: a receipt once held is never replaced",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "        : failWith(\"R15\", v, Fault.StateLost())",
+        "to": "        : obj._tag === \"HasObject\" && obj.vouching._tag === \"Vouched\"\n          ? vouched(v, obj.version, obj.vouching.report)\n          : failWith(\"R15\", v, Fault.StateLost())"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K1b holds"
+  },
+  {
+    "name": "R17 seals instead of removing",
+    "claim": "K2: Seal only for an assembled goal with nothing seen",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "HasObject: ({ version }) => issue(\"R17\", a, Cmd.DoRemove({ version }))",
+        "to": "HasObject: () => issue(\"R17\", a, Cmd.DoSeal())"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K2 holds"
+  },
+  {
+    "name": "R15 removes the object it finds at another version",
+    "claim": "K3: no Remove while a receipt is held for a kept goal",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "        : failWith(\"R15\", v, Fault.StateLost())",
+        "to": "        : obj._tag === \"HasObject\"\n          ? issue(\"R15\", a, Cmd.DoRemove({ version: obj.version }))\n          : failWith(\"R15\", v, Fault.StateLost())"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K3 holds"
+  },
+  {
+    "name": "R16 waits instead of discarding",
+    "claim": "K4: a Clear goal with anything seen held removes some of it",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "onSome: (r) => issue(\"R16\", a, Cmd.DoDiscard({ ref: r }))",
+        "to": "onSome: () => rest(\"R16\", a)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K4 holds"
+  },
+  {
+    "name": "R13 discards the goal's area instead of the one listed",
+    "claim": "K5n: Discard names a staging area that was seen",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "onSome: (r2) => issue(\"R13\", a, Cmd.DoDiscard({ ref: r2 }))",
+        "to": "onSome: () => issue(\"R13\", a, Cmd.DoDiscard({ ref: r }))"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K5n holds"
+  },
+  {
+    "name": "adopting a staging area starts the chunk list over",
+    "claim": "K8: the goal's rank never rises",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "import { type Chunks, chunkList, offsetOf } from \"../Upload.js\"",
+        "to": "import { type Chunks, chunkList, emptyChunks, limitsOf, offsetOf } from \"../Upload.js\""
+      },
+      {
+        "from": "assemblingGoal(Option.some(r), v.goal.assembly.chunks)",
+        "to": "assemblingGoal(Option.some(r), emptyChunks(limitsOf(v.goal.assembly.chunks)))"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K8 holds"
+  },
+  {
+    "name": "a lost staging area is reported as a cancellation",
+    "claim": "K8: the reconciler clears a goal only as Failed",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "Outcome.Ended({ ending: Ending.Failed({ fault }) })",
+        "to": "Outcome.Ended({ ending: fault._tag === \"StateLost\" ? Ending.Cancelled() : Ending.Failed({ fault }) })"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K8 holds"
+  },
+  {
+    "name": "R14 ignores the receipt's version",
+    "claim": "K9: an object at another version clears a vouched goal",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "import { type Version, bind, boundVersion } from \"./Bound.js\"",
+        "to": "import { type Version, bind } from \"./Bound.js\""
+      },
+      {
+        "from": "HasReceipt: ({ bound }) =>\n      obj._tag === \"HasObject\" && obj.version === boundVersion(bound)",
+        "to": "HasReceipt: () =>\n      obj._tag === \"HasObject\""
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K9 holds"
+  },
+  {
+    "name": "R4 discards the producer's own staging area",
+    "claim": "K10: no Discard of the goal's staging area while no receipt is held",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "onSome: (other) => issue(\"R4\", a, Cmd.DoDiscard({ ref: other }))\n              })\n            : failWith(\"R5\"",
+        "to": "onSome: () => issue(\"R4\", a, Cmd.DoDiscard({ ref: r }))\n              })\n            : failWith(\"R5\""
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim K10 holds"
+  },
+  {
+    "name": "R12 retries without spending an attempt",
+    "claim": "Prog: an Observe on a seen asset spends budget",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "withBackoffAt(withBudget(stale(a), budget), w.nextStep)",
+        "to": "withBackoffAt(stale(a), w.nextStep)"
+      },
+      {
+        "from": "onSome: (budget) => {",
+        "to": "onSome: () => {"
+      },
+      {
+        "from": "  withBackoffAt,\n  withBudget,\n  withSeen",
+        "to": "  withBackoffAt,\n  withSeen"
+      }
+    ],
+    "expect": "tests",
+    "catches": "Step claim Prog holds"
+  },
+  {
+    "name": "R8 fails only when the area is gone, not when a chunk is missing",
+    "claim": "K7: R8's guard is 'not held c'",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "!holds(r, c, ss)\n",
+        "to": "!(listed(r, ss) || holds(r, c, ss))\n"
+      }
+    ],
+    "expect": "tests",
+    "catches": "K7: guards exhaustive"
+  },
+  {
+    "name": "R4 is checked before R8",
+    "claim": "K7: R8 before R4 (a missing chunk fails whatever else is listed)",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "          !holds(r, c, ss)\n            ? failWith(\"R8\", v, Fault.StateLost())\n            : Option.match(firstOther(r, ss), {\n                onSome: (other) => issue(\"R4\", a, Cmd.DoDiscard({ ref: other })),\n                onNone: () => issue(\"R7\", a, Cmd.DoSeal())\n              }),",
+        "to": "          Option.match(firstOther(r, ss), {\n            onSome: (other) => issue(\"R4\", a, Cmd.DoDiscard({ ref: other })),\n            onNone: () => (!holds(r, c, ss) ? failWith(\"R8\", v, Fault.StateLost()) : issue(\"R7\", a, Cmd.DoSeal()))\n          }),"
+      }
+    ],
+    "expect": "tests",
+    "catches": "K7: guards exhaustive"
+  },
+  {
+    "name": "R7 seals while orphans are listed",
+    "claim": "K7: R4 before R7",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "onSome: (other) => issue(\"R4\", a, Cmd.DoDiscard({ ref: other })),\n                onNone: () => issue(\"R7\", a, Cmd.DoSeal())",
+        "to": "onSome: () => issue(\"R7\", a, Cmd.DoSeal()),\n                onNone: () => issue(\"R7\", a, Cmd.DoSeal())"
+      }
+    ],
+    "expect": "tests",
+    "catches": "K7: guards exhaustive"
+  },
+  {
+    "name": "holds accepts an area holding any one chunk",
+    "claim": "K7: held c means every chunk, by token",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "chunkList(c).every((ch) =>",
+        "to": "chunkList(c).some((ch) =>"
+      }
+    ],
+    "expect": "tests",
+    "catches": "K7: guards exhaustive"
+  },
+  {
+    "name": "pending reports the earliest deadline",
+    "claim": "pending: the latest unreported deadline",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "Nat(ws.reduce((m, w) => Math.max(m,",
+        "to": "Nat(ws.reduce((m, w) => Math.min(m,"
+      }
+    ],
+    "expect": "tests",
+    "catches": "pending is 0 exactly"
+  },
+  {
+    "name": "firstOther returns r itself",
+    "claim": "firstOther: what it finds isn't r",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "ss.find((s) => s.ref !== r)",
+        "to": "ss.find((s) => s.ref === r)"
+      }
+    ],
+    "expect": "tests",
+    "catches": "firstOther:"
+  },
+  {
+    "name": "R1 opens even when something is staged",
+    "claim": "every row has a leaf (R2 goes missing)",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "onSome: (r) => adopt(v, r)",
+        "to": "onSome: () => issue(\"R1\", a, Cmd.DoOpen())"
+      }
+    ],
+    "expect": "tsc"
+  },
+  {
+    "name": "the assembled branch matches only assets without a receipt",
+    "claim": "exhaustive split of the Asset by its goal",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "Match.when({ goal: { assembly: { _tag: \"Assembled\" } } }, (v) =>",
+        "to": "Match.when({ goal: { assembly: { _tag: \"Assembled\" } }, vouch: { _tag: \"NoReceipt\" } }, (v) =>"
+      }
+    ],
+    "expect": "tsc"
+  },
+  {
+    "name": "the clearing split loses its Remove case",
+    "claim": "exhaustive split of the object (Match.valueTags)",
+    "file": "src/Kernel/Reconcile.ts",
+    "edits": [
+      {
+        "from": "        HasObject: ({ version }) => issue(\"R17\", a, Cmd.DoRemove({ version })),\n",
+        "to": ""
+      }
+    ],
+    "expect": "tsc"
+  }
+]

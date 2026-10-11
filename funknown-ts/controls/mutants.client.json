@@ -1,0 +1,118 @@
+[
+  {
+    "name": "clearGoal forgets the unreported writes",
+    "claim": "clearGoal postcondition: authorised b == authorised a (KMove itself allows it)",
+    "file": "src/Client/Core.ts",
+    "from": "    authorised: a.authorised,\n    goal: Goal.Clear(),",
+    "to": "    authorised: [],\n    goal: Goal.Clear(),",
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "startWrite spends the budget",
+    "claim": "KMove: budget b == budget a",
+    "file": "src/Client/Core.ts",
+    "from": "    budget: a.budget,\n    backoffAt: a.backoffAt,\n    authorised,\n",
+    "to": "    budget: 0,\n    backoffAt: a.backoffAt,\n    authorised,\n",
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "completeGoal refills the budget",
+    "claim": "KMove: budget b == budget a",
+    "file": "src/Client/Core.ts",
+    "from": "    budget: a.budget,\n    backoffAt: a.backoffAt,\n    authorised: a.authorised,\n    goal: assembledGoal(",
+    "to": "    budget: 5,\n    backoffAt: a.backoffAt,\n    authorised: a.authorised,\n    goal: assembledGoal(",
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "completeGoal moves to another staging area",
+    "claim": "KMove: an adopted goal keeps its staging area",
+    "file": "src/Client/Core.ts",
+    "edits": [
+      {
+        "from": "  type StagingRef,\n",
+        "to": "  StagingRef,\n"
+      },
+      {
+        "from": "assembledGoal(a.goal.assembly.staging.value, a.goal.assembly.chunks)",
+        "to": "assembledGoal(StagingRef(\"elsewhere\"), a.goal.assembly.chunks)"
+      }
+    ],
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "appendTo acknowledges the chunk and drops it",
+    "claim": "appendTo postcondition: goalOffset b == goalOffset a + cbytes k, rank drops",
+    "file": "src/Client/Core.ts",
+    "from": "(chunks) => regrow(a, chunks))",
+    "to": "() => regrow(a, a.goal.assembly.chunks))",
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "startWrite starts two writes",
+    "claim": "KMove: at most one write starts per move",
+    "file": "src/Client/Core.ts",
+    "from": "[new Write({ epoch, deadline }), ...a.authorised]",
+    "to": "[new Write({ epoch, deadline }), new Write({ epoch, deadline }), ...a.authorised]",
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "reportWrite puts the writes back twice",
+    "claim": "reportWrite: len (authorised b) <= len (authorised a)",
+    "file": "src/Client/Core.ts",
+    "from": "[...ws.slice(0, i), ...ws.slice(i + 1)]",
+    "to": "[...ws, ...ws.slice(i + 1)]",
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "completeGoal lands back in an assembly",
+    "claim": "completeGoal's result is an assembled goal (type)",
+    "file": "src/Client/Core.ts",
+    "from": "(a: AdoptedAsset): AssembledAsset => seal(a)",
+    "to": "(a: AdoptedAsset): AssembledAsset => (seal(a), regrow(a, a.goal.assembly.chunks))",
+    "expect": "tsc",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "clearGoal accepts a Clear goal",
+    "claim": "clearGoal's precondition goalTag (goal a) /= 0 (type)",
+    "file": "src/Client/Core.ts",
+    "from": "export type KeepAsset = Extract<Asset, { readonly goal: AssemblingGoal | AssembledGoal }>",
+    "to": "export type KeepAsset = Asset",
+    "expect": "controls",
+    "test": "client-moves-by-shape.ts"
+  },
+  {
+    "name": "KMove forgets the budget clause",
+    "claim": "the KMove predicate itself: budget b == budget a",
+    "file": "src/Client/Contract.ts",
+    "from": "budgetKept: b.budget === a.budget,",
+    "to": "budgetKept: true,",
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "KMove lets a start land on any goal",
+    "claim": "the KMove predicate itself: a start only while assembling",
+    "file": "src/Client/Contract.ts",
+    "from": "startOnlyAlone: !grew || (goalSame && tagA === 2)",
+    "to": "startOnlyAlone: !grew || goalSame",
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  },
+  {
+    "name": "KMove reads a goal change at equal rank as fine",
+    "claim": "the KMove predicate itself: a goal that moves lowers its rank",
+    "file": "src/Client/Contract.ts",
+    "from": "goalChangeLowersRank: goalSame || rank(gb) < rank(ga),",
+    "to": "goalChangeLowersRank: goalSame || rank(gb) <= rank(ga),",
+    "expect": "tests",
+    "test": "ClientCore.test.js"
+  }
+]

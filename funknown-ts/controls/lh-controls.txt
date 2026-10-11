@@ -1,0 +1,121 @@
+R1   trust the store's size for the receipt
+     LH: UNSAFE | TS: NOT CAUGHT
+R2   remove the vouched object while ACTIVE (R13 removes)
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite | an empty script is the honest store alone, and still converges
+     differential: 233 points disagree
+R3   remove a version nobody observed (R17)
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite | an empty script is the honest store alone, and still converges
+     differential: 1309 points disagree
+R4   leave a staging area behind on Clear (R16 rests)
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite | an empty script is the honest store alone, and still converges
+     differential: 2980 points disagree
+R5   stay ACTIVE after the store lost the object (R15 rests)
+     LH: SAFE at first (hole), UNSAFE once K9 was added | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite | an empty script is the honest store alone, and still converges
+     differential: 452 points disagree
+R6   decide before observing (R0 opens)
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite | an empty script is the honest store alone, and still converges
+     differential: 1834 points disagree
+R7   spend budget that isn't there (b >= 0)
+     LH: UNSAFE | TS: tsc
+     tsc: src/Http/Retry.ts(22,7): error TS2375: Type 'Option<-1>' is not assignable to type 'Option<Attempts>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's 
+R8   clear the goal as Cancelled, not Failed
+     LH: UNSAFE | TS: property, differential
+     properties: Step claims K0-K10 and Prog hold at all 1320 points of the guard domain | Step claim K8 holds for every generated asset and observation
+     differential: 2470 points disagree
+R9   seal while an orphan staging area exists (R4 seals)
+     LH: SAFE (not caught) | TS: differential
+     differential: 76 points disagree
+R10  accept any version as the vouched one
+     LH: UNSAFE | TS: property, differential
+     properties: K7: guards exhaustive, exclusive and followed at all 1320 points | Step claims K0-K10 and Prog hold at all 1320 points of the guard domain | Step claim K9 holds for every generated asset and observation
+     differential: 166 points disagree
+R11  call a file ACTIVE before its receipt
+     LH: UNSAFE | TS: property
+     properties: K6: stateOf is ACTIVE exactly when a receipt is held and the goal isn't Clear
+R12  stall on leftover staging after the receipt (R13 rests)
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite | an empty script is the honest store alone, and still converges
+     differential: 237 points disagree
+R13  open while something is staged (R2 opens)
+     LH: UNSAFE | TS: tsc
+     tsc: src/Kernel/Reconcile.ts(281,14): error TS2322: Type 'true' is not assignable to type '"R2"'.
+R13b open while something is staged (compiling form: the row stays R2)
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite | an empty script is the honest store alone, and still converges
+     differential: 559 points disagree
+R14  retry forever without spending (R12)
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite | an empty script is the honest store alone, and still converges
+     differential: 112 points disagree
+R15  discard the producer's own staging area (R4, assembling)
+     LH: SAFE at first (hole), UNSAFE once K10 was added | TS: property, differential
+     properties: Step claims K0-K10 and Prog hold at all 1320 points of the guard domain | Step claim K10 holds for every generated asset and observation
+     differential: 284 points disagree
+R16  discard the producer's own staging area (R4, assembled)
+     LH: UNSAFE | TS: property, differential
+     properties: Step claims K0-K10 and Prog hold at all 1320 points of the guard domain | Step claim K10 holds for every generated asset and observation
+     differential: 98 points disagree
+R17  R3 no longer a resting row
+     LH: UNSAFE | TS: property
+     properties: the resting-row type agrees with isFixedRow on every row | converge reaches a resting row for every start and every script, finite or infinite | Step claims K0-K10 and Prog hold at all 1320 points of the guard domain | progress: every round rests or lowers the metric, and leaves the asset's observation exact
+R18  discard orphans before failing a missing chunk (R4 before R8)
+     LH: not LH: caught by the guard test | TS: property, differential
+     properties: K7: guards exhaustive, exclusive and followed at all 1320 points
+     differential: 146 points disagree
+C1   drops that cost nothing
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite
+     differential: 648 points disagree; NoProgress
+C2   drops with no allowance left
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite
+     differential: expected a natural number
+C3   late writes that never run out
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite
+     differential: 459 points disagree; NoProgress
+C4   an append that doesn't use up the cap
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite
+     differential: 125 points disagree; NoProgress
+C5   keep going after a resting row (literal: if False)
+     LH: UNSAFE | TS: tsc
+     tsc: src/Kernel/Converge.ts(245,49): error TS2322: Type 'Row' is not assignable to type '"R14" | "R18" | "R19" | "R3"'.
+C5b  keep going after a resting row (compiling form)
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite | an empty script is the honest store alone, and still converges
+     differential: 1500 points disagree; NoProgress
+C6   a client can reopen a cleared goal
+     LH: UNSAFE | TS: property, differential
+     properties: the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts) | the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script | converge reaches a resting row for every start and every script, finite or infinite
+     differential: 537 points disagree; NoProgress
+K1   clear without an ending
+     LH: UNSAFE | TS: tsc
+     tsc: src/Client/Core.ts(105,15): error TS2345: Argument of type '{ seen: { readonly _tag: "Seen"; readonly observed: Observed; } | { readonly _tag: "Unseen"; }; vouch: { readonly _tag: "HasReceipt"; readon
+K2   append into a different staging area (literal)
+     LH: UNSAFE | TS: tsc
+     tsc: src/Client/Core.ts(125,23): error TS2379: Argument of type 'Option<StagingRef>' is not assignable to parameter of type 'Some<StagingRef>' with 'exactOptionalPropertyTypes: true'. Consider adding 'unde
+K2b  append into a different staging area (compiling form)
+     LH: UNSAFE | TS: property
+     properties: appendTo meets KMove, grows the offset by the chunk and keeps the writes | a script of client moves never raises the metric prefix, apart from each start's one write
+K3   append that drops the new chunk
+     LH: UNSAFE | TS: property
+     properties: appendTo meets KMove, grows the offset by the chunk and keeps the writes
+K4   complete that also starts a write
+     LH: UNSAFE | TS: property
+     properties: completeGoal meets KMove and completes with exactly the chunks it had | a script of client moves never raises the metric prefix, apart from each start's one write
+K5   report that starts another write instead
+     LH: UNSAFE | TS: property
+     properties: reportWrite meets KMove on any asset, keeps the goal and never adds a write | a script of client moves never raises the metric prefix, apart from each start's one write
+K6   the client throws away the receipt
+     LH: UNSAFE | TS: property
+     properties: clearGoal meets KMove, clears the goal and keeps the writes | a script of client moves never raises the metric prefix, apart from each start's one write
+X1   pending reports the earliest deadline, not the latest
+     LH: see current-controls.log | TS: property, differential
+     properties: pending is 0 exactly when no write's deadline is after now, and otherwise the latest deadline less now
+     differential: 170 points disagree

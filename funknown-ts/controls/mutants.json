@@ -1,0 +1,307 @@
+[
+  {
+    "name": "canAppend lets a chunk follow a short one",
+    "claim": "Chunks refinement: only the newest chunk may be short",
+    "file": "src/Upload.ts",
+    "from": "(l.length === 0 || headBytes(l) >= lim.minChunk)",
+    "to": "true",
+    "expect": "tests",
+    "test": "Upload.test.js"
+  },
+  {
+    "name": "canAppend ignores max-size",
+    "claim": "Chunks refinement: total within max-size",
+    "file": "src/Upload.ts",
+    "from": "total(l) + n <= lim.maxSize &&",
+    "to": "",
+    "expect": "tests",
+    "test": "Upload.test.js"
+  },
+  {
+    "name": "canAppend ignores the chunk cap",
+    "claim": "Chunks refinement: count within maxChunks; room is a Nat",
+    "file": "src/Upload.ts",
+    "from": "l.length < lim.maxChunks &&",
+    "to": "",
+    "expect": "tests",
+    "test": "Upload.test.js"
+  },
+  {
+    "name": "appendChunk adds the chunk as the oldest",
+    "claim": "appendChunk postcondition: lastBytes y == cbytes c",
+    "file": "src/Upload.ts",
+    "from": "Data.array([c, ...x.newestFirst])",
+    "to": "Data.array([...x.newestFirst, c])",
+    "expect": "tests",
+    "test": "Upload.test.js"
+  },
+  {
+    "name": "limits accepts maxChunk < minChunk",
+    "claim": "Limits refinement: maxChunk >= minChunk",
+    "file": "src/Upload.ts",
+    "from": "f.maxChunk >= f.minChunk ? Option.some",
+    "to": "true ? Option.some",
+    "expect": "tests",
+    "test": "Upload.test.js"
+  },
+  {
+    "name": "makeUpload lets complete disagree with the offset",
+    "claim": "Upload refinement: complete => known length == offset",
+    "file": "src/Upload.ts",
+    "from": "onSome: (n) => n === off })",
+    "to": "onSome: () => true })",
+    "expect": "tests",
+    "test": "Upload.test.js"
+  },
+  {
+    "name": "knownLen forgets a known length",
+    "claim": "Len: Known carries its length",
+    "file": "src/Opt.ts",
+    "from": "Known: ({ n }) => Option.some(n)",
+    "to": "Known: () => Option.none()",
+    "expect": "tests",
+    "test": "Upload.test.js"
+  },
+  {
+    "name": "checksum bound is 2^63",
+    "claim": "Checksum: 0 <= v < 2^64, checksumOf present exactly then",
+    "file": "src/Store/Algorithm.ts",
+    "from": "2n ** 64n",
+    "to": "2n ** 63n",
+    "expect": "tests",
+    "test": "Store.test.js"
+  },
+  {
+    "name": "receiptReport refuses size 0",
+    "claim": "receiptReport present exactly when 0 <= s",
+    "file": "src/Store/Receipt.ts",
+    "from": "Option.map(Nat.option(s),",
+    "to": "Option.map(Nat.option(s === 0 ? -1 : s),",
+    "expect": "tests",
+    "test": "Store.test.js"
+  },
+  {
+    "name": "vouch issues a receipt for any size",
+    "claim": "vouch: Receipt exactly when size == expected (DC1)",
+    "file": "src/Store/Receipt.ts",
+    "from": "rep.size === expected\n",
+    "to": "rep.size >= 0\n",
+    "expect": "tests",
+    "test": "Store.test.js"
+  },
+  {
+    "name": "vouch swaps in another checksum",
+    "claim": "vouch keeps the report's checksum (and alg and size)",
+    "file": "src/Store/Receipt.ts",
+    "expect": "tests",
+    "test": "Store.test.js",
+    "edits": [
+      {
+        "from": "import { type Checksum, type ReceiptAlgorithm, checksumValue, width } from \"./Algorithm.js\"",
+        "to": "import { type Checksum, type ReceiptAlgorithm, checksumOf, checksumValue, width } from \"./Algorithm.js\""
+      },
+      {
+        "from": "new Receipt({ alg: rep.alg, checksum: rep.checksum, size: rep.size })",
+        "to": "new Receipt({ alg: rep.alg, checksum: Option.getOrElse(checksumOf(0n), () => rep.checksum), size: rep.size })"
+      }
+    ]
+  },
+  {
+    "name": "toHex drops the zero padding",
+    "claim": "toHex: sixteen lowercase hex digits",
+    "file": "src/Store/Receipt.ts",
+    "from": ".toString(16).padStart(16, \"0\")",
+    "to": ".toString(16)",
+    "expect": "tests",
+    "test": "Store.test.js"
+  },
+  {
+    "name": "bind ignores the observed version",
+    "claim": "K1: boundVersion b == v",
+    "file": "src/Kernel/Bound.ts",
+    "from": "new Bound({ version: v, receipt: r })",
+    "to": "new Bound({ version: Version(v + \"-other\"), receipt: r })",
+    "expect": "tests",
+    "test": "Store.test.js"
+  },
+  {
+    "name": "makeAsset skips the receipt length check",
+    "claim": "Asset refinement: receipt size == assembled length",
+    "file": "src/Kernel/Types.ts",
+    "from": "assembled.value !== receipt.value",
+    "to": "assembled.value !== assembled.value",
+    "expect": "tests",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "stateOf calls a cancelled asset with a receipt ACTIVE",
+    "claim": "K6: ACTIVE iff receipt held and goal not Clear",
+    "file": "src/Kernel/Types.ts",
+    "from": "Cancelled: () => State.CANCELLED(),",
+    "to": "Cancelled: () => (hasReceipt(a.vouch) ? State.ACTIVE() : State.CANCELLED()),",
+    "expect": "tests",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "rank of an assembly in progress is 1 + room",
+    "claim": "rank: goalTag 2 => rank >= 2",
+    "file": "src/Kernel/Types.ts",
+    "from": "addNat(Nat(2), room(chunks))",
+    "to": "addNat(Nat(1), room(chunks))",
+    "expect": "tests",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "gapI counts 2 for an unadopted, unstaged assembly",
+    "claim": "gapI matches the design's gap table",
+    "file": "src/Kernel/Types.ts",
+    "from": "n === 0 ? Nat(3)",
+    "to": "n === 0 ? Nat(2)",
+    "expect": "tests",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "R19 stops being a resting row",
+    "claim": "isFixedRow is exactly R3, R14, R18, R19",
+    "file": "src/Kernel/Types.ts",
+    "from": "R18: true, R19: true",
+    "to": "R18: true, R19: false",
+    "expect": "tests",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "withSeen also resets the budget",
+    "claim": "with* change only their field",
+    "file": "src/Kernel/Types.ts",
+    "from": "mint({ ...a, seen })",
+    "to": "mint({ ...a, seen, budget: 0 })",
+    "expect": "tests",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "backoff grows past the cap",
+    "claim": "backoff c s in (0, maxBackoff], A6 closed form",
+    "file": "src/Http/Retry.ts",
+    "from": "return p >= c.maxBackoff ? c.maxBackoff : PosInt(p)",
+    "to": "return PosInt(p)",
+    "expect": "tests",
+    "test": "Retry.test.js"
+  },
+  {
+    "name": "nextWait resets the step to 2 after a hint",
+    "claim": "RE3: a hint resets the step to 1",
+    "file": "src/Http/Retry.ts",
+    "from": "nextStep: PosInt(1)",
+    "to": "nextStep: PosInt(2)",
+    "expect": "tests",
+    "test": "Retry.test.js"
+  },
+  {
+    "name": "makeBackoff accepts initial above max",
+    "claim": "Backoff refinement: initial <= max",
+    "file": "src/Http/Retry.ts",
+    "from": "f.initialBackoff <= f.maxBackoff &&",
+    "to": "",
+    "expect": "tests",
+    "test": "Retry.test.js"
+  },
+  {
+    "name": "backoffBound is 2^32",
+    "claim": "Backoff refinement: maxBackoff and multiplier <= 2^31",
+    "file": "src/Http/Retry.ts",
+    "from": "export const backoffBound = 2147483648",
+    "to": "export const backoffBound = 4294967296",
+    "expect": "tests",
+    "test": "Retry.test.js"
+  },
+  {
+    "name": "width returns 65",
+    "claim": "width a == 64",
+    "file": "src/Store/Algorithm.ts",
+    "from": "Crc64Nvme: (): 64 => 64",
+    "to": "Crc64Nvme: (): 64 => 65",
+    "expect": "tsc",
+    "test": "Store.test.js"
+  },
+  {
+    "name": "a new store command appears",
+    "claim": "Cmd case analysis is exhaustive",
+    "file": "src/Kernel/Types.ts",
+    "from": "  DoRemove: { readonly version: Version }\n}>",
+    "to": "  DoRemove: { readonly version: Version }\n  DoCopy: {}\n}>",
+    "expect": "tsc",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "a new decision row appears",
+    "claim": "every row is listed and says whether it rests",
+    "file": "src/Kernel/Types.ts",
+    "from": "| \"R15\" | \"R16\" | \"R17\" | \"R18\" | \"R19\"",
+    "to": "| \"R15\" | \"R16\" | \"R17\" | \"R18\" | \"R19\" | \"R20\"",
+    "expect": "tsc",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "a new kind of vouching appears",
+    "claim": "objTag and objVouchedSize cover every observation",
+    "file": "src/Kernel/Types.ts",
+    "from": "  NotYetVouched: {}\n}>",
+    "to": "  NotYetVouched: {}\n  Revoked: {}\n}>",
+    "expect": "tsc",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "receipts allowed while assembling",
+    "claim": "Asset refinement: no receipt for an assembly in progress",
+    "file": "src/Kernel/Types.ts",
+    "from": "  readonly goal: AssemblingGoal\n  readonly outcome: Data.TaggedEnum.Value<Outcome, \"Ongoing\">\n  readonly vouch: Data.TaggedEnum.Value<Vouch, \"NoReceipt\">",
+    "to": "  readonly goal: AssemblingGoal\n  readonly outcome: Data.TaggedEnum.Value<Outcome, \"Ongoing\">\n  readonly vouch: Vouch",
+    "expect": "tsc",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "vouch refuses a matching size",
+    "claim": "SizeDiffers: reportedSize /= expectedSize",
+    "file": "src/Store/Receipt.ts",
+    "from": "rep.size === expected\n",
+    "to": "rep.size === expected + 1\n",
+    "expect": "tests",
+    "test": "Store.test.js"
+  },
+  {
+    "name": "pow16 is off by one digit",
+    "claim": "widthIsSixteenDigits: pow2 (width a) == pow16 16",
+    "file": "src/Store/Receipt.ts",
+    "from": "16n ** BigInt(k)",
+    "to": "16n ** BigInt(k - 1)",
+    "expect": "tests",
+    "test": "Store.test.js"
+  },
+  {
+    "name": "stateOf ignores unreported writes",
+    "claim": "DELETED only once seen empty and no write unreported (A3)",
+    "file": "src/Kernel/Types.ts",
+    "from": "heldNothing(a.seen) && a.authorised.length === 0",
+    "to": "heldNothing(a.seen)",
+    "expect": "tests",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "objTag calls not-yet-vouched vouched",
+    "claim": "objTag: 1 exactly for a vouched object",
+    "file": "src/Kernel/Types.ts",
+    "from": "NotYetVouched: (): ObjTag => 3",
+    "to": "NotYetVouched: (): ObjTag => 1",
+    "expect": "tests",
+    "test": "Types.test.js"
+  },
+  {
+    "name": "spendAttempt skips a step",
+    "claim": "budget lowers by exactly one",
+    "file": "src/Http/Retry.ts",
+    "from": "case 3:\n      return Option.some(2)",
+    "to": "case 3:\n      return Option.some(1)",
+    "expect": "tests",
+    "test": "Retry.test.js"
+  }
+]

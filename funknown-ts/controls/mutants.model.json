@@ -1,0 +1,170 @@
+[
+  {
+    "name": "Open adds no staging area",
+    "claim": "perform: Open adds a staging area (cmdTag 2 postcondition); progress at R1",
+    "file": "src/Kernel/Model.ts",
+    "from": "DoOpen: () => withObs(m, observed([staging(m.fresh, []), ...ss], o)),",
+    "to": "DoOpen: () => withObs(m, observed([staging(m.fresh, []), ...ss].slice(1), o)),",
+    "expect": "tests"
+  },
+  {
+    "name": "Seal keeps the staging area it consumed",
+    "claim": "perform: a successful Seal consumes the staging area (cmdTag 3 postcondition)",
+    "file": "src/Kernel/Model.ts",
+    "from": "withObs(m, observed(dropRef(r, ss), ObjectObs.HasObject(",
+    "to": "withObs(m, observed([...ss, ...dropRef(r, [])], ObjectObs.HasObject(",
+    "expect": "tests"
+  },
+  {
+    "name": "Discard removes nothing",
+    "claim": "perform: Discard of a listed area lowers the count (cmdTag 4 postcondition); progress at R4, R13, R16",
+    "file": "src/Kernel/Model.ts",
+    "from": "DoDiscard: ({ ref }) => withObs(m, observed(dropRef(ref, ss), o)),",
+    "to": "DoDiscard: () => m,",
+    "expect": "tests"
+  },
+  {
+    "name": "Remove ignores the version it names",
+    "claim": "store contract rule 2: Remove is conditional on its version (beyond the LH spec of perform)",
+    "file": "src/Kernel/Model.ts",
+    "from": "h.version === version ?",
+    "to": "h.version === version || h.version !== version ?",
+    "expect": "tests"
+  },
+  {
+    "name": "coherent ignores the object's version",
+    "claim": "Coherent A M: synced is present exactly when the pair is Coherent",
+    "file": "src/Kernel/Model.ts",
+    "from": "Option.getEquivalence((x: Version, y: Version) => x === y)(seenVersion(a.seen), obsVersion(m.obs)))",
+    "to": "(Option.getEquivalence((x: Version, y: Version) => x === y)(seenVersion(a.seen), obsVersion(m.obs)) || true))",
+    "expect": "tests"
+  },
+  {
+    "name": "synced skips the Coherent check",
+    "claim": "Coherent A M as a type: the checked producer",
+    "file": "src/Kernel/Model.ts",
+    "from": "coherent(a, m) ? Option.some",
+    "to": "true ? Option.some",
+    "expect": "tests"
+  },
+  {
+    "name": "observedNow keeps the asset's old observation",
+    "claim": "round: the asset's observation is exact after the round (isSeen, Coherent)",
+    "file": "src/Kernel/Model.ts",
+    "from": "new Synced({ asset: observeInto(a, m), model: m })",
+    "to": "new Synced({ asset: a, model: m })",
+    "expect": "tests"
+  },
+  {
+    "name": "forgetting keeps a stale observation",
+    "claim": "Coherent after an adversary move: a late write leaves the asset's view stale",
+    "file": "src/Kernel/Model.ts",
+    "from": "new Synced({ asset: withSeen(a, Seen.Unseen()), model: m })",
+    "to": "new Synced({ asset: a, model: m })",
+    "expect": "tests"
+  },
+  {
+    "name": "Synced is exported as a value",
+    "claim": "Coherent A M as a type: only the four producers build a Synced",
+    "file": "src/Kernel/Model.ts",
+    "from": "export type { Synced }",
+    "to": "export { Synced }",
+    "expect": "controls"
+  },
+  {
+    "name": "a drop costs nothing",
+    "claim": "converge metric: a drop lowers the allowance",
+    "file": "src/Kernel/Converge.ts",
+    "from": "allowance: Nat(d - 1)",
+    "to": "allowance: d",
+    "expect": "tests"
+  },
+  {
+    "name": "drops go on with the allowance spent",
+    "claim": "converge metric: the allowance is a Nat",
+    "file": "src/Kernel/Converge.ts",
+    "from": "return d > 0 && cmdTag(dec.command) >= 1",
+    "to": "return cmdTag(dec.command) >= 1",
+    "expect": "tests"
+  },
+  {
+    "name": "late writes never run out",
+    "claim": "converge metric: a late write uses up one unreported write",
+    "file": "src/Kernel/Converge.ts",
+    "from": "forgetting(withAuthorised(a, tail), reappear(m))",
+    "to": "forgetting(a, reappear(m))",
+    "expect": "tests"
+  },
+  {
+    "name": "an append doesn't use up the chunk cap",
+    "claim": "converge metric: an append lowers the goal's rank",
+    "file": "src/Kernel/Converge.ts",
+    "edits": [
+      {
+        "from": "    (c) =>\n",
+        "to": "    (_c) =>\n"
+      },
+      {
+        "from": "goal: assemblingGoal(r, c),",
+        "to": "goal: assemblingGoal(r, chunks),"
+      }
+    ],
+    "expect": "tests"
+  },
+  {
+    "name": "abandon applies to a goal already cleared",
+    "claim": "converge metric: a goal move lowers the rank",
+    "file": "src/Kernel/Converge.ts",
+    "from": "  a.goal._tag === \"Keep\"\n",
+    "to": "  a.goal._tag !== \"Keep\" || a.goal._tag === \"Keep\"\n",
+    "expect": "tests"
+  },
+  {
+    "name": "carrying on past a resting row",
+    "claim": "converge stops at a resting row",
+    "file": "src/Kernel/Converge.ts",
+    "from": "? Advanced.Rested({ synced: r.synced, row })",
+    "to": "? Advanced.Rounded({ next: new Next({ synced: r.synced, allowance: d }), row })",
+    "expect": "tests"
+  },
+  {
+    "name": "R19 stops being a resting row for converge",
+    "claim": "Run's row is a resting row; FixedRow agrees with isFixedRow",
+    "file": "src/Kernel/Converge.ts",
+    "from": "Schema.Literal(\"R3\", \"R14\", \"R18\", \"R19\")",
+    "to": "Schema.Literal(\"R3\", \"R14\", \"R18\")",
+    "expect": "tests"
+  },
+  {
+    "name": "the metric puts the gap before the unreported writes",
+    "claim": "converge metric: the lexicographic order of its components",
+    "file": "src/Kernel/Converge.ts",
+    "from": "  lengthOf(s.asset.authorised),\n  gapM(s.asset, s.model),\n",
+    "to": "  gapM(s.asset, s.model),\n  lengthOf(s.asset.authorised),\n",
+    "expect": "tests"
+  },
+  {
+    "name": "the metric drops the not-yet-observed bit",
+    "claim": "converge metric: an observing round lowers the last component",
+    "file": "src/Kernel/Converge.ts",
+    "from": "unseenBit(isSeen(s.asset.seen))",
+    "to": "unseenBit(isSeen(s.asset.seen) || true)",
+    "expect": "tests"
+  },
+  {
+    "name": "Run accepts any row",
+    "claim": "Run: runRow is a resting row, by type",
+    "file": "src/Kernel/Converge.ts",
+    "from": "  readonly row: FixedRow\n  readonly rounds: Nat",
+    "to": "  readonly row: Row\n  readonly rounds: Nat",
+    "expect": "controls"
+  },
+  {
+    "name": "a new adversary move appears",
+    "claim": "exhaustive case analysis over Move",
+    "file": "src/Kernel/Converge.ts",
+    "from": "  Drop: {}\n",
+    "to": "  Drop: {}\n  Stall: {}\n",
+    "expect": "tsc"
+  }
+]

@@ -59,6 +59,13 @@ library port-check
   exposed-modules:  Port.Urllib3
                     Port.GoTransport
 
+-- Runs the kernel on a fixed set of inputs and writes each result as a JSON
+-- line, so funknown-ts can compare its port against the Haskell.
+executable haskell-dump
+  import:           plain
+  hs-source-dirs:   dump
+  main-is:          Dump.hs
+
 test-suite exhaustive-precondition
   import:           plain
   type:             exitcode-stdio-1.0

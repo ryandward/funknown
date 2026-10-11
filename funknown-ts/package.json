@@ -1,0 +1,17 @@
+{
+  "name": "funknown-ts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Strict TypeScript + Effect port of the Funknown kernel, checked against the Haskell",
+  "scripts": {
+    "fixture": "mkdir -p test/fixtures && cd .. && cabal run -v0 haskell-dump > funknown-ts/test/fixtures/haskell-dump.jsonl",
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run fixture && npm run build && node --test \"dist/test/**/*.test.js\"",
+    "controls": "npm run fixture && npm run build && node controls/run.mjs"
+  },
+  "type": "module",
+  "dependencies": {
+    "effect": "3.22.2",
+    "typescript": "7.0.2"
+  }
+}

@@ -1,0 +1,528 @@
+[
+  {
+    "id": "R1",
+    "name": "trust the store's size for the receipt",
+    "claim": "K1",
+    "lh": "UNSAFE",
+    "src": "transcript (a); README",
+    "applied": true,
+    "property": [],
+    "ctor": null,
+    "differential": false,
+    "differentialDetail": null
+  },
+  {
+    "id": "R2",
+    "name": "remove the vouched object while ACTIVE (R13 removes)",
+    "claim": "K3",
+    "lh": "UNSAFE",
+    "src": "transcript (b); README 'removing the good object'",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "an empty script is the honest store alone, and still converges",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "progress: every round rests or lowers the metric, and leaves the asset's observation exact",
+      "Step claim K3 holds for every generated asset and observation",
+      "Step claim Prog holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "233 points disagree"
+  },
+  {
+    "id": "R3",
+    "name": "remove a version nobody observed (R17)",
+    "claim": "K5n",
+    "lh": "UNSAFE",
+    "src": "transcript (c)",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "an empty script is the honest store alone, and still converges",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "progress: every round rests or lowers the metric, and leaves the asset's observation exact",
+      "Step claim K5n holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "1309 points disagree"
+  },
+  {
+    "id": "R4",
+    "name": "leave a staging area behind on Clear (R16 rests)",
+    "claim": "K4",
+    "lh": "UNSAFE",
+    "src": "transcript (d)",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "an empty script is the honest store alone, and still converges",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "progress: every round rests or lowers the metric, and leaves the asset's observation exact",
+      "Step claim K4 holds for every generated asset and observation",
+      "Step claim Prog holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "2980 points disagree"
+  },
+  {
+    "id": "R5",
+    "name": "stay ACTIVE after the store lost the object (R15 rests)",
+    "claim": "K9",
+    "lh": "SAFE at first (hole), UNSAFE once K9 was added",
+    "src": "transcript (e); kernel.md K9; README",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "an empty script is the honest store alone, and still converges",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "progress: every round rests or lowers the metric, and leaves the asset's observation exact",
+      "Step claim K9 holds for every generated asset and observation",
+      "Step claim Prog holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "452 points disagree"
+  },
+  {
+    "id": "R6",
+    "name": "decide before observing (R0 opens)",
+    "claim": "K0",
+    "lh": "UNSAFE",
+    "src": "transcript (g); README 'issuing a command before observing'",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "an empty script is the honest store alone, and still converges",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "progress: every round rests or lowers the metric, and leaves the asset's observation exact",
+      "Step claim K0 holds for every generated asset and observation",
+      "Step claim Prog holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "1834 points disagree"
+  },
+  {
+    "id": "R7",
+    "name": "spend budget that isn't there (b >= 0)",
+    "claim": "Asset budget :: Nat",
+    "lh": "UNSAFE",
+    "src": "transcript (i)",
+    "applied": true,
+    "tsc": "src/Http/Retry.ts(22,7): error TS2375: Type 'Option<-1>' is not assignable to type 'Option<Attempts>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's "
+  },
+  {
+    "id": "R8",
+    "name": "clear the goal as Cancelled, not Failed",
+    "claim": "K8",
+    "lh": "UNSAFE",
+    "src": "transcript (j)",
+    "applied": true,
+    "property": [
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "Step claim K8 holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "2470 points disagree"
+  },
+  {
+    "id": "R9",
+    "name": "seal while an orphan staging area exists (R4 seals)",
+    "claim": "none (no claim covers it)",
+    "lh": "SAFE (not caught)",
+    "src": "transcript (k)",
+    "applied": true,
+    "property": [],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "76 points disagree"
+  },
+  {
+    "id": "R10",
+    "name": "accept any version as the vouched one",
+    "claim": "K9",
+    "lh": "UNSAFE",
+    "src": "transcript (l)",
+    "applied": true,
+    "property": [
+      "K7: guards exhaustive, exclusive and followed at all 1320 points",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "Step claim K9 holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "166 points disagree"
+  },
+  {
+    "id": "R11",
+    "name": "call a file ACTIVE before its receipt",
+    "claim": "K6",
+    "lh": "UNSAFE",
+    "src": "transcript (K6)",
+    "applied": true,
+    "property": [
+      "K6: stateOf is ACTIVE exactly when a receipt is held and the goal isn't Clear"
+    ],
+    "ctor": null,
+    "differential": false,
+    "differentialDetail": null
+  },
+  {
+    "id": "R12",
+    "name": "stall on leftover staging after the receipt (R13 rests)",
+    "claim": "Prog",
+    "lh": "UNSAFE",
+    "src": "transcript (p1)",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "an empty script is the honest store alone, and still converges",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "progress: every round rests or lowers the metric, and leaves the asset's observation exact",
+      "Step claim Prog holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "237 points disagree"
+  },
+  {
+    "id": "R13",
+    "name": "open while something is staged (R2 opens)",
+    "claim": "Prog",
+    "lh": "UNSAFE",
+    "src": "transcript (p2)",
+    "applied": true,
+    "tsc": "src/Kernel/Reconcile.ts(281,14): error TS2322: Type 'true' is not assignable to type '\"R2\"'."
+  },
+  {
+    "id": "R13b",
+    "name": "open while something is staged (compiling form: the row stays R2)",
+    "claim": "Prog",
+    "lh": "UNSAFE",
+    "src": "transcript (p2)",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "an empty script is the honest store alone, and still converges",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "progress: every round rests or lowers the metric, and leaves the asset's observation exact",
+      "Step claim Prog holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "559 points disagree"
+  },
+  {
+    "id": "R14",
+    "name": "retry forever without spending (R12)",
+    "claim": "Prog",
+    "lh": "UNSAFE",
+    "src": "transcript (p3)",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "an empty script is the honest store alone, and still converges",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "progress: every round rests or lowers the metric, and leaves the asset's observation exact",
+      "Step claim Prog holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "112 points disagree"
+  },
+  {
+    "id": "R15",
+    "name": "discard the producer's own staging area (R4, assembling)",
+    "claim": "K10",
+    "lh": "SAFE at first (hole), UNSAFE once K10 was added",
+    "src": "transcript; kernel.md K10; README",
+    "applied": true,
+    "property": [
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "Step claim K10 holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "284 points disagree"
+  },
+  {
+    "id": "R16",
+    "name": "discard the producer's own staging area (R4, assembled)",
+    "claim": "K10",
+    "lh": "UNSAFE",
+    "src": "transcript",
+    "applied": true,
+    "property": [
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "Step claim K10 holds for every generated asset and observation"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "98 points disagree"
+  },
+  {
+    "id": "R17",
+    "name": "R3 no longer a resting row",
+    "claim": "progress lemma (round)",
+    "lh": "UNSAFE",
+    "src": "transcript",
+    "applied": true,
+    "property": [
+      "the resting-row type agrees with isFixedRow on every row",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "Step claims K0-K10 and Prog hold at all 1320 points of the guard domain",
+      "progress: every round rests or lowers the metric, and leaves the asset's observation exact",
+      "Step claim Prog holds for every generated asset and observation",
+      "the resting rows are exactly R3, R14, R18 and R19, and allRows lists twenty rows once each"
+    ],
+    "ctor": null,
+    "differential": false,
+    "differentialDetail": null
+  },
+  {
+    "id": "R18",
+    "name": "discard orphans before failing a missing chunk (R4 before R8)",
+    "claim": "K7",
+    "lh": "not LH: caught by the guard test",
+    "src": "README (the third problem)",
+    "applied": true,
+    "property": [
+      "K7: guards exhaustive, exclusive and followed at all 1320 points"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "146 points disagree"
+  },
+  {
+    "id": "C1",
+    "name": "drops that cost nothing",
+    "claim": "termination",
+    "lh": "UNSAFE",
+    "src": "transcript; kernel.md; README",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "648 points disagree; NoProgress"
+  },
+  {
+    "id": "C2",
+    "name": "drops with no allowance left",
+    "claim": "termination",
+    "lh": "UNSAFE",
+    "src": "transcript; kernel.md",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "expected a natural number"
+  },
+  {
+    "id": "C3",
+    "name": "late writes that never run out",
+    "claim": "termination",
+    "lh": "UNSAFE",
+    "src": "transcript; kernel.md",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "459 points disagree; NoProgress"
+  },
+  {
+    "id": "C4",
+    "name": "an append that doesn't use up the cap",
+    "claim": "termination",
+    "lh": "UNSAFE",
+    "src": "transcript; kernel.md",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "125 points disagree; NoProgress"
+  },
+  {
+    "id": "C5",
+    "name": "keep going after a resting row (literal: if False)",
+    "claim": "termination",
+    "lh": "UNSAFE",
+    "src": "transcript; kernel.md",
+    "applied": true,
+    "tsc": "src/Kernel/Converge.ts(245,49): error TS2322: Type 'Row' is not assignable to type '\"R14\" | \"R18\" | \"R19\" | \"R3\"'."
+  },
+  {
+    "id": "C5b",
+    "name": "keep going after a resting row (compiling form)",
+    "claim": "termination",
+    "lh": "UNSAFE",
+    "src": "transcript; kernel.md",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite",
+      "an empty script is the honest store alone, and still converges"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "1500 points disagree; NoProgress"
+  },
+  {
+    "id": "C6",
+    "name": "a client can reopen a cleared goal",
+    "claim": "termination",
+    "lh": "UNSAFE",
+    "src": "transcript; kernel.md; README",
+    "applied": true,
+    "property": [
+      "the metric is natural and strictly decreases on every iteration that doesn't rest (fixed scripts)",
+      "the metric strictly decreases against a greedy adversary, and converge agrees with the replayed script",
+      "converge reaches a resting row for every start and every script, finite or infinite"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "537 points disagree; NoProgress"
+  },
+  {
+    "id": "K1",
+    "name": "clear without an ending",
+    "claim": "KMove / Asset refinement",
+    "lh": "UNSAFE",
+    "src": "transcript (Client/Core)",
+    "applied": true,
+    "tsc": "src/Client/Core.ts(105,15): error TS2345: Argument of type '{ seen: { readonly _tag: \"Seen\"; readonly observed: Observed; } | { readonly _tag: \"Unseen\"; }; vouch: { readonly _tag: \"HasReceipt\"; readon"
+  },
+  {
+    "id": "K2",
+    "name": "append into a different staging area (literal)",
+    "claim": "KMove",
+    "lh": "UNSAFE",
+    "src": "transcript (Client/Core)",
+    "applied": true,
+    "tsc": "src/Client/Core.ts(125,23): error TS2379: Argument of type 'Option<StagingRef>' is not assignable to parameter of type 'Some<StagingRef>' with 'exactOptionalPropertyTypes: true'. Consider adding 'unde"
+  },
+  {
+    "id": "K2b",
+    "name": "append into a different staging area (compiling form)",
+    "claim": "KMove",
+    "lh": "UNSAFE",
+    "src": "transcript (Client/Core)",
+    "applied": true,
+    "property": [
+      "appendTo meets KMove, grows the offset by the chunk and keeps the writes",
+      "a script of client moves never raises the metric prefix, apart from each start's one write"
+    ],
+    "ctor": null,
+    "differential": false,
+    "differentialDetail": null
+  },
+  {
+    "id": "K3",
+    "name": "append that drops the new chunk",
+    "claim": "KMove",
+    "lh": "UNSAFE",
+    "src": "transcript (Client/Core)",
+    "applied": true,
+    "property": [
+      "appendTo meets KMove, grows the offset by the chunk and keeps the writes"
+    ],
+    "ctor": null,
+    "differential": false,
+    "differentialDetail": null
+  },
+  {
+    "id": "K4",
+    "name": "complete that also starts a write",
+    "claim": "KMove",
+    "lh": "UNSAFE",
+    "src": "transcript (Client/Core)",
+    "applied": true,
+    "property": [
+      "completeGoal meets KMove and completes with exactly the chunks it had",
+      "a script of client moves never raises the metric prefix, apart from each start's one write"
+    ],
+    "ctor": null,
+    "differential": false,
+    "differentialDetail": null
+  },
+  {
+    "id": "K5",
+    "name": "report that starts another write instead",
+    "claim": "KMove",
+    "lh": "UNSAFE",
+    "src": "transcript (Client/Core)",
+    "applied": true,
+    "property": [
+      "reportWrite meets KMove on any asset, keeps the goal and never adds a write",
+      "a script of client moves never raises the metric prefix, apart from each start's one write"
+    ],
+    "ctor": null,
+    "differential": false,
+    "differentialDetail": null
+  },
+  {
+    "id": "K6",
+    "name": "the client throws away the receipt",
+    "claim": "KMove",
+    "lh": "UNSAFE",
+    "src": "transcript (Client/Core)",
+    "applied": true,
+    "property": [
+      "clearGoal meets KMove, clears the goal and keeps the writes",
+      "a script of client moves never raises the metric prefix, apart from each start's one write"
+    ],
+    "ctor": null,
+    "differential": false,
+    "differentialDetail": null
+  },
+  {
+    "id": "X1",
+    "name": "pending reports the earliest deadline, not the latest",
+    "claim": "pending :: Nat (value unspecified)",
+    "lh": "see current-controls.log",
+    "src": "extra",
+    "applied": true,
+    "property": [
+      "pending is 0 exactly when no write's deadline is after now, and otherwise the latest deadline less now"
+    ],
+    "ctor": null,
+    "differential": true,
+    "differentialDetail": "170 points disagree"
+  }
+]
