@@ -189,6 +189,73 @@ What the adversary doesn't model yet: an observation that is stale but not lost 
 
 **Bounded exhaustion** (in `test/`, a pure fold): every adversary trace up to small bounds, run through the real `reconcile` and the real client-side step, checking K1 to K6 and that every run within the bounds converges.
 
+## Reattaching the client side
+
+The client side is the upload draft's request handling (the Requests and Receiving columns of `core.md`), rebuilt around the kernel's `Asset`. One file is now
+
+```
+data File   = File { meta :: Meta, asset :: Asset, client :: Client, epoch :: Int }
+data Client = Client
+  { clientLen  :: Len      -- Upload-Length, once a request declared it
+  , uploadOpen :: Bool     -- whether the upload resource still accepts requests
+  , phase      :: Phase    -- Opening, Idle, Reading, Writing, Sealing or Settled
+  , opDeleted  :: Bool }
+```
+
+The asset keeps everything the store side needs, and the client keeps only what the upload protocol needs on top of it. The phase names the one request the file owes, if any (a held creation, an append in flight, a completing request waiting on its receipt), and the one mover job it waits for. The offset a client is told is the goal's chunk total, the one number `appendChunk` maintains, so the client side has no offset of its own to get wrong. The epoch is only for mover jobs (a body being read, a chunk being written), and store calls no longer use it.
+
+Every client step is one function, `stepClient :: env:Env -> ev:Event -> f:File -> ClientOut env f ev`, which routes each of the 17 events to its slice: upload-resource requests and mover reports (`Client.Upload`), operation, object and content requests (`Client.Requests`), and the two watches, `KernelMoved` and `Tick` (`Client.Watch`). `create` (`Client.Create`) builds a new file or refuses with a reply.
+
+**The client moves the kernel only the way the adversary does.** Every client step changes the asset by at most one of these moves, and leaves the asset's observation, receipt, budget and backoff step alone. The functions in `Client.Core` that make these moves (`clearGoal`, `appendTo`, `completeGoal`, `startWrite` and `reportWrite`) are the only code that builds an `Asset`, apart from `create`, which builds the first one.
+
+| move | client step | effect on the asset |
+|---|---|---|
+| none | everything that only answers | the asset is unchanged |
+| append | a chunk write reported durable (B10) | `Assembling r c` becomes `Assembling r (appendChunk c k)`; the rank drops by one |
+| complete | a completing chunk (B11), a completing empty PATCH, or an empty creation the kernel just adopted | `Assembling (Present r) c` becomes `Assembled r c`; the rank drops to 1 |
+| abandon | cancel, DELETE, expiry, a refused creation | the goal becomes `Clear` with that ending; the rank drops to 0 |
+| start a write | a body read in full (B3) | one more unreported write, under the job's epoch |
+| report a write | any report of that write | every entry under that write's epoch goes, and no other |
+
+This is the `KMove` clause of the contract, stated with the same measures the kernel uses. The goal's rank never rises, the chunks only grow while the goal keeps the asset, a completed assembly keeps exactly the chunks it had (or one more, for B11), an ending once set stays, and the unreported writes grow by at most one, only while assembling and only on a step that leaves the goal alone.
+
+**What the contract holds every step to.** The first version of `ClientOut` said what a step had to keep track of: the owed request is kept or settled, the event's request is settled or becomes owed, a mover job is reported, stopped or kept, a job the file waits for was started by this step or was already running, every new reply deadline has its Tick, and `KMove`. A cancel that didn't cancel, a DELETE that answered 412 and deleted anyway, and a write report that left its entry behind all proved SAFE against it, and only the exhaustive tests caught them, because the contract never said what a step was supposed to do. So in the second round we added the effects every slice shares to `ClientOut` itself, once:
+
+- **A job is named by its epoch.** A job a step starts runs under an epoch greater than the file's (CJobFresh), and it sets the phase that names its kind, a read in Reading and a write in Writing (CJobKind). A report from the job the file is waiting for is its end: the file stops waiting for it, and a reader's report either stops the reader or hands its buffer to the write started under the next epoch (CJobEnded). A report from any other job stops its sender. A current report of the wrong kind runs the job's failure row (B9 while reading, B12 while writing, B16 for the creation request) with a `ShellContract` alert, as CH42 does for the store.
+- **A write's report removes its own entry, and nothing else does.** `authorised` grows only on a step that starts a persist job, and its new entry carries that job's epoch and A3's deadline (CWriteJob, CWriteEntry). A report removes every entry under its own epoch (CWriteReported), and no other entry leaves (CWriteKept). That second half is what lets the composition below count a dropped entry as progress: `converge` only sees a late landing through its entry, and an entry now goes only once its own job has said its last word.
+- **Every offset a client is told is the goal's** (CToldOffset). That covers `AppendAccepted`, `CreatedUpload`, an offset retrieval's `OffsetIs`, and A2's `OffsetMismatch`.
+- **A read is capped** at what one chunk and max-size still allow (CReadCap), and a persist job writes the next chunk into the staging area the goal adopted (CPersistNames).
+- **G3 stands before every request, the Tick, and the running job's own report** (CExpires). When the goal is still assembling past its deadline, X1 runs first: the file ends FAILED Expired and the owed request is abandoned. X1 is one function, `expireFile`, and `answer` and `stale` both require that G3 doesn't apply, so no row can answer or ignore a file past its deadline. `KernelMoved` isn't one of these events, because its rows are the watch's own and not `core.md`'s.
+- **The watches move the goal only by their own rows** (CQuietGoal). `KernelMoved` never clears a goal (the kernel already did that) and completes only an empty creation the kernel has just adopted. A Tick never completes, and it clears only by X1.
+
+The shared moves state their own effects in their specs too. `abandonFile` clears the goal with the given ending, leaves `authorised` alone and settles the owed request as asked; `answer` leaves the file unchanged; `stale` changes nothing but the report's own write entry; and `endingRefusal` is a measure, so a spec can name the reply a cleared goal owes.
+
+**Held requests are watches on the asset.** A request that can't be answered yet stays in the phase, and `KernelMoved`, which runs after every kernel round, answers it as soon as the asset shows what it was waiting for. A Tick answers only by the clock.
+
+| held request | answered when | with |
+|---|---|---|
+| the creation request | the reconciler adopts a staging area | 201, Location, Upload-Limit, Upload-Offset 0 |
+| an empty creation with UC ?1 | the reconciler adopts a staging area, and the store can seal zero chunks | nothing yet: the goal completes, and the request waits for its receipt like a completing request |
+| the completing request | a receipt appears | 201 with the file's ETag and UC ?1 |
+| the completing request | `replyBy` passes first (T2, on a Tick at or after that instant, never before) | 202 with the operation as its body, UC ?1 |
+| any held request | the goal is cleared first | the ending's refusal, with UC ?1 |
+
+A cleared goal settles every phase that still owes something, `Opening` and `Sealing` with nothing held included, and a Tick over a cleared goal settles exactly as `KernelMoved` would, so a held request gets the ending's refusal and never a 202. Each watch's rows end with "anything else is stale". Once a receipt is held, the file is ACTIVE for every request, Sealing included, so the V rows answer it, and the request waiting on that receipt is never settled or dropped by another upload request. The `File` refinement also gained one fact: a goal still assembling under Idle, Reading or Writing has adopted its staging area.
+
+**What's proved, and what only the tests cover.** LiquidHaskell proves every clause above for every row, and it also proves the row-level effects that fit over measures: the reply offset, the persisted-bytes check on a chunk report, the quota check at completion, a cancel that keeps a receipt, B16 ending the file, B9 abandoning the request and B12 answering `StoreUnavailable`, CancelOperation's refusal to a request still being created, F1's 201, and the cleared goal's refusal. What's left is which reply a client gets wherever a measure can't say it, and the exhaustive suites in `funknown-core/test/` cover it, each transcribed from `core.md` and the client rulings onto a test-side description of the file. One suite per slice runs every event over every phase it handles, with the max-age deadline on both sides of the clock; `dispatch` runs all three again through `stepClient`, and `scenarios` runs composed sequences no single slice reaches. Three things are left to them on purpose. T2's 202 body needs the file id, the outcome and the receipt at once. A set of epochs can't count two entries under one epoch, though CJobFresh already keeps a client step from making two. And the table from ending to refusal is only written in code.
+
+Every claim has a negative control, a mutation that looks like a real bug: LiquidHaskell has to report it UNSAFE, or, for a claim only a test can see, its suite has to fail.
+
+**Convergence carries over between producer actions** (`Client.Compose`, proved). We didn't state a client step as a list of the adversary's moves, because it isn't one. Starting a write has no adversary move, a report removes its entry wherever it sits while `Lapse` only drops the head, and `KMove` bounds the goal without naming the chunk that was appended. So Compose proves what `converge` actually consumes, using Converge's own `Smaller` and `GapA` and Model's `Coherent`, so a change to the kernel's metric reaches it:
+
+- `kmoveMetric`: a step that keeps `KMove` leaves the asset coherent with the store model, and either lowers the kernel's metric or keeps every component of it, or it is the one step that starts a write on an otherwise unchanged assembly;
+- `clientThenRound`: a `KMove` step that doesn't grow `authorised`, followed by a kernel round, either rests or ends `Smaller` than before the client step;
+- `stepThenRound`: the same for `stepClient` itself, with "the step started a persist job" as the only exception, which CWriteJob makes the only way `authorised` grows.
+
+Starting a write is the one client action that raises the metric, and a client can keep retrying a chunk for as long as it likes. So the honest statement for the composed system is that between producer actions the kernel converges, which is also what R3 means: an assembly in progress rests until its producer does something.
+
+Some rows still wait on a ruling. F9's cancel while sealing answers 204, as A11 and B15 do, where `core.md` says 202. `KernelMoved` over an adopted creation past its deadline answers O1's 201 and leaves X1 to the next Tick. The table from ending to refusal (Gone for Deleted, Cancelled and Expired, Internal for the faults `core.md` doesn't name) is the code's choice. A held completing request answers 201 when a DELETE ends an ACTIVE file. Two readings also wait to be confirmed: that a wrong-kind report past the deadline is G2's and runs its failure row rather than X1, and that a held receipt makes the whole Sealing phase ACTIVE.
+
 ## What stays assumed, by name
 
 These can't be proved inside the core. We state them so nobody mistakes the proofs for more than they are.
@@ -215,7 +282,7 @@ These go: the store-side columns (Opening, Finishing, Ended, Timers' store rows)
 1. The kernel types and `reconcile`, with K1 to K6 and negative controls.
 2. The store model (`perform`, `observe`), the gap measure and the progress lemma.
 3. The adversary and `converge` with its termination metric.
-4. Re-attach the client side: the completing request is answered when `receipt` becomes present, or with 202 at `replyWait`; DELETE and cancel move the goal to `Clear` with their ending.
+4. Re-attach the client side (see "Reattaching the client side"): every client step proved to move the kernel only as the adversary does, and held requests answered by `KernelMoved` once the asset shows what they wait for.
 5. Bounded exhaustion over the composed system.
 
 The S3 adapter, the projections and the World come after the kernel converges.

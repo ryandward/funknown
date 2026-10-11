@@ -71,6 +71,21 @@ $$\mu(a, m, d) \;=\; \big(\mathrm{rank}(g_a),\ d,\ b_a,\ \vert{}w_a\vert{},\ \ma
 ### 3. Convergence (Over Whole Runs)
 A run alternates the reconciler with an adversary's script of moves. The adversary can lose commands, drop observations, land late writes, let deadlines pass, and move the goal. LiquidHaskell's termination checker formally verifies that against *any* valid adversarial script, the system reaches a resting row in finitely many rounds.
 
+### 4. The Client Side (Per Step)
+All 17 client events go through one function, `stepClient`, and its contract holds every step to the same bookkeeping: the request a file owes is kept or settled, never forgotten, a mover job is named by its epoch and ends with its own report, every offset a client is told is the goal's, and a file past its deadline expires before any request or Tick can answer it.
+
+The clause that matters most to the kernel is about the writes it's waiting on. If $w$ is the set of epochs with a write still unreported, a step that reports the write under epoch $e$ removes exactly that one, and no other step removes any:
+
+$$\mathrm{report}(e) \;\Rightarrow\; w' = w \setminus \lbrace e \rbrace$$
+
+$$\lnot\,\mathrm{report} \;\Rightarrow\; w \subseteq w'$$
+
+The client changes the asset only by the moves the adversary already makes (append, complete, abandon), plus starting and reporting a write, so it can't put the kernel anywhere the convergence proof didn't already cover. `Client.Compose` ties the two halves together. Take a file whose view of the store is exact, run any client event on it, and then one kernel round. Unless the client step started a write, the round either ends in a resting row or strictly lowers the metric:
+
+$$\mathrm{Coherent}(a, m) \;\land\; \lnot\,\mathrm{startsWrite} \;\Rightarrow\; \mathrm{rests}(a', m') \;\lor\; \mu(a', m', d) < \mu(a, m, d)$$
+
+The write clause is what lets this count a dropped entry as progress, because an entry only goes once its own job has reported. Starting a write is the one client action that raises the metric, and a producer can keep sending chunks for as long as it likes, so the honest claim for the whole system is that the kernel converges between producer actions. Which exact reply a client gets is mostly a table, so exhaustive suites transcribed from the design check those replies over every event in every phase.
+
 ## Negative Controls (How we know the proofs have teeth)
 
 A claim that cannot fail is vacuous. Every claim in *Funknown* gets a **negative control**: a deliberate, bug-shaped mutation introduced to the code that *must* force LiquidHaskell to report `UNSAFE`.

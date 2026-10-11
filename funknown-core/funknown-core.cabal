@@ -35,11 +35,21 @@ library
                     Funknown.Store.Receipt
                     Funknown.Upload
                     Funknown.Fault
+                    Funknown.Refusal
                     Funknown.Kernel.Bound
                     Funknown.Kernel.Types
                     Funknown.Kernel.Reconcile
                     Funknown.Kernel.Model
                     Funknown.Kernel.Converge
+                    Funknown.Client.Types
+                    Funknown.Client.Contract
+                    Funknown.Client.Core
+                    Funknown.Client.Upload
+                    Funknown.Client.Requests
+                    Funknown.Client.Watch
+                    Funknown.Client.Create
+                    Funknown.Client.Step
+                    Funknown.Client.Compose
 
 -- The port-side lemmas that let one value per class stand for the whole
 -- class in the retry diffs, checked by LiquidHaskell.
@@ -84,3 +94,46 @@ test-suite kernel-guards
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          KernelGuards.hs
+
+-- The client side's exhaustive oracles, transcribed from CLIENT.md and
+-- core.md onto a test-side description of the file. Each slice suite also
+-- runs on its own; dispatch runs all three through stepClient.
+test-suite upload-replies
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          UploadReplies.hs
+  other-modules:    Tally
+  ghc-options:      -main-is UploadReplies
+
+test-suite requests
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Requests.hs
+  other-modules:    Tally
+  ghc-options:      -main-is Requests
+
+test-suite watch-create
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          WatchCreate.hs
+  other-modules:    Tally
+  ghc-options:      -main-is WatchCreate
+
+test-suite dispatch
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Dispatch.hs
+  other-modules:    Tally
+                    UploadReplies
+                    Requests
+                    WatchCreate
+
+test-suite scenarios
+  import:           plain
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Scenarios.hs
